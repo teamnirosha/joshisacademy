@@ -4,7 +4,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: () => {
-        const base = "https://id-preview--9abde1ff-c22b-4669-b239-b7a3fe6f1344.lovable.app";
+        const base = "https://joshisacademy.com";
         const paths = [
           "",
           "courses",

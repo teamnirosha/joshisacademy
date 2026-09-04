@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://id-preview--9abde1ff-c22b-4669-b239-b7a3fe6f1344.lovable.app/sitemap.xml
+Sitemap: https://joshisacademy.com/sitemap.xml
