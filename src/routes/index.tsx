@@ -115,7 +115,7 @@ function HomePage() {
         </div>
 
         <div className="section-shell relative z-10 flex min-h-[96svh] flex-col justify-end pb-16 pt-28 md:pb-20">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mt-[3rem]">
             <p className="eyebrow reveal text-lavender tracking-[0.22em] text-[11px]">
               CBSE • ICSE • SCIENCE • IX–X
             </p>
@@ -194,11 +194,9 @@ function HomePage() {
           ].map((item, idx) => (
             <div
               key={item.label}
-              className={`py-7 md:py-9 ${
-                idx % 2 === 0 ? "border-r border-border pr-5 md:pr-8" : "pl-5 md:pl-8"
-              } ${idx < 2 ? "border-b md:border-b-0 border-border" : ""} ${
-                idx === 1 ? "md:border-r border-border" : ""
-              } ${idx === 2 ? "md:border-r border-border" : ""}`}
+              className={`py-7 md:py-9 ${idx % 2 === 0 ? "border-r border-border pr-5 md:pr-8" : "pl-5 md:pl-8"
+                } ${idx < 2 ? "border-b md:border-b-0 border-border" : ""} ${idx === 1 ? "md:border-r border-border" : ""
+                } ${idx === 2 ? "md:border-r border-border" : ""}`}
             >
               <p className="font-display text-2xl sm:text-3xl lg:text-[2.6rem] text-ink font-normal tracking-tight">
                 {item.num}
@@ -294,9 +292,8 @@ function HomePage() {
                           {item.num}
                         </span>
                         <h3
-                          className={`font-display text-xl transition-colors sm:text-2xl ${
-                            activeApproach === idx ? "text-ivory font-normal" : "text-ivory/45"
-                          }`}
+                          className={`font-display text-xl transition-colors sm:text-2xl ${activeApproach === idx ? "text-ivory font-normal" : "text-ivory/45"
+                            }`}
                         >
                           {item.title}
                         </h3>
@@ -307,11 +304,10 @@ function HomePage() {
                     </div>
 
                     <div
-                      className={`grid transition-all duration-300 ${
-                        activeApproach === idx
-                          ? "grid-rows-[1fr] opacity-100 mt-4"
-                          : "grid-rows-[0fr] opacity-0"
-                      }`}
+                      className={`grid transition-all duration-300 ${activeApproach === idx
+                        ? "grid-rows-[1fr] opacity-100 mt-4"
+                        : "grid-rows-[0fr] opacity-0"
+                        }`}
                     >
                       <p className="overflow-hidden pl-9 text-[14px] leading-relaxed text-ivory/70 max-w-xl">
                         {item.desc}
@@ -473,11 +469,10 @@ function HomePage() {
                   onMouseEnter={() => setActiveMethodStep(idx)}
                 >
                   <span
-                    className={`absolute top-1.5 left-0 size-3 rounded-full border-2 transition-all ${
-                      activeMethodStep === idx
-                        ? "border-violet bg-violet scale-125"
-                        : "border-royal bg-ivory"
-                    }`}
+                    className={`absolute top-1.5 left-0 size-3 rounded-full border-2 transition-all ${activeMethodStep === idx
+                      ? "border-violet bg-violet scale-125"
+                      : "border-royal bg-ivory"
+                      }`}
                   />
                   <span className="text-[11px] font-bold text-violet">0{idx + 1}</span>
                   <h3 className="mt-4 font-display text-xl text-ink">{m.name}</h3>
@@ -585,11 +580,10 @@ function HomePage() {
                     type="button"
                     onClick={() => setActiveTestimonial(idx)}
                     aria-label={`Go to testimonial ${idx + 1}`}
-                    className={`h-1 transition-all cursor-pointer ${
-                      activeTestimonial === idx
-                        ? "w-10 bg-violet"
-                        : "w-4 bg-border hover:bg-royal/50"
-                    }`}
+                    className={`h-1 transition-all cursor-pointer ${activeTestimonial === idx
+                      ? "w-10 bg-violet"
+                      : "w-4 bg-border hover:bg-royal/50"
+                      }`}
                   />
                 ))}
               </div>
