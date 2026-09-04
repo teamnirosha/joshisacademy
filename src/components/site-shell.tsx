@@ -83,7 +83,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const contentOffset = announcementHeight + HEADER_HEIGHT;
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col antialiased">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground flex flex-col antialiased">
       <BrandLoader />
 
       {/* Top Configurable Announcement Bar — fixed at very top */}
@@ -113,13 +113,12 @@ export function SiteShell({ children }: { children: ReactNode }) {
       {/* Fixed Institutional Navbar — compact width with large, clean logo */}
       <header
         style={{ top: `${announcementHeight}px` }}
-        className={`fixed inset-x-0 z-40 transition-all duration-200 ${
-          scrolled
-            ? "border-b border-border bg-[rgba(250,249,245,0.97)] backdrop-blur-md shadow-xs"
-            : isHome
-              ? "bg-transparent"
-              : "border-b border-border/40 bg-ivory"
-        }`}
+        className={`fixed inset-x-0 z-40 transition-all duration-200 ${scrolled
+          ? "border-b border-border bg-[rgba(250,249,245,0.97)] backdrop-blur-md shadow-xs"
+          : isHome
+            ? "bg-transparent"
+            : "border-b border-border/40 bg-ivory"
+          }`}
       >
         <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo + Institutional Title — large, crisp, clean branding */}
@@ -139,16 +138,14 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </div>
             <div className="leading-tight">
               <span
-                className={`block text-[15px] sm:text-[17px] font-bold tracking-[0.06em] uppercase transition-colors ${
-                  scrolled || !isHome ? "text-ink" : "text-ivory"
-                }`}
+                className={`block text-[10px] sm:text-[10.5px] font-bold tracking-[0.08em] uppercase transition-colors ${scrolled || !isHome ? "text-ink" : "text-ivory"
+                  }`}
               >
                 {site.name}
               </span>
               <span
-                className={`block text-[9px] sm:text-[10px] font-extrabold tracking-[0.22em] uppercase transition-colors ${
-                  scrolled || !isHome ? "text-violet" : "text-lavender"
-                }`}
+                className={`block text-[8px] sm:text-[8.5px] font-extrabold tracking-[0.22em] uppercase transition-colors mt-0.5 ${scrolled || !isHome ? "text-violet" : "text-lavender"
+                  }`}
               >
                 {site.tagline}
               </span>
@@ -164,11 +161,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <Link
                 key={item.to}
                 to={item.to}
-                className={`text-[12px] font-semibold tracking-[0.12em] uppercase transition-colors ${
-                  scrolled || !isHome
-                    ? "text-ink/70 hover:text-violet"
-                    : "text-ivory/80 hover:text-white"
-                }`}
+                className={`text-[12px] font-semibold tracking-[0.12em] uppercase transition-colors ${scrolled || !isHome
+                  ? "text-ink/70 hover:text-violet"
+                  : "text-ivory/80 hover:text-white"
+                  }`}
                 activeProps={{
                   className:
                     scrolled || !isHome
@@ -185,11 +181,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setEnquireOpen(true)}
-              className={`hidden sm:inline-flex items-center gap-1.5 h-[38px] px-[18px] text-[11px] font-bold tracking-[0.11em] uppercase transition-colors ${
-                scrolled || !isHome
-                  ? "bg-violet text-ivory hover:bg-violet/90"
-                  : "bg-ivory text-ink hover:bg-white"
-              }`}
+              className={`hidden sm:inline-flex items-center gap-1.5 h-[38px] px-[18px] text-[11px] font-bold tracking-[0.11em] uppercase transition-colors ${scrolled || !isHome
+                ? "bg-violet text-ivory hover:bg-violet/90"
+                : "bg-ivory text-ink hover:bg-white"
+                }`}
             >
               ENQUIRE <ArrowRight className="size-3" />
             </button>
@@ -197,9 +192,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
             {/* Mobile Menu Trigger */}
             <button
               type="button"
-              className={`lg:hidden flex items-center justify-center size-9 transition-colors ${
-                scrolled || !isHome ? "text-ink hover:text-violet" : "text-ivory hover:text-white"
-              }`}
+              className={`lg:hidden flex items-center justify-center size-9 transition-colors ${scrolled || !isHome ? "text-ink hover:text-violet" : "text-ivory hover:text-white"
+                }`}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -212,7 +206,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Mobile Off-canvas Editorial Drawer */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-ink p-6 text-ivory animate-in fade-in duration-200 lg:hidden">
+        <div className="fixed inset-0 z-50 flex flex-col bg-ink p-6 text-ivory animate-in fade-in duration-200 lg:hidden overflow-y-auto w-full max-w-full">
           <div className="flex items-center justify-between border-b border-ivory/15 pb-5">
             <div className="flex items-center gap-3.5">
               <div className="relative size-12 shrink-0 rounded-full bg-white p-0.5 shadow-sm">
@@ -225,10 +219,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 />
               </div>
               <div>
-                <strong className="block text-[15px] font-bold tracking-[0.06em] uppercase">
+                <strong className="block text-[12px] sm:text-[13px] font-bold tracking-[0.08em] uppercase">
                   {site.name}
                 </strong>
-                <span className="block text-[9px] font-bold tracking-[0.20em] text-lavender uppercase">
+                <span className="block text-[8px] sm:text-[8.5px] font-bold tracking-[0.22em] text-lavender uppercase mt-0.5">
                   {site.tagline}
                 </span>
               </div>
@@ -247,7 +241,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             className="my-auto flex flex-col divide-y divide-ivory/10 py-4"
             aria-label="Mobile Navigation"
           >
-            {navItems.map((item, i) => (
+            {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -255,9 +249,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 className="flex items-center justify-between py-4 font-display text-2xl transition-colors hover:text-lavender"
               >
                 <span>{item.label}</span>
-                <span className="font-sans text-xs font-bold tracking-widest text-violet">
-                  0{i + 1}
-                </span>
               </Link>
             ))}
           </nav>
@@ -284,7 +275,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Main Content Area — offset by header + announcement height */}
       <main
-        className="flex-1 pb-16 lg:pb-0"
+        className="flex-1 w-full max-w-full overflow-x-hidden pb-16 lg:pb-0"
         style={{ paddingTop: isHome ? 0 : `${contentOffset}px` }}
       >
         {children}
@@ -345,8 +336,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
 function Footer({ onEnquire }: { onEnquire: () => void }) {
   return (
-    <footer className="bg-ink px-6 pb-28 pt-16 text-ivory md:px-10 lg:pb-12 border-t border-border/15">
-      <div className="mx-auto max-w-6xl">
+    <footer className="bg-ink pb-28 pt-16 text-ivory lg:pb-12 border-t border-border/15">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 border-b border-ivory/15 pb-14 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           {/* ── Column 1: Identity + Contact ──────────────────────── */}
           <div>
@@ -362,10 +353,10 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
                 />
               </div>
               <div>
-                <p className="text-[15px] font-extrabold tracking-[0.10em] uppercase text-ivory">
+                <p className="text-[13px] sm:text-[13.5px] font-extrabold tracking-[0.10em] uppercase text-ivory">
                   {site.name}
                 </p>
-                <p className="mt-[2px] text-[10px] font-bold tracking-[0.26em] uppercase text-lavender">
+                <p className="mt-[2px] text-[8px] sm:text-[8.5px] font-bold tracking-[0.24em] uppercase text-lavender">
                   {site.tagline}
                 </p>
               </div>
@@ -424,21 +415,26 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
           </div>
 
           {/* ── Column 2: Navigation Links ─────────────────────────── */}
-          <div className="grid grid-cols-1 gap-y-1 text-xs font-semibold uppercase tracking-wider">
-            {[
-              ...navItems,
-              { label: "FAQ", to: "/faq" },
-              { label: "Privacy Policy", to: "/privacy" },
-              { label: "Terms of Service", to: "/terms" },
-            ].map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="border-b border-ivory/10 py-3 text-ivory/65 transition-colors hover:text-lavender hover:border-lavender/40"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ivory/45 mb-3">
+              Navigation
+            </p>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-xs font-semibold uppercase tracking-wider">
+              {[
+                ...navItems,
+                { label: "FAQ", to: "/faq" },
+                { label: "Privacy Policy", to: "/privacy" },
+                { label: "Terms of Service", to: "/terms" },
+              ].map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="border-b border-ivory/10 py-2.5 text-ivory/65 transition-colors hover:text-lavender hover:border-lavender/40 block truncate"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* ── Column 3: Map Embed ────────────────────────────────── */}
@@ -471,9 +467,9 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-7 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 pt-7 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between flex-wrap">
           <p>© {new Date().getFullYear()} Joshi's Academy. Kharadi, Pune, Maharashtra, India.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <span className="text-ivory/35">CBSE • ICSE • Science • IX–X</span>
             <button onClick={onEnquire} className="text-lavender hover:underline cursor-pointer">
               Direct Admissions Desk →

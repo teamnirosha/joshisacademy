@@ -88,6 +88,34 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Hide scrollbars globally across all browsers */
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+    height: 0px;
+    background: transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   body {
@@ -95,7 +123,6 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     letter-spacing: -0.01em;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -127,7 +154,7 @@
   .section-shell {
     margin-inline: auto;
     max-width: 1500px;
-    padding-inline: 1.5rem;
+    padding-inline: 1.25rem; /* 20px — very small mobile */
   }
 
   .border-hairline {
@@ -193,15 +220,27 @@
   }
 }
 
+@media (min-width: 480px) {
+  .section-shell {
+    padding-inline: 1.5rem; /* 24px — mobile/small */
+  }
+}
+
 @media (min-width: 768px) {
   .section-shell {
-    padding-inline: 2.5rem;
+    padding-inline: 2rem; /* 32px — tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-shell {
+    padding-inline: 2.5rem; /* 40px — small desktop */
   }
 }
 
 @media (min-width: 1280px) {
   .section-shell {
-    padding-inline: 3.5rem;
+    padding-inline: 3.5rem; /* 56px — large desktop */
   }
 }
 

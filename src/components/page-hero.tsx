@@ -13,8 +13,8 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-ink px-6 pb-16 pt-32 text-ivory md:px-10 md:pb-24 md:pt-40 border-b border-border/15">
-      <div className="mx-auto max-w-6xl">
+    <section className="bg-ink pb-16 pt-32 text-ivory md:pb-24 md:pt-40 border-b border-border/15">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <p className="eyebrow text-lavender/85">{eyebrow}</p>
         <h1 className="mt-5 max-w-4xl font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.06] tracking-tight">
           {title}
@@ -25,6 +25,7 @@ export function PageHero({
         </div>
       </div>
     </section>
+
   );
 }
 

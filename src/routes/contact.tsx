@@ -26,33 +26,35 @@ function ContactPage() {
         intro="Speak with the academic team about the right Science programme for your child. We welcome parents and students for structured academic counselling."
       />
 
-      <section className="section-shell py-24 md:py-36">
-        <div className="grid gap-16 lg:grid-cols-2 items-start">
+      <section className="section-shell py-12 sm:py-20 md:py-28 overflow-hidden w-full max-w-full">
+        <div className="grid gap-12 lg:gap-16 lg:grid-cols-2 items-start">
           {/* ── Left: Contact Information ──────────────────────────────── */}
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10 min-w-0">
             <div>
               <div className="flex items-center gap-3">
-                <MapPin className="size-6 text-violet" />
+                <MapPin className="size-6 text-violet shrink-0" />
                 <span className="eyebrow text-violet">Academic Centre</span>
               </div>
-              <h2 className="mt-3 font-display text-4xl sm:text-5xl text-ink">Joshi's Academy</h2>
-              <p className="mt-2 text-base text-muted-foreground">
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl text-ink break-words">
+                Joshi's Academy
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
                 Kharadi, Pune, Maharashtra, India
               </p>
             </div>
 
             {/* Contact rows */}
-            <div className="border-t border-border pt-8 space-y-5">
+            <div className="border-t border-border pt-6 sm:pt-8 space-y-5">
               {/* Phone */}
-              <a href={`tel:${site.phone}`} className="flex items-center gap-4 group">
+              <a href={`tel:${site.phone}`} className="flex items-center gap-4 group min-w-0">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-lavender/30 group-hover:bg-violet group-hover:border-violet transition-colors">
                   <Phone className="size-4 text-violet group-hover:text-ivory transition-colors" />
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Call Us
                   </p>
-                  <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-violet transition-colors">
+                  <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-violet transition-colors truncate">
                     {site.phone}
                   </p>
                 </div>
@@ -63,31 +65,31 @@ function ContactPage() {
                 href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 group"
+                className="flex items-center gap-4 group min-w-0"
               >
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-green-50 group-hover:bg-green-500 group-hover:border-green-500 transition-colors">
                   <MessageSquare className="size-4 text-green-600 group-hover:text-white transition-colors" />
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     WhatsApp
                   </p>
-                  <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-green-600 transition-colors">
+                  <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-green-600 transition-colors truncate">
                     {site.whatsapp}
                   </p>
                 </div>
               </a>
 
               {/* Hours */}
-              <div className="flex items-start gap-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-lavender/30">
+              <div className="flex items-start gap-4 min-w-0">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-lavender/30 mt-0.5">
                   <Clock className="size-4 text-royal" />
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Counselling Hours
                   </p>
-                  <p className="mt-0.5 text-sm text-ink leading-relaxed">
+                  <p className="mt-0.5 text-sm text-ink leading-relaxed break-words">
                     Monday – Saturday: 10:00 AM – 7:30 PM
                     <br />
                     <span className="text-muted-foreground text-xs">
@@ -98,15 +100,15 @@ function ContactPage() {
               </div>
 
               {/* Location accessibility */}
-              <div className="flex items-start gap-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-lavender/30">
+              <div className="flex items-start gap-4 min-w-0">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-lavender/30 mt-0.5">
                   <Compass className="size-4 text-royal" />
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Locational Accessibility
                   </p>
-                  <p className="mt-0.5 text-sm text-muted-foreground leading-relaxed">
+                  <p className="mt-0.5 text-sm text-muted-foreground leading-relaxed break-words">
                     Conveniently situated in Kharadi, accessible from EON Free Zone, Magarpatta,
                     Wadgaon Sheri, and Viman Nagar.
                   </p>
@@ -115,22 +117,22 @@ function ContactPage() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="pt-2 flex flex-wrap gap-4">
-              <Button asChild>
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+              <Button asChild className="w-full sm:w-auto">
                 <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
                   Get Directions <Compass className="size-4 ml-1" />
                 </a>
               </Button>
-              <Button variant="outline" onClick={openEnquiry}>
+              <Button variant="outline" onClick={openEnquiry} className="w-full sm:w-auto">
                 Request a Callback
               </Button>
             </div>
           </div>
 
           {/* ── Right: Map + Enquiry Card ──────────────────────────────── */}
-          <div className="space-y-6">
+          <div className="space-y-6 min-w-0">
             {/* Google Maps Embed */}
-            <div className="overflow-hidden border border-border shadow-sm">
+            <div className="overflow-hidden border border-border shadow-sm rounded-sm">
               <iframe
                 title="Joshi's Academy on Google Maps"
                 src={site.mapsEmbed}
@@ -142,10 +144,10 @@ function ContactPage() {
                 style={{ border: 0 }}
                 allowFullScreen
               />
-              <div className="flex items-center justify-between border-t border-border bg-ivory px-4 py-3">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-border bg-ivory px-4 py-3 min-w-0">
+                <div className="flex items-center gap-2 min-w-0">
                   <MapPin className="size-4 text-violet shrink-0" />
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-muted-foreground truncate">
                     Kharadi, Pune, Maharashtra, India
                   </span>
                 </div>
@@ -153,7 +155,7 @@ function ContactPage() {
                   href={site.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[11px] font-bold uppercase tracking-wider text-violet hover:underline"
+                  className="text-[11px] font-bold uppercase tracking-wider text-violet hover:underline shrink-0"
                 >
                   Open in Maps ↗
                 </a>
@@ -161,19 +163,19 @@ function ContactPage() {
             </div>
 
             {/* Admissions Enquiry Card */}
-            <div className="border border-border bg-white p-8 shadow-sm">
+            <div className="border border-border bg-white p-5 sm:p-8 shadow-sm rounded-sm min-w-0">
               <span className="eyebrow text-royal">Admissions Inquiry</span>
-              <h3 className="mt-3 font-display text-3xl text-ink">
+              <h3 className="mt-3 font-display text-2xl sm:text-3xl text-ink break-words">
                 Schedule an Academic Assessment.
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-words">
                 A 20-minute conversation with our academic counsellor helps identify your child's
                 learning baseline, addresses board curriculum nuances, and clarifies how small-batch
                 science coaching accelerates understanding.
               </p>
 
-              <div className="mt-8 border-t border-border pt-8 space-y-4">
-                <div className="border border-border bg-lavender/30 p-4 text-xs text-ink space-y-1">
+              <div className="mt-8 border-t border-border pt-6 sm:pt-8 space-y-4">
+                <div className="border border-border bg-lavender/30 p-4 text-xs text-ink space-y-1 rounded-sm">
                   <p className="font-bold">✓ Free, no-obligation conversation</p>
                   <p className="text-muted-foreground">
                     Includes syllabus review and previous test gap analysis.
@@ -181,7 +183,7 @@ function ContactPage() {
                 </div>
 
                 <Button variant="default" size="lg" className="w-full" onClick={openEnquiry}>
-                  Book a Free Counselling Session <ArrowRight className="size-4" />
+                  Book a Free Counselling Session <ArrowRight className="size-4 ml-1" />
                 </Button>
               </div>
             </div>

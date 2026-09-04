@@ -114,14 +114,14 @@ function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 to-transparent md:bg-[linear-gradient(90deg,var(--ink)_0%,rgba(17,17,17,0.85)_48%,rgba(17,17,17,0.3)_100%)]" />
         </div>
 
-        <div className="section-shell relative z-10 flex min-h-[96svh] flex-col justify-end pb-16 pt-28 md:pb-20">
-          <div className="max-w-3xl mt-[3rem]">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 flex min-h-[96svh] flex-col justify-end pb-16 pt-28 md:pb-20">
+          <div className="w-full max-w-3xl mt-[3rem]">
             <p className="eyebrow reveal text-lavender tracking-[0.22em] text-[11px]">
               CBSE • ICSE • SCIENCE • IX–X
             </p>
 
             <h1
-              className="reveal mt-5 font-display text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] text-ivory tracking-tight"
+              className="reveal mt-5 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.95] text-ivory tracking-tight"
               style={{ animationDelay: "100ms" }}
             >
               Science,
