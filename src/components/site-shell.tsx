@@ -71,7 +71,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const isHome = location.pathname === "/";
 
   // Total offset for page content = announcement bar + header
-  const HEADER_HEIGHT = 76; // px — fixed target height
+  const HEADER_HEIGHT = 72; // px — compact target height
   const contentOffset = announcementHeight + HEADER_HEIGHT;
 
   return (
@@ -86,7 +86,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           role="region"
           aria-label="Academic Announcement"
         >
-          <div className="mx-auto flex max-w-[1500px] items-center justify-center gap-2 sm:gap-3 flex-wrap">
+          <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3 flex-wrap">
             <span className="inline-flex items-center gap-1 rounded bg-white/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ivory">
               <Sparkles className="size-3" />
               {announcement.badge}
@@ -102,52 +102,54 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {/* Fixed Institutional Navbar — sits directly below announcement bar, or at top if no announcement */}
+      {/* Fixed Institutional Navbar — compact width with large, clean logo */}
       <header
         style={{ top: `${announcementHeight}px` }}
         className={`fixed inset-x-0 z-40 transition-all duration-200 ${
           scrolled
-            ? "border-b border-border bg-[rgba(250,249,245,0.96)] backdrop-blur-md"
+            ? "border-b border-border bg-[rgba(250,249,245,0.97)] backdrop-blur-md shadow-xs"
             : isHome
               ? "bg-transparent"
               : "border-b border-border/40 bg-ivory"
         }`}
       >
-        <div className="mx-auto flex h-[80px] max-w-[1500px] items-center justify-between px-5 md:px-10">
-          {/* Logo + Institutional Title */}
+        <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo + Institutional Title — large, crisp, clean branding */}
           <Link
             to="/"
             className="flex items-center gap-3.5 group cursor-pointer focus:outline-none"
-            aria-label="Joshi's Academy Home"
+            aria-label={`${site.name} Home`}
           >
-            <img
-              src="/brand/logo.png"
-              alt="Joshi's Academy Circular Academic Seal"
-              width={52}
-              height={52}
-              className="size-[52px] shrink-0 object-contain rounded-full border border-border/50 bg-white p-[2px] transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="leading-none">
+            <div className="relative size-[54px] sm:size-[58px] shrink-0 rounded-full bg-white shadow-sm flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
+              <img
+                src="/brand/logo.png"
+                alt={`${site.name} Academic Seal`}
+                width={58}
+                height={58}
+                className="size-full object-contain rounded-full"
+              />
+            </div>
+            <div className="leading-tight">
               <span
-                className={`block text-[15px] font-bold tracking-[0.08em] uppercase transition-colors ${
+                className={`block text-[15px] sm:text-[17px] font-bold tracking-[0.06em] uppercase transition-colors ${
                   scrolled || !isHome ? "text-ink" : "text-ivory"
                 }`}
               >
-                JOSHI'S ACADEMY
+                {site.name}
               </span>
               <span
-                className={`mt-[4px] block text-[9px] font-semibold tracking-[0.20em] uppercase transition-colors ${
+                className={`block text-[9px] sm:text-[10px] font-extrabold tracking-[0.22em] uppercase transition-colors ${
                   scrolled || !isHome ? "text-violet" : "text-lavender"
                 }`}
               >
-                GYAN KI VARSHA
+                {site.tagline}
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
           <nav
-            className="hidden items-center gap-[26px] xl:gap-[30px] lg:flex"
+            className="hidden items-center gap-[22px] xl:gap-[28px] lg:flex"
             aria-label="Primary Navigation"
           >
             {navItems.map((item) => (
@@ -156,8 +158,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 to={item.to}
                 className={`text-[12px] font-semibold tracking-[0.12em] uppercase transition-colors ${
                   scrolled || !isHome
-                    ? "text-ink/65 hover:text-violet"
-                    : "text-ivory/75 hover:text-white"
+                    ? "text-ink/70 hover:text-violet"
+                    : "text-ivory/80 hover:text-white"
                 }`}
                 activeProps={{
                   className:
@@ -175,7 +177,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setEnquireOpen(true)}
-              className={`hidden sm:inline-flex items-center gap-1.5 h-[42px] px-[20px] text-[12px] font-bold tracking-[0.11em] uppercase transition-colors ${
+              className={`hidden sm:inline-flex items-center gap-1.5 h-[38px] px-[18px] text-[11px] font-bold tracking-[0.11em] uppercase transition-colors ${
                 scrolled || !isHome
                   ? "bg-violet text-ivory hover:bg-violet/90"
                   : "bg-ivory text-ink hover:bg-white"
@@ -205,19 +207,21 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <div className="fixed inset-0 z-50 flex flex-col bg-ink p-6 text-ivory animate-in fade-in duration-200 lg:hidden">
           <div className="flex items-center justify-between border-b border-ivory/15 pb-5">
             <div className="flex items-center gap-3.5">
-              <img
-                src="/brand/logo.png"
-                alt="Joshi's Academy Seal"
-                width={40}
-                height={40}
-                className="size-10 object-contain rounded-full bg-white p-[2px]"
-              />
+              <div className="relative size-12 shrink-0 rounded-full bg-white p-0.5 shadow-sm">
+                <img
+                  src="/brand/logo.png"
+                  alt={`${site.name} Seal`}
+                  width={48}
+                  height={48}
+                  className="size-full object-contain rounded-full"
+                />
+              </div>
               <div>
-                <strong className="block text-[14px] font-bold tracking-[0.08em] uppercase">
-                  JOSHI'S ACADEMY
+                <strong className="block text-[15px] font-bold tracking-[0.06em] uppercase">
+                  {site.name}
                 </strong>
-                <span className="mt-[3px] block text-[9px] tracking-[0.20em] text-lavender uppercase">
-                  GYAN KI VARSHA
+                <span className="block text-[9px] font-bold tracking-[0.20em] text-lavender uppercase">
+                  {site.tagline}
                 </span>
               </div>
             </div>
@@ -334,25 +338,27 @@ export function SiteShell({ children }: { children: ReactNode }) {
 function Footer({ onEnquire }: { onEnquire: () => void }) {
   return (
     <footer className="bg-ink px-6 pb-28 pt-16 text-ivory md:px-10 lg:pb-12 border-t border-border/15">
-      <div className="mx-auto max-w-[1500px]">
+      <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 border-b border-ivory/15 pb-14 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           {/* ── Column 1: Identity + Contact ──────────────────────── */}
           <div>
             {/* Logo & Brand */}
             <div className="flex items-center gap-3.5">
-              <img
-                src="/brand/logo.png"
-                alt="Joshi's Academy Academic Seal"
-                width={48}
-                height={48}
-                className="size-12 object-contain rounded-full bg-white p-[2px]"
-              />
+              <div className="relative size-14 shrink-0 rounded-full bg-white p-0.5 shadow-sm">
+                <img
+                  src="/brand/logo.png"
+                  alt={`${site.name} Academic Seal`}
+                  width={56}
+                  height={56}
+                  className="size-full object-contain rounded-full"
+                />
+              </div>
               <div>
-                <p className="text-[13px] font-extrabold tracking-[0.14em] uppercase text-ivory">
-                  JOSHI'S ACADEMY
+                <p className="text-[15px] font-extrabold tracking-[0.10em] uppercase text-ivory">
+                  {site.name}
                 </p>
-                <p className="mt-[3px] text-[9px] font-bold tracking-[0.28em] uppercase text-lavender">
-                  GYAN KI VARSHA
+                <p className="mt-[2px] text-[10px] font-bold tracking-[0.26em] uppercase text-lavender">
+                  {site.tagline}
                 </p>
               </div>
             </div>

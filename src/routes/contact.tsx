@@ -73,7 +73,7 @@ function ContactPage() {
                     WhatsApp
                   </p>
                   <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-green-600 transition-colors">
-                    {site.phone}
+                    {site.whatsapp}
                   </p>
                 </div>
               </a>
