@@ -5,11 +5,65 @@ import { courses } from "@/content/site";
 
 export const Route = createFileRoute("/courses/")({
   head: () => ({
-    meta: seoMeta(
-      "Science Courses in Kharadi | CBSE & ICSE Coaching | Joshi’s Academy",
-      "Explore CBSE and ICSE Science coaching programmes for Classes IX and X at Joshi’s Academy in Kharadi, Pune. Physics, Chemistry and Biology taught with small batches.",
-    ),
+    meta: [
+      ...seoMeta(
+        "CBSE & ICSE Science Coaching Classes in Kharadi, Pune | Courses — Joshi’s Academy",
+        "Explore CBSE & ICSE Science coaching programmes for Classes 9 & 10 at Joshi’s Academy in Kharadi, Pune. Serving Chandan Nagar, Wagholi, Viman Nagar. Physics, Chemistry & Biology small batch classes.",
+      ),
+      { name: "keywords", content: "science coaching classes in Kharadi, CBSE class 10 science coaching Kharadi, ICSE class 10 science classes Kharadi, CBSE class 9 science tuition, 10th science tuition Chandan Nagar, Wagholi science classes" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/courses" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Courses",
+              item: "https://joshisacademy.com/courses",
+            },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Science Coaching Programmes in Kharadi, Pune",
+          itemListElement: courses.map((c, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Course",
+              name: c.title,
+              description: c.description,
+              url: `https://joshisacademy.com/courses/${c.slug}`,
+              provider: {
+                "@type": "EducationalOrganization",
+                name: "Joshi’s Academy",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Kharadi, Pune",
+                  addressRegion: "Maharashtra",
+                  addressCountry: "IN",
+                },
+              },
+            },
+          })),
+        }),
+      },
+    ],
   }),
   component: CoursesDirectoryPage,
 });

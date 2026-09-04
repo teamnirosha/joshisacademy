@@ -16,10 +16,12 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/classroom-hero.jpg";
 import approachImage from "@/assets/academy-approach.jpg";
 import classroomImage from "@/assets/classroom-wide.jpg";
+import { LocalSeoAreas } from "@/components/sections/LocalSeoAreas";
 import {
   approach,
   articles,
   courses,
+  faqs,
   scienceDisciplines,
   methodology,
   results,
@@ -31,18 +33,20 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Science Coaching in Kharadi | CBSE & ICSE Classes 9 & 10 | Joshi’s Academy" },
+      { title: "Top Science Coaching Classes in Kharadi, Pune | CBSE & ICSE 9th & 10th | Joshi’s Academy" },
       {
         name: "description",
         content:
-          "Specialist CBSE and ICSE Science coaching for Classes IX–X in Kharadi, Pune. Small batches, concept-based understanding in Physics, Chemistry & Biology, structured notes and verified 90%+ board results.",
+          "Best Science coaching classes in Kharadi, Pune for CBSE & ICSE Classes 9 & 10. Serving Chandan Nagar, Wagholi, Viman Nagar, Mundhwa. Small batches, concept-first Physics, Chemistry & Biology.",
       },
-      { property: "og:title", content: "Joshi’s Academy — Science, Understood." },
+      { name: "keywords", content: "coaching classes in Kharadi, science tuition Kharadi, best coaching institute in Kharadi Pune, 10th CBSE science tuition Kharadi, ICSE science coaching Kharadi, tuition classes near Chandan Nagar, science tuition Wagholi, coaching classes Viman Nagar" },
+      { property: "og:title", content: "Joshi’s Academy — Top Science Coaching Classes in Kharadi, Pune" },
       {
         property: "og:description",
-        content: "Concept-first CBSE & ICSE Science Coaching for Classes 9 & 10 in Kharadi, Pune.",
+        content: "Concept-first CBSE & ICSE Science Coaching for Classes 9 & 10 in Kharadi, Pune. Verified 90%+ board results.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://joshisacademy.com/brand/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/" }],
@@ -51,18 +55,25 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "EducationalOrganization",
+          "@type": ["EducationalOrganization", "LocalBusiness"],
           name: "Joshi’s Academy",
           slogan: "Gyan Ki Varsha",
           description:
             "Specialist CBSE and ICSE Science coaching for Classes IX and X in Kharadi, Pune.",
           address: {
             "@type": "PostalAddress",
-            addressLocality: "Kharadi",
+            streetAddress: "Kharadi",
+            addressLocality: "Kharadi, Pune",
             addressRegion: "Maharashtra",
+            postalCode: "411014",
             addressCountry: "IN",
           },
-          areaServed: "Pune",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 18.5515,
+            longitude: 73.9468,
+          },
+          areaServed: site.nearbyLocations,
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Secondary Science Coaching",
@@ -70,8 +81,27 @@ export const Route = createFileRoute("/")({
               "@type": "Course",
               name: c.title,
               description: c.description,
+              provider: {
+                "@type": "EducationalOrganization",
+                name: "Joshi’s Academy",
+              },
             })),
           },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: f.a,
+            },
+          })),
         }),
       },
     ],
@@ -860,6 +890,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Local SEO Footprint: Serving Kharadi & Nearby Areas ──────── */}
+      <LocalSeoAreas />
 
       <section className="bg-ink text-ivory py-20 md:py-28 border-t border-border/15">
         <div className="section-shell">

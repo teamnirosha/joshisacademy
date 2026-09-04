@@ -6,11 +6,37 @@ import { articles } from "@/content/site";
 
 export const Route = createFileRoute("/journal/")({
   head: () => ({
-    meta: seoMeta(
-      "The Joshi’s Journal | CBSE & ICSE Science Study Guides",
-      "Academic guides, numerical strategies, and board exam blueprints for Class 9 and 10 Science students from the faculty at Joshi’s Academy, Kharadi.",
-    ),
+    meta: [
+      ...seoMeta(
+        "Academic Journal & Science Guides for Kharadi & Pune Students | Joshi’s Academy",
+        "Read expert academic study guides, board exam preparation strategies, and curriculum advice for CBSE & ICSE Class 9 & 10 Science by Joshi’s Academy Kharadi.",
+      ),
+      { name: "keywords", content: "coaching guides Kharadi, CBSE 10th science preparation Kharadi, best science tuition guide Pune, ICSE 10th study strategy Kharadi" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/journal" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Journal",
+              item: "https://joshisacademy.com/journal",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: JournalIndexPage,
 });

@@ -6,11 +6,37 @@ import { results } from "@/content/site";
 
 export const Route = createFileRoute("/results")({
   head: () => ({
-    meta: seoMeta(
-      "Academic Results & Board Performance | Joshi’s Academy Kharadi",
-      "Verified board examination outcomes for CBSE Class 10 Science at Joshi’s Academy in Kharadi, Pune. 50% of the 2024–25 batch scored 90%+.",
-    ),
+    meta: [
+      ...seoMeta(
+        "Board Examination Results (90%+) | Top Coaching Classes in Kharadi, Pune — Joshi’s Academy",
+        "Verified 10th CBSE & ICSE board examination results at Joshi’s Academy in Kharadi, Pune. Over 50% of our batch scored 90%+ in Science.",
+      ),
+      { name: "keywords", content: "10th board toppers Kharadi, CBSE science results Kharadi Pune, best coaching results Kharadi, 90 percent in 10th CBSE Kharadi, science tuition results Chandan Nagar" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/results" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Academic Results",
+              item: "https://joshisacademy.com/results",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ResultsPage,
 });

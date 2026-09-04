@@ -6,12 +6,36 @@ import { faqs } from "@/content/site";
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
-    meta: seoMeta(
-      "Science Coaching FAQs | Joshi’s Academy Kharadi",
-      "Answers about CBSE & ICSE classes, small batches, Physics, Chemistry & Biology teaching, weekly tests, and location at Joshi’s Academy in Kharadi, Pune.",
-    ),
+    meta: [
+      ...seoMeta(
+        "Frequently Asked Questions | Science Coaching Classes in Kharadi, Pune",
+        "Answers about CBSE & ICSE Class 9 & 10 Science coaching, small batches, Physics, Chemistry & Biology teaching, fees, and locations in Kharadi, Chandan Nagar & Wagholi.",
+      ),
+      { name: "keywords", content: "coaching classes Kharadi FAQ, science tuition Kharadi questions, CBSE 10th science tuition fee Kharadi, coaching near Chandan Nagar FAQ" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/faq" }],
     scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "FAQ",
+              item: "https://joshisacademy.com/faq",
+            },
+          ],
+        }),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({

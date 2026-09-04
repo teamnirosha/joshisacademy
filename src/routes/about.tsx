@@ -7,11 +7,37 @@ import classroomImg from "@/assets/classroom-wide.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
-    meta: seoMeta(
-      "About Joshi’s Academy | Gyan Ki Varsha | Kharadi Pune",
-      "The founding vision, academic philosophy, and small-batch Science coaching methodology of Joshi’s Academy in Kharadi, Pune for CBSE and ICSE Classes IX & X.",
-    ),
+    meta: [
+      ...seoMeta(
+        "About Joshi’s Academy | Best Science Coaching Institute in Kharadi, Pune",
+        "Learn about Joshi’s Academy in Kharadi, Pune. Specialist CBSE & ICSE Science coaching for 9th & 10th grade, serving Chandan Nagar, Wagholi, Viman Nagar. Small batch concept mastery.",
+      ),
+      { name: "keywords", content: "about Joshi's Academy Kharadi, science institute Kharadi Pune, best coaching center Kharadi, science tuition Chandan Nagar, Wagholi coaching institute" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/about" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "About Us",
+              item: "https://joshisacademy.com/about",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: AboutPage,
 });
