@@ -12,4 +12,12 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    ssr: {
+      // recharts uses React hooks internally and doesn't support SSR natively.
+      // Bundling it (noExternal) instead of externalizing it fixes the
+      // "Cannot read properties of null (reading 'useContext')" error.
+      noExternal: ["recharts"],
+    },
+  },
 });
