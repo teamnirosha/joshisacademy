@@ -4,7 +4,6 @@ import { ArrowRight, Compass, MapPin, Menu, MessageSquare, Phone, Sparkles, X } 
 import { Button } from "@/components/ui/button";
 import { EnquiryDialog } from "./enquiry-dialog";
 import { BrandLoader } from "./brand-loader";
-import { PageTransition } from "./page-transition";
 import { site, announcement } from "@/content/site";
 
 const navItems = [
@@ -276,7 +275,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         className="flex-1 pb-16 lg:pb-0"
         style={{ paddingTop: isHome ? 0 : `${contentOffset}px` }}
       >
-        <PageTransition>{children}</PageTransition>
+        {children}
       </main>
 
       {/* Footer */}
