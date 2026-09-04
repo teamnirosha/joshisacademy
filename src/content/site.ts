@@ -30,10 +30,25 @@ export const site = {
   addressDisplay: "Kharadi, Pune, Maharashtra, India",
   phone: "07030554317",
   whatsapp: "07030554317",
+  geo: {
+    latitude: 18.5515,
+    longitude: 73.9468,
+  },
+  nearbyLocations: [
+    "Kharadi",
+    "Chandan Nagar",
+    "Wagholi",
+    "Viman Nagar",
+    "Mundhwa",
+    "Keshav Nagar",
+    "Hadapsar",
+    "Vadgaon Sheri",
+    "Kalyani Nagar",
+  ],
   mapsUrl: "https://maps.google.com/maps?ftid=0xda91b9aaa8e08e7:0xa2245a5b43016f88",
   mapsEmbed: "https://maps.google.com/maps?q=joshi%27s+academy+kharadi+pune&output=embed",
   description:
-    "Specialist CBSE and ICSE Science coaching for Classes IX and X in Kharadi, Pune, with small batches, personalised attention, and concept-first methodology.",
+    "Specialist CBSE and ICSE Science coaching for Classes IX and X in Kharadi, Pune, serving Chandan Nagar, Wagholi, Viman Nagar, Mundhwa & nearby areas with small batches and 90%+ board results.",
 };
 
 export const announcement = {
@@ -709,6 +724,60 @@ export const galleryItems = [
 ];
 
 export const articles = [
+  {
+    slug: "best-coaching-classes-in-kharadi-pune",
+    category: "Local Education Guide",
+    classLevel: "Class IX & X",
+    title: "How to Choose the Best Coaching Classes in Kharadi & Nearby Areas",
+    excerpt:
+      "A complete parent's guide for evaluating science coaching, batch size, and conceptual foundation in Kharadi, Chandan Nagar, Wagholi, and Viman Nagar.",
+    readingTime: "7 min read",
+    date: "September 2026",
+    sections: [
+      {
+        heading: "Why Location and Batch Size Matter in Kharadi",
+        content:
+          "Kharadi and nearby hubs like Chandan Nagar, Wagholi, Viman Nagar, and Mundhwa have experienced rapid growth. For secondary school students preparing for Class 9 and 10 CBSE & ICSE board examinations, daily travel time directly affects study efficiency. Choosing a specialized academy in Kharadi with strictly controlled batch sizes ensures your child receives individual attention without wasting hours in transit.",
+      },
+      {
+        heading: "Evaluating Science Specialisation vs Mass Coaching",
+        content:
+          "Mass coaching institutes often combine hundreds of students in a single lecture hall. For core subjects like Physics, Chemistry, and Biology, personal doubt clearance and step-by-step problem-solving are essential. Specialized science academies focus exclusively on deep conceptual clarity, NCERT exemplar practice, and board-pattern answer presentation.",
+      },
+      {
+        heading: "Key Criteria for Parents in Kharadi, Chandan Nagar & Wagholi",
+        content:
+          "When selecting coaching classes, evaluate four main factors: 1) Experienced subject specialist faculty, 2) Small batch size guaranteeing active participation, 3) Regular chapter-wise testing with detailed mark breakdowns, and 4) Accessible location near key residential landmarks like EON IT Park, WTC Kharadi, Nagar Road, and Mundhwa bridge.",
+      },
+    ],
+  },
+  {
+    slug: "cbse-icse-science-tuition-kharadi-wagholi-vimannagar",
+    category: "Board Preparation",
+    classLevel: "Class IX & X",
+    title: "CBSE & ICSE Science Tuition in Kharadi, Wagholi & Viman Nagar: A Parent's Guide",
+    excerpt:
+      "Key strategies to ensure your child excels in 9th & 10th grade Physics, Chemistry, and Biology across top schools in Kharadi and Eastern Pune.",
+    readingTime: "6 min read",
+    date: "September 2026",
+    sections: [
+      {
+        heading: "Understanding Board Expectations in Eastern Pune Schools",
+        content:
+          "Students attending top schools in Kharadi, Viman Nagar, Wagholi, and Hadapsar follow rigorous CBSE and ICSE curricula. While CBSE emphasizes conceptual application and NCERT Exemplar numericals, ICSE demands deep factual knowledge, detailed biological diagrams, and observation-based chemistry questions.",
+      },
+      {
+        heading: "Structured Preparation Timeline for Classes 9 & 10",
+        content:
+          "At Joshi's Academy in Kharadi, we follow a disciplined three-phase preparation model: 1) Conceptual syllabus completion by October, 2) Intensive chapter-wise PYQ marathons through December, and 3) Timed 3-hour pre-board simulations in January and February.",
+      },
+      {
+        heading: "Seamless Access for Students in Nearby Neighborhoods",
+        content:
+          "Located centrally in Kharadi, Joshi's Academy is easily accessible to students from Chandan Nagar (2 mins), Wagholi (7-10 mins via Nagar Road), Viman Nagar (8 mins), and Keshav Nagar/Mundhwa (5 mins across the river bridge).",
+      },
+    ],
+  },
   {
     slug: "score-90-cbse-class-10-science",
     category: "CBSE Science",

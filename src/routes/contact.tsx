@@ -6,11 +6,65 @@ import { site } from "@/content/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
-    meta: seoMeta(
-      "Contact Joshi's Academy | Kharadi, Pune, Maharashtra",
-      "Get in touch with Joshi's Academy in Kharadi, Pune for CBSE and ICSE Science coaching enquiries for Classes IX & X. Schedule a free counselling session.",
-    ),
+    meta: [
+      ...seoMeta(
+        "Contact Joshi's Academy | Science Coaching Classes in Kharadi, Pune",
+        "Get in touch with Joshi's Academy in Kharadi, Pune for CBSE & ICSE Science coaching enquiries for Classes 9 & 10. Convenient to Chandan Nagar, Wagholi, Viman Nagar. Schedule a free counselling session.",
+      ),
+      { name: "keywords", content: "contact Joshi's Academy, coaching classes in Kharadi address, science tuition Kharadi phone number, coaching near Chandan Nagar, science classes Wagholi contact" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/contact" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact Joshi's Academy",
+          description: "Admissions and enquiries contact page for Joshi's Academy Kharadi Pune",
+          url: "https://joshisacademy.com/contact",
+          mainEntity: {
+            "@type": "EducationalOrganization",
+            name: "Joshi’s Academy",
+            telephone: "+917030554317",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Kharadi",
+              addressLocality: "Kharadi, Pune",
+              addressRegion: "Maharashtra",
+              postalCode: "411014",
+              addressCountry: "IN",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 18.5515,
+              longitude: 73.9468,
+            },
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Contact Us",
+              item: "https://joshisacademy.com/contact",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ContactPage,
 });

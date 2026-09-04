@@ -6,11 +6,37 @@ import { facultyStandards } from "@/content/site";
 
 export const Route = createFileRoute("/faculty")({
   head: () => ({
-    meta: seoMeta(
-      "Science Faculty Standards | Joshi’s Academy Kharadi",
-      "Meet the academic standards, teaching philosophy, and verification principles behind Joshi’s Academy’s CBSE and ICSE Science programmes in Kharadi, Pune.",
-    ),
+    meta: [
+      ...seoMeta(
+        "Expert Science Faculty & Educators in Kharadi, Pune | Joshi’s Academy",
+        "Meet the specialist Physics, Chemistry & Biology faculty at Joshi’s Academy in Kharadi, Pune. Expert teaching for CBSE & ICSE 9th & 10th grade students.",
+      ),
+      { name: "keywords", content: "best science teachers in Kharadi, physics tutor Kharadi, chemistry tuition teacher Kharadi, biology coaching teacher Pune, coaching faculty Kharadi" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/faculty" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Faculty Standards",
+              item: "https://joshisacademy.com/faculty",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: FacultyPage,
 });

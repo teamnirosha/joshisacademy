@@ -16,14 +16,16 @@ export const Route = createFileRoute("/courses/$slug")({
   },
   head: ({ loaderData: c }) => ({
     meta: [
-      { title: `${c?.title ?? "Science Course"} Coaching in Kharadi | Joshi’s Academy` },
+      { title: `${c?.title ?? "Science Course"} Coaching Classes in Kharadi, Pune | Joshi’s Academy` },
       {
         name: "description",
-        content: c?.description ?? "Specialist CBSE & ICSE Science coaching.",
+        content: `${c?.title ?? "Science Course"} coaching classes in Kharadi, Pune for ${c?.board ?? "CBSE/ICSE"} ${c?.className ?? ""}. Physics, Chemistry & Biology with small batches, serving Chandan Nagar, Wagholi & Viman Nagar.`,
       },
-      { property: "og:title", content: `${c?.title ?? "Course"} | Joshi’s Academy` },
-      { property: "og:description", content: c?.description ?? "Science coaching." },
+      { name: "keywords", content: `${c?.title ?? "Science"}, ${c?.board ?? "CBSE"} ${c?.className ?? ""} Science coaching Kharadi, tuition classes Kharadi Pune, 10th science classes Chandan Nagar, Wagholi science tuition` },
+      { property: "og:title", content: `${c?.title ?? "Course"} Coaching in Kharadi | Joshi’s Academy` },
+      { property: "og:description", content: c?.description ?? "Specialist Science coaching in Kharadi, Pune." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://joshisacademy.com/brand/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `https://joshisacademy.com/courses/${c?.slug ?? ""}` }],
@@ -36,17 +38,67 @@ export const Route = createFileRoute("/courses/$slug")({
               "@type": "Course",
               name: c.title,
               description: c.description,
+              url: `https://joshisacademy.com/courses/${c.slug}`,
               provider: {
                 "@type": "EducationalOrganization",
                 name: "Joshi’s Academy",
+                sameAs: "https://joshisacademy.com",
                 address: {
                   "@type": "PostalAddress",
-                  addressLocality: "Kharadi",
+                  addressLocality: "Kharadi, Pune",
                   addressRegion: "Maharashtra",
                   addressCountry: "IN",
                 },
               },
+              educationalCredentialAwarded: "Board Exam Mastery Certificate",
               educationalLevel: c.className,
+              hasCourseInstance: {
+                "@type": "CourseInstance",
+                courseMode: "In-Person Classroom",
+                location: "Joshi's Academy, Kharadi, Pune",
+              },
+            }),
+          },
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://joshisacademy.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Courses",
+                  item: "https://joshisacademy.com/courses",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: c.title,
+                  item: `https://joshisacademy.com/courses/${c.slug}`,
+                },
+              ],
+            }),
+          },
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: (c.faqs ?? []).map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: f.a,
+                },
+              })),
             }),
           },
         ]

@@ -9,11 +9,37 @@ import wideImg from "@/assets/classroom-wide.jpg";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
-    meta: seoMeta(
-      "Classroom & Academy Gallery | Joshi’s Academy Kharadi",
-      "Authentic photographs of small-batch Science classrooms, conceptual learning sessions, and student focus at Joshi’s Academy in Kharadi, Pune.",
-    ),
+    meta: [
+      ...seoMeta(
+        "Classroom & Science Lab Gallery | Joshi’s Academy Kharadi, Pune",
+        "View authentic photographs of small-batch Science classrooms, doubt-solving sessions, and state-of-the-art facilities at Joshi’s Academy in Kharadi, Pune.",
+      ),
+      { name: "keywords", content: "coaching classroom photos Kharadi, science tuition environment Kharadi, Joshi's Academy classroom pictures, coaching infrastructure Kharadi" },
+    ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/gallery" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://joshisacademy.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Gallery",
+              item: "https://joshisacademy.com/gallery",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: GalleryPage,
 });

@@ -12,11 +12,13 @@ export const Route = createFileRoute("/journal/$slug")({
   },
   head: ({ loaderData: art }) => ({
     meta: [
-      { title: `${art?.title ?? "Science Guide"} | The Joshi’s Journal` },
-      { name: "description", content: art?.excerpt ?? "Science study guidance." },
+      { title: `${art?.title ?? "Science Guide"} | Joshi’s Academy Kharadi, Pune` },
+      { name: "description", content: art?.excerpt ?? "Science study guidance for Kharadi and Pune students." },
+      { name: "keywords", content: `${art?.title ?? "Science guide"}, coaching classes Kharadi, science tuition Kharadi Pune, 10th CBSE science guide, Chandan Nagar science tuition` },
       { property: "og:title", content: art?.title ?? "The Joshi’s Journal" },
       { property: "og:description", content: art?.excerpt ?? "Science study guidance." },
       { property: "og:type", content: "article" },
+      { property: "og:image", content: "https://joshisacademy.com/brand/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `https://joshisacademy.com/journal/${art?.slug ?? ""}` }],
@@ -29,6 +31,7 @@ export const Route = createFileRoute("/journal/$slug")({
               "@type": "Article",
               headline: art.title,
               description: art.excerpt,
+              mainEntityOfPage: `https://joshisacademy.com/journal/${art.slug}`,
               author: {
                 "@type": "EducationalOrganization",
                 name: "Joshi’s Academy",
@@ -42,6 +45,33 @@ export const Route = createFileRoute("/journal/$slug")({
                 },
               },
               datePublished: "2026-08-01",
+            }),
+          },
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://joshisacademy.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Journal",
+                  item: "https://joshisacademy.com/journal",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: art.title,
+                  item: `https://joshisacademy.com/journal/${art.slug}`,
+                },
+              ],
             }),
           },
         ]
