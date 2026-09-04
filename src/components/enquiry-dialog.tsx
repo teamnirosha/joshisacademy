@@ -86,7 +86,26 @@ export function EnquiryDialog({
 
     setState("loading");
 
+    const payload = {
+      student_class: form.studentClass,
+      board: form.board,
+      parent_name: form.parentName.trim(),
+      mobile_number: form.mobile.trim(),
+      email: form.email.trim() || undefined,
+      preferred_contact: form.preferred,
+      submitted_at: new Date().toISOString(),
+      page_url: typeof window !== "undefined" ? window.location.href : "https://joshisacademy.com",
+    };
+
     try {
+      // 1. Post to n8n Automation Webhook
+      fetch("https://automate.nirosha.org/webhook/joshisacademy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }).catch((err) => console.warn("n8n webhook notice:", err));
+
+      // 2. Persist to Supabase
       const { error } = await supabase.from("enquiries").insert({
         student_class: form.studentClass,
         board: form.board,
