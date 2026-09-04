@@ -63,6 +63,18 @@ export function SiteShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("open-enquiry", handleOpenEnquiry);
   }, []);
 
+  // Automatically trigger attractive enquiry popup 3 seconds after visit
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const hasAutoOpened = sessionStorage.getItem("ja_enquiry_auto_opened");
+      if (!hasAutoOpened) {
+        sessionStorage.setItem("ja_enquiry_auto_opened", "true");
+        setEnquireOpen(true);
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
