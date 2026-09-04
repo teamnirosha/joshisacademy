@@ -59,7 +59,7 @@ function JournalArticlePage() {
   return (
     <article className="min-h-screen bg-background">
       {/* Article Header */}
-      <header className="bg-ink px-6 pb-20 pt-36 text-ivory md:px-10 md:pt-44 border-b border-border/15">
+      <header className="bg-ink px-6 pb-16 pt-32 text-ivory md:px-10 md:pb-24 md:pt-40 border-b border-border/15">
         <div className="mx-auto max-w-5xl">
           <Crumbs items={["Journal", art.title]} />
 
@@ -74,11 +74,11 @@ function JournalArticlePage() {
             <span>{art.date}</span>
           </div>
 
-          <h1 className="mt-6 font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-ivory leading-[1.02] tracking-tight">
+          <h1 className="mt-5 max-w-4xl font-display text-3xl sm:text-5xl md:text-6xl text-ivory leading-[1.08] tracking-tight">
             {art.title}
           </h1>
 
-          <p className="mt-8 max-w-3xl text-base sm:text-xl leading-relaxed text-ivory/75">
+          <p className="mt-6 max-w-3xl text-base sm:text-lg leading-relaxed text-ivory/75">
             {art.excerpt}
           </p>
         </div>

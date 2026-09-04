@@ -13,14 +13,14 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-ink px-6 pb-20 pt-36 text-ivory md:px-10 md:pb-28 md:pt-44 border-b border-border/15">
-      <div className="mx-auto max-w-[1500px]">
+    <section className="bg-ink px-6 pb-16 pt-32 text-ivory md:px-10 md:pb-24 md:pt-40 border-b border-border/15">
+      <div className="mx-auto max-w-6xl">
         <p className="eyebrow text-lavender/85">{eyebrow}</p>
-        <h1 className="mt-6 max-w-6xl font-display text-5xl leading-[0.98] sm:text-6xl md:text-8xl lg:text-9xl text-ivory">
+        <h1 className="mt-5 max-w-4xl font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.06] tracking-tight">
           {title}
         </h1>
-        <div className="mt-10 grid gap-8 border-t border-ivory/20 pt-8 md:grid-cols-2 md:items-end">
-          <p className="max-w-xl text-base leading-8 text-ivory/70 sm:text-lg">{intro}</p>
+        <div className="mt-8 grid gap-8 border-t border-ivory/20 pt-8 md:grid-cols-2 md:items-end">
+          <p className="max-w-xl text-base leading-relaxed text-ivory/75 sm:text-lg">{intro}</p>
           {children && <div className="md:justify-self-end">{children}</div>}
         </div>
       </div>

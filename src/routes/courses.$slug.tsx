@@ -64,20 +64,20 @@ function CourseDetailPage() {
   return (
     <>
       {/* Course Hero */}
-      <section className="bg-ink px-6 pb-20 pt-36 text-ivory md:px-10 md:pt-44 border-b border-border/15">
-        <div className="mx-auto max-w-[1500px]">
+      <section className="bg-ink px-6 pb-16 pt-32 text-ivory md:px-10 md:pb-24 md:pt-40 border-b border-border/15">
+        <div className="mx-auto max-w-6xl">
           <Crumbs items={["Courses", c.title]} />
 
-          <p className="eyebrow text-lavender tracking-[0.24em] mt-8">
+          <p className="eyebrow text-lavender tracking-[0.24em] mt-6">
             {c.board} • {c.className} • SPECIALIST SCIENCE
           </p>
 
-          <h1 className="mt-6 max-w-5xl font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-ivory leading-[0.94] tracking-tight">
+          <h1 className="mt-5 max-w-4xl font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.04] tracking-tight">
             {c.title}
           </h1>
 
-          <div className="mt-12 grid gap-8 border-t border-ivory/20 pt-8 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <p className="max-w-2xl text-base sm:text-xl leading-relaxed text-ivory/80">
+          <div className="mt-8 grid gap-8 border-t border-ivory/20 pt-8 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-ivory/80">
               {c.tagline}. {c.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3.5 md:justify-end">
