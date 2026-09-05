@@ -138,13 +138,13 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </div>
             <div className="leading-tight">
               <span
-                className={`block text-[10px] sm:text-[10.5px] font-bold tracking-[0.08em] uppercase transition-colors ${scrolled || !isHome ? "text-ink" : "text-ivory"
+                className={`block text-[13px] sm:text-[14.5px] font-extrabold tracking-[0.08em] uppercase transition-colors ${scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
                   }`}
               >
                 {site.name}
               </span>
               <span
-                className={`block text-[8px] sm:text-[8.5px] font-extrabold tracking-[0.22em] uppercase transition-colors mt-0.5 ${scrolled || !isHome ? "text-violet" : "text-lavender"
+                className={`block text-[8.5px] sm:text-[9.5px] font-bold tracking-[0.20em] uppercase transition-colors mt-0.5 ${scrolled || !isHome ? "text-violet" : "text-lavender"
                   }`}
               >
                 {site.tagline}
@@ -181,12 +181,12 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setEnquireOpen(true)}
-              className={`hidden sm:inline-flex items-center gap-1.5 h-[38px] px-[18px] text-[11px] font-bold tracking-[0.11em] uppercase transition-colors ${scrolled || !isHome
+              className={`hidden sm:inline-flex items-center gap-1.5 h-[40px] px-5 text-[11px] font-extrabold tracking-[0.11em] uppercase transition-colors rounded-sm cursor-pointer ${scrolled || !isHome
                 ? "bg-violet text-ivory hover:bg-violet/90"
-                : "bg-ivory text-ink hover:bg-white"
+                : "bg-ivory text-ink hover:bg-white shadow-md"
                 }`}
             >
-              ENQUIRE <ArrowRight className="size-3" />
+              SPEAK TO VARSHA MA'AM →
             </button>
 
             {/* Mobile Menu Trigger */}
@@ -260,9 +260,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 setMenuOpen(false);
                 setEnquireOpen(true);
               }}
-              className="w-full flex items-center justify-center gap-2 bg-ivory text-ink h-12 text-sm font-bold tracking-[0.1em] uppercase hover:bg-white transition-colors"
+              className="w-full flex items-center justify-center gap-2 bg-violet text-ivory h-12 text-xs font-bold tracking-[0.12em] uppercase hover:bg-violet/90 transition-colors shadow-sm"
             >
-              Book a Free Counselling Session <ArrowRight className="size-4" />
+              SPEAK TO VARSHA MA'AM <ArrowRight className="size-4" />
             </button>
 
             <div className="flex items-center justify-between text-xs text-ivory/50 pt-1">
@@ -286,7 +286,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Mobile Fixed Bottom Action Bar */}
       <div
-        className="fixed inset-x-0 bottom-0 z-30 grid h-14 grid-cols-3 border-t border-border bg-ivory text-ink shadow-[0_-2px_10px_rgba(0,0,0,0.06)] lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 grid h-14 grid-cols-3 border-t border-border/20 bg-ink text-ivory shadow-[0_-4px_16px_rgba(0,0,0,0.25)] lg:hidden"
         role="navigation"
         aria-label="Mobile Action Bar"
       >
@@ -298,10 +298,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
               setEnquireOpen(true);
             }
           }}
-          className="flex flex-col items-center justify-center border-r border-border hover:bg-lavender/50 transition-colors text-ink"
+          className="flex items-center justify-center gap-1.5 border-r border-ivory/15 bg-ink text-ivory hover:bg-white/10 transition-colors px-1"
         >
-          <Phone className="size-4 text-violet mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">Call</span>
+          <Phone className="size-3.5 text-lavender shrink-0" />
+          <span className="text-[10px] font-bold uppercase tracking-wider truncate">CALL NOW</span>
         </a>
 
         <a
@@ -312,19 +312,19 @@ export function SiteShell({ children }: { children: ReactNode }) {
               setEnquireOpen(true);
             }
           }}
-          className="flex flex-col items-center justify-center border-r border-border hover:bg-lavender/50 transition-colors text-ink"
+          className="flex items-center justify-center gap-1.5 border-r border-ivory/15 bg-emerald-700 text-white hover:bg-emerald-800 transition-colors px-1"
         >
-          <MessageSquare className="size-4 text-royal mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">WhatsApp</span>
+          <MessageSquare className="size-3.5 text-white shrink-0" />
+          <span className="text-[10px] font-bold uppercase tracking-wider truncate">WHATSAPP</span>
         </a>
 
         <button
           type="button"
           onClick={() => setEnquireOpen(true)}
-          className="flex flex-col items-center justify-center bg-violet text-ivory hover:bg-violet/90 transition-colors cursor-pointer"
+          className="flex items-center justify-center gap-1 bg-violet text-ivory hover:bg-violet/90 transition-colors cursor-pointer px-1"
         >
-          <ArrowRight className="size-4 mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">Enquire</span>
+          <span className="text-[9.5px] font-bold uppercase tracking-wider truncate">SPEAK TO VARSHA</span>
+          <ArrowRight className="size-3 shrink-0" />
         </button>
       </div>
 

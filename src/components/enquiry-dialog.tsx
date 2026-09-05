@@ -140,8 +140,8 @@ export function EnquiryDialog({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/75 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         
-        <Dialog.Content className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-50 mx-auto w-full max-w-[540px] rounded-2xl border border-border/80 bg-ivory text-ink shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-hidden transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-          <div className="p-6 sm:p-8">
+        <Dialog.Content className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-50 mx-auto w-full max-w-[540px] max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl border border-border/80 bg-ivory text-ink shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 no-scrollbar">
+          <div className="p-5 sm:p-8">
             {/* Header with Official Logo & Badges */}
             <div className="flex items-start justify-between border-b border-border/60 pb-5">
               <div className="flex items-center gap-3.5">
