@@ -116,21 +116,21 @@ function HomePage() {
             width={1600}
             height={1000}
             fetchPriority="high"
-            className="size-full object-cover object-[65%_15%] sm:object-[60%_15%] lg:object-[right_15%] image-reveal"
+            className="size-full object-cover object-[50%_6%] sm:object-[50%_8%] lg:object-[85%_12%] xl:object-[88%_15%] image-reveal"
           />
-          {/* On mobile: gradient from bottom so text panel below is dark */}
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/30 to-ink lg:hidden" />
-          {/* On desktop: left-to-right gradient — medium dark left, fades to transparent right */}
-          <div className="absolute inset-0 hidden lg:block bg-[linear-gradient(100deg,rgba(17,17,17,0.82)_0%,rgba(17,17,17,0.72)_38%,rgba(17,17,17,0.30)_62%,rgba(17,17,17,0.08)_100%)]" />
+          {/* On mobile: subtle top tint for header, clear un-darkened view of centered teacher face in upper 30-35%, smooth dark gradient downwards for 100% text clarity */}
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-transparent via-18% via-ink/65 via-34% to-ink to-85% lg:hidden" />
+          {/* On desktop: left-to-right gradient — solid dark left column, fades smoothly right to reveal teacher portrait */}
+          <div className="absolute inset-0 hidden lg:block bg-[linear-gradient(98deg,rgba(17,17,17,0.92)_0%,rgba(17,17,17,0.84)_44%,rgba(17,17,17,0.30)_68%,rgba(17,17,17,0.02)_100%)]" />
         </div>
 
         {/* Content grid — single flex container over the image */}
         <div className="relative z-10 flex flex-col lg:flex-row lg:min-h-screen">
 
           {/* LEFT PANEL — transparent bg, content overlays the image */}
-          <div className="relative flex flex-col justify-center w-full lg:w-[52%] px-5 sm:px-8 lg:px-12 xl:px-16 pt-[calc(72px+2rem)] pb-12 lg:pt-[calc(72px+4rem)] lg:pb-24">
+          <div className="relative flex flex-col justify-center w-full lg:w-[54%] xl:w-[50%] px-5 sm:px-8 lg:px-12 xl:px-16 pt-[32vh] sm:pt-[34vh] lg:pt-[calc(72px+3rem)] pb-14 lg:pb-24">
             {/* Extra spacer on desktop for aesthetic vertical centering */}
-            <div className="hidden lg:block h-6 shrink-0" />
+            <div className="hidden lg:block h-4 shrink-0" />
 
             {/* Gold Eyebrow */}
             <div className="flex items-center gap-3 mb-5">
@@ -201,14 +201,24 @@ function HomePage() {
               </Link>
             </div>
 
-            {/* AT A GLANCE — shown below CTAs on mobile only */}
-            <div className="mt-8 lg:hidden bg-[#1c1244]/80 backdrop-blur-md text-white p-4 rounded-xl border border-ivory/15 shadow-xl">
-              <div className="flex items-center gap-2 border-b border-ivory/15 pb-2 mb-3">
-                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-400 text-ink font-bold text-[10px]">✓</span>
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-amber-300">AT A GLANCE</span>
+            {/* AT A GLANCE — Left Side Corner Box (Responsive for Desktop & Mobile) */}
+            <div className="mt-7 bg-[#1c1244]/90 backdrop-blur-md text-white p-4 sm:p-5 rounded-2xl border border-amber-400/25 shadow-2xl max-w-xl">
+              <div className="flex items-center justify-between border-b border-ivory/15 pb-2.5 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="flex size-5.5 shrink-0 items-center justify-center rounded-full bg-amber-400 text-ink font-bold text-[11px] shadow-xs">✓</span>
+                  <span className="text-[10.5px] font-extrabold uppercase tracking-[0.20em] text-amber-300">AT A GLANCE</span>
+                </div>
+                <span className="text-[9px] sm:text-[9.5px] text-ivory/60 uppercase tracking-widest font-semibold">Specialized Coaching</span>
               </div>
-              <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-[11px] text-white/90 font-medium">
-                {["Concept Clarity","Strong Fundamentals","Exam Focused","Doubt Solving","Personal Attention"].map(item => (
+              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 text-[11px] sm:text-xs text-white/95 font-medium">
+                {[
+                  "Concept Clarity",
+                  "Strong Fundamentals",
+                  "Exam Focused",
+                  "Doubt Solving",
+                  "Personal Attention",
+                  "Board Mentorship",
+                ].map((item) => (
                   <li key={item} className="flex items-center gap-1.5">
                     <CheckCircle2 className="size-3.5 text-amber-400 shrink-0" />
                     <span>{item}</span>
@@ -218,24 +228,8 @@ function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT PANEL — spacer on desktop so layout takes full width; AT A GLANCE card here */}
-          <div className="hidden lg:flex lg:w-[48%] relative items-end pb-12 px-10">
-            {/* AT A GLANCE floating card — desktop only */}
-            <div className="bg-[#1c1244]/85 backdrop-blur-md text-white p-5 xl:p-6 rounded-2xl shadow-2xl border border-ivory/20 w-[240px] xl:w-[260px]">
-              <div className="flex items-center gap-2.5 border-b border-ivory/20 pb-2.5 mb-3">
-                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-400 text-ink font-bold text-xs">✓</span>
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-amber-300">AT A GLANCE</span>
-              </div>
-              <ul className="space-y-2 text-xs text-white/95 font-medium">
-                {["Concept Clarity","Strong Fundamentals","Exam Focused","Regular Doubt Solving","Personal Attention"].map(item => (
-                  <li key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="size-3.5 text-amber-400 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          {/* RIGHT PANEL — Clear area on desktop so Varsha's portrait is prominently displayed */}
+          <div className="hidden lg:flex lg:w-[46%] xl:w-[50%] relative" />
 
         </div>
       </section>

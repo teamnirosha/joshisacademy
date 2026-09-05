@@ -42,10 +42,17 @@ export function SiteShell({ children }: { children: ReactNode }) {
     }
     const el = announcementRef.current;
     if (!el) return;
-    setAnnouncementHeight(el.offsetHeight);
-    const ro = new ResizeObserver(() => setAnnouncementHeight(el.offsetHeight));
+    const updateHeight = () => {
+      setAnnouncementHeight(el.offsetHeight);
+    };
+    updateHeight();
+    const ro = new ResizeObserver(updateHeight);
     ro.observe(el);
-    return () => ro.disconnect();
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
   }, [showAnnouncement]);
 
   useEffect(() => {
@@ -86,11 +93,11 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground flex flex-col antialiased">
       <BrandLoader />
 
-      {/* Top Configurable Announcement Bar — fixed at very top */}
+      {/* Top Configurable Announcement Bar — desktop only, hidden on mobile */}
       {showAnnouncement && (
         <div
           ref={announcementRef}
-          className="fixed inset-x-0 top-0 z-50 bg-violet text-ivory px-4 py-2 text-center"
+          className="fixed inset-x-0 top-0 z-50 bg-violet text-ivory px-4 py-2 text-center hidden md:block"
           role="region"
           aria-label="Academic Announcement"
         >
