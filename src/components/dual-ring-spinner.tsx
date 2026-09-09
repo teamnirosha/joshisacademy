@@ -3,15 +3,15 @@
  *
  * Premium concentric dual-ring SVG spinner.
  *
- * Outer ring  — sky blue  (#3FA9F5), clockwise,         1.0s linear infinite
- * Inner ring  — deep blue (#0B3D91), counter-clockwise, 0.7s linear infinite
- * Track rings — #DCEEFB (light bg) / #16294F (dark bg)
+ * Outer ring  - sky blue  (#3FA9F5), clockwise,         1.0s linear infinite
+ * Inner ring  - deep blue (#0B3D91), counter-clockwise, 0.7s linear infinite
+ * Track rings - #DCEEFB (light bg) / #16294F (dark bg)
  *
  * Both rings have rounded stroke caps and a partial-arc so the rotation
  * is visually obvious against the faded track ring behind it.
  *
  * Pure CSS animation via .ring-outer / .ring-inner classes defined in
- * styles.css — zero JS library dependency.
+ * styles.css - zero JS library dependency.
  */
 
 interface DualRingSpinnerProps {
@@ -36,9 +36,9 @@ export function DualRingSpinner({
   const sw = (3 / 60) * size; // stroke-width scales with size
 
   const outerR = size * (25 / 60); // ≈25px at 60px size
-  const innerR = size * (15 / 60); // ≈15px at 60px size — 10px gap
+  const innerR = size * (15 / 60); // ≈15px at 60px size - 10px gap
 
-  // Partial arc lengths (dasharray) — outer 75%, inner 60%
+  // Partial arc lengths (dasharray) - outer 75%, inner 60%
   const outerCirc = 2 * Math.PI * outerR;
   const innerCirc = 2 * Math.PI * innerR;
   const outerDash = `${(outerCirc * 0.75).toFixed(2)} ${(outerCirc * 0.25).toFixed(2)}`;
@@ -57,7 +57,7 @@ export function DualRingSpinner({
       role="status"
       aria-label="Loading"
     >
-      {/* Responsive wrapper — 60px desktop, 48px mobile */}
+      {/* Responsive wrapper - 60px desktop, 48px mobile */}
       <div className="size-[48px] sm:size-[60px]">
         <svg
           width="100%"

@@ -144,7 +144,7 @@ function ContactPage() {
                     Counselling Hours
                   </p>
                   <p className="mt-0.5 text-sm text-ink leading-relaxed break-words">
-                    Monday – Saturday: 10:00 AM – 7:30 PM
+                    Monday - Saturday: 10:00 AM - 7:30 PM
                     <br />
                     <span className="text-muted-foreground text-xs">
                       Sunday: By prior appointment for parent counselling

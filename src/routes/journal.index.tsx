@@ -69,7 +69,7 @@ function JournalIndexPage() {
       <PageHero
         eyebrow="The Joshi’s Journal"
         title="Thinking clearly about Science."
-        intro="Practical, thoughtful academic guidance for students and parents—written by educators to improve authentic understanding, not to chase search trends."
+        intro="Practical, thoughtful academic guidance for students and parents-written by educators to improve authentic understanding, not to chase search trends."
       />
 
       <section className="section-shell py-24 md:py-36">

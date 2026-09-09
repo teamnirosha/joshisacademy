@@ -156,7 +156,7 @@ function JournalArticlePage() {
                 Key Academic Takeaway
               </div>
               <p className="font-display text-xl sm:text-2xl text-ink leading-snug">
-                “Strong Science board results come from a disciplined, weekly diagnostic process—not
+                “Strong Science board results come from a disciplined, weekly diagnostic process-not
                 a desperate burst of memorisation before the exam.”
               </p>
             </div>

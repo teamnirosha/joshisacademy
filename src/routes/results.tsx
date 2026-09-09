@@ -8,7 +8,7 @@ export const Route = createFileRoute("/results")({
   head: () => ({
     meta: [
       ...seoMeta(
-        "Board Examination Results (90%+) | Top Coaching Classes in Kharadi, Pune — Joshi’s Academy",
+        "Board Examination Results (90%+) | Top Coaching Classes in Kharadi, Pune - Joshi’s Academy",
         "Verified 10th CBSE & ICSE board examination results at Joshi’s Academy in Kharadi, Pune. Over 50% of our batch scored 90%+ in Science.",
       ),
       { name: "keywords", content: "10th board toppers Kharadi, CBSE science results Kharadi Pune, best coaching results Kharadi, 90 percent in 10th CBSE Kharadi, science tuition results Chandan Nagar" },
@@ -86,7 +86,7 @@ function ResultsPage() {
               </p>
               <p>
                 Every student maintains an error log from weekly tests. We don’t just count marks;
-                we diagnose why a mark was missed—whether due to mathematical calculation, unit
+                we diagnose why a mark was missed-whether due to mathematical calculation, unit
                 omission, or inadequate answer framing according to CBSE/ICSE rubrics.
               </p>
             </div>

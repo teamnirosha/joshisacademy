@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Joshi’s Academy — Best Science Coaching Classes in Kharadi, Pune" },
+      { title: "Joshi’s Academy - Best Science Coaching Classes in Kharadi, Pune" },
       {
         name: "description",
         content:
@@ -86,7 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Joshi’s Academy" },
       { name: "keywords", content: "coaching classes in Kharadi, science tuition Kharadi, CBSE 10th science coaching, ICSE science classes Kharadi, tuition classes near Chandan Nagar, science tuition Wagholi, Viman Nagar coaching classes, Mundhwa science tuition" },
-      { property: "og:title", content: "Joshi’s Academy — Best Science Coaching in Kharadi, Pune" },
+      { property: "og:title", content: "Joshi’s Academy - Best Science Coaching in Kharadi, Pune" },
       {
         property: "og:description",
         content:

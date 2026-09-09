@@ -86,55 +86,57 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const isHome = location.pathname === "/";
 
   // Total offset for page content = announcement bar + header
-  const HEADER_HEIGHT = 72; // px — compact target height
+  const HEADER_HEIGHT = 72; // px - compact target height
   const contentOffset = announcementHeight + HEADER_HEIGHT;
 
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground flex flex-col antialiased">
       <BrandLoader />
 
-      {/* Top Configurable Announcement Bar — desktop only, hidden on mobile */}
-      {showAnnouncement && (
-        <div
-          ref={announcementRef}
-          className="fixed inset-x-0 top-0 z-50 bg-violet text-ivory px-4 py-2 text-center hidden md:block"
-          role="region"
-          aria-label="Academic Announcement"
-        >
-          <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3 flex-wrap">
-            <span className="inline-flex items-center gap-1 rounded bg-white/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ivory">
-              <Sparkles className="size-3" />
-              {announcement.badge}
-            </span>
-            <span className="text-xs tracking-tight">{announcement.text}</span>
-            <button
-              onClick={() => setEnquireOpen(true)}
-              className="ml-1 text-xs font-bold underline underline-offset-4 hover:text-lavender transition-colors cursor-pointer"
-            >
-              Enquire Now →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Fixed Institutional Navbar — compact width with large, clean logo */}
+      {/* Fixed Institutional Header + Announcement Bar */}
       <header
-        style={{ top: `${announcementHeight}px` }}
-        className={`fixed inset-x-0 z-40 transition-all duration-200 ${scrolled
-          ? "border-b border-border bg-[rgba(250,249,245,0.97)] backdrop-blur-md shadow-xs"
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
+          ? "border-b border-border bg-[rgba(250,249,245,0.98)] backdrop-blur-md shadow-xs"
           : isHome
             ? "bg-transparent"
             : "border-b border-border/40 bg-ivory"
           }`}
       >
-        <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo + Institutional Title — large, crisp, clean branding */}
+        {/* Top Opaque Light Announcement Bar — desktop only, hidden on mobile */}
+        {showAnnouncement && (
+          <div
+            ref={announcementRef}
+            className={`w-full transition-all duration-300 overflow-hidden ${scrolled
+              ? "max-h-0 opacity-0 py-0 border-none"
+              : "max-h-12 opacity-100 py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
+              } hidden md:block`}
+            role="region"
+            aria-label="Academic Announcement"
+          >
+            <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3 flex-wrap px-4">
+              <span className="inline-flex items-center gap-1 rounded bg-violet text-ivory px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider shadow-2xs">
+                <Sparkles className="size-3 text-amber-300" />
+                {announcement.badge}
+              </span>
+              <span className="text-xs font-semibold tracking-tight text-ink">{announcement.text}</span>
+              <button
+                onClick={() => setEnquireOpen(true)}
+                className="ml-1 text-xs font-bold text-violet underline underline-offset-4 hover:text-royal transition-colors cursor-pointer"
+              >
+                Enquire Now →
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="mx-auto flex h-[64px] sm:h-[72px] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo + Institutional Title - large, crisp, clean branding */}
           <Link
             to="/"
-            className="flex items-center gap-3.5 group cursor-pointer focus:outline-none"
+            className="flex items-center gap-2.5 sm:gap-3.5 group cursor-pointer focus:outline-none"
             aria-label={`${site.name} Home`}
           >
-            <div className="relative size-[54px] sm:size-[58px] shrink-0 rounded-full bg-white shadow-sm flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative size-[44px] sm:size-[58px] shrink-0 rounded-full bg-white shadow-sm flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/brand/logo.png"
                 alt={`${site.name} Academic Seal`}
@@ -145,13 +147,13 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </div>
             <div className="leading-tight">
               <span
-                className={`block text-[13px] sm:text-[14.5px] font-extrabold tracking-[0.08em] uppercase transition-colors ${scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
+                className={`block text-[12px] sm:text-[14.5px] font-extrabold tracking-[0.08em] uppercase transition-colors ${scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
                   }`}
               >
                 {site.name}
               </span>
               <span
-                className={`block text-[8.5px] sm:text-[9.5px] font-bold tracking-[0.20em] uppercase transition-colors mt-0.5 ${scrolled || !isHome ? "text-violet" : "text-lavender"
+                className={`block text-[8px] sm:text-[9.5px] font-bold tracking-[0.20em] uppercase transition-colors mt-0.5 ${scrolled || !isHome ? "text-violet" : "text-lavender"
                   }`}
               >
                 {site.tagline}
@@ -280,7 +282,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {/* Main Content Area — offset by header + announcement height */}
+      {/* Main Content Area - offset by header + announcement height */}
       <main
         className="flex-1 w-full max-w-full overflow-x-hidden pb-16 lg:pb-0"
         style={{ paddingTop: isHome ? 0 : `${contentOffset}px` }}
@@ -293,7 +295,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Mobile Fixed Bottom Action Bar */}
       <div
-        className="fixed inset-x-0 bottom-0 z-30 grid h-14 grid-cols-3 border-t border-border/20 bg-ink text-ivory shadow-[0_-4px_16px_rgba(0,0,0,0.25)] lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 grid h-[52px] grid-cols-3 border-t border-border/20 bg-ink text-ivory shadow-[0_-4px_16px_rgba(0,0,0,0.25)] lg:hidden pb-safe"
         role="navigation"
         aria-label="Mobile Action Bar"
       >
@@ -474,10 +476,20 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 pt-7 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between flex-wrap">
+        <div className="flex flex-col gap-3 pt-7 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between flex-wrap border-t border-ivory/10">
           <p>© {new Date().getFullYear()} Joshi's Academy. Kharadi, Pune, Maharashtra, India.</p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <span className="text-ivory/35">CBSE • ICSE • Science • IX–X</span>
+            <span className="text-ivory/50">
+              Designed &amp; Developed by{" "}
+              <a
+                href="https://nirosha.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-lavender hover:text-white hover:underline transition-colors"
+              >
+                Team Nirosha
+              </a>
+            </span>
             <button onClick={onEnquire} className="text-lavender hover:underline cursor-pointer">
               Direct Admissions Desk →
             </button>

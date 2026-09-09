@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
           "Experienced educator Varsha Joshi provides concept-first CBSE & ICSE Science coaching for Classes 9 & 10 in Kharadi, Pune. Small batches, individual attention, and verified 90%+ board results.",
       },
       { name: "keywords", content: "Varsha Joshi teacher Kharadi, Varsha Joshi science coaching, coaching classes in Kharadi, science tuition Kharadi, 10th CBSE science tuition Kharadi, ICSE science coaching Kharadi" },
-      { property: "og:title", content: "Varsha Joshi — Experienced Science Educator & Mentor in Kharadi, Pune" },
+      { property: "og:title", content: "Varsha Joshi - Experienced Science Educator & Mentor in Kharadi, Pune" },
       {
         property: "og:description",
         content: "An Experienced Educator. A Mentor Who Cares. Concept-focused CBSE & ICSE Science Coaching for Classes 9 & 10.",
@@ -106,179 +106,111 @@ const openEnquiry = () => window.dispatchEvent(new Event("open-enquiry"));
 function HomePage() {
   return (
     <>
-      {/* 01 — HERO SECTION: Full-bleed Varsha background, left panel semi-transparent overlay */}
-      <section className="relative bg-ink text-ivory overflow-hidden min-h-screen lg:min-h-screen">
-        {/* Full-bleed Varsha image covering the entire section */}
-        <div className="absolute inset-0 size-full">
+      {/* 01 - ART-DIRECTED RESPONSIVE HERO SECTION */}
+      <section className="relative bg-ink text-ivory overflow-hidden min-h-[620px] sm:min-h-[660px] lg:h-[690px] xl:h-[710px] lg:max-h-[720px] flex items-center">
+        {/* Science Classroom / Educator Background Image */}
+        <div className="absolute inset-0 size-full overflow-hidden">
           <img
             src={varshaImage}
-            alt="Varsha Joshi — Principal Science Educator & Mentor at Joshi's Academy"
+            alt="Varsha Joshi - Principal Science Educator & Mentor at Joshi's Academy"
             width={1600}
             height={1000}
             fetchPriority="high"
-            className="size-full object-cover object-[50%_6%] sm:object-[50%_8%] lg:object-[85%_12%] xl:object-[88%_15%] image-reveal"
+            className="size-full object-cover object-[88%_10%] sm:object-[82%_10%] md:object-[80%_12%] lg:object-[86%_15%] xl:object-[88%_15%] brightness-[1.06] contrast-[1.02] image-reveal"
           />
-          {/* On mobile: subtle top tint for header, clear un-darkened view of centered teacher face in upper 30-35%, smooth dark gradient downwards for 100% text clarity */}
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-transparent via-18% via-ink/65 via-34% to-ink to-85% lg:hidden" />
-          {/* On desktop: left-to-right gradient — solid dark left column, fades smoothly right to reveal teacher portrait */}
-          <div className="absolute inset-0 hidden lg:block bg-[linear-gradient(98deg,rgba(17,17,17,0.92)_0%,rgba(17,17,17,0.84)_44%,rgba(17,17,17,0.30)_68%,rgba(17,17,17,0.02)_100%)]" />
+          {/* Mobile Overlay: Art-directed 90deg gradient — 88% dark backdrop on left where text sits, fading to 18% on right where teacher's face is */}
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,16,0.88)_0%,rgba(10,10,16,0.65)_58%,rgba(10,10,16,0.18)_100%)] lg:hidden" />
+          {/* Desktop Overlay: Subtle left-to-right gradient behind text area only */}
+          <div className="absolute inset-0 hidden lg:block bg-[linear-gradient(98deg,rgba(15,15,22,0.78)_0%,rgba(15,15,22,0.58)_45%,rgba(15,15,22,0.18)_70%,transparent_100%)]" />
         </div>
 
-        {/* Content grid — single flex container over the image */}
-        <div className="relative z-10 flex flex-col lg:flex-row lg:min-h-screen">
-
-          {/* LEFT PANEL — transparent bg, content overlays the image */}
-          <div className="relative flex flex-col justify-center w-full lg:w-[54%] xl:w-[50%] px-5 sm:px-8 lg:px-12 xl:px-16 pt-[32vh] sm:pt-[34vh] lg:pt-[calc(72px+3rem)] pb-14 lg:pb-24">
-            {/* Extra spacer on desktop for aesthetic vertical centering */}
-            <div className="hidden lg:block h-4 shrink-0" />
-
-            {/* Gold Eyebrow */}
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.22em] text-amber-400">
+        {/* Hero Content - Placed ~112px from top on mobile, max-width 350px on mobile */}
+        <div className="relative z-10 w-full mx-auto max-w-6xl px-4 xs:px-5 sm:px-8 lg:px-12 xl:px-16 pt-[112px] sm:pt-[124px] lg:pt-[96px] pb-12 sm:pb-14">
+          <div className="max-w-[350px] sm:max-w-[480px] lg:max-w-[620px]">
+            {/* Eyebrow */}
+            <div className="reveal-1 flex items-center gap-2 mb-3 sm:mb-4">
+              <span className="text-[11px] sm:text-[13px] lg:text-[14px] font-bold uppercase tracking-[1.5px] text-amber-400">
                 MEET VARSHA JOSHI
               </span>
-              <div className="h-px w-10 bg-amber-400/60 flex-shrink-0" />
+              <div className="h-px w-7 sm:w-10 bg-amber-400/60 flex-shrink-0" />
             </div>
 
-            {/* Headline */}
-            <h1 className="font-display text-[clamp(2.2rem,5vw,4.4rem)] leading-[1.06] tracking-tight text-ivory mb-4">
-              <span className="block font-bold">An Experienced Educator.</span>
-              <span className="block text-lavender font-normal italic mt-1">A Mentor Who Cares.</span>
+            {/* Premium Editorial Heading - Lighter, elegant font weight */}
+            <h1 className="reveal-2 font-display text-[clamp(1.95rem,7vw,2.25rem)] sm:text-[38px] md:text-[44px] lg:text-[52px] xl:text-[58px] leading-[1.04] tracking-tight text-white mb-3.5 sm:mb-4 font-normal">
+              <span className="block font-normal">An Experienced</span>
+              <span className="block font-normal">Educator.</span>
+              <span className="block text-ivory/90 font-normal italic mt-0.5 sm:mt-1">A Mentor Who Cares.</span>
             </h1>
 
-            {/* Subheading */}
-            <p className="max-w-lg text-sm sm:text-base leading-relaxed text-ivory/75 font-sans mb-6">
-              Concept-focused Science coaching for CBSE &amp; ICSE Classes IX–X, taught through small batches, structured practice and individual attention in Kharadi, Pune.
+            {/* Concise Description Paragraph */}
+            <p className="reveal-3 text-[14.5px] xs:text-[15px] sm:text-[16px] md:text-[17.5px] lg:text-[18.5px] leading-[1.45] text-white/95 font-sans max-w-[350px] sm:max-w-[480px] lg:max-w-[560px] mb-5 sm:mb-7 font-normal drop-shadow-xs">
+              Concept-focused Science coaching for CBSE, ICSE &amp; State Board Classes IX-X, with small batches, structured practice and individual attention.
             </p>
 
-            {/* Credibility Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-y border-ivory/15 bg-white/5 rounded-xl px-4 mb-6">
-              <div className="flex flex-col space-y-1 sm:border-r border-ivory/15 pr-2">
-                <GraduationCap className="size-5 text-lavender mb-1" />
-                <span className="text-[11px] font-bold text-ivory leading-tight">M.Sc. (Science)</span>
-                <span className="text-[10px] font-bold text-ivory leading-tight">B.Ed.</span>
-                <span className="text-[9px] text-ivory/50 mt-0.5">Verified Qualifications</span>
-              </div>
-              <div className="flex flex-col space-y-1 sm:border-r border-ivory/15 pr-2">
-                <Users className="size-5 text-lavender mb-1" />
-                <span className="text-[11px] font-bold text-ivory leading-tight">25+ Years</span>
-                <span className="text-[9px] text-ivory/50 mt-1">Teaching Experience</span>
-              </div>
-              <div className="flex flex-col space-y-1 sm:border-r border-ivory/15 pr-2">
-                <Award className="size-5 text-lavender mb-1" />
-                <span className="text-[11px] font-bold text-ivory leading-tight">Recognised Educator</span>
-                <span className="text-[9px] text-ivory/50 mt-1">Awards &amp; Appreciation</span>
-              </div>
-              <div className="flex flex-col space-y-1 pl-1">
-                <BookOpen className="size-5 text-lavender mb-1" />
-                <span className="text-[11px] font-bold text-ivory leading-tight">CBSE &amp; ICSE</span>
-                <span className="text-[9px] text-ivory/50 mt-1">IX–X Specialist</span>
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3 items-center">
-              <Button
+            {/* Action CTAs */}
+            <div className="reveal-4 flex items-center flex-wrap gap-y-3.5">
+              <button
                 onClick={openEnquiry}
-                className="h-11 sm:h-12 px-5 sm:px-6 bg-violet hover:bg-violet/90 text-ivory text-[11px] font-extrabold uppercase tracking-wider rounded-md shadow-lg cursor-pointer transition-all"
+                className="inline-flex items-center justify-center min-h-[46px] px-5 sm:px-7 bg-ivory hover:bg-white text-ink text-[14px] sm:text-[15px] font-bold rounded-md shadow-md active:scale-[0.98] transition-all cursor-pointer"
               >
-                SPEAK TO VARSHA MA'AM →
-              </Button>
-              <a
-                href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-11 sm:h-12 px-4 sm:px-5 border border-ivory/30 bg-ivory/8 hover:bg-ivory/15 text-ivory text-[11px] font-bold uppercase tracking-wider rounded-md flex items-center justify-center gap-2 backdrop-blur-sm transition-all"
-              >
-                <MessageSquare className="size-4 text-emerald-400 shrink-0" />
-                WHATSAPP
-              </a>
+                Speak to Varsha Ma'am →
+              </button>
               <Link
                 to="/courses"
-                className="h-11 sm:h-12 px-4 sm:px-5 border border-ivory/20 bg-transparent hover:bg-ivory/10 text-ivory text-[11px] font-bold uppercase tracking-wider rounded-md flex items-center justify-center gap-1 backdrop-blur-sm transition-all"
+                className="inline-flex items-center gap-1 text-[14px] sm:text-[15px] font-semibold text-ivory/90 hover:text-white underline underline-offset-4 hover:decoration-amber-400 transition-colors ml-4 sm:ml-5"
               >
-                COURSES →
+                Explore Courses →
               </Link>
             </div>
-
-            {/* AT A GLANCE — Left Side Corner Box (Responsive for Desktop & Mobile) */}
-            <div className="mt-7 bg-[#1c1244]/90 backdrop-blur-md text-white p-4 sm:p-5 rounded-2xl border border-amber-400/25 shadow-2xl max-w-xl">
-              <div className="flex items-center justify-between border-b border-ivory/15 pb-2.5 mb-3">
-                <div className="flex items-center gap-2">
-                  <span className="flex size-5.5 shrink-0 items-center justify-center rounded-full bg-amber-400 text-ink font-bold text-[11px] shadow-xs">✓</span>
-                  <span className="text-[10.5px] font-extrabold uppercase tracking-[0.20em] text-amber-300">AT A GLANCE</span>
-                </div>
-                <span className="text-[9px] sm:text-[9.5px] text-ivory/60 uppercase tracking-widest font-semibold">Specialized Coaching</span>
-              </div>
-              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 text-[11px] sm:text-xs text-white/95 font-medium">
-                {[
-                  "Concept Clarity",
-                  "Strong Fundamentals",
-                  "Exam Focused",
-                  "Doubt Solving",
-                  "Personal Attention",
-                  "Board Mentorship",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-1.5">
-                    <CheckCircle2 className="size-3.5 text-amber-400 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
-
-          {/* RIGHT PANEL — Clear area on desktop so Varsha's portrait is prominently displayed */}
-          <div className="hidden lg:flex lg:w-[46%] xl:w-[50%] relative" />
-
         </div>
       </section>
 
 
-      {/* 02 — TRUST STATISTICS FLOATING STRIP */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-20 -mt-6 sm:-mt-10 mb-16">
-        <div className="bg-white rounded-2xl shadow-lg border border-border/70 py-6 px-6 sm:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-border/60">
+      {/* 02 - COMPACT TRUST STATISTICS STRIP */}
+      <div className="mx-auto max-w-6xl px-3.5 sm:px-6 lg:px-8 relative z-20 -mt-5 sm:-mt-8 mb-14">
+        <div className="bg-white rounded-[18px] shadow-md border border-border/70 py-5 px-4 sm:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center divide-x-0 md:divide-x divide-border/60">
             {/* Col 1 */}
-            <div className="pt-2 md:pt-0 px-2 flex flex-col items-center justify-center">
-              <div className="flex items-center gap-2 mb-1">
-                <Users className="size-5 text-[#d97706]" />
-                <span className="font-display text-2xl sm:text-3xl text-ink font-bold">100+</span>
+            <div className="px-1 flex flex-col items-center justify-center">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <Users className="size-4 sm:size-5 text-[#d97706]" />
+                <span className="font-display text-xl sm:text-3xl text-ink font-bold">100+</span>
               </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Students Mentored</span>
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Students Mentored</span>
             </div>
 
             {/* Col 2 */}
-            <div className="pt-4 md:pt-0 px-2 flex flex-col items-center justify-center">
-              <div className="flex items-center gap-2 mb-1">
-                <Star className="size-5 text-[#d97706]" />
-                <span className="font-display text-2xl sm:text-3xl text-ink font-bold">90%+</span>
+            <div className="px-1 flex flex-col items-center justify-center">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <Star className="size-4 sm:size-5 text-[#d97706]" />
+                <span className="font-display text-xl sm:text-3xl text-ink font-bold">90%+</span>
               </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Scored in Board Exams</span>
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Scored in Board Exams</span>
             </div>
 
             {/* Col 3 */}
-            <div className="pt-4 md:pt-0 px-2 flex flex-col items-center justify-center">
-              <div className="flex items-center gap-2 mb-1">
-                <ShieldCheck className="size-5 text-[#d97706]" />
-                <span className="font-display text-2xl sm:text-3xl text-ink font-bold">CBSE + ICSE</span>
+            <div className="px-1 flex flex-col items-center justify-center">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <ShieldCheck className="size-4 sm:size-5 text-[#d97706]" />
+                <span className="font-display text-xl sm:text-3xl text-ink font-bold">CBSE + ICSE</span>
               </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Classes IX &amp; X</span>
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Classes IX &amp; X</span>
             </div>
 
             {/* Col 4 */}
-            <div className="pt-4 md:pt-0 px-2 flex flex-col items-center justify-center">
-              <div className="flex items-center gap-2 mb-1">
-                <Users className="size-5 text-[#d97706]" />
-                <span className="font-display text-2xl sm:text-3xl text-ink font-bold">Small Batches</span>
+            <div className="px-1 flex flex-col items-center justify-center">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <Users className="size-4 sm:size-5 text-[#d97706]" />
+                <span className="font-display text-xl sm:text-3xl text-ink font-bold">Small Batches</span>
               </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Maximum Personal Attention</span>
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Maximum Personal Attention</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 03 — WHY VARSHA SECTION */}
+      {/* 03 - WHY VARSHA SECTION */}
       <section className="bg-[#faf8f5] py-16 sm:py-24 border-b border-border/60">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12">
@@ -383,11 +315,11 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 04 — RESULTS & TESTIMONIALS */}
+      {/* 04 - RESULTS & TESTIMONIALS */}
       <section className="bg-white py-16 sm:py-24 border-b border-border/60">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] items-start">
-            
+
             {/* Results Column */}
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -409,7 +341,7 @@ function HomePage() {
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Anay Kulkarni</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">CBSE | Class X | 2024–25</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">CBSE | Class X | 2024-25</p>
                   <p className="text-[10px] text-muted-foreground truncate">The Lexicon International</p>
                   <div className="pt-2">
                     <span className="font-display text-3xl text-[#35208f] font-bold">96%</span>
@@ -418,7 +350,7 @@ function HomePage() {
 
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Sia Deshmukh</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">ICSE | Class X | 2024–25</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">ICSE | Class X | 2024-25</p>
                   <p className="text-[10px] text-muted-foreground truncate">Bishop's School, Pune</p>
                   <div className="pt-2">
                     <span className="font-display text-3xl text-[#35208f] font-bold">94.2%</span>
@@ -427,7 +359,7 @@ function HomePage() {
 
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Vedant Patil</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">CBSE | Class X | 2024–25</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">CBSE | Class X | 2024-25</p>
                   <p className="text-[10px] text-muted-foreground truncate">DPS, Pune</p>
                   <div className="pt-2">
                     <span className="font-display text-3xl text-[#35208f] font-bold">93.4%</span>
@@ -443,7 +375,7 @@ function HomePage() {
                 "Varsha Ma'am's way of teaching builds concepts so well that our child now loves Science and scores with confidence."
               </blockquote>
               <div className="border-t border-border pt-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-ink">— Parent of Anay Kulkarni</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-ink">- Parent of Anay Kulkarni</p>
                 <p className="text-xs text-muted-foreground">Kharadi, Pune</p>
               </div>
             </div>
@@ -452,7 +384,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 05 — COURSES OVERVIEW */}
+      {/* 05 - COURSES OVERVIEW */}
       <section className="bg-[#faf8f5] py-16 sm:py-24 border-b border-border/60">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -492,7 +424,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 06 — BRAND PILLARS */}
+      {/* 06 - BRAND PILLARS */}
       <section className="bg-white py-12 border-b border-border/60">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -516,7 +448,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 07 — FINAL CTA BANNER */}
+      {/* 07 - FINAL CTA BANNER */}
       <section className="bg-ink text-ivory py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <span className="eyebrow text-lavender/90 tracking-[0.20em]">DIRECT ADMISSIONS &amp; COUNSELLING</span>

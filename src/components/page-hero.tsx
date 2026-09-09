@@ -13,14 +13,14 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-ink pb-16 pt-32 text-ivory md:pb-24 md:pt-40 border-b border-border/15">
+    <section className="bg-gradient-to-b from-lavender/40 via-ivory to-ivory pb-16 pt-32 text-ink md:pb-24 md:pt-40 border-b border-border/60">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <p className="eyebrow text-lavender/85">{eyebrow}</p>
-        <h1 className="mt-5 max-w-4xl font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.06] tracking-tight">
+        <p className="eyebrow text-violet font-extrabold tracking-[0.2em]">{eyebrow}</p>
+        <h1 className="mt-5 max-w-4xl font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ink leading-[1.06] tracking-tight">
           {title}
         </h1>
-        <div className="mt-8 grid gap-8 border-t border-ivory/20 pt-8 md:grid-cols-2 md:items-end">
-          <p className="max-w-xl text-base leading-relaxed text-ivory/75 sm:text-lg">{intro}</p>
+        <div className="mt-8 grid gap-8 border-t border-border pt-8 md:grid-cols-2 md:items-end">
+          <p className="max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">{intro}</p>
           {children && <div className="md:justify-self-end">{children}</div>}
         </div>
       </div>
@@ -31,18 +31,18 @@ export function PageHero({
 
 export function Crumbs({ items }: { items: string[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="eyebrow text-ivory/60 mb-6">
+    <nav aria-label="Breadcrumb" className="eyebrow text-ink/60 mb-6">
       <ol className="flex flex-wrap items-center gap-2">
         <li>
-          <Link to="/" className="hover:text-lavender transition-colors">
+          <Link to="/" className="hover:text-violet transition-colors">
             Home
           </Link>
         </li>
         {items.map((item, idx) => (
           <li
             key={item}
-            className={`before:mr-2 before:content-['/'] before:text-ivory/40 ${
-              idx === items.length - 1 ? "text-ivory font-bold" : "hover:text-lavender"
+            className={`before:mr-2 before:content-['/'] before:text-ink/40 ${
+              idx === items.length - 1 ? "text-ink font-bold" : "hover:text-violet"
             }`}
           >
             {item}

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/courses/")({
   head: () => ({
     meta: [
       ...seoMeta(
-        "CBSE & ICSE Science Coaching Classes in Kharadi, Pune | Courses — Joshi’s Academy",
+        "CBSE & ICSE Science Coaching Classes in Kharadi, Pune | Courses - Joshi’s Academy",
         "Explore CBSE & ICSE Science coaching programmes for Classes 9 & 10 at Joshi’s Academy in Kharadi, Pune. Serving Chandan Nagar, Wagholi, Viman Nagar. Physics, Chemistry & Biology small batch classes.",
       ),
       { name: "keywords", content: "science coaching classes in Kharadi, CBSE class 10 science coaching Kharadi, ICSE class 10 science classes Kharadi, CBSE class 9 science tuition, 10th science tuition Chandan Nagar, Wagholi science classes" },

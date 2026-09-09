@@ -53,8 +53,8 @@ export const site = {
 
 export const announcement = {
   enabled: true,
-  badge: "2025–26 AY",
-  text: "Science available at just ₹1500/- for 2025–26 AY!",
+  badge: "2025-26 AY",
+  text: "Science available at just ₹1500/- for 2025-26 AY!",
   expiry: "2026-12-31",
 };
 
@@ -70,7 +70,7 @@ export const courses: CourseItem[] = [
     description:
       "Build the deep conceptual base in Physics, Chemistry, and Biology that makes Class 10 Board Science intuitive and achievable.",
     overview:
-      "Class IX Science introduces fundamental concepts—from Newton's laws of motion to atomic structure and cell physiology—that form the bedrock of all future science education. We teach students to understand principles before memorising equations.",
+      "Class IX Science introduces fundamental concepts-from Newton's laws of motion to atomic structure and cell physiology-that form the bedrock of all future science education. We teach students to understand principles before memorising equations.",
     targetStudent:
       "Students entering or enrolled in CBSE Class IX who want to develop sharp analytical thinking, prevent conceptual backlogs, and gain early confidence before their board examination year.",
     subjects: {
@@ -126,15 +126,15 @@ export const courses: CourseItem[] = [
       "15 minutes reserved after every lecture plus dedicated weekend doubt-clearing sessions where students resolve homework ambiguities individually.",
     boardTimeline: [
       {
-        phase: "April – August",
+        phase: "April - August",
         milestone: "Foundational Mechanics, States of Matter, and Cellular Biology",
       },
       {
-        phase: "September – November",
+        phase: "September - November",
         milestone: "Gravitation, Work & Energy, Atomic Structure, and Plant Tissues",
       },
       {
-        phase: "December – January",
+        phase: "December - January",
         milestone:
           "Full syllabus review, multi-chapter numerical integration, and CBSE question sets",
       },
@@ -227,26 +227,26 @@ export const courses: CourseItem[] = [
       "Immediate doubt clearance during class, personal one-on-one doubt slots, and custom question resolution for school assignment topics.",
     boardTimeline: [
       {
-        phase: "April – July",
+        phase: "April - July",
         milestone: "Chemical Reactions, Acids/Bases, Electricity, Light, and Core Life Processes",
       },
       {
-        phase: "August – October",
+        phase: "August - October",
         milestone: "Carbon Compounds, Magnetism, Reproduction, Heredity, and Environment",
       },
       {
-        phase: "November – December",
+        phase: "November - December",
         milestone: "First full syllabus completion, Chapter-wise PYQ marathons, and Pre-Board 1",
       },
       {
-        phase: "January – February",
+        phase: "January - February",
         milestone: "Intensive 3-hour board simulations, answer polish, and final revision sprints",
       },
     ],
     faqs: [
       {
         q: "How does Joshi's Academy help students score 90%+ in CBSE Class 10 Science?",
-        a: "By combining rigorous concept clarity with step-wise CBSE marking scheme practice. 50% of our 2024–25 batch scored 90%+, demonstrating the consistency of our approach.",
+        a: "By combining rigorous concept clarity with step-wise CBSE marking scheme practice. 50% of our 2024-25 batch scored 90%+, demonstrating the consistency of our approach.",
       },
       {
         q: "Do you provide concise revision notes?",
@@ -331,15 +331,15 @@ export const courses: CourseItem[] = [
       "Dedicated 1-on-1 sessions addressing complex derivation steps and experimental reasoning questions.",
     boardTimeline: [
       {
-        phase: "April – August",
+        phase: "April - August",
         milestone: "Mechanics, Atomic Structure, Language of Chemistry, and Plant Biology",
       },
       {
-        phase: "September – November",
+        phase: "September - November",
         milestone: "Heat, Light, Gas Laws, Hydrogen, and Human Systems",
       },
       {
-        phase: "December – January",
+        phase: "December - January",
         milestone: "Comprehensive revision of all 3 disciplines and cross-topic drills",
       },
       { phase: "February", milestone: "Final annual exam readiness" },
@@ -431,21 +431,21 @@ export const courses: CourseItem[] = [
       "Individual doubt resolution hours for each student, focusing on individual school preliminary exam questions and council model answers.",
     boardTimeline: [
       {
-        phase: "March – July",
+        phase: "March - July",
         milestone: "Mechanics, Light, Periodic Table, Mole Concept, and Plant Physiology",
       },
       {
-        phase: "August – October",
+        phase: "August - October",
         milestone:
           "Electricity, Calorimetry, Study of Compounds, Organic Chemistry, and Human Systems",
       },
       {
-        phase: "November – December",
+        phase: "November - December",
         milestone:
           "First complete syllabus review, Prelim 1 preparation, and 10-year paper marathons",
       },
       {
-        phase: "January – February",
+        phase: "January - February",
         milestone:
           "Council model question papers, answer precision polish, and final board mock cycles",
       },
@@ -605,7 +605,7 @@ export const results = {
   subheadline: "Academic excellence built through consistency, not last-minute memorisation.",
   stats: [
     { value: "25+", label: "Students Scored 90%+", detail: "In CBSE Class X Board Examination" },
-    { value: "50%", label: "Scored Above 90%", detail: "Of the entire 2024–25 academic batch" },
+    { value: "50%", label: "Scored Above 90%", detail: "Of the entire 2024-25 academic batch" },
     { value: "85%+", label: "Remaining Students", detail: "Maintained distinction level averages" },
   ],
   note: "All published results represent verified academic records from Joshi’s Academy students. We publish verified statistical milestones to maintain institutional integrity.",
@@ -661,7 +661,7 @@ export const faqs = [
   },
   {
     q: "Does the academy specialise in Science?",
-    a: "Yes. Joshi’s Academy is dedicated entirely to Science—covering Physics, Chemistry, and Biology in complete conceptual depth.",
+    a: "Yes. Joshi’s Academy is dedicated entirely to Science-covering Physics, Chemistry, and Biology in complete conceptual depth.",
   },
   {
     q: "Are batches small?",
@@ -833,7 +833,7 @@ export const articles = [
     classLevel: "Class IX & X",
     title: "Physics Numericals: Common Mistakes and How to Avoid Them",
     excerpt:
-      "The small reasoning and sign-convention errors that cost students valuable board marks—and the systematic habits that prevent them.",
+      "The small reasoning and sign-convention errors that cost students valuable board marks-and the systematic habits that prevent them.",
     readingTime: "5 min read",
     date: "August 2026",
     sections: [
@@ -862,7 +862,7 @@ export const articles = [
       {
         heading: "Diagram Marking Criteria",
         content:
-          "In CBSE and ICSE Biology, diagrams do not require artistic flair—they require anatomical accuracy and clear horizontal labeling lines on the right side. Practice the human nephron, heart structure, and reflex arc weekly.",
+          "In CBSE and ICSE Biology, diagrams do not require artistic flair-they require anatomical accuracy and clear horizontal labeling lines on the right side. Practice the human nephron, heart structure, and reflex arc weekly.",
       },
       {
         heading: "Precision in Physiological Pathways",

@@ -50,7 +50,7 @@ function AboutPage() {
       <PageHero
         eyebrow="Institutional Heritage"
         title="An academy built around a simple belief: clarity changes everything."
-        intro="Joshi’s Academy specialises in Science for CBSE and ICSE Classes IX–X, bringing personal attention and a disciplined learning structure to students in Kharadi, Pune."
+        intro="Joshi’s Academy specialises in Science for CBSE and ICSE Classes IX-X, bringing personal attention and a disciplined learning structure to students in Kharadi, Pune."
       />
 
       {/* Narrative Editorial Section */}
@@ -66,8 +66,8 @@ function AboutPage() {
               <p>
                 Joshi’s Academy was founded with an uncompromising pedagogical conviction: secondary
                 school science should not be reduced to rote memorisation of textbook questions.
-                When students understand the fundamental principle—why an apple falls, why atoms
-                share electrons, or how cellular respiration releases ATP—science transforms from an
+                When students understand the fundamental principle-why an apple falls, why atoms
+                share electrons, or how cellular respiration releases ATP-science transforms from an
                 intimidating hurdle into an exhilarating intellectual journey.
               </p>
               <p>

@@ -192,7 +192,7 @@ export function LocalSeoAreas() {
               Looking for Science Tuition Near You in Kharadi or Nearby?
             </h3>
             <p className="text-sm text-ivory/80 max-w-2xl">
-              Admissions open for 2025–26 Academic Year for CBSE & ICSE Classes IX & X. Limited seats available per batch to maintain personalised attention.
+              Admissions open for 2025-26 Academic Year for CBSE & ICSE Classes IX & X. Limited seats available per batch to maintain personalised attention.
             </p>
           </div>
           <Button

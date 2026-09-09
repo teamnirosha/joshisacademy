@@ -7,14 +7,14 @@ import { DualRingSpinner } from "./dual-ring-spinner";
  *
  * Three-phase route transition:
  *
- *  1. "loading"  — Full-screen ivory overlay fades IN (160ms), spinner appears.
+ *  1. "loading"  - Full-screen ivory overlay fades IN (160ms), spinner appears.
  *                  Gives the browser a frame to render the spinner before
  *                  swapping page content.
- *  2. "entering" — Content is swapped invisibly behind the overlay, then the
+ *  2. "entering" - Content is swapped invisibly behind the overlay, then the
  *                  overlay fades OUT (260ms) while the new page starts fading up.
- *  3. "idle"     — Overlay removed from DOM. Page is fully visible.
+ *  3. "idle"     - Overlay removed from DOM. Page is fully visible.
  *
- * Total perceived transition: ~420ms — snappy but clearly animated.
+ * Total perceived transition: ~420ms - snappy but clearly animated.
  *
  * Respects prefers-reduced-motion: styles.css collapses all animation-duration
  * to 0.01ms for users who prefer reduced motion.
@@ -43,19 +43,19 @@ export function PageTransition({ children }: { children: ReactNode }) {
     // Scroll to top immediately
     window.scrollTo({ top: 0 });
 
-    // Phase 1 — show spinner overlay
+    // Phase 1 - show spinner overlay
     setPhase("loading");
 
-    // Phase 2 — after spinner has faded in, swap content + start exit animation
+    // Phase 2 - after spinner has faded in, swap content + start exit animation
     t1.current = setTimeout(() => {
       setDisplayPath(pathname);
       setPhase("exiting");
 
-      // Phase 3 — after overlay exit animation (260ms), begin page enter
+      // Phase 3 - after overlay exit animation (260ms), begin page enter
       t2.current = setTimeout(() => {
         setPhase("entering");
 
-        // Phase 4 — two RAFs: first renders at opacity-0, second triggers transition
+        // Phase 4 - two RAFs: first renders at opacity-0, second triggers transition
         raf.current = requestAnimationFrame(() => {
           raf.current = requestAnimationFrame(() => {
             setPhase("idle");
