@@ -129,7 +129,7 @@ function HomePage() {
           <div className="max-w-[350px] sm:max-w-[480px] lg:max-w-[620px]">
             {/* Eyebrow */}
             <div className="reveal-1 flex items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-[11px] sm:text-[13px] lg:text-[14px] font-bold uppercase tracking-[1.5px] text-amber-400">
+              <span className="text-[11px] sm:text-[13px] lg:text-[14px] font-medium uppercase tracking-[1.5px] text-amber-400">
                 MEET VARSHA JOSHI
               </span>
               <div className="h-px w-7 sm:w-10 bg-amber-400/60 flex-shrink-0" />
@@ -143,7 +143,7 @@ function HomePage() {
             </h1>
 
             {/* Concise Description Paragraph */}
-            <p className="reveal-3 text-[14.5px] xs:text-[15px] sm:text-[16px] md:text-[17.5px] lg:text-[18.5px] leading-[1.45] text-white/95 font-sans max-w-[350px] sm:max-w-[480px] lg:max-w-[560px] mb-5 sm:mb-7 font-normal drop-shadow-xs">
+            <p className="reveal-3 text-[14.5px] xs:text-[15px] sm:text-[16px] md:text-[17.5px] lg:text-[18.5px] leading-[1.45] text-white/90 font-sans max-w-[350px] sm:max-w-[480px] lg:max-w-[560px] mb-5 sm:mb-7 font-normal">
               Concept-focused Science coaching for CBSE, ICSE &amp; State Board Classes IX-X, with small batches, structured practice and individual attention.
             </p>
 
@@ -151,13 +151,13 @@ function HomePage() {
             <div className="reveal-4 flex items-center flex-wrap gap-y-3.5">
               <button
                 onClick={openEnquiry}
-                className="inline-flex items-center justify-center min-h-[46px] px-5 sm:px-7 bg-ivory hover:bg-white text-ink text-[14px] sm:text-[15px] font-bold rounded-md shadow-md active:scale-[0.98] transition-all cursor-pointer"
+                className="inline-flex items-center justify-center min-h-[46px] px-5 sm:px-7 bg-ivory hover:bg-white text-ink text-[14px] sm:text-[15px] font-medium rounded-md shadow-md active:scale-[0.98] transition-all cursor-pointer"
               >
-                Speak to Varsha Ma'am →
+                I'm Interested →
               </button>
               <Link
                 to="/courses"
-                className="inline-flex items-center gap-1 text-[14px] sm:text-[15px] font-semibold text-ivory/90 hover:text-white underline underline-offset-4 hover:decoration-amber-400 transition-colors ml-4 sm:ml-5"
+                className="inline-flex items-center gap-1 text-[14px] sm:text-[15px] font-normal text-ivory/90 hover:text-white underline underline-offset-4 hover:decoration-amber-400 transition-colors ml-4 sm:ml-5"
               >
                 Explore Courses →
               </Link>
@@ -175,36 +175,36 @@ function HomePage() {
             <div className="px-1 flex flex-col items-center justify-center">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <Users className="size-4 sm:size-5 text-[#d97706]" />
-                <span className="font-display text-xl sm:text-3xl text-ink font-bold">100+</span>
+                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">100+</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Students Mentored</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Students Mentored</span>
             </div>
 
             {/* Col 2 */}
             <div className="px-1 flex flex-col items-center justify-center">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <Star className="size-4 sm:size-5 text-[#d97706]" />
-                <span className="font-display text-xl sm:text-3xl text-ink font-bold">90%+</span>
+                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">90%+</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Scored in Board Exams</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Scored in Board Exams</span>
             </div>
 
             {/* Col 3 */}
             <div className="px-1 flex flex-col items-center justify-center">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <ShieldCheck className="size-4 sm:size-5 text-[#d97706]" />
-                <span className="font-display text-xl sm:text-3xl text-ink font-bold">CBSE + ICSE</span>
+                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">CBSE + ICSE</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Classes IX &amp; X</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Classes IX &amp; X</span>
             </div>
 
             {/* Col 4 */}
             <div className="px-1 flex flex-col items-center justify-center">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <Users className="size-4 sm:size-5 text-[#d97706]" />
-                <span className="font-display text-xl sm:text-3xl text-ink font-bold">Small Batches</span>
+                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">Small Batches</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground leading-tight">Maximum Personal Attention</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Maximum Personal Attention</span>
             </div>
           </div>
         </div>
@@ -305,7 +305,7 @@ function HomePage() {
                   </p>
                   <div className="pt-2">
                     <Button onClick={openEnquiry} size="sm" variant="outline" className="text-xs font-bold cursor-pointer">
-                      Speak with Varsha Ma'am →
+                      I'm Interested →
                     </Button>
                   </div>
                 </div>
@@ -463,7 +463,7 @@ function HomePage() {
               onClick={openEnquiry}
               className="h-12 px-8 bg-[#35208f] hover:bg-[#2b177d] text-ivory text-xs font-bold uppercase tracking-wider rounded-md shadow-md cursor-pointer"
             >
-              SPEAK TO VARSHA MA'AM →
+              I'M INTERESTED →
             </Button>
             <a
               href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}

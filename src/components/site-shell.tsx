@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { ArrowRight, Compass, MapPin, Menu, MessageSquare, Phone, Sparkles, X } from "lucide-react";
+import { ArrowRight, Compass, LogOut, MapPin, Menu, MessageSquare, Phone, Sparkles, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EnquiryDialog } from "./enquiry-dialog";
+import { AuthDialog } from "./auth-dialog";
 import { BrandLoader } from "./brand-loader";
 import { site, announcement } from "@/content/site";
+import { supabase } from "@/integrations/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const navItems = [
   { label: "Courses", to: "/courses" },
@@ -20,10 +23,25 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [enquireOpen, setEnquireOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"signup" | "login">("signup");
+  const [user, setUser] = useState<SupabaseUser | null>(null);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   const announcementRef = useRef<HTMLDivElement>(null);
   const [announcementHeight, setAnnouncementHeight] = useState(0);
   const location = useLocation();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (announcement.enabled) {
@@ -86,7 +104,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const isHome = location.pathname === "/";
 
   // Total offset for page content = announcement bar + header
-  const HEADER_HEIGHT = 72; // px - compact target height
+  const HEADER_HEIGHT = 64; // px - compact target height
   const contentOffset = announcementHeight + HEADER_HEIGHT;
 
   return (
@@ -129,32 +147,34 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </div>
         )}
 
-        <div className="mx-auto flex h-[64px] sm:h-[72px] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo + Institutional Title - large, crisp, clean branding */}
+        <div className="mx-auto flex h-[58px] sm:h-[64px] max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-2 sm:gap-4">
+          {/* Logo + Institutional Title - compact, crisp, clean branding */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 sm:gap-3.5 group cursor-pointer focus:outline-none"
+            className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer focus:outline-none shrink-0"
             aria-label={`${site.name} Home`}
           >
-            <div className="relative size-[44px] sm:size-[58px] shrink-0 rounded-full bg-white shadow-sm flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative size-[36px] sm:size-[42px] shrink-0 rounded-full bg-white shadow-xs flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/brand/logo.png"
                 alt={`${site.name} Academic Seal`}
-                width={58}
-                height={58}
+                width={42}
+                height={42}
                 className="size-full object-contain rounded-full"
               />
             </div>
             <div className="leading-tight">
               <span
-                className={`block text-[12px] sm:text-[14.5px] font-extrabold tracking-[0.08em] uppercase transition-colors ${scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
-                  }`}
+                className={`block text-[11px] sm:text-[13px] font-extrabold tracking-[0.05em] uppercase transition-colors ${
+                  scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
+                }`}
               >
                 {site.name}
               </span>
               <span
-                className={`block text-[8px] sm:text-[9.5px] font-bold tracking-[0.20em] uppercase transition-colors mt-0.5 ${scrolled || !isHome ? "text-violet" : "text-lavender"
-                  }`}
+                className={`block text-[7px] sm:text-[8px] font-bold tracking-[0.18em] uppercase transition-colors mt-0.5 ${
+                  scrolled || !isHome ? "text-violet" : "text-lavender"
+                }`}
               >
                 {site.tagline}
               </span>
@@ -163,22 +183,23 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
           {/* Desktop Navigation Links */}
           <nav
-            className="hidden items-center gap-[22px] xl:gap-[28px] lg:flex"
+            className="hidden items-center gap-3 xl:gap-6 lg:flex shrink-0"
             aria-label="Primary Navigation"
           >
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`text-[12px] font-semibold tracking-[0.12em] uppercase transition-colors ${scrolled || !isHome
-                  ? "text-ink/70 hover:text-violet"
-                  : "text-ivory/80 hover:text-white"
-                  }`}
+                className={`text-[11px] xl:text-[12px] font-semibold tracking-[0.08em] uppercase transition-colors ${
+                  scrolled || !isHome
+                    ? "text-ink/70 hover:text-violet"
+                    : "text-ivory/80 hover:text-white"
+                }`}
                 activeProps={{
                   className:
                     scrolled || !isHome
                       ? "!text-violet !font-bold"
-                      : "!text-white !font-bold underline underline-offset-8",
+                      : "!text-white !font-bold underline underline-offset-6",
                 }}
               >
                 {item.label}
@@ -186,23 +207,62 @@ export function SiteShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
 
-          {/* Action CTA */}
-          <div className="flex items-center gap-3">
+          {/* Action CTA & Auth */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {user ? (
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="hidden xl:inline text-[11px] font-semibold max-w-[110px] truncate text-violet bg-violet/10 px-2 py-0.5 rounded-full border border-violet/20">
+                  {user.email}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => supabase.auth.signOut()}
+                  className={`inline-flex items-center gap-1.5 h-[36px] sm:h-[38px] px-2.5 sm:px-3 text-[10.5px] font-bold tracking-[0.06em] uppercase transition-colors rounded-sm cursor-pointer border ${
+                    scrolled || !isHome
+                      ? "border-violet/30 text-violet hover:bg-violet/10"
+                      : "border-white/40 text-ivory hover:bg-white/10"
+                  }`}
+                  title="Sign Out"
+                >
+                  <LogOut className="size-3.5" />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode("login");
+                  setAuthOpen(true);
+                }}
+                className={`inline-flex items-center gap-1.5 h-[36px] sm:h-[38px] px-3 sm:px-3.5 text-[10.5px] sm:text-[11px] font-extrabold tracking-[0.08em] uppercase transition-colors rounded-sm cursor-pointer border ${
+                  scrolled || !isHome
+                    ? "border-violet/40 text-violet hover:bg-violet/10 bg-violet/5"
+                    : "border-white/50 text-ivory hover:bg-white/10 bg-white/5"
+                }`}
+              >
+                <User className="size-3.5 text-violet sm:text-current" />
+                Login
+              </button>
+            )}
+
             <button
               onClick={() => setEnquireOpen(true)}
-              className={`hidden sm:inline-flex items-center gap-1.5 h-[40px] px-5 text-[11px] font-extrabold tracking-[0.11em] uppercase transition-colors rounded-sm cursor-pointer ${scrolled || !isHome
-                ? "bg-violet text-ivory hover:bg-violet/90"
-                : "bg-ivory text-ink hover:bg-white shadow-md"
-                }`}
+              className={`hidden sm:inline-flex items-center gap-1.5 h-[36px] sm:h-[38px] px-3.5 sm:px-4 text-[10.5px] sm:text-[11px] font-extrabold tracking-[0.08em] uppercase transition-colors rounded-sm cursor-pointer ${
+                scrolled || !isHome
+                  ? "bg-violet text-ivory hover:bg-violet/90"
+                  : "bg-ivory text-ink hover:bg-white shadow-xs"
+              }`}
             >
-              SPEAK TO VARSHA MA'AM →
+              I'M INTERESTED →
             </button>
 
             {/* Mobile Menu Trigger */}
             <button
               type="button"
-              className={`lg:hidden flex items-center justify-center size-9 transition-colors ${scrolled || !isHome ? "text-ink hover:text-violet" : "text-ivory hover:text-white"
-                }`}
+              className={`lg:hidden flex items-center justify-center size-9 transition-colors ${
+                scrolled || !isHome ? "text-ink hover:text-violet" : "text-ivory hover:text-white"
+              }`}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -263,15 +323,56 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="space-y-3 pt-5 border-t border-ivory/15">
+            {user ? (
+              <div className="flex items-center justify-between bg-white/5 p-3 rounded border border-white/10">
+                <span className="text-xs font-semibold text-lavender truncate max-w-[200px]">{user.email}</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    supabase.auth.signOut();
+                    setMenuOpen(false);
+                  }}
+                  className="flex items-center gap-1 text-xs text-rose-400 font-bold uppercase tracking-wider hover:text-rose-300"
+                >
+                  <LogOut className="size-3.5" /> Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setAuthMode("signup");
+                    setAuthOpen(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-1.5 bg-violet text-ivory h-10 text-xs font-extrabold tracking-[0.10em] uppercase hover:bg-violet/90 transition-colors shadow-sm"
+                >
+                  Sign Up
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setAuthMode("login");
+                    setAuthOpen(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-1.5 border border-ivory/30 text-ivory h-10 text-xs font-extrabold tracking-[0.10em] uppercase hover:bg-white/10 transition-colors"
+                >
+                  <User className="size-3.5" /> Log In
+                </button>
+              </div>
+            )}
+
             <button
               type="button"
               onClick={() => {
                 setMenuOpen(false);
                 setEnquireOpen(true);
               }}
-              className="w-full flex items-center justify-center gap-2 bg-violet text-ivory h-12 text-xs font-bold tracking-[0.12em] uppercase hover:bg-violet/90 transition-colors shadow-sm"
+              className="w-full flex items-center justify-center gap-2 bg-ivory text-ink h-12 text-xs font-bold tracking-[0.12em] uppercase hover:bg-white transition-colors shadow-sm"
             >
-              SPEAK TO VARSHA MA'AM <ArrowRight className="size-4" />
+              I'M INTERESTED <ArrowRight className="size-4" />
             </button>
 
             <div className="flex items-center justify-between text-xs text-ivory/50 pt-1">
@@ -332,13 +433,16 @@ export function SiteShell({ children }: { children: ReactNode }) {
           onClick={() => setEnquireOpen(true)}
           className="flex items-center justify-center gap-1 bg-violet text-ivory hover:bg-violet/90 transition-colors cursor-pointer px-1"
         >
-          <span className="text-[9.5px] font-bold uppercase tracking-wider truncate">SPEAK TO VARSHA</span>
+          <span className="text-[9.5px] font-bold uppercase tracking-wider truncate">I'M INTERESTED</span>
           <ArrowRight className="size-3 shrink-0" />
         </button>
       </div>
 
       {/* Global Enquiry Dialog */}
       <EnquiryDialog open={enquireOpen} onOpenChange={setEnquireOpen} />
+
+      {/* Global Auth (Login / Sign Up) Dialog */}
+      <AuthDialog open={authOpen} onOpenChange={setAuthOpen} defaultMode={authMode} />
     </div>
   );
 }
@@ -479,13 +583,13 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
         <div className="flex flex-col gap-3 pt-7 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between flex-wrap border-t border-ivory/10">
           <p>© {new Date().getFullYear()} Joshi's Academy. Kharadi, Pune, Maharashtra, India.</p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <span className="text-ivory/50">
+            <span className="text-ivory/70">
               Designed &amp; Developed by{" "}
               <a
                 href="https://nirosha.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-lavender hover:text-white hover:underline transition-colors"
+                className="font-bold text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-2 decoration-purple-400/50"
               >
                 Team Nirosha
               </a>

@@ -156,15 +156,15 @@ export function EnquiryDialog({
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-violet/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-violet">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-violet/10 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider text-violet">
                       <Sparkles className="size-2.5" />
                       Free Academic Counselling
                     </span>
                   </div>
-                  <Dialog.Title className="mt-0.5 font-display text-base sm:text-xl text-ink font-bold leading-snug truncate">
+                  <Dialog.Title className="mt-0.5 font-display text-base sm:text-xl text-ink font-normal leading-snug truncate">
                     Let’s find the right programme.
                   </Dialog.Title>
-                  <p className="text-[10px] sm:text-[11px] text-muted-foreground font-medium truncate">
+                  <p className="text-[10px] sm:text-[11px] text-muted-foreground font-normal truncate">
                     {site.name} • {site.location}
                   </p>
                 </div>
@@ -204,22 +204,22 @@ export function EnquiryDialog({
               <div className="mx-auto mb-3.5 flex size-12 sm:size-14 items-center justify-center rounded-full bg-violet text-ivory shadow-sm">
                 <Check className="size-6 sm:size-7" />
               </div>
-              <h2 className="font-display text-xl sm:text-2xl text-ink font-bold leading-tight">
+              <h2 className="font-display text-xl sm:text-2xl text-ink font-normal leading-tight">
                 Enquiry Received Successfully!
               </h2>
-              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-sm mx-auto">
-                Thank you, <strong className="text-ink">{form.parentName || "Parent"}</strong>. Our academic coordinator in Kharadi will connect with you via <strong className="text-violet">{form.preferred || "call"}</strong> shortly to schedule your counselling session.
+              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-sm mx-auto font-normal">
+                Thank you, <strong className="text-ink font-medium">{form.parentName || "Parent"}</strong>. Our academic coordinator in Kharadi will connect with you via <strong className="text-violet font-medium">{form.preferred || "call"}</strong> shortly to schedule your counselling session.
               </p>
 
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5 w-full pt-4 border-t border-border/60">
                 <a
                   href={`tel:${site.phone}`}
-                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-ink hover:bg-lavender/40 transition-colors shadow-2xs"
+                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-xs font-medium uppercase tracking-wider text-ink hover:bg-lavender/40 transition-colors shadow-2xs"
                 >
                   <Phone className="size-3.5 text-violet" /> Direct Call: {site.phone}
                 </a>
                 <Button
-                  className="w-full sm:w-auto rounded-xl font-bold uppercase tracking-wider text-xs px-6 py-2.5"
+                  className="w-full sm:w-auto rounded-xl font-medium uppercase tracking-wider text-xs px-6 py-2.5"
                   onClick={() => handleClose(false)}
                 >
                   Done
@@ -248,15 +248,15 @@ export function EnquiryDialog({
                         <span className="eyebrow text-violet text-[10px]">
                           Step 0{step + 1} of 06
                         </span>
-                        <span className="text-[10px] sm:text-[11px] font-semibold text-muted-foreground">
+                        <span className="text-[10px] sm:text-[11px] font-medium text-muted-foreground">
                           {currentStepInfo.title}
                         </span>
                       </div>
 
-                      <h3 className="mt-1 font-display text-xl sm:text-2xl text-ink font-bold leading-tight">
+                      <h3 className="mt-1 font-display text-xl sm:text-2xl text-ink font-normal leading-tight">
                         {currentStepInfo.label}
                       </h3>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
+                      <p className="mt-0.5 text-xs text-muted-foreground font-normal">
                         {currentStepInfo.helper}
                       </p>
                     </div>
@@ -284,8 +284,8 @@ export function EnquiryDialog({
                           }`}
                         >
                           <GraduationCap className={`size-5 sm:size-6 mb-1 ${form.studentClass === item.cls ? "text-lavender" : "text-violet"}`} />
-                          <span className="font-display text-xl sm:text-2xl font-bold">Class {item.cls}</span>
-                          <span className={`text-[10px] sm:text-[11px] font-medium mt-0.5 text-center ${form.studentClass === item.cls ? "text-ivory/85" : "text-muted-foreground"}`}>
+                          <span className="font-display text-xl sm:text-2xl font-normal">Class {item.cls}</span>
+                          <span className={`text-[10px] sm:text-[11px] font-normal mt-0.5 text-center ${form.studentClass === item.cls ? "text-ivory/85" : "text-muted-foreground"}`}>
                             {item.sub}
                           </span>
                         </button>
@@ -312,8 +312,8 @@ export function EnquiryDialog({
                           }`}
                         >
                           <School className={`size-5 sm:size-6 mb-1 ${form.board === item.brd ? "text-lavender" : "text-violet"}`} />
-                          <span className="font-display text-xl sm:text-2xl font-bold">{item.brd}</span>
-                          <span className={`text-[10px] sm:text-[11px] font-medium mt-0.5 text-center ${form.board === item.brd ? "text-ivory/85" : "text-muted-foreground"}`}>
+                          <span className="font-display text-xl sm:text-2xl font-normal">{item.brd}</span>
+                          <span className={`text-[10px] sm:text-[11px] font-normal mt-0.5 text-center ${form.board === item.brd ? "text-ivory/85" : "text-muted-foreground"}`}>
                             {item.sub}
                           </span>
                         </button>
@@ -323,20 +323,20 @@ export function EnquiryDialog({
 
                   {step === 2 && (
                     <div className="space-y-1.5 sm:space-y-2">
-                      <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ink/75">
+                      <label className="block text-[11px] sm:text-xs font-medium uppercase tracking-wider text-ink/75">
                         Parent / Guardian Name
                       </label>
                       <input
                         autoFocus
                         type="text"
-                        className="w-full rounded-xl border border-border bg-white px-3.5 py-3 sm:px-4 sm:py-3.5 text-sm sm:text-base font-medium text-ink shadow-2xs outline-none focus:border-violet focus:ring-2 focus:ring-violet/15 transition-all placeholder:text-muted-foreground/60"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-3 sm:px-4 sm:py-3.5 text-sm sm:text-base font-normal text-ink shadow-2xs outline-none focus:border-violet focus:ring-2 focus:ring-violet/15 transition-all placeholder:text-muted-foreground/60"
                         value={form.parentName}
                         onChange={(e) => setForm({ ...form, parentName: e.target.value })}
                         placeholder="e.g. Rajesh Sharma"
                         autoComplete="name"
                         required
                       />
-                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground font-normal">
                         Please provide the name of the parent or guardian.
                       </p>
                     </div>
@@ -344,17 +344,17 @@ export function EnquiryDialog({
 
                   {step === 3 && (
                     <div className="space-y-1.5 sm:space-y-2">
-                      <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ink/75">
+                      <label className="block text-[11px] sm:text-xs font-medium uppercase tracking-wider text-ink/75">
                         10-Digit Mobile Number
                       </label>
                       <div className="relative flex items-center">
-                        <span className="absolute left-3 sm:left-3.5 flex items-center gap-1 text-xs font-bold text-ink/70 border-r border-border pr-2 sm:pr-2.5 pointer-events-none select-none">
+                        <span className="absolute left-3 sm:left-3.5 flex items-center gap-1 text-xs font-medium text-ink/70 border-r border-border pr-2 sm:pr-2.5 pointer-events-none select-none">
                           🇮🇳 +91
                         </span>
                         <input
                           autoFocus
                           type="tel"
-                          className="w-full rounded-xl border border-border bg-white pl-18 sm:pl-20 pr-3.5 py-3 sm:py-3.5 text-sm sm:text-base font-medium text-ink shadow-2xs outline-none focus:border-violet focus:ring-2 focus:ring-violet/15 transition-all placeholder:text-muted-foreground/60"
+                          className="w-full rounded-xl border border-border bg-white pl-18 sm:pl-20 pr-3.5 py-3 sm:py-3.5 text-sm sm:text-base font-normal text-ink shadow-2xs outline-none focus:border-violet focus:ring-2 focus:ring-violet/15 transition-all placeholder:text-muted-foreground/60"
                           value={form.mobile}
                           onChange={(e) => setForm({ ...form, mobile: e.target.value })}
                           placeholder="98230 12345"
@@ -363,7 +363,7 @@ export function EnquiryDialog({
                           required
                         />
                       </div>
-                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground font-normal">
                         We will send counseling schedule and confirmation to this number.
                       </p>
                     </div>
@@ -372,23 +372,23 @@ export function EnquiryDialog({
                   {step === 4 && (
                     <div className="space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between">
-                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ink/75">
+                        <label className="block text-[11px] sm:text-xs font-medium uppercase tracking-wider text-ink/75">
                           Email Address
                         </label>
-                        <span className="text-[9px] sm:text-[10px] font-bold text-muted-foreground bg-lavender/60 px-2 py-0.5 rounded-full">
+                        <span className="text-[9px] sm:text-[10px] font-medium text-muted-foreground bg-lavender/60 px-2 py-0.5 rounded-full">
                           Optional
                         </span>
                       </div>
                       <input
                         autoFocus
                         type="email"
-                        className="w-full rounded-xl border border-border bg-white px-3.5 py-3 sm:px-4 sm:py-3.5 text-sm sm:text-base font-medium text-ink shadow-2xs outline-none focus:border-violet focus:ring-2 focus:ring-violet/15 transition-all placeholder:text-muted-foreground/60"
+                        className="w-full rounded-xl border border-border bg-white px-3.5 py-3 sm:px-4 sm:py-3.5 text-sm sm:text-base font-normal text-ink shadow-2xs outline-none focus:border-violet focus:ring-2 focus:ring-violet/15 transition-all placeholder:text-muted-foreground/60"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder="parent@example.com"
                         autoComplete="email"
                       />
-                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground font-normal">
                         Receive the detailed syllabus brochure and sample testing papers.
                       </p>
                     </div>
@@ -415,8 +415,8 @@ export function EnquiryDialog({
                             }`}
                           >
                             <Icon className={`size-5 sm:size-6 mb-1 ${form.preferred === item.pref ? "text-lavender" : "text-violet"}`} />
-                            <span className="font-display text-lg sm:text-xl font-bold">{item.label}</span>
-                            <span className={`text-[10px] sm:text-[11px] font-medium mt-0.5 text-center ${form.preferred === item.pref ? "text-ivory/85" : "text-muted-foreground"}`}>
+                            <span className="font-display text-lg sm:text-xl font-normal">{item.label}</span>
+                            <span className={`text-[10px] sm:text-[11px] font-normal mt-0.5 text-center ${form.preferred === item.pref ? "text-ivory/85" : "text-muted-foreground"}`}>
                               {item.desc}
                             </span>
                           </button>
@@ -446,7 +446,7 @@ export function EnquiryDialog({
                   variant="ghost"
                   disabled={step === 0}
                   onClick={() => setStep(step - 1)}
-                  className={`text-xs sm:text-sm font-semibold h-9 sm:h-10 px-2 sm:px-3 ${step === 0 ? "invisible" : ""}`}
+                  className={`text-xs sm:text-sm font-medium h-9 sm:h-10 px-2 sm:px-3 ${step === 0 ? "invisible" : ""}`}
                 >
                   <ArrowLeft className="mr-1 size-3.5 sm:size-4" /> Back
                 </Button>
@@ -454,7 +454,7 @@ export function EnquiryDialog({
                 <Button
                   type="submit"
                   disabled={!isValidStep || state === "loading"}
-                  className="min-w-[130px] sm:min-w-[150px] h-9 sm:h-10 text-xs sm:text-sm shadow-sm font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer"
+                  className="min-w-[130px] sm:min-w-[150px] h-9 sm:h-10 text-xs sm:text-sm shadow-sm font-medium uppercase tracking-wider rounded-xl transition-all cursor-pointer"
                 >
                   {state === "loading"
                     ? "Submitting…"
