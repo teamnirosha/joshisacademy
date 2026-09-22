@@ -16,14 +16,25 @@ export const Route = createFileRoute("/courses/$slug")({
   },
   head: ({ loaderData: c }) => ({
     meta: [
-      { title: `${c?.title ?? "Science Course"} Coaching Classes in Kharadi, Pune | Joshi’s Academy` },
+      {
+        title: `${c?.title ?? "Science Course"} Coaching Classes in Kharadi, Pune | Joshi’s Academy`,
+      },
       {
         name: "description",
         content: `${c?.title ?? "Science Course"} coaching classes in Kharadi, Pune for ${c?.board ?? "CBSE/ICSE"} ${c?.className ?? ""}. Physics, Chemistry & Biology with small batches, serving Chandan Nagar, Wagholi & Viman Nagar.`,
       },
-      { name: "keywords", content: `${c?.title ?? "Science"}, ${c?.board ?? "CBSE"} ${c?.className ?? ""} Science coaching Kharadi, tuition classes Kharadi Pune, 10th science classes Chandan Nagar, Wagholi science tuition` },
-      { property: "og:title", content: `${c?.title ?? "Course"} Coaching in Kharadi | Joshi’s Academy` },
-      { property: "og:description", content: c?.description ?? "Specialist Science coaching in Kharadi, Pune." },
+      {
+        name: "keywords",
+        content: `${c?.title ?? "Science"}, ${c?.board ?? "CBSE"} ${c?.className ?? ""} Science coaching Kharadi, tuition classes Kharadi Pune, 10th science classes Chandan Nagar, Wagholi science tuition`,
+      },
+      {
+        property: "og:title",
+        content: `${c?.title ?? "Course"} Coaching in Kharadi | Joshi’s Academy`,
+      },
+      {
+        property: "og:description",
+        content: c?.description ?? "Specialist Science coaching in Kharadi, Pune.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://joshisacademy.com/brand/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },

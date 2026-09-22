@@ -21,10 +21,28 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as YoutubeRouteImport } from './routes/youtube'
+import { Route as AdminCmsRouteImport } from './routes/admin.cms'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as YoutubeIndexRouteImport } from './routes/youtube.index'
+import { Route as AdminCmsIndexRouteImport } from './routes/admin.cms.index'
+import { Route as AdminCmsGalleryRouteImport } from './routes/admin.cms.gallery'
+import { Route as AdminCmsGoogleReviewsRouteImport } from './routes/admin.cms.google-reviews'
+import { Route as AdminCmsLoginRouteImport } from './routes/admin.cms.login'
+import { Route as AdminCmsSettingsRouteImport } from './routes/admin.cms.settings'
+import { Route as AdminCmsYoutubeRouteImport } from './routes/admin.cms.youtube'
+import { Route as ApiCmsGalleryRouteImport } from './routes/api.cms.gallery'
+import { Route as ApiCmsYoutubeRouteImport } from './routes/api.cms.youtube'
+import { Route as ApiPublicGalleryRouteImport } from './routes/api.public.gallery'
+import { Route as ApiPublicGoogleReviewsRouteImport } from './routes/api.public.google-reviews'
+import { Route as ApiPublicYoutubeRouteImport } from './routes/api.public.youtube'
+import { Route as YoutubePlaylistPlaylistIdRouteImport } from './routes/youtube.playlist.$playlistId'
+import { Route as ApiCmsAuthLoginRouteImport } from './routes/api.cms.auth.login'
+import { Route as ApiCmsAuthLogoutRouteImport } from './routes/api.cms.auth.logout'
+import { Route as ApiCmsAuthMeRouteImport } from './routes/api.cms.auth.me'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -86,6 +104,16 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const YoutubeRoute = YoutubeRouteImport.update({
+  id: '/youtube',
+  path: '/youtube',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCmsRoute = AdminCmsRouteImport.update({
+  id: '/admin/cms',
+  path: '/admin/cms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoursesIndexRoute = CoursesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -106,6 +134,87 @@ const JournalSlugRoute = JournalSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => JournalRoute,
 } as any)
+const YoutubeIndexRoute = YoutubeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => YoutubeRoute,
+} as any)
+const AdminCmsIndexRoute = AdminCmsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
+const AdminCmsGalleryRoute = AdminCmsGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
+const AdminCmsGoogleReviewsRoute = AdminCmsGoogleReviewsRouteImport.update({
+  id: '/google-reviews',
+  path: '/google-reviews',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
+const AdminCmsLoginRoute = AdminCmsLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
+const AdminCmsSettingsRoute = AdminCmsSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
+const AdminCmsYoutubeRoute = AdminCmsYoutubeRouteImport.update({
+  id: '/youtube',
+  path: '/youtube',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
+const ApiCmsGalleryRoute = ApiCmsGalleryRouteImport.update({
+  id: '/api/cms/gallery',
+  path: '/api/cms/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCmsYoutubeRoute = ApiCmsYoutubeRouteImport.update({
+  id: '/api/cms/youtube',
+  path: '/api/cms/youtube',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicGalleryRoute = ApiPublicGalleryRouteImport.update({
+  id: '/api/public/gallery',
+  path: '/api/public/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicGoogleReviewsRoute = ApiPublicGoogleReviewsRouteImport.update({
+  id: '/api/public/google-reviews',
+  path: '/api/public/google-reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicYoutubeRoute = ApiPublicYoutubeRouteImport.update({
+  id: '/api/public/youtube',
+  path: '/api/public/youtube',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YoutubePlaylistPlaylistIdRoute =
+  YoutubePlaylistPlaylistIdRouteImport.update({
+    id: '/playlist/$playlistId',
+    path: '/playlist/$playlistId',
+    getParentRoute: () => YoutubeRoute,
+  } as any)
+const ApiCmsAuthLoginRoute = ApiCmsAuthLoginRouteImport.update({
+  id: '/api/cms/auth/login',
+  path: '/api/cms/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCmsAuthLogoutRoute = ApiCmsAuthLogoutRouteImport.update({
+  id: '/api/cms/auth/logout',
+  path: '/api/cms/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCmsAuthMeRoute = ApiCmsAuthMeRouteImport.update({
+  id: '/api/cms/auth/me',
+  path: '/api/cms/auth/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -120,10 +229,28 @@ export interface FileRoutesByFullPath {
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/youtube': typeof YoutubeRouteWithChildren
+  '/admin/cms': typeof AdminCmsRouteWithChildren
   '/courses/$slug': typeof CoursesSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/courses/': typeof CoursesIndexRoute
   '/journal/': typeof JournalIndexRoute
+  '/youtube/': typeof YoutubeIndexRoute
+  '/admin/cms/gallery': typeof AdminCmsGalleryRoute
+  '/admin/cms/google-reviews': typeof AdminCmsGoogleReviewsRoute
+  '/admin/cms/login': typeof AdminCmsLoginRoute
+  '/admin/cms/settings': typeof AdminCmsSettingsRoute
+  '/admin/cms/youtube': typeof AdminCmsYoutubeRoute
+  '/api/cms/gallery': typeof ApiCmsGalleryRoute
+  '/api/cms/youtube': typeof ApiCmsYoutubeRoute
+  '/api/public/gallery': typeof ApiPublicGalleryRoute
+  '/api/public/google-reviews': typeof ApiPublicGoogleReviewsRoute
+  '/api/public/youtube': typeof ApiPublicYoutubeRoute
+  '/youtube/playlist/$playlistId': typeof YoutubePlaylistPlaylistIdRoute
+  '/admin/cms/': typeof AdminCmsIndexRoute
+  '/api/cms/auth/login': typeof ApiCmsAuthLoginRoute
+  '/api/cms/auth/logout': typeof ApiCmsAuthLogoutRoute
+  '/api/cms/auth/me': typeof ApiCmsAuthMeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,6 +267,22 @@ export interface FileRoutesByTo {
   '/journal/$slug': typeof JournalSlugRoute
   '/courses': typeof CoursesIndexRoute
   '/journal': typeof JournalIndexRoute
+  '/youtube': typeof YoutubeIndexRoute
+  '/admin/cms/gallery': typeof AdminCmsGalleryRoute
+  '/admin/cms/google-reviews': typeof AdminCmsGoogleReviewsRoute
+  '/admin/cms/login': typeof AdminCmsLoginRoute
+  '/admin/cms/settings': typeof AdminCmsSettingsRoute
+  '/admin/cms/youtube': typeof AdminCmsYoutubeRoute
+  '/api/cms/gallery': typeof ApiCmsGalleryRoute
+  '/api/cms/youtube': typeof ApiCmsYoutubeRoute
+  '/api/public/gallery': typeof ApiPublicGalleryRoute
+  '/api/public/google-reviews': typeof ApiPublicGoogleReviewsRoute
+  '/api/public/youtube': typeof ApiPublicYoutubeRoute
+  '/youtube/playlist/$playlistId': typeof YoutubePlaylistPlaylistIdRoute
+  '/admin/cms': typeof AdminCmsIndexRoute
+  '/api/cms/auth/login': typeof ApiCmsAuthLoginRoute
+  '/api/cms/auth/logout': typeof ApiCmsAuthLogoutRoute
+  '/api/cms/auth/me': typeof ApiCmsAuthMeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -155,10 +298,28 @@ export interface FileRoutesById {
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/youtube': typeof YoutubeRouteWithChildren
+  '/admin/cms': typeof AdminCmsRouteWithChildren
   '/courses/$slug': typeof CoursesSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/courses/': typeof CoursesIndexRoute
   '/journal/': typeof JournalIndexRoute
+  '/youtube/': typeof YoutubeIndexRoute
+  '/admin/cms/gallery': typeof AdminCmsGalleryRoute
+  '/admin/cms/google-reviews': typeof AdminCmsGoogleReviewsRoute
+  '/admin/cms/login': typeof AdminCmsLoginRoute
+  '/admin/cms/settings': typeof AdminCmsSettingsRoute
+  '/admin/cms/youtube': typeof AdminCmsYoutubeRoute
+  '/api/cms/gallery': typeof ApiCmsGalleryRoute
+  '/api/cms/youtube': typeof ApiCmsYoutubeRoute
+  '/api/public/gallery': typeof ApiPublicGalleryRoute
+  '/api/public/google-reviews': typeof ApiPublicGoogleReviewsRoute
+  '/api/public/youtube': typeof ApiPublicYoutubeRoute
+  '/youtube/playlist/$playlistId': typeof YoutubePlaylistPlaylistIdRoute
+  '/admin/cms/': typeof AdminCmsIndexRoute
+  '/api/cms/auth/login': typeof ApiCmsAuthLoginRoute
+  '/api/cms/auth/logout': typeof ApiCmsAuthLogoutRoute
+  '/api/cms/auth/me': typeof ApiCmsAuthMeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -175,10 +336,28 @@ export interface FileRouteTypes {
     | '/results'
     | '/sitemap.xml'
     | '/terms'
+    | '/youtube'
+    | '/admin/cms'
     | '/courses/$slug'
     | '/journal/$slug'
     | '/courses/'
     | '/journal/'
+    | '/youtube/'
+    | '/admin/cms/gallery'
+    | '/admin/cms/google-reviews'
+    | '/admin/cms/login'
+    | '/admin/cms/settings'
+    | '/admin/cms/youtube'
+    | '/api/cms/gallery'
+    | '/api/cms/youtube'
+    | '/api/public/gallery'
+    | '/api/public/google-reviews'
+    | '/api/public/youtube'
+    | '/youtube/playlist/$playlistId'
+    | '/admin/cms/'
+    | '/api/cms/auth/login'
+    | '/api/cms/auth/logout'
+    | '/api/cms/auth/me'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,6 +374,22 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/courses'
     | '/journal'
+    | '/youtube'
+    | '/admin/cms/gallery'
+    | '/admin/cms/google-reviews'
+    | '/admin/cms/login'
+    | '/admin/cms/settings'
+    | '/admin/cms/youtube'
+    | '/api/cms/gallery'
+    | '/api/cms/youtube'
+    | '/api/public/gallery'
+    | '/api/public/google-reviews'
+    | '/api/public/youtube'
+    | '/youtube/playlist/$playlistId'
+    | '/admin/cms'
+    | '/api/cms/auth/login'
+    | '/api/cms/auth/logout'
+    | '/api/cms/auth/me'
   id:
     | '__root__'
     | '/'
@@ -209,10 +404,28 @@ export interface FileRouteTypes {
     | '/results'
     | '/sitemap.xml'
     | '/terms'
+    | '/youtube'
+    | '/admin/cms'
     | '/courses/$slug'
     | '/journal/$slug'
     | '/courses/'
     | '/journal/'
+    | '/youtube/'
+    | '/admin/cms/gallery'
+    | '/admin/cms/google-reviews'
+    | '/admin/cms/login'
+    | '/admin/cms/settings'
+    | '/admin/cms/youtube'
+    | '/api/cms/gallery'
+    | '/api/cms/youtube'
+    | '/api/public/gallery'
+    | '/api/public/google-reviews'
+    | '/api/public/youtube'
+    | '/youtube/playlist/$playlistId'
+    | '/admin/cms/'
+    | '/api/cms/auth/login'
+    | '/api/cms/auth/logout'
+    | '/api/cms/auth/me'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -228,6 +441,16 @@ export interface RootRouteChildren {
   ResultsRoute: typeof ResultsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  YoutubeRoute: typeof YoutubeRouteWithChildren
+  AdminCmsRoute: typeof AdminCmsRouteWithChildren
+  ApiCmsGalleryRoute: typeof ApiCmsGalleryRoute
+  ApiCmsYoutubeRoute: typeof ApiCmsYoutubeRoute
+  ApiPublicGalleryRoute: typeof ApiPublicGalleryRoute
+  ApiPublicGoogleReviewsRoute: typeof ApiPublicGoogleReviewsRoute
+  ApiPublicYoutubeRoute: typeof ApiPublicYoutubeRoute
+  ApiCmsAuthLoginRoute: typeof ApiCmsAuthLoginRoute
+  ApiCmsAuthLogoutRoute: typeof ApiCmsAuthLogoutRoute
+  ApiCmsAuthMeRoute: typeof ApiCmsAuthMeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -316,6 +539,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/youtube': {
+      id: '/youtube'
+      path: '/youtube'
+      fullPath: '/youtube'
+      preLoaderRoute: typeof YoutubeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/cms': {
+      id: '/admin/cms'
+      path: '/admin/cms'
+      fullPath: '/admin/cms'
+      preLoaderRoute: typeof AdminCmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/courses/': {
       id: '/courses/'
       path: '/'
@@ -343,6 +580,118 @@ declare module '@tanstack/react-router' {
       fullPath: '/journal/$slug'
       preLoaderRoute: typeof JournalSlugRouteImport
       parentRoute: typeof JournalRoute
+    }
+    '/youtube/': {
+      id: '/youtube/'
+      path: '/'
+      fullPath: '/youtube/'
+      preLoaderRoute: typeof YoutubeIndexRouteImport
+      parentRoute: typeof YoutubeRoute
+    }
+    '/admin/cms/': {
+      id: '/admin/cms/'
+      path: '/'
+      fullPath: '/admin/cms/'
+      preLoaderRoute: typeof AdminCmsIndexRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
+    '/admin/cms/gallery': {
+      id: '/admin/cms/gallery'
+      path: '/gallery'
+      fullPath: '/admin/cms/gallery'
+      preLoaderRoute: typeof AdminCmsGalleryRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
+    '/admin/cms/google-reviews': {
+      id: '/admin/cms/google-reviews'
+      path: '/google-reviews'
+      fullPath: '/admin/cms/google-reviews'
+      preLoaderRoute: typeof AdminCmsGoogleReviewsRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
+    '/admin/cms/login': {
+      id: '/admin/cms/login'
+      path: '/login'
+      fullPath: '/admin/cms/login'
+      preLoaderRoute: typeof AdminCmsLoginRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
+    '/admin/cms/settings': {
+      id: '/admin/cms/settings'
+      path: '/settings'
+      fullPath: '/admin/cms/settings'
+      preLoaderRoute: typeof AdminCmsSettingsRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
+    '/admin/cms/youtube': {
+      id: '/admin/cms/youtube'
+      path: '/youtube'
+      fullPath: '/admin/cms/youtube'
+      preLoaderRoute: typeof AdminCmsYoutubeRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
+    '/api/cms/gallery': {
+      id: '/api/cms/gallery'
+      path: '/api/cms/gallery'
+      fullPath: '/api/cms/gallery'
+      preLoaderRoute: typeof ApiCmsGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/cms/youtube': {
+      id: '/api/cms/youtube'
+      path: '/api/cms/youtube'
+      fullPath: '/api/cms/youtube'
+      preLoaderRoute: typeof ApiCmsYoutubeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/gallery': {
+      id: '/api/public/gallery'
+      path: '/api/public/gallery'
+      fullPath: '/api/public/gallery'
+      preLoaderRoute: typeof ApiPublicGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/google-reviews': {
+      id: '/api/public/google-reviews'
+      path: '/api/public/google-reviews'
+      fullPath: '/api/public/google-reviews'
+      preLoaderRoute: typeof ApiPublicGoogleReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/youtube': {
+      id: '/api/public/youtube'
+      path: '/api/public/youtube'
+      fullPath: '/api/public/youtube'
+      preLoaderRoute: typeof ApiPublicYoutubeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/youtube/playlist/$playlistId': {
+      id: '/youtube/playlist/$playlistId'
+      path: '/playlist/$playlistId'
+      fullPath: '/youtube/playlist/$playlistId'
+      preLoaderRoute: typeof YoutubePlaylistPlaylistIdRouteImport
+      parentRoute: typeof YoutubeRoute
+    }
+    '/api/cms/auth/login': {
+      id: '/api/cms/auth/login'
+      path: '/api/cms/auth/login'
+      fullPath: '/api/cms/auth/login'
+      preLoaderRoute: typeof ApiCmsAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/cms/auth/logout': {
+      id: '/api/cms/auth/logout'
+      path: '/api/cms/auth/logout'
+      fullPath: '/api/cms/auth/logout'
+      preLoaderRoute: typeof ApiCmsAuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/cms/auth/me': {
+      id: '/api/cms/auth/me'
+      path: '/api/cms/auth/me'
+      fullPath: '/api/cms/auth/me'
+      preLoaderRoute: typeof ApiCmsAuthMeRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -373,6 +722,41 @@ const JournalRouteChildren: JournalRouteChildren = {
 const JournalRouteWithChildren =
   JournalRoute._addFileChildren(JournalRouteChildren)
 
+interface YoutubeRouteChildren {
+  YoutubeIndexRoute: typeof YoutubeIndexRoute
+  YoutubePlaylistPlaylistIdRoute: typeof YoutubePlaylistPlaylistIdRoute
+}
+
+const YoutubeRouteChildren: YoutubeRouteChildren = {
+  YoutubeIndexRoute: YoutubeIndexRoute,
+  YoutubePlaylistPlaylistIdRoute: YoutubePlaylistPlaylistIdRoute,
+}
+
+const YoutubeRouteWithChildren =
+  YoutubeRoute._addFileChildren(YoutubeRouteChildren)
+
+interface AdminCmsRouteChildren {
+  AdminCmsGalleryRoute: typeof AdminCmsGalleryRoute
+  AdminCmsGoogleReviewsRoute: typeof AdminCmsGoogleReviewsRoute
+  AdminCmsLoginRoute: typeof AdminCmsLoginRoute
+  AdminCmsSettingsRoute: typeof AdminCmsSettingsRoute
+  AdminCmsYoutubeRoute: typeof AdminCmsYoutubeRoute
+  AdminCmsIndexRoute: typeof AdminCmsIndexRoute
+}
+
+const AdminCmsRouteChildren: AdminCmsRouteChildren = {
+  AdminCmsGalleryRoute: AdminCmsGalleryRoute,
+  AdminCmsGoogleReviewsRoute: AdminCmsGoogleReviewsRoute,
+  AdminCmsLoginRoute: AdminCmsLoginRoute,
+  AdminCmsSettingsRoute: AdminCmsSettingsRoute,
+  AdminCmsYoutubeRoute: AdminCmsYoutubeRoute,
+  AdminCmsIndexRoute: AdminCmsIndexRoute,
+}
+
+const AdminCmsRouteWithChildren = AdminCmsRoute._addFileChildren(
+  AdminCmsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -386,6 +770,16 @@ const rootRouteChildren: RootRouteChildren = {
   ResultsRoute: ResultsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  YoutubeRoute: YoutubeRouteWithChildren,
+  AdminCmsRoute: AdminCmsRouteWithChildren,
+  ApiCmsGalleryRoute: ApiCmsGalleryRoute,
+  ApiCmsYoutubeRoute: ApiCmsYoutubeRoute,
+  ApiPublicGalleryRoute: ApiPublicGalleryRoute,
+  ApiPublicGoogleReviewsRoute: ApiPublicGoogleReviewsRoute,
+  ApiPublicYoutubeRoute: ApiPublicYoutubeRoute,
+  ApiCmsAuthLoginRoute: ApiCmsAuthLoginRoute,
+  ApiCmsAuthLogoutRoute: ApiCmsAuthLogoutRoute,
+  ApiCmsAuthMeRoute: ApiCmsAuthMeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

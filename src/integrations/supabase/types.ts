@@ -47,6 +47,180 @@ export type Database = {
         };
         Relationships: [];
       };
+      gallery: {
+        Row: {
+          id: string;
+          academy_id: string;
+          title: string;
+          description: string | null;
+          image_url: string;
+          thumbnail_url: string | null;
+          category: string;
+          display_order: number;
+          is_published: boolean;
+          created_at: string;
+          updated_at: string;
+          created_by: string | null;
+          updated_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          academy_id?: string;
+          title: string;
+          description?: string | null;
+          image_url: string;
+          thumbnail_url?: string | null;
+          category?: string;
+          display_order?: number;
+          is_published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+          created_by?: string | null;
+          updated_by?: string | null;
+        };
+        Update: {
+          id?: string;
+          academy_id?: string;
+          title?: string;
+          description?: string | null;
+          image_url?: string;
+          thumbnail_url?: string | null;
+          category?: string;
+          display_order?: number;
+          is_published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+          created_by?: string | null;
+          updated_by?: string | null;
+        };
+        Relationships: [];
+      };
+      youtube_videos: {
+        Row: {
+          id: string;
+          academy_id: string;
+          title: string;
+          description: string | null;
+          youtube_url: string;
+          youtube_video_id: string;
+          thumbnail_url: string;
+          display_order: number;
+          is_published: boolean;
+          created_at: string;
+          updated_at: string;
+          created_by: string | null;
+          updated_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          academy_id?: string;
+          title: string;
+          description?: string | null;
+          youtube_url: string;
+          youtube_video_id: string;
+          thumbnail_url: string;
+          display_order?: number;
+          is_published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+          created_by?: string | null;
+          updated_by?: string | null;
+        };
+        Update: {
+          id?: string;
+          academy_id?: string;
+          title?: string;
+          description?: string | null;
+          youtube_url?: string;
+          youtube_video_id?: string;
+          thumbnail_url?: string;
+          display_order?: number;
+          is_published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+          created_by?: string | null;
+          updated_by?: string | null;
+        };
+        Relationships: [];
+      };
+      google_review_config: {
+        Row: {
+          id: string;
+          academy_id: string;
+          google_place_id: string;
+          is_enabled: boolean;
+          auto_refresh: boolean;
+          max_reviews: number;
+          min_rating: number;
+          last_fetched_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          academy_id?: string;
+          google_place_id?: string;
+          is_enabled?: boolean;
+          auto_refresh?: boolean;
+          max_reviews?: number;
+          min_rating?: number;
+          last_fetched_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          academy_id?: string;
+          google_place_id?: string;
+          is_enabled?: boolean;
+          auto_refresh?: boolean;
+          max_reviews?: number;
+          min_rating?: number;
+          last_fetched_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      google_review_cache: {
+        Row: {
+          id: string;
+          academy_id: string;
+          place_id: string;
+          place_name: string;
+          overall_rating: number;
+          total_reviews: number;
+          review_data: Json;
+          last_fetched_at: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          academy_id?: string;
+          place_id?: string;
+          place_name?: string;
+          overall_rating?: number;
+          total_reviews?: number;
+          review_data?: Json;
+          last_fetched_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          academy_id?: string;
+          place_id?: string;
+          place_name?: string;
+          overall_rating?: number;
+          total_reviews?: number;
+          review_data?: Json;
+          last_fetched_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

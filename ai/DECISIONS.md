@@ -31,7 +31,7 @@ Architecture Decision Record (ADR) style. **Only decisions with evidence are rec
 - **Date:** 2026-09-04 (commit `5fe8ba5`)
 - **Status:** ACCEPTED
 - **Context:** Academy wants leads delivered to its workflow/CRM instantly, beyond the Supabase table.
-- **Decision:** On submit, `POST` JSON to `https://automate.nirosha.org/webhook/joshisacademy` (fire-and-forget) *and* insert into Supabase.
+- **Decision:** On submit, `POST` JSON to `https://automate.nirosha.org/webhook/joshisacademy` (fire-and-forget) _and_ insert into Supabase.
 - **Reason:** "real-time lead forwarding" per commit message. Failure non-fatal by design.
 - **Consequences:** Webhook payload includes fields Supabase doesn't store (`email`, `submitted_at`, `page_url`); n8n failures are only console-warned; endpoint hard-coded client-side.
 - **Alternatives:** Server-side forwarding with retry — not implemented.
@@ -90,7 +90,7 @@ Architecture Decision Record (ADR) style. **Only decisions with evidence are rec
 - **Context:** Recharts uses React hooks and breaks SSR ("Cannot read properties of null (reading 'useContext')").
 - **Decision:** `ssr: { noExternal: ["recharts"] }` in `vite.config.ts`.
 - **Reason:** Commit message documents the fix.
-- **Consequences:** Recharts is currently only used by the *unused* `ui/chart.tsx`; the workaround can be removed with that file. Bundle weight consideration.
+- **Consequences:** Recharts is currently only used by the _unused_ `ui/chart.tsx`; the workaround can be removed with that file. Bundle weight consideration.
 
 ## Decision: Central, typed content module (`src/content/site.ts`) instead of scattered literals
 

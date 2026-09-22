@@ -1,6 +1,17 @@
 import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowRight, Lock, Mail, User, X, CheckCircle2, AlertCircle, Sparkles, LogOut, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Lock,
+  Mail,
+  User,
+  X,
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  LogOut,
+  ShieldCheck,
+} from "lucide-react";
 import { supabase, isSupabaseConfigured } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { site } from "@/content/site";
@@ -36,7 +47,9 @@ export function AuthDialog({
     setLoading(true);
 
     if (!isSupabaseConfigured) {
-      setErrorMessage("Supabase is not connected yet. Please connect Supabase in Lovable Cloud to enable account sign up & log in.");
+      setErrorMessage(
+        "Supabase is not connected yet. Please connect Supabase in Lovable Cloud to enable account sign up & log in.",
+      );
       setLoading(false);
       return;
     }
@@ -60,7 +73,7 @@ export function AuthDialog({
           setSuccessMessage(
             data.session
               ? "Account created and logged in successfully!"
-              : "Account created! Please check your email to confirm your registration."
+              : "Account created! Please check your email to confirm your registration.",
           );
           setTimeout(() => {
             if (data.session) onOpenChange(false);
@@ -101,7 +114,6 @@ export function AuthDialog({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200" />
         <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-violet/20 bg-white p-6 sm:p-7 shadow-2xl animate-in zoom-in-95 fade-in duration-200">
-          
           {/* Header Bar */}
           <div className="flex items-start justify-between pb-4 border-b border-violet/10">
             <div className="flex items-center gap-2.5">
@@ -113,7 +125,9 @@ export function AuthDialog({
                   {mode === "signup" ? "Create Account" : "Welcome Back"}
                 </Dialog.Title>
                 <p className="text-xs text-muted-foreground font-normal">
-                  {mode === "signup" ? "Register to access courses & study material" : "Sign in to your student or parent account"}
+                  {mode === "signup"
+                    ? "Register to access courses & study material"
+                    : "Sign in to your student or parent account"}
                 </p>
               </div>
             </div>

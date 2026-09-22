@@ -37,18 +37,18 @@ When facts disagree, trust in this order:
 
 ## Repository Summary (30-second version)
 
-| Aspect | Reality |
-|--------|---------|
-| What | Public marketing website for **Joshi's Academy – Gyan Ki Varsha**, a Science coaching institute in Kharadi, Pune (CBSE & ICSE, Classes IX–X) |
-| Live domain | `https://joshisacademy.com` |
-| Stack | React 19 + TypeScript (strict) + Vite 8 + **TanStack Start** (SSR, file-based routing) + TanStack Router + TanStack Query + Tailwind CSS v4 + shadcn/ui-style primitives |
-| Content | Static TypeScript content module: `src/content/site.ts` (no CMS / admin UI) |
-| Data | Supabase (Postgres) — single table `public.enquiries` for lead capture |
-| Integrations | Supabase, n8n webhook (lead forwarding), Google Maps, WhatsApp deep links, Google Fonts, schema.org JSON-LD |
-| Auth | None user-facing. Supabase auth *scaffolding* exists but is unused by application pages. Enquiries insert via anonymous RLS-limited client |
-| Build origin | Generated on the Lovable platform (`@lovable.dev/vite-tanstack-config`) — see `AGENTS.md` Lovable warning |
-| Tests | None |
-| CI/CD | None inside the repository |
+| Aspect       | Reality                                                                                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| What         | Public marketing website for **Joshi's Academy – Gyan Ki Varsha**, a Science coaching institute in Kharadi, Pune (CBSE & ICSE, Classes IX–X)                             |
+| Live domain  | `https://joshisacademy.com`                                                                                                                                              |
+| Stack        | React 19 + TypeScript (strict) + Vite 8 + **TanStack Start** (SSR, file-based routing) + TanStack Router + TanStack Query + Tailwind CSS v4 + shadcn/ui-style primitives |
+| Content      | Static TypeScript content module: `src/content/site.ts` (no CMS / admin UI)                                                                                              |
+| Data         | Supabase (Postgres) — single table `public.enquiries` for lead capture                                                                                                   |
+| Integrations | Supabase, n8n webhook (lead forwarding), Google Maps, WhatsApp deep links, Google Fonts, schema.org JSON-LD                                                              |
+| Auth         | None user-facing. Supabase auth _scaffolding_ exists but is unused by application pages. Enquiries insert via anonymous RLS-limited client                               |
+| Build origin | Generated on the Lovable platform (`@lovable.dev/vite-tanstack-config`) — see `AGENTS.md` Lovable warning                                                                |
+| Tests        | None                                                                                                                                                                     |
+| CI/CD        | None inside the repository                                                                                                                                               |
 
 ## The Context System and Future Tooling
 
@@ -56,16 +56,16 @@ This `ai/` directory is the **shared engineering knowledge base**. It is deliber
 
 - **GitHub** = source of truth for version-controlled code
 - **AI Context** (`ai/`) = shared engineering knowledge: what the project is, why it works this way, the rules, what is complete, what is being worked on, and what decisions were made
-- **Graphify** = future code/dependency knowledge graph (will answer *"How is this code connected?"*) — **not installed, do not configure it**
+- **Graphify** = future code/dependency knowledge graph (will answer _"How is this code connected?"_) — **not installed, do not configure it**
 - **MCP** = future AI access layer over this knowledge
 - **Coordination system** = future real-time developer/agent work synchronization (the `ACTIVE_WORK.md` table is the manual precursor — do not build the automation now)
 
 Division of labour to keep in mind:
 
-| Tool | Will answer |
-|------|-------------|
-| AI Context | *What is this project? Why does it work this way? What are the rules? What is complete? What is being worked on? What decisions were made?* |
-| Graphify (future) | *How is this code connected?* |
+| Tool              | Will answer                                                                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| AI Context        | _What is this project? Why does it work this way? What are the rules? What is complete? What is being worked on? What decisions were made?_ |
+| Graphify (future) | _How is this code connected?_                                                                                                               |
 
 ## Golden Rules (also in `ai/AI_RULES.md`)
 

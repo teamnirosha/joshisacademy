@@ -5,6 +5,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 ---
 
 ### Issue: `/gallery` missing from sitemap.xml
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** SEO / `src/routes/sitemap[.]xml.tsx`
@@ -13,6 +14,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Confirm whether omission is deliberate; if not, add `gallery` to the paths array.
 
 ### Issue: Article JSON-LD `datePublished` hard-coded for all articles
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** SEO / `src/routes/journal.$slug.tsx`
@@ -21,6 +23,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Derive `datePublished` from each article's `date`.
 
 ### Issue: Duplicate gallery metadata (route-local vs content module)
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** `src/routes/gallery.tsx` vs `src/content/site.ts` `galleryItems`
@@ -29,6 +32,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Unify to one structure or document the intentional split.
 
 ### Issue: Duplicated faculty copy on the homepage
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** `src/routes/index.tsx` (faculty-standards section) vs `site.ts` `facultyStandards`
@@ -37,6 +41,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Reuse `facultyStandards` on the homepage.
 
 ### Issue: Enquiry email is sent to webhook only — not stored in Supabase
+
 - **Severity:** Medium (data/expectation gap)
 - **Status:** OPEN
 - **Affected Area:** `enquiry-dialog.tsx`, `supabase/migrations`, `DATA_MODEL`
@@ -45,6 +50,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Confirm n8n persists email; or add an `email` column (nullable, validated) + include it in the insert.
 
 ### Issue: Enquiry "success" displayed even when persistence fails
+
 - **Severity:** Medium (data-accuracy/UX)
 - **Status:** OPEN (deliberate per DECISIONS.md, still worth tracking)
 - **Affected Area:** `enquiry-dialog.tsx` `submit()`
@@ -53,6 +59,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Add soft telemetry/flagging while preserving the graceful UX; or implement retry.
 
 ### Issue: Auto enquiry popup fires on every full page load with no dismissal memory
+
 - **Severity:** Low (UX)
 - **Status:** OPEN
 - **Affected Area:** `src/components/site-shell.tsx`
@@ -61,6 +68,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Consider once-per-session gate or interaction-based trigger (product decision).
 
 ### Issue: n8n webhook is fire-and-forget with no retry and hard-coded URL
+
 - **Severity:** Medium (reliability)
 - **Status:** OPEN
 - **Affected Area:** `enquiry-dialog.tsx`
@@ -69,6 +77,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Retry-with-backoff, env-configurable URL, or server-side forwarding.
 
 ### Issue: Dead code from overlay removal
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** `src/components/page-transition.tsx`, `src/components/dual-ring-spinner.tsx`, CSS in `styles.css` (`ring-*`, `spinner-overlay-*`, `overlay-*` keyframes)
@@ -77,6 +86,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Delete files + CSS (after confirming nothing references them), or mark clearly.
 
 ### Issue: Unused Supabase auth/server scaffolding is globally registered or importable
+
 - **Severity:** Medium (foot-gun)
 - **Status:** OPEN
 - **Affected Area:** `src/integrations/supabase/*` (`client.server.ts`, `auth-middleware.ts`, `cron-auth.ts`, `auth-attacher.ts` registered in `src/start.ts`)
@@ -85,6 +95,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Wire into a real admin feature or remove; add lint guard against importing `client.server.ts` from client code.
 
 ### Issue: sitemap/robots reference only `joshisacademy.com` — no `www` handling
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** SEO artifacts; canonical links
@@ -93,6 +104,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Verify apex vs www at DNS/host level (outside repo).
 
 ### Issue: `found_images.txt` is an empty tracked artifact
+
 - **Severity:** Trivial
 - **Status:** OPEN
 - **Affected Area:** repo root
@@ -101,6 +113,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Confirm purpose or remove.
 
 ### Issue: Client mobile validation is narrower than DB validation
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** `enquiry-dialog.tsx` (`{10,15}`) vs migration (`{10,20}`)
@@ -109,6 +122,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Align lengths deliberately.
 
 ### Issue: `page_url` may include tracking/query noise in stored leads (webhook only)
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** `enquiry-dialog.tsx` (`window.location.href` as `page_url`)
@@ -117,6 +131,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** Decide desired URL granularity.
 
 ### Issue: No automated tests or CI guard the enquiry pipeline
+
 - **Severity:** High (process risk, not current breakage)
 - **Status:** OPEN
 - **Affected Area:** whole repo
@@ -125,6 +140,7 @@ Documented for awareness. **Nothing here has been fixed** as part of context cre
 - **Suggested Investigation:** See `TESTING_STRATEGY.md` + `ROADMAP.md`.
 
 ### Issue: Unused-dependency surface (incl. recharts SSR workaround)
+
 - **Severity:** Low
 - **Status:** OPEN
 - **Affected Area:** `package.json`, `vite.config.ts`, `src/components/ui/*`

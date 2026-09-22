@@ -38,7 +38,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const urlTags = allRoutes
           .map(
             (r) =>
-              `<url><loc>${base}/${r.path}</loc><lastmod>${today}</lastmod><changefreq>${r.changefreq}</changefreq><priority>${r.priority}</priority></url>`
+              `<url><loc>${base}/${r.path}</loc><lastmod>${today}</lastmod><changefreq>${r.changefreq}</changefreq><priority>${r.priority}</priority></url>`,
           )
           .join("");
 

@@ -11,7 +11,11 @@ export const Route = createFileRoute("/journal/")({
         "Academic Journal & Science Guides for Kharadi & Pune Students | Joshi’s Academy",
         "Read expert academic study guides, board exam preparation strategies, and curriculum advice for CBSE & ICSE Class 9 & 10 Science by Joshi’s Academy Kharadi.",
       ),
-      { name: "keywords", content: "coaching guides Kharadi, CBSE 10th science preparation Kharadi, best science tuition guide Pune, ICSE 10th study strategy Kharadi" },
+      {
+        name: "keywords",
+        content:
+          "coaching guides Kharadi, CBSE 10th science preparation Kharadi, best science tuition guide Pune, ICSE 10th study strategy Kharadi",
+      },
     ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/journal" }],
     scripts: [

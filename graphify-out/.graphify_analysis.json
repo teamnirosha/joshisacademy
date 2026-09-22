@@ -646,210 +646,61 @@
       "src_components_ui_sonner_toaster",
       "src_components_ui_sonner_toasterprops"
     ],
-    "34": [
-      "class_variance_authority",
-      "package_dependencies_class_variance_authority"
-    ],
-    "35": [
-      "clsx",
-      "package_dependencies_clsx"
-    ],
-    "36": [
-      "date_fns",
-      "package_dependencies_date_fns"
-    ],
-    "37": [
-      "embla_carousel_react",
-      "package_dependencies_embla_carousel_react"
-    ],
-    "38": [
-      "hookform_resolvers",
-      "package_dependencies_hookform_resolvers"
-    ],
-    "39": [
-      "input_otp",
-      "package_dependencies_input_otp"
-    ],
-    "40": [
-      "package_dependencies_radix_ui_react_accordion",
-      "radix_ui_react_accordion"
-    ],
-    "41": [
-      "package_dependencies_radix_ui_react_alert_dialog",
-      "radix_ui_react_alert_dialog"
-    ],
-    "42": [
-      "package_dependencies_radix_ui_react_aspect_ratio",
-      "radix_ui_react_aspect_ratio"
-    ],
-    "43": [
-      "package_dependencies_radix_ui_react_avatar",
-      "radix_ui_react_avatar"
-    ],
-    "44": [
-      "package_dependencies_radix_ui_react_collapsible",
-      "radix_ui_react_collapsible"
-    ],
-    "45": [
-      "package_dependencies_radix_ui_react_context_menu",
-      "radix_ui_react_context_menu"
-    ],
-    "46": [
-      "package_dependencies_radix_ui_react_dialog",
-      "radix_ui_react_dialog"
-    ],
-    "47": [
-      "package_dependencies_radix_ui_react_dropdown_menu",
-      "radix_ui_react_dropdown_menu"
-    ],
-    "48": [
-      "package_dependencies_radix_ui_react_hover_card",
-      "radix_ui_react_hover_card"
-    ],
-    "49": [
-      "package_dependencies_radix_ui_react_label",
-      "radix_ui_react_label"
-    ],
-    "50": [
-      "package_dependencies_radix_ui_react_menubar",
-      "radix_ui_react_menubar"
-    ],
-    "51": [
-      "package_dependencies_radix_ui_react_navigation_menu",
-      "radix_ui_react_navigation_menu"
-    ],
-    "52": [
-      "package_dependencies_radix_ui_react_popover",
-      "radix_ui_react_popover"
-    ],
-    "53": [
-      "package_dependencies_radix_ui_react_radio_group",
-      "radix_ui_react_radio_group"
-    ],
-    "54": [
-      "package_dependencies_radix_ui_react_scroll_area",
-      "radix_ui_react_scroll_area"
-    ],
-    "55": [
-      "package_dependencies_radix_ui_react_select",
-      "radix_ui_react_select"
-    ],
-    "56": [
-      "package_dependencies_radix_ui_react_separator",
-      "radix_ui_react_separator"
-    ],
-    "57": [
-      "package_dependencies_radix_ui_react_slider",
-      "radix_ui_react_slider"
-    ],
-    "58": [
-      "package_dependencies_radix_ui_react_switch",
-      "radix_ui_react_switch"
-    ],
-    "59": [
-      "package_dependencies_radix_ui_react_tabs",
-      "radix_ui_react_tabs"
-    ],
-    "60": [
-      "package_dependencies_radix_ui_react_toggle",
-      "radix_ui_react_toggle"
-    ],
-    "61": [
-      "package_dependencies_radix_ui_react_toggle_group",
-      "radix_ui_react_toggle_group"
-    ],
-    "62": [
-      "package_dependencies_radix_ui_react_tooltip",
-      "radix_ui_react_tooltip"
-    ],
-    "63": [
-      "package_dependencies_react",
-      "react"
-    ],
-    "64": [
-      "package_dependencies_react_day_picker",
-      "react_day_picker"
-    ],
-    "65": [
-      "package_dependencies_react_dom",
-      "react_dom"
-    ],
-    "66": [
-      "package_dependencies_react_resizable_panels",
-      "react_resizable_panels"
-    ],
-    "67": [
-      "package_dependencies_recharts",
-      "recharts"
-    ],
-    "68": [
-      "package_dependencies_sonner",
-      "sonner"
-    ],
-    "69": [
-      "package_dependencies_supabase_supabase_js",
-      "supabase_supabase_js"
-    ],
-    "70": [
-      "package_dependencies_tailwind_merge",
-      "tailwind_merge"
-    ],
-    "71": [
-      "package_dependencies_tailwindcss",
-      "tailwindcss"
-    ],
-    "72": [
-      "package_dependencies_tailwindcss_vite",
-      "tailwindcss_vite"
-    ],
-    "73": [
-      "package_dependencies_tanstack_react_query",
-      "tanstack_react_query"
-    ],
-    "74": [
-      "package_dependencies_tanstack_react_router",
-      "tanstack_react_router"
-    ],
-    "75": [
-      "package_dependencies_tanstack_react_start",
-      "tanstack_react_start"
-    ],
-    "76": [
-      "package_dependencies_tanstack_router_plugin",
-      "tanstack_router_plugin"
-    ],
-    "77": [
-      "package_dependencies_tw_animate_css",
-      "tw_animate_css"
-    ],
-    "78": [
-      "package_dependencies_vaul",
-      "vaul"
-    ],
-    "79": [
-      "package_dependencies_vite_tsconfig_paths",
-      "vite_tsconfig_paths"
-    ],
-    "80": [
-      "package_dependencies_zod",
-      "zod"
-    ],
+    "34": ["class_variance_authority", "package_dependencies_class_variance_authority"],
+    "35": ["clsx", "package_dependencies_clsx"],
+    "36": ["date_fns", "package_dependencies_date_fns"],
+    "37": ["embla_carousel_react", "package_dependencies_embla_carousel_react"],
+    "38": ["hookform_resolvers", "package_dependencies_hookform_resolvers"],
+    "39": ["input_otp", "package_dependencies_input_otp"],
+    "40": ["package_dependencies_radix_ui_react_accordion", "radix_ui_react_accordion"],
+    "41": ["package_dependencies_radix_ui_react_alert_dialog", "radix_ui_react_alert_dialog"],
+    "42": ["package_dependencies_radix_ui_react_aspect_ratio", "radix_ui_react_aspect_ratio"],
+    "43": ["package_dependencies_radix_ui_react_avatar", "radix_ui_react_avatar"],
+    "44": ["package_dependencies_radix_ui_react_collapsible", "radix_ui_react_collapsible"],
+    "45": ["package_dependencies_radix_ui_react_context_menu", "radix_ui_react_context_menu"],
+    "46": ["package_dependencies_radix_ui_react_dialog", "radix_ui_react_dialog"],
+    "47": ["package_dependencies_radix_ui_react_dropdown_menu", "radix_ui_react_dropdown_menu"],
+    "48": ["package_dependencies_radix_ui_react_hover_card", "radix_ui_react_hover_card"],
+    "49": ["package_dependencies_radix_ui_react_label", "radix_ui_react_label"],
+    "50": ["package_dependencies_radix_ui_react_menubar", "radix_ui_react_menubar"],
+    "51": ["package_dependencies_radix_ui_react_navigation_menu", "radix_ui_react_navigation_menu"],
+    "52": ["package_dependencies_radix_ui_react_popover", "radix_ui_react_popover"],
+    "53": ["package_dependencies_radix_ui_react_radio_group", "radix_ui_react_radio_group"],
+    "54": ["package_dependencies_radix_ui_react_scroll_area", "radix_ui_react_scroll_area"],
+    "55": ["package_dependencies_radix_ui_react_select", "radix_ui_react_select"],
+    "56": ["package_dependencies_radix_ui_react_separator", "radix_ui_react_separator"],
+    "57": ["package_dependencies_radix_ui_react_slider", "radix_ui_react_slider"],
+    "58": ["package_dependencies_radix_ui_react_switch", "radix_ui_react_switch"],
+    "59": ["package_dependencies_radix_ui_react_tabs", "radix_ui_react_tabs"],
+    "60": ["package_dependencies_radix_ui_react_toggle", "radix_ui_react_toggle"],
+    "61": ["package_dependencies_radix_ui_react_toggle_group", "radix_ui_react_toggle_group"],
+    "62": ["package_dependencies_radix_ui_react_tooltip", "radix_ui_react_tooltip"],
+    "63": ["package_dependencies_react", "react"],
+    "64": ["package_dependencies_react_day_picker", "react_day_picker"],
+    "65": ["package_dependencies_react_dom", "react_dom"],
+    "66": ["package_dependencies_react_resizable_panels", "react_resizable_panels"],
+    "67": ["package_dependencies_recharts", "recharts"],
+    "68": ["package_dependencies_sonner", "sonner"],
+    "69": ["package_dependencies_supabase_supabase_js", "supabase_supabase_js"],
+    "70": ["package_dependencies_tailwind_merge", "tailwind_merge"],
+    "71": ["package_dependencies_tailwindcss", "tailwindcss"],
+    "72": ["package_dependencies_tailwindcss_vite", "tailwindcss_vite"],
+    "73": ["package_dependencies_tanstack_react_query", "tanstack_react_query"],
+    "74": ["package_dependencies_tanstack_react_router", "tanstack_react_router"],
+    "75": ["package_dependencies_tanstack_react_start", "tanstack_react_start"],
+    "76": ["package_dependencies_tanstack_router_plugin", "tanstack_router_plugin"],
+    "77": ["package_dependencies_tw_animate_css", "tw_animate_css"],
+    "78": ["package_dependencies_vaul", "vaul"],
+    "79": ["package_dependencies_vite_tsconfig_paths", "vite_tsconfig_paths"],
+    "80": ["package_dependencies_zod", "zod"],
     "81": [
       "src_integrations_supabase_cron_auth",
       "src_integrations_supabase_cron_auth_authenticatecronrequest"
     ],
-    "82": [
-      "eslint_config"
-    ],
-    "83": [
-      "src_components_ui_aspect_ratio"
-    ],
-    "84": [
-      "src_components_ui_collapsible"
-    ],
-    "85": [
-      "vite_config"
-    ]
+    "82": ["eslint_config"],
+    "83": ["src_components_ui_aspect_ratio"],
+    "84": ["src_components_ui_collapsible"],
+    "85": ["vite_config"]
   },
   "cohesion": {
     "0": 0.05735430157261795,
@@ -995,10 +846,7 @@
     {
       "source": "SheetFooter()",
       "target": "cn()",
-      "source_files": [
-        "src/components/ui/sheet.tsx",
-        "src/lib/utils.ts"
-      ],
+      "source_files": ["src/components/ui/sheet.tsx", "src/lib/utils.ts"],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "bridges separate communities; peripheral node `SheetFooter()` unexpectedly reaches hub `cn()`"
@@ -1006,10 +854,7 @@
     {
       "source": "AlertDescription",
       "target": "cn()",
-      "source_files": [
-        "src/components/ui/alert.tsx",
-        "src/lib/utils.ts"
-      ],
+      "source_files": ["src/components/ui/alert.tsx", "src/lib/utils.ts"],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "bridges separate communities; peripheral node `AlertDescription` unexpectedly reaches hub `cn()`"
@@ -1017,10 +862,7 @@
     {
       "source": "AlertTitle",
       "target": "cn()",
-      "source_files": [
-        "src/components/ui/alert.tsx",
-        "src/lib/utils.ts"
-      ],
+      "source_files": ["src/components/ui/alert.tsx", "src/lib/utils.ts"],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "bridges separate communities; peripheral node `AlertTitle` unexpectedly reaches hub `cn()`"
@@ -1028,10 +870,7 @@
     {
       "source": "AlertDialogContent",
       "target": "cn()",
-      "source_files": [
-        "src/components/ui/alert-dialog.tsx",
-        "src/lib/utils.ts"
-      ],
+      "source_files": ["src/components/ui/alert-dialog.tsx", "src/lib/utils.ts"],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "bridges separate communities; peripheral node `AlertDialogContent` unexpectedly reaches hub `cn()`"
@@ -1039,10 +878,7 @@
     {
       "source": "AlertDialogDescription",
       "target": "cn()",
-      "source_files": [
-        "src/components/ui/alert-dialog.tsx",
-        "src/lib/utils.ts"
-      ],
+      "source_files": ["src/components/ui/alert-dialog.tsx", "src/lib/utils.ts"],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "bridges separate communities; peripheral node `AlertDialogDescription` unexpectedly reaches hub `cn()`"

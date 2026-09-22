@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-**There is no user-facing authentication.** The public site has no login, registration, account, or session concept. Visitors browse anonymously and submit enquiries as the anonymous Supabase role. What *does* exist is Supabase auth **plumbing** inherited from the project template — some of it registered globally — that no application flow actually exercises.
+**There is no user-facing authentication.** The public site has no login, registration, account, or session concept. Visitors browse anonymously and submit enquiries as the anonymous Supabase role. What _does_ exist is Supabase auth **plumbing** inherited from the project template — some of it registered globally — that no application flow actually exercises.
 
 ## Login Flow
 
@@ -15,12 +15,12 @@
 ## Token / Session Mechanism
 
 - `src/integrations/supabase/client.ts` (browser): creates the Supabase client with `persistSession: true`, `autoRefreshToken: true`, and a special `brokeredPreviewStorage()` storage adapter.
-- `brokeredPreviewStorage` (`previewAuthStorage.ts`): on Lovable preview hosts, auth tokens are brokered to the editor via `postMessage` (only to validated Lovable editor origins) so preview surfaces share one login; elsewhere it falls back to `localStorage`. This exists so *if* an auth session existed, preview iframes would share it — no session currently exists in practice.
+- `brokeredPreviewStorage` (`previewAuthStorage.ts`): on Lovable preview hosts, auth tokens are brokered to the editor via `postMessage` (only to validated Lovable editor origins) so preview surfaces share one login; elsewhere it falls back to `localStorage`. This exists so _if_ an auth session existed, preview iframes would share it — no session currently exists in practice.
 - Session would be persisted in `localStorage` (key managed by supabase-js) in normal deployments, or brokered in Lovable previews.
 
 ## JWT
 
-- JWT would be Supabase's standard access token (only *referenced* by the unused `auth-middleware.ts`, which validates `header.payload.signature` shape, 3 segments, and verifies claims via `supabase.auth.getClaims(token)`).
+- JWT would be Supabase's standard access token (only _referenced_ by the unused `auth-middleware.ts`, which validates `header.payload.signature` shape, 3 segments, and verifies claims via `supabase.auth.getClaims(token)`).
 - **No JWT secret handling** exists in application code. Supabase JWTs are verified server-side by Supabase itself; the middleware (unused) only forwards the user token.
 
 ## Refresh Token
@@ -36,7 +36,7 @@
 
 ## Password Handling
 
-**N/A** — no passwords collected, stored, or processed by the application. (Enquiry form collects a parent *name* and *mobile number*, not credentials.)
+**N/A** — no passwords collected, stored, or processed by the application. (Enquiry form collects a parent _name_ and _mobile number_, not credentials.)
 
 ## Roles
 
@@ -46,11 +46,11 @@
 
 ## Permissions
 
-| Action | anon | authenticated | service_role |
-|--------|------|---------------|--------------|
-| INSERT `enquiries` (status='new') | ✅ RLS | ✅ RLS | ✅ (bypasses RLS) |
-| SELECT/UPDATE/DELETE `enquiries` | ❌ RLS denies | ❌ RLS denies | ✅ |
-| Anything else in app | n/a | n/a | n/a |
+| Action                            | anon          | authenticated | service_role      |
+| --------------------------------- | ------------- | ------------- | ----------------- |
+| INSERT `enquiries` (status='new') | ✅ RLS        | ✅ RLS        | ✅ (bypasses RLS) |
+| SELECT/UPDATE/DELETE `enquiries`  | ❌ RLS denies | ❌ RLS denies | ✅                |
+| Anything else in app              | n/a           | n/a           | n/a               |
 
 No application-level role/permission model exists.
 

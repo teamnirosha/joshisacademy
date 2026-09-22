@@ -25,7 +25,11 @@ export const locationAreasData: LocationArea[] = [
       "Specialised CBSE & ICSE Science Coaching for 9th & 10th grade",
       "Small batches ensuring personal doubt resolution",
     ],
-    popularSchoolsServed: ["Podar International School", "Dhole Patil National School", "EuroSchool Kharadi"],
+    popularSchoolsServed: [
+      "Podar International School",
+      "Dhole Patil National School",
+      "EuroSchool Kharadi",
+    ],
   },
   {
     id: "chandan-nagar",
@@ -51,7 +55,11 @@ export const locationAreasData: LocationArea[] = [
       "Dedicated CBSE & ICSE science curriculum alignment",
       "Complete Physics numericals & Chemistry lab observations practice",
     ],
-    popularSchoolsServed: ["Lexicon International School", "JSPM Public School", "Sanskriti School"],
+    popularSchoolsServed: [
+      "Lexicon International School",
+      "JSPM Public School",
+      "Sanskriti School",
+    ],
   },
   {
     id: "viman-nagar",
@@ -64,7 +72,11 @@ export const locationAreasData: LocationArea[] = [
       "High distinction track record (90%+) for ICSE & CBSE board exams",
       "Handwritten concise revision notes & exemplar solving",
     ],
-    popularSchoolsServed: ["Air Force School", "Symbiosis International School", "Vimannagar Public School"],
+    popularSchoolsServed: [
+      "Air Force School",
+      "Symbiosis International School",
+      "Vimannagar Public School",
+    ],
   },
   {
     id: "mundhwa-keshavnagar",
@@ -108,7 +120,10 @@ export const locationAreasData: LocationArea[] = [
 
 export function LocalSeoAreas() {
   return (
-    <section className="bg-ink py-20 md:py-32 text-ivory border-t border-border/20 relative overflow-hidden" id="locations-served">
+    <section
+      className="bg-ink py-20 md:py-32 text-ivory border-t border-border/20 relative overflow-hidden"
+      id="locations-served"
+    >
       {/* Background Subtle Accent Elements */}
       <div className="absolute -right-24 -top-24 size-96 rounded-full bg-violet/10 blur-3xl pointer-events-none" />
       <div className="absolute -left-24 -bottom-24 size-96 rounded-full bg-lavender/10 blur-3xl pointer-events-none" />
@@ -121,10 +136,13 @@ export function LocalSeoAreas() {
             <span>Serving Kharadi & Surrounding Neighborhoods</span>
           </div>
           <h2 className="mt-5 font-display text-3xl sm:text-4xl md:text-5xl text-ivory tracking-tight leading-tight">
-            Top Science Coaching Classes in <span className="text-lavender">Kharadi & Nearby Areas</span>
+            Top Science Coaching Classes in{" "}
+            <span className="text-lavender">Kharadi & Nearby Areas</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-ivory/75 leading-relaxed">
-            Conveniently located in Kharadi, Pune, Joshi’s Academy provides specialist CBSE & ICSE Science tuition (Classes IX & X) for students across Kharadi and nearby residential communities.
+            Conveniently located in Kharadi, Pune, Joshi’s Academy provides specialist CBSE & ICSE
+            Science tuition (Classes IX & X) for students across Kharadi and nearby residential
+            communities.
           </p>
         </div>
 
@@ -192,7 +210,8 @@ export function LocalSeoAreas() {
               Looking for Science Tuition Near You in Kharadi or Nearby?
             </h3>
             <p className="text-sm text-ivory/80 max-w-2xl">
-              Admissions open for 2025-26 Academic Year for CBSE & ICSE Classes IX & X. Limited seats available per batch to maintain personalised attention.
+              Admissions open for 2025-26 Academic Year for CBSE & ICSE Classes IX & X. Limited
+              seats available per batch to maintain personalised attention.
             </p>
           </div>
           <Button

@@ -1,6 +1,6 @@
 # Security — Joshis Academy Website
 
-> ⚠️ **No secrets appear in this document.** Actual values (keys, tokens, credentials) are replaced with `[REDACTED — SECRET NOT DOCUMENTED]`. This file intentionally documents *practices and environment variable names only*.
+> ⚠️ **No secrets appear in this document.** Actual values (keys, tokens, credentials) are replaced with `[REDACTED — SECRET NOT DOCUMENTED]`. This file intentionally documents _practices and environment variable names only_.
 
 ## Authentication
 
@@ -15,7 +15,7 @@
 
 ## Token Handling
 
-- Supabase publishable key lives in env (`VITE_SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_PUBLISHABLE_KEY`) and is bundled client-side by design — it is a *publishable* (anon) key, safe for browsers.
+- Supabase publishable key lives in env (`VITE_SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_PUBLISHABLE_KEY`) and is bundled client-side by design — it is a _publishable_ (anon) key, safe for browsers.
 - Service-role key (`SUPABASE_SERVICE_ROLE_KEY`) is server-only, read from `process.env`, and only used by the unused `client.server.ts`. **Never import `client.server` from client code** (its own comment warns about this).
 - New-format Supabase keys (`sb_publishable_*`/`sb_secret_*`) are opaque strings, not JWTs — the custom fetch wrapper strips an invalid `Authorization: Bearer <opaque>` header and sends `apikey` instead. Do not "fix" this behaviour.
 - Cron secret (`LOVABLE_CRON_SECRET`, plus `_PREVIOUS` rotation support) is compared with SHA-256 + `timingSafeEqual` in `cron-auth.ts` — unused but already rotation-aware.
@@ -29,17 +29,18 @@
 
 Declared env vars (names only — see `DEPLOYMENT.md` for where they come from):
 
-| Variable | Scope | Purpose |
-|----------|-------|---------|
-| `VITE_SUPABASE_URL` / `SUPABASE_URL` | client build / server | Supabase project URL |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_PUBLISHABLE_KEY` | client build / server | anon/publishable key |
-| `SUPABASE_SERVICE_ROLE_KEY` | server only | admin key (unused app code) |
-| `LOVABLE_CRON_SECRET` / `LOVABLE_CRON_SECRET_PREVIOUS` | server only | cron guard (unused app code) |
+| Variable                                                     | Scope                 | Purpose                      |
+| ------------------------------------------------------------ | --------------------- | ---------------------------- |
+| `VITE_SUPABASE_URL` / `SUPABASE_URL`                         | client build / server | Supabase project URL         |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_PUBLISHABLE_KEY` | client build / server | anon/publishable key         |
+| `SUPABASE_SERVICE_ROLE_KEY`                                  | server only           | admin key (unused app code)  |
+| `LOVABLE_CRON_SECRET` / `LOVABLE_CRON_SECRET_PREVIOUS`       | server only           | cron guard (unused app code) |
 
 Practices:
+
 - `.env` is gitignored; **no `.env` file is committed** (verified: none exists in the repo).
 - `.dev.vars`, `.wrangler/`, `*.local` are gitignored (Wrangler/Cloudflare artifacts).
-- Error messages mention variable *names* only, never values.
+- Error messages mention variable _names_ only, never values.
 - In this documentation and in code review: **never paste real values**. Use `[REDACTED — SECRET NOT DOCUMENTED]`.
 
 ## CORS

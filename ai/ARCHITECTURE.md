@@ -64,7 +64,7 @@ See `ai/API_CONTRACTS.md` for full payload details.
 - Supabase Postgres, project configured in `supabase/config.toml` (`project_id` present; no local stack config in repo besides it).
 - Single migration creates `public.enquiries` + grants + RLS + trigger + index. See `ai/DATA_MODEL.md`.
 - Typed via generated-style `src/integrations/supabase/types.ts` (`Database` type with one table).
-- The app never *reads* the table in code; reads happen outside the application (dashboard / n8n).
+- The app never _reads_ the table in code; reads happen outside the application (dashboard / n8n).
 
 ## Module Dependencies (important relationships found in code)
 
@@ -150,15 +150,15 @@ Evidence basis: canonical/OG/JSON-LD URLs point to `https://joshisacademy.com`; 
 
 ## Architecture Boundaries
 
-| Layer | Responsibility | Must not do |
-|-------|----------------|-------------|
-| Routes (`src/routes/`) | Compose pages from shared components + content; define per-route SEO; hold page-local UI state | Fetch remote data ad hoc; contain business logic beyond the page |
-| Global chrome (`SiteShell`) | Header, announcement, nav, footer, mobile bar, dialogs, layout offsets | Page-specific logic |
-| Content module (`site.ts`) | Single typed source of marketing content | Talk to services; change frequently outside content edits |
-| Supabase integration (`src/integrations/supabase/`) | Client creation, env handling, types, auth plumbing | Imported into browser UI except the thin client |
-| SSR plumbing (`server.ts`, `start.ts`, `lib/*`) | Error resilience (h3 swallow workaround), CSRF, friendly error pages | Application features |
-| Supabase DB | Persist `enquiries` with RLS guardrails | — |
-| n8n | Receive + forward leads outside the app | — |
+| Layer                                               | Responsibility                                                                                 | Must not do                                                      |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Routes (`src/routes/`)                              | Compose pages from shared components + content; define per-route SEO; hold page-local UI state | Fetch remote data ad hoc; contain business logic beyond the page |
+| Global chrome (`SiteShell`)                         | Header, announcement, nav, footer, mobile bar, dialogs, layout offsets                         | Page-specific logic                                              |
+| Content module (`site.ts`)                          | Single typed source of marketing content                                                       | Talk to services; change frequently outside content edits        |
+| Supabase integration (`src/integrations/supabase/`) | Client creation, env handling, types, auth plumbing                                            | Imported into browser UI except the thin client                  |
+| SSR plumbing (`server.ts`, `start.ts`, `lib/*`)     | Error resilience (h3 swallow workaround), CSRF, friendly error pages                           | Application features                                             |
+| Supabase DB                                         | Persist `enquiries` with RLS guardrails                                                        | —                                                                |
+| n8n                                                 | Receive + forward leads outside the app                                                        | —                                                                |
 
 ## Important Dependency Relationships
 

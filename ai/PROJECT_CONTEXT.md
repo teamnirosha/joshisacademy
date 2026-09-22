@@ -9,7 +9,7 @@
 A production-quality public marketing website for **Joshi's Academy**, a premium specialist **Science coaching institute** located in **Kharadi, Pune, Maharashtra, India**. The site represents the institute online, builds trust with parents and students, communicates the teaching methodology, presents programmes and verified outcomes, and converts visitors into **enquiries** (free counselling sessions).
 
 - Tagline: **Gyan Ki Varsha**
-- Positioning: *Specialist Science coaching for CBSE & ICSE Classes IX–X*
+- Positioning: _Specialist Science coaching for CBSE & ICSE Classes IX–X_
 - Live URL: `https://joshisacademy.com`
 
 ## Business / Domain Purpose
@@ -34,29 +34,29 @@ Subjects taught: Physics, Chemistry, Biology — concept-first, small batches, s
 1. Present a premium, trustworthy, human brand (deliberately not "AI-generated-looking").
 2. Explain the pedagogy (concept-based learning, small batches, testing, doubt solving).
 3. Publish **verified only** claims (results stats, faculty standards); never fabricated marks/credentials.
-4. Convert visitors via a multi-step **Enquiry** experience (primary CTA: *Book a Free Counselling Session*).
+4. Convert visitors via a multi-step **Enquiry** experience (primary CTA: _Book a Free Counselling Session_).
 5. Persist leads to **Supabase** and forward them in real time to an **n8n webhook**.
 6. Rank well locally (SEO: meta, canonical, Open Graph, sitemap.xml, robots.txt, JSON-LD structured data).
 7. Be fast, responsive, accessible (reduced-motion support, keyboard-friendly lightbox/form, semantic HTML).
 
 ## Major Modules / Pages (routes)
 
-| Route | Purpose | Implementation |
-|-------|---------|----------------|
-| `/` | Homepage — editorial sections (hero, trust strip, approach, why, sciences, method, results, testimonials, faculty standards, courses, classroom, gallery preview, journal preview, location, final CTA) | `src/routes/index.tsx` |
-| `/courses` | Course directory (4 programmes) | `src/routes/courses.index.tsx` |
-| `/courses/$slug` | Course detail page (curriculum, testing, timeline, FAQs, related articles) | `src/routes/courses.$slug.tsx` |
-| `/journal` | "The Joshi's Journal" article listing w/ category filter | `src/routes/journal.index.tsx` |
-| `/journal/$slug` | Article page (TOC, sections, CTA) | `src/routes/journal.$slug.tsx` |
-| `/gallery` | Editorial masonry gallery + lightbox | `src/routes/gallery.tsx` |
-| `/results` | Verified results statistics + methodology | `src/routes/results.tsx` |
-| `/faculty` | Faculty standards / verification policy page | `src/routes/faculty.tsx` |
-| `/about` | About / Our Story | `src/routes/about.tsx` |
-| `/contact` | Contact info, map, hours | `src/routes/contact.tsx` |
-| `/faq` | FAQ accordion | `src/routes/faq.tsx` |
-| `/privacy`, `/terms` | Legal pages | `src/routes/privacy.tsx`, `src/routes/terms.tsx` |
-| `/sitemap.xml` | XML sitemap (server-rendered route) | `src/routes/sitemap[.]xml.tsx` |
-| 404 | Custom not-found | `src/routes/__root.tsx` (`NotFoundComponent`) |
+| Route                | Purpose                                                                                                                                                                                                 | Implementation                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `/`                  | Homepage — editorial sections (hero, trust strip, approach, why, sciences, method, results, testimonials, faculty standards, courses, classroom, gallery preview, journal preview, location, final CTA) | `src/routes/index.tsx`                           |
+| `/courses`           | Course directory (4 programmes)                                                                                                                                                                         | `src/routes/courses.index.tsx`                   |
+| `/courses/$slug`     | Course detail page (curriculum, testing, timeline, FAQs, related articles)                                                                                                                              | `src/routes/courses.$slug.tsx`                   |
+| `/journal`           | "The Joshi's Journal" article listing w/ category filter                                                                                                                                                | `src/routes/journal.index.tsx`                   |
+| `/journal/$slug`     | Article page (TOC, sections, CTA)                                                                                                                                                                       | `src/routes/journal.$slug.tsx`                   |
+| `/gallery`           | Editorial masonry gallery + lightbox                                                                                                                                                                    | `src/routes/gallery.tsx`                         |
+| `/results`           | Verified results statistics + methodology                                                                                                                                                               | `src/routes/results.tsx`                         |
+| `/faculty`           | Faculty standards / verification policy page                                                                                                                                                            | `src/routes/faculty.tsx`                         |
+| `/about`             | About / Our Story                                                                                                                                                                                       | `src/routes/about.tsx`                           |
+| `/contact`           | Contact info, map, hours                                                                                                                                                                                | `src/routes/contact.tsx`                         |
+| `/faq`               | FAQ accordion                                                                                                                                                                                           | `src/routes/faq.tsx`                             |
+| `/privacy`, `/terms` | Legal pages                                                                                                                                                                                             | `src/routes/privacy.tsx`, `src/routes/terms.tsx` |
+| `/sitemap.xml`       | XML sitemap (server-rendered route)                                                                                                                                                                     | `src/routes/sitemap[.]xml.tsx`                   |
+| 404                  | Custom not-found                                                                                                                                                                                        | `src/routes/__root.tsx` (`NotFoundComponent`)    |
 
 ## Frontend Technology
 
@@ -89,7 +89,7 @@ There is **no conventional standalone API backend**. The "backend" is:
 ## Authentication
 
 - **None user-facing.** The public site does not log users in. Enquiry submissions use the anonymous `anon` role + Row-Level Security (RLS allows INSERT where `status = 'new'`).
-- Supabase auth *infrastructure* (session attach middleware, bearer-token verification, preview-auth storage broker, cron auth guard) is present from the Lovable template but **not exercised by any page or server function**.
+- Supabase auth _infrastructure_ (session attach middleware, bearer-token verification, preview-auth storage broker, cron auth guard) is present from the Lovable template but **not exercised by any page or server function**.
 
 ## Authorization
 
@@ -105,14 +105,14 @@ There is **no conventional standalone API backend**. The "backend" is:
 
 ## External Services
 
-| Service | Purpose |
-|---------|---------|
-| Supabase | Enquiry persistence (`enquiries` table) |
-| n8n (automate.nirosha.org) | Real-time lead forwarding webhook |
-| Google Maps (embed + directions) | Location display (`site.mapsEmbed`, `site.mapsUrl`) |
-| WhatsApp (wa.me) | Contact / enquiry channel |
-| Google Fonts | Manrope + DM Serif Display |
-| schema.org JSON-LD | Structured data (EducationalOrganization, Course, FAQPage, Article) |
+| Service                          | Purpose                                                             |
+| -------------------------------- | ------------------------------------------------------------------- |
+| Supabase                         | Enquiry persistence (`enquiries` table)                             |
+| n8n (automate.nirosha.org)       | Real-time lead forwarding webhook                                   |
+| Google Maps (embed + directions) | Location display (`site.mapsEmbed`, `site.mapsUrl`)                 |
+| WhatsApp (wa.me)                 | Contact / enquiry channel                                           |
+| Google Fonts                     | Manrope + DM Serif Display                                          |
+| schema.org JSON-LD               | Structured data (EducationalOrganization, Course, FAQPage, Article) |
 
 ## Important Entry Points
 
@@ -156,17 +156,17 @@ There is **no conventional standalone API backend**. The "backend" is:
 
 ## Important Files (quick map)
 
-| File | Why it matters |
-|------|----------------|
-| `src/content/site.ts` | Courses, approach, disciplines, methodology, results, testimonials, FAQs, gallery, articles, site contact config, announcement |
-| `src/routes/index.tsx` | Largest page; all homepage sections |
-| `src/components/enquiry-dialog.tsx` | Lead capture; posts to n8n + Supabase |
-| `src/components/site-shell.tsx` | Header/nav/announcement/footer/mobile bar/dialog orchestration |
-| `src/styles.css` | Tailwind v4 theme tokens + custom components/animations |
-| `supabase/migrations/*.sql` | Actual DB schema |
-| `src/integrations/supabase/client.ts` | Browser Supabase client (env: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`) |
-| `vite.config.ts` | Build config; recharts SSR noExternal |
-| `public/robots.txt` + `src/routes/sitemap[.]xml.tsx` | Search engine artifacts |
+| File                                                 | Why it matters                                                                                                                 |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `src/content/site.ts`                                | Courses, approach, disciplines, methodology, results, testimonials, FAQs, gallery, articles, site contact config, announcement |
+| `src/routes/index.tsx`                               | Largest page; all homepage sections                                                                                            |
+| `src/components/enquiry-dialog.tsx`                  | Lead capture; posts to n8n + Supabase                                                                                          |
+| `src/components/site-shell.tsx`                      | Header/nav/announcement/footer/mobile bar/dialog orchestration                                                                 |
+| `src/styles.css`                                     | Tailwind v4 theme tokens + custom components/animations                                                                        |
+| `supabase/migrations/*.sql`                          | Actual DB schema                                                                                                               |
+| `src/integrations/supabase/client.ts`                | Browser Supabase client (env: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`)                                            |
+| `vite.config.ts`                                     | Build config; recharts SSR noExternal                                                                                          |
+| `public/robots.txt` + `src/routes/sitemap[.]xml.tsx` | Search engine artifacts                                                                                                        |
 
 ## How the Application Works (end-to-end)
 
@@ -179,4 +179,4 @@ There is **no conventional standalone API backend**. The "backend" is:
    - `INSERT`s into Supabase `public.enquiries` using the publishable key (RLS: insert-only). Email is **not** stored in Supabase (no column) — it travels to the webhook only.
 6. Success state is shown to the user even when persistence fails (deliberate graceful degradation), with call-back / WhatsApp follow-up actions.
 7. `/sitemap.xml` is generated server-side from the static content; crawlers also get per-page canonicals, meta, and JSON-LD.
-8. Separately, background plumbing (`src/server.ts`, `src/start.ts`) wraps SSR errors and protects server functions with CSRF; none of the Supabase *auth* scaffolding is reached by these flows.
+8. Separately, background plumbing (`src/server.ts`, `src/start.ts`) wraps SSR errors and protects server functions with CSRF; none of the Supabase _auth_ scaffolding is reached by these flows.

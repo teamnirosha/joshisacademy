@@ -11,7 +11,11 @@ export const Route = createFileRoute("/contact")({
         "Contact Joshi's Academy | Science Coaching Classes in Kharadi, Pune",
         "Get in touch with Joshi's Academy in Kharadi, Pune for CBSE & ICSE Science coaching enquiries for Classes 9 & 10. Convenient to Chandan Nagar, Wagholi, Viman Nagar. Schedule a free counselling session.",
       ),
-      { name: "keywords", content: "contact Joshi's Academy, coaching classes in Kharadi address, science tuition Kharadi phone number, coaching near Chandan Nagar, science classes Wagholi contact" },
+      {
+        name: "keywords",
+        content:
+          "contact Joshi's Academy, coaching classes in Kharadi address, science tuition Kharadi phone number, coaching near Chandan Nagar, science classes Wagholi contact",
+      },
     ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/contact" }],
     scripts: [

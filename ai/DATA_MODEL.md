@@ -24,18 +24,18 @@ erDiagram
 
 Represents one counselling/enquiry lead submitted via the website enquiry dialog.
 
-| Column | Type | Nullable | Default | Constraints / Notes |
-|--------|------|----------|---------|---------------------|
-| `id` | `uuid` | no | `gen_random_uuid()` | **Primary key** |
-| `student_class` | `text` | no | — | `CHECK (student_class IN ('IX','X'))` |
-| `board` | `text` | no | — | `CHECK (board IN ('CBSE','ICSE'))` |
-| `parent_name` | `text` | no | — | `CHECK (char_length(parent_name) BETWEEN 2 AND 100)` |
-| `mobile_number` | `text` | no | — | `CHECK (mobile_number ~ '^[0-9+ ()-]{10,20}$')` |
-| `preferred_contact` | `text` | no | — | `CHECK (preferred_contact IN ('Call','WhatsApp'))` |
-| `status` | `text` | no | `'new'` | `CHECK (status IN ('new','contacted','closed'))` — lead workflow state (schema-only; nothing in the app updates it) |
-| `submission_fingerprint` | `text` | **yes** | — | Intended spam/duplicate fingerprinting; **never populated by the app** (no field in the insert payload) |
-| `created_at` | `timestamptz` | no | `now()` | |
-| `updated_at` | `timestamptz` | no | `now()` | Maintained by trigger `enquiries_set_updated_at` (function `public.set_updated_at`) on UPDATE |
+| Column                   | Type          | Nullable | Default             | Constraints / Notes                                                                                                 |
+| ------------------------ | ------------- | -------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `id`                     | `uuid`        | no       | `gen_random_uuid()` | **Primary key**                                                                                                     |
+| `student_class`          | `text`        | no       | —                   | `CHECK (student_class IN ('IX','X'))`                                                                               |
+| `board`                  | `text`        | no       | —                   | `CHECK (board IN ('CBSE','ICSE'))`                                                                                  |
+| `parent_name`            | `text`        | no       | —                   | `CHECK (char_length(parent_name) BETWEEN 2 AND 100)`                                                                |
+| `mobile_number`          | `text`        | no       | —                   | `CHECK (mobile_number ~ '^[0-9+ ()-]{10,20}$')`                                                                     |
+| `preferred_contact`      | `text`        | no       | —                   | `CHECK (preferred_contact IN ('Call','WhatsApp'))`                                                                  |
+| `status`                 | `text`        | no       | `'new'`             | `CHECK (status IN ('new','contacted','closed'))` — lead workflow state (schema-only; nothing in the app updates it) |
+| `submission_fingerprint` | `text`        | **yes**  | —                   | Intended spam/duplicate fingerprinting; **never populated by the app** (no field in the insert payload)             |
+| `created_at`             | `timestamptz` | no       | `now()`             |                                                                                                                     |
+| `updated_at`             | `timestamptz` | no       | `now()`             | Maintained by trigger `enquiries_set_updated_at` (function `public.set_updated_at`) on UPDATE                       |
 
 ## Primary / Foreign Keys
 

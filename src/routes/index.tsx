@@ -16,11 +16,9 @@ import heroImage from "@/assets/classroom-hero.jpg";
 import approachImage from "@/assets/academy-approach.jpg";
 import classroomImage from "@/assets/classroom-wide.jpg";
 import { LocalSeoAreas } from "@/components/sections/LocalSeoAreas";
-import {
-  courses,
-  faqs,
-  site,
-} from "@/content/site";
+import { LatestVideos } from "@/components/sections/LatestVideos";
+import { GoogleReviewsSection } from "@/components/sections/GoogleReviewsSection";
+import { courses, faqs, site } from "@/content/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,11 +29,19 @@ export const Route = createFileRoute("/")({
         content:
           "Experienced educator Varsha Joshi provides concept-first CBSE & ICSE Science coaching for Classes 9 & 10 in Kharadi, Pune. Small batches, individual attention, and verified 90%+ board results.",
       },
-      { name: "keywords", content: "Varsha Joshi teacher Kharadi, Varsha Joshi science coaching, coaching classes in Kharadi, science tuition Kharadi, 10th CBSE science tuition Kharadi, ICSE science coaching Kharadi" },
-      { property: "og:title", content: "Varsha Joshi - Experienced Science Educator & Mentor in Kharadi, Pune" },
+      {
+        name: "keywords",
+        content:
+          "Varsha Joshi teacher Kharadi, Varsha Joshi science coaching, coaching classes in Kharadi, science tuition Kharadi, 10th CBSE science tuition Kharadi, ICSE science coaching Kharadi",
+      },
+      {
+        property: "og:title",
+        content: "Varsha Joshi - Experienced Science Educator & Mentor in Kharadi, Pune",
+      },
       {
         property: "og:description",
-        content: "An Experienced Educator. A Mentor Who Cares. Concept-focused CBSE & ICSE Science Coaching for Classes 9 & 10.",
+        content:
+          "An Experienced Educator. A Mentor Who Cares. Concept-focused CBSE & ICSE Science Coaching for Classes 9 & 10.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://joshisacademy.com/brand/logo.png" },
@@ -139,12 +145,15 @@ function HomePage() {
             <h1 className="reveal-2 font-display text-[clamp(1.95rem,7vw,2.25rem)] sm:text-[38px] md:text-[44px] lg:text-[52px] xl:text-[58px] leading-[1.04] tracking-tight text-white mb-3.5 sm:mb-4 font-normal">
               <span className="block font-normal">An Experienced</span>
               <span className="block font-normal">Educator.</span>
-              <span className="block text-ivory/90 font-normal italic mt-0.5 sm:mt-1">A Mentor Who Cares.</span>
+              <span className="block text-ivory/90 font-normal italic mt-0.5 sm:mt-1">
+                A Mentor Who Cares.
+              </span>
             </h1>
 
             {/* Concise Description Paragraph */}
             <p className="reveal-3 text-[14.5px] xs:text-[15px] sm:text-[16px] md:text-[17.5px] lg:text-[18.5px] leading-[1.45] text-white/90 font-sans max-w-[350px] sm:max-w-[480px] lg:max-w-[560px] mb-5 sm:mb-7 font-normal">
-              Concept-focused Science coaching for CBSE, ICSE &amp; State Board Classes IX-X, with small batches, structured practice and individual attention.
+              Concept-focused Science coaching for CBSE, ICSE &amp; State Board Classes IX-X, with
+              small batches, structured practice and individual attention.
             </p>
 
             {/* Action CTAs */}
@@ -166,7 +175,6 @@ function HomePage() {
         </div>
       </section>
 
-
       {/* 02 - COMPACT TRUST STATISTICS STRIP */}
       <div className="mx-auto max-w-6xl px-3.5 sm:px-6 lg:px-8 relative z-20 -mt-5 sm:-mt-8 mb-14">
         <div className="bg-white rounded-[18px] shadow-md border border-border/70 py-5 px-4 sm:px-10">
@@ -177,7 +185,9 @@ function HomePage() {
                 <Users className="size-4 sm:size-5 text-[#d97706]" />
                 <span className="font-sans text-lg sm:text-2xl text-ink font-normal">100+</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Students Mentored</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">
+                Students Mentored
+              </span>
             </div>
 
             {/* Col 2 */}
@@ -186,25 +196,35 @@ function HomePage() {
                 <Star className="size-4 sm:size-5 text-[#d97706]" />
                 <span className="font-sans text-lg sm:text-2xl text-ink font-normal">90%+</span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Scored in Board Exams</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">
+                Scored in Board Exams
+              </span>
             </div>
 
             {/* Col 3 */}
             <div className="px-1 flex flex-col items-center justify-center">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <ShieldCheck className="size-4 sm:size-5 text-[#d97706]" />
-                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">CBSE + ICSE</span>
+                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">
+                  CBSE + ICSE
+                </span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Classes IX &amp; X</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">
+                Classes IX &amp; X
+              </span>
             </div>
 
             {/* Col 4 */}
             <div className="px-1 flex flex-col items-center justify-center">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <Users className="size-4 sm:size-5 text-[#d97706]" />
-                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">Small Batches</span>
+                <span className="font-sans text-lg sm:text-2xl text-ink font-normal">
+                  Small Batches
+                </span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">Maximum Personal Attention</span>
+              <span className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-muted-foreground leading-tight">
+                Maximum Personal Attention
+              </span>
             </div>
           </div>
         </div>
@@ -222,7 +242,8 @@ function HomePage() {
                 <span className="italic font-normal text-[#35208f]">Proven Results.</span>
               </h2>
               <p className="mt-4 max-w-2xl text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Every child is unique. My focus is to build strong concepts, boost confidence and prepare students to excel in board exams and beyond.
+                Every child is unique. My focus is to build strong concepts, boost confidence and
+                prepare students to excel in board exams and beyond.
               </p>
             </div>
             <Link
@@ -238,13 +259,18 @@ function HomePage() {
             {/* Card 1 */}
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
-                <img src={approachImage} alt="Concept-focused science teaching" className="size-full object-cover" />
+                <img
+                  src={approachImage}
+                  alt="Concept-focused science teaching"
+                  className="size-full object-cover"
+                />
               </div>
               <div>
                 <span className="eyebrow text-royal text-[10px]">Pillar 01</span>
                 <h3 className="font-display text-xl text-ink mt-1">Concept-Focused Teaching</h3>
                 <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Making Science simple, logical and enjoyable through fundamental physical principles.
+                  Making Science simple, logical and enjoyable through fundamental physical
+                  principles.
                 </p>
               </div>
             </div>
@@ -252,13 +278,18 @@ function HomePage() {
             {/* Card 2 */}
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
-                <img src={classroomImage} alt="Individual student attention in small batches" className="size-full object-cover" />
+                <img
+                  src={classroomImage}
+                  alt="Individual student attention in small batches"
+                  className="size-full object-cover"
+                />
               </div>
               <div>
                 <span className="eyebrow text-royal text-[10px]">Pillar 02</span>
                 <h3 className="font-display text-xl text-ink mt-1">Individual Attention</h3>
                 <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Every student gets the focus they truly deserve with close observation of learning gaps.
+                  Every student gets the focus they truly deserve with close observation of learning
+                  gaps.
                 </p>
               </div>
             </div>
@@ -266,7 +297,11 @@ function HomePage() {
             {/* Card 3 */}
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
-                <img src={heroImage} alt="Regular doubt solving session" className="size-full object-cover" />
+                <img
+                  src={heroImage}
+                  alt="Regular doubt solving session"
+                  className="size-full object-cover"
+                />
               </div>
               <div>
                 <span className="eyebrow text-royal text-[10px]">Pillar 03</span>
@@ -280,13 +315,18 @@ function HomePage() {
             {/* Card 4 */}
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
-                <img src={approachImage} alt="Structured practice and test series" className="size-full object-cover" />
+                <img
+                  src={approachImage}
+                  alt="Structured practice and test series"
+                  className="size-full object-cover"
+                />
               </div>
               <div>
                 <span className="eyebrow text-royal text-[10px]">Pillar 04</span>
                 <h3 className="font-display text-xl text-ink mt-1">Structured Practice</h3>
                 <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Tests, assignments and practice to build exam confidence strictly on council standards.
+                  Tests, assignments and practice to build exam confidence strictly on council
+                  standards.
                 </p>
               </div>
             </div>
@@ -295,16 +335,26 @@ function HomePage() {
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4 lg:col-span-2">
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <div className="w-full sm:w-1/2 overflow-hidden rounded-lg aspect-[16/10] bg-muted">
-                  <img src={classroomImage} alt="Mentorship and student motivation" className="size-full object-cover" />
+                  <img
+                    src={classroomImage}
+                    alt="Mentorship and student motivation"
+                    className="size-full object-cover"
+                  />
                 </div>
                 <div className="w-full sm:w-1/2 space-y-2">
                   <span className="eyebrow text-royal text-[10px]">Pillar 05</span>
                   <h3 className="font-display text-2xl text-ink">Mentorship &amp; Motivation</h3>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    Guiding students with care, discipline and encouragement to build academic confidence for life.
+                    Guiding students with care, discipline and encouragement to build academic
+                    confidence for life.
                   </p>
                   <div className="pt-2">
-                    <Button onClick={openEnquiry} size="sm" variant="outline" className="text-xs font-bold cursor-pointer">
+                    <Button
+                      onClick={openEnquiry}
+                      size="sm"
+                      variant="outline"
+                      className="text-xs font-bold cursor-pointer"
+                    >
                       I'm Interested →
                     </Button>
                   </div>
@@ -319,7 +369,6 @@ function HomePage() {
       <section className="bg-white py-16 sm:py-24 border-b border-border/60">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] items-start">
-
             {/* Results Column */}
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -341,8 +390,12 @@ function HomePage() {
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Anay Kulkarni</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">CBSE | Class X | 2024-25</p>
-                  <p className="text-[10px] text-muted-foreground truncate">The Lexicon International</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">
+                    CBSE | Class X | 2024-25
+                  </p>
+                  <p className="text-[10px] text-muted-foreground truncate">
+                    The Lexicon International
+                  </p>
                   <div className="pt-2">
                     <span className="font-display text-3xl text-[#35208f] font-bold">96%</span>
                   </div>
@@ -350,8 +403,12 @@ function HomePage() {
 
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Sia Deshmukh</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">ICSE | Class X | 2024-25</p>
-                  <p className="text-[10px] text-muted-foreground truncate">Bishop's School, Pune</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">
+                    ICSE | Class X | 2024-25
+                  </p>
+                  <p className="text-[10px] text-muted-foreground truncate">
+                    Bishop's School, Pune
+                  </p>
                   <div className="pt-2">
                     <span className="font-display text-3xl text-[#35208f] font-bold">94.2%</span>
                   </div>
@@ -359,7 +416,9 @@ function HomePage() {
 
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Vedant Patil</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">CBSE | Class X | 2024-25</p>
+                  <p className="text-[11px] text-muted-foreground font-semibold">
+                    CBSE | Class X | 2024-25
+                  </p>
                   <p className="text-[10px] text-muted-foreground truncate">DPS, Pune</p>
                   <div className="pt-2">
                     <span className="font-display text-3xl text-[#35208f] font-bold">93.4%</span>
@@ -372,17 +431,22 @@ function HomePage() {
             <div className="border border-border/80 bg-[#faf8f5] p-8 rounded-2xl space-y-6 shadow-xs">
               <span className="eyebrow text-royal">WHAT PARENTS SAY</span>
               <blockquote className="font-display text-xl sm:text-2xl text-ink leading-relaxed italic">
-                "Varsha Ma'am's way of teaching builds concepts so well that our child now loves Science and scores with confidence."
+                "Varsha Ma'am's way of teaching builds concepts so well that our child now loves
+                Science and scores with confidence."
               </blockquote>
               <div className="border-t border-border pt-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-ink">- Parent of Anay Kulkarni</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-ink">
+                  - Parent of Anay Kulkarni
+                </p>
                 <p className="text-xs text-muted-foreground">Kharadi, Pune</p>
               </div>
             </div>
-
           </div>
         </div>
       </section>
+
+      {/* GOOGLE REVIEWS SECTION */}
+      <GoogleReviewsSection />
 
       {/* 05 - COURSES OVERVIEW */}
       <section className="bg-[#faf8f5] py-16 sm:py-24 border-b border-border/60">
@@ -399,17 +463,28 @@ function HomePage() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             {courses.map((c) => (
-              <div key={c.id} className="border border-border/80 bg-white p-6 sm:p-8 rounded-2xl space-y-4 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div
+                key={c.id}
+                className="border border-border/80 bg-white p-6 sm:p-8 rounded-2xl space-y-4 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
+              >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="eyebrow text-[#35208f] text-[10px]">{c.board} • {c.className}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Small Batches</span>
+                    <span className="eyebrow text-[#35208f] text-[10px]">
+                      {c.board} • {c.className}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                      Small Batches
+                    </span>
                   </div>
                   <h3 className="font-display text-2xl text-ink mt-3">{c.title}</h3>
-                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">{c.description}</p>
+                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    {c.description}
+                  </p>
                 </div>
                 <div className="pt-4 border-t border-border/60 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">Physics • Chemistry • Biology</span>
+                  <span className="text-xs text-muted-foreground">
+                    Physics • Chemistry • Biology
+                  </span>
                   <Link
                     to="/courses/$slug"
                     params={{ slug: c.slug }}
@@ -423,6 +498,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* LATEST YOUTUBE VIDEOS SECTION */}
+      <LatestVideos />
 
       {/* 06 - BRAND PILLARS */}
       <section className="bg-white py-12 border-b border-border/60">
@@ -451,12 +529,15 @@ function HomePage() {
       {/* 07 - FINAL CTA BANNER */}
       <section className="bg-ink text-ivory py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <span className="eyebrow text-lavender/90 tracking-[0.20em]">DIRECT ADMISSIONS &amp; COUNSELLING</span>
+          <span className="eyebrow text-lavender/90 tracking-[0.20em]">
+            DIRECT ADMISSIONS &amp; COUNSELLING
+          </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-ivory">
             Let's understand what your child needs.
           </h2>
           <p className="max-w-xl mx-auto text-sm sm:text-base text-ivory/75 leading-relaxed">
-            Have questions about the right class, batch or preparation plan? Speak directly with Varsha Ma'am.
+            Have questions about the right class, batch or preparation plan? Speak directly with
+            Varsha Ma'am.
           </p>
           <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button

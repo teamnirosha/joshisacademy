@@ -11,7 +11,11 @@ export const Route = createFileRoute("/faculty")({
         "Expert Science Faculty & Educators in Kharadi, Pune | Joshi’s Academy",
         "Meet the specialist Physics, Chemistry & Biology faculty at Joshi’s Academy in Kharadi, Pune. Expert teaching for CBSE & ICSE 9th & 10th grade students.",
       ),
-      { name: "keywords", content: "best science teachers in Kharadi, physics tutor Kharadi, chemistry tuition teacher Kharadi, biology coaching teacher Pune, coaching faculty Kharadi" },
+      {
+        name: "keywords",
+        content:
+          "best science teachers in Kharadi, physics tutor Kharadi, chemistry tuition teacher Kharadi, biology coaching teacher Pune, coaching faculty Kharadi",
+      },
     ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/faculty" }],
     scripts: [

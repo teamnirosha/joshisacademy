@@ -1,19 +1,23 @@
-# Graph Report - joshisacademy  (2026-09-04)
+# Graph Report - joshisacademy (2026-09-04)
 
 ## Corpus Check
+
 - cluster-only mode — file stats not available
 
 ## Summary
+
 - 678 nodes · 1124 edges · 86 communities (31 shown, 50 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 18 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
+
 - Built from commit: `45a7e574`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
+
 - sidebar.tsx
 - cn
 - routeTree.gen.ts
@@ -97,6 +101,7 @@
 - zod
 
 ## God Nodes (most connected - your core abstractions)
+
 1. `cn()` - 220 edges
 2. `compilerOptions` - 22 edges
 3. `seoMeta()` - 21 edges
@@ -109,152 +114,187 @@
 10. `site` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `SheetFooter()` --calls--> `cn()`  [EXTRACTED]
+
+- `SheetFooter()` --calls--> `cn()` [EXTRACTED]
   src/components/ui/sheet.tsx → src/lib/utils.ts
-- `AlertDescription` --calls--> `cn()`  [EXTRACTED]
+- `AlertDescription` --calls--> `cn()` [EXTRACTED]
   src/components/ui/alert.tsx → src/lib/utils.ts
-- `AlertTitle` --calls--> `cn()`  [EXTRACTED]
+- `AlertTitle` --calls--> `cn()` [EXTRACTED]
   src/components/ui/alert.tsx → src/lib/utils.ts
-- `AlertDialogContent` --calls--> `cn()`  [EXTRACTED]
+- `AlertDialogContent` --calls--> `cn()` [EXTRACTED]
   src/components/ui/alert-dialog.tsx → src/lib/utils.ts
-- `AlertDialogDescription` --calls--> `cn()`  [EXTRACTED]
+- `AlertDialogDescription` --calls--> `cn()` [EXTRACTED]
   src/components/ui/alert-dialog.tsx → src/lib/utils.ts
 
 ## Import Cycles
+
 - None detected.
 
 ## Communities (86 total, 50 thin omitted)
 
 ### Community 0 - "sidebar.tsx"
+
 Cohesion: 0.06
 Nodes (40): Input, Separator, SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay (+32 more)
 
 ### Community 1 - "cn"
+
 Cohesion: 0.08
 Nodes (37): AccordionContent, AccordionItem, AccordionTrigger, Card, CardContent, CardDescription, CardFooter, CardHeader (+29 more)
 
 ### Community 2 - "routeTree.gen.ts"
+
 Cohesion: 0.06
 Nodes (38): getRouter(), Route, Route, Route, Route, Route, Route, AboutRoute (+30 more)
 
 ### Community 3 - "devDependencies"
+
 Cohesion: 0.06
 Nodes (35): eslint, eslint-config-prettier, @eslint/js, eslint-plugin-prettier, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, @lovable.dev/vite-tanstack-config (+27 more)
 
 ### Community 4 - "compilerOptions"
+
 Cohesion: 0.06
-Nodes (31): DOM, DOM.Iterable, ES2022, eslint.config.js, src/**/*.ts, src/**/*.tsx, vite/client, vite.config.ts (+23 more)
+Nodes (31): DOM, DOM.Iterable, ES2022, eslint.config.js, src/**/\*.ts, src/**/*.tsx, vite/client, vite.config.ts (+23 more)
 
 ### Community 5 - "seoMeta"
+
 Cohesion: 0.12
 Nodes (11): Crumbs(), PageHero(), seoMeta(), facultyStandards, Route, Route, Route, categories (+3 more)
 
 ### Community 6 - "types.ts"
+
 Cohesion: 0.10
 Nodes (23): attachSupabaseAuth, createSupabaseFetch(), isNewSupabaseApiKey(), requireSupabaseAuth, createSupabaseClient(), createSupabaseFetch(), isNewSupabaseApiKey(), createSupabaseAdminClient() (+15 more)
 
 ### Community 7 - "utils.ts"
+
 Cohesion: 0.08
 Nodes (14): Badge(), BadgeProps, badgeVariants, Checkbox, HoverCardContent, PopoverContent, Progress, RadioGroup (+6 more)
 
 ### Community 8 - "button.tsx"
+
 Cohesion: 0.12
 Nodes (20): AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter(), AlertDialogHeader(), AlertDialogOverlay, AlertDialogTitle (+12 more)
 
 ### Community 9 - "components.json"
+
 Cohesion: 0.11
 Nodes (18): aliases, components, hooks, lib, ui, utils, iconLibrary, registries (+10 more)
 
 ### Community 10 - "package.json"
+
 Cohesion: 0.11
 Nodes (18): @oxc-parser/binding-win32-x64-msvc, name, optionalDependencies, @oxc-parser/binding-win32-x64-msvc, @rolldown/binding-win32-x64-msvc, overrides, rolldown, private (+10 more)
 
 ### Community 11 - "server.ts"
+
 Cohesion: 0.18
 Nodes (13): consumeLastCapturedError(), describeError(), describeStatus(), originalConsoleError, safeStringify(), renderErrorPage(), fetch(), getServerEntry() (+5 more)
 
 ### Community 12 - "Button"
+
 Cohesion: 0.15
 Nodes (9): BrandLoader(), EnquiryDialog(), FormData, initialForm, navItems, Button, announcement, site (+1 more)
 
 ### Community 13 - "site.ts"
+
 Cohesion: 0.20
 Nodes (12): approach, articles, CourseItem, courses, galleryItems, methodology, results, scienceDisciplines (+4 more)
 
 ### Community 14 - "command.tsx"
+
 Cohesion: 0.12
 Nodes (14): Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut() (+6 more)
 
 ### Community 15 - "menubar.tsx"
+
 Cohesion: 0.12
 Nodes (11): Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarLabel, MenubarRadioItem, MenubarSeparator, MenubarShortcut() (+3 more)
 
 ### Community 16 - "form.tsx"
+
 Cohesion: 0.19
 Nodes (12): FormControl, FormDescription, FormFieldContext, FormFieldContextValue, FormItem, FormItemContext, FormItemContextValue, FormLabel (+4 more)
 
 ### Community 17 - "carousel.tsx"
+
 Cohesion: 0.19
 Nodes (13): Carousel, CarouselApi, CarouselContent, CarouselContext, CarouselContextProps, CarouselItem, CarouselNext, CarouselOptions (+5 more)
 
 ### Community 18 - "dependencies"
+
 Cohesion: 0.15
 Nodes (13): cmdk, lucide-react, dependencies, cmdk, lucide-react, @radix-ui/react-checkbox, @radix-ui/react-progress, @radix-ui/react-slot (+5 more)
 
 ### Community 19 - "__root.tsx"
+
 Cohesion: 0.22
 Nodes (6): SiteShell(), LovableErrorOptions, LovableEvents, reportLovableError(), Window, ErrorComponent()
 
 ### Community 20 - "chart.tsx"
+
 Cohesion: 0.25
 Nodes (9): ChartConfig, ChartContainer, ChartContext, ChartContextProps, ChartLegendContent, ChartTooltipContent, getPayloadConfigFromPayload(), THEMES (+1 more)
 
 ### Community 21 - "context-menu.tsx"
+
 Cohesion: 0.20
 Nodes (9): ContextMenuCheckboxItem, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut(), ContextMenuSubContent (+1 more)
 
 ### Community 22 - "table.tsx"
+
 Cohesion: 0.22
 Nodes (8): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow
 
 ### Community 23 - "breadcrumb.tsx"
+
 Cohesion: 0.25
 Nodes (7): Breadcrumb, BreadcrumbEllipsis(), BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator()
 
 ### Community 24 - "navigation-menu.tsx"
+
 Cohesion: 0.29
 Nodes (7): NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport
 
 ### Community 25 - "toggle-group.tsx"
+
 Cohesion: 0.43
 Nodes (5): ToggleGroup, ToggleGroupContext, ToggleGroupItem, Toggle, toggleVariants
 
 ### Community 26 - "page-transition.tsx"
+
 Cohesion: 0.40
 Nodes (3): DualRingSpinner(), DualRingSpinnerProps, Phase
 
 ### Community 27 - "alert.tsx"
+
 Cohesion: 0.50
 Nodes (4): Alert, AlertDescription, AlertTitle, alertVariants
 
 ### Community 28 - "input-otp.tsx"
+
 Cohesion: 0.40
 Nodes (4): InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot
 
 ### Community 30 - "gallery.tsx"
+
 Cohesion: 0.40
 Nodes (3): GalleryItem, items, Route
 
 ### Community 31 - "avatar.tsx"
+
 Cohesion: 0.50
 Nodes (3): Avatar, AvatarFallback, AvatarImage
 
 ## Knowledge Gaps
+
 - **203 isolated node(s):** `SheetContentProps`, `SidebarContextProps`, `ServerEntry`, `FormData`, `CourseItem` (+198 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 247 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **50 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
+
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `cn()` connect `cn` to `sidebar.tsx`, `utils.ts`, `button.tsx`, `Button`, `command.tsx`, `menubar.tsx`, `form.tsx`, `carousel.tsx`, `chart.tsx`, `context-menu.tsx`, `table.tsx`, `breadcrumb.tsx`, `navigation-menu.tsx`, `toggle-group.tsx`, `alert.tsx`, `input-otp.tsx`, `avatar.tsx`?**

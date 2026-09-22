@@ -32,12 +32,12 @@
 
 Names only (values are secrets / not in the repo; see `SECURITY.md`):
 
-| Variable | Consumed by |
-|----------|-------------|
-| `SUPABASE_URL` (or client `VITE_SUPABASE_URL`) | `src/integrations/supabase/client.ts`, `client.server.ts`, `auth-middleware.ts` |
-| `SUPABASE_PUBLISHABLE_KEY` (or client `VITE_SUPABASE_PUBLISHABLE_KEY`) | same |
-| `SUPABASE_SERVICE_ROLE_KEY` | `client.server.ts` (unused by app code) |
-| `LOVABLE_CRON_SECRET`, `LOVABLE_CRON_SECRET_PREVIOUS` | `cron-auth.ts` (unused by app code) |
+| Variable                                                               | Consumed by                                                                     |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `SUPABASE_URL` (or client `VITE_SUPABASE_URL`)                         | `src/integrations/supabase/client.ts`, `client.server.ts`, `auth-middleware.ts` |
+| `SUPABASE_PUBLISHABLE_KEY` (or client `VITE_SUPABASE_PUBLISHABLE_KEY`) | same                                                                            |
+| `SUPABASE_SERVICE_ROLE_KEY`                                            | `client.server.ts` (unused by app code)                                         |
+| `LOVABLE_CRON_SECRET`, `LOVABLE_CRON_SECRET_PREVIOUS`                  | `cron-auth.ts` (unused by app code)                                             |
 
 Client reads `import.meta.env["VITE_*"]` with fallback to `process.env["*"]` for SSR. If any required var is missing, the Supabase client throws at first use with a descriptive error (browser console / SSR error page).
 
@@ -71,7 +71,7 @@ npm run preview  # vite preview of built output
 - `https://automate.nirosha.org/webhook/joshisacademy` — n8n lead webhook.
 - Repository: `https://github.com/teamnirosha/joshisacademy`.
 
-> Note: phone/WhatsApp numbers are public marketing contact details already published across the site (header CTA, footer, contact page, robots-independent pages); they are documented here only as *what the site exposes*, not as secrets.
+> Note: phone/WhatsApp numbers are public marketing contact details already published across the site (header CTA, footer, contact page, robots-independent pages); they are documented here only as _what the site exposes_, not as secrets.
 
 ## CI/CD Status
 

@@ -11,7 +11,11 @@ export const Route = createFileRoute("/results")({
         "Board Examination Results (90%+) | Top Coaching Classes in Kharadi, Pune - Joshi’s Academy",
         "Verified 10th CBSE & ICSE board examination results at Joshi’s Academy in Kharadi, Pune. Over 50% of our batch scored 90%+ in Science.",
       ),
-      { name: "keywords", content: "10th board toppers Kharadi, CBSE science results Kharadi Pune, best coaching results Kharadi, 90 percent in 10th CBSE Kharadi, science tuition results Chandan Nagar" },
+      {
+        name: "keywords",
+        content:
+          "10th board toppers Kharadi, CBSE science results Kharadi Pune, best coaching results Kharadi, 90 percent in 10th CBSE Kharadi, science tuition results Chandan Nagar",
+      },
     ],
     links: [{ rel: "canonical", href: "https://joshisacademy.com/results" }],
     scripts: [

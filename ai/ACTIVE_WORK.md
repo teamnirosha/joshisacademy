@@ -4,9 +4,9 @@ This file records work currently being performed by developers or AI agents in t
 
 ## Active Tasks
 
-| Developer | AI Tool | Task | Branch | Status | Started | Affected Areas | Affected Files |
-|-----------|---------|------|--------|--------|---------|----------------|----------------|
-| — | — | No active work has been registered through this context system. | `main` | — | — | — | — |
+| Developer | AI Tool | Task                                                            | Branch | Status | Started | Affected Areas | Affected Files |
+| --------- | ------- | --------------------------------------------------------------- | ------ | ------ | ------- | -------------- | -------------- |
+| —         | —       | No active work has been registered through this context system. | `main` | —      | —       | —              | —              |
 
 ## Rules
 

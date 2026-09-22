@@ -13,8 +13,14 @@ export const Route = createFileRoute("/journal/$slug")({
   head: ({ loaderData: art }) => ({
     meta: [
       { title: `${art?.title ?? "Science Guide"} | Joshi’s Academy Kharadi, Pune` },
-      { name: "description", content: art?.excerpt ?? "Science study guidance for Kharadi and Pune students." },
-      { name: "keywords", content: `${art?.title ?? "Science guide"}, coaching classes Kharadi, science tuition Kharadi Pune, 10th CBSE science guide, Chandan Nagar science tuition` },
+      {
+        name: "description",
+        content: art?.excerpt ?? "Science study guidance for Kharadi and Pune students.",
+      },
+      {
+        name: "keywords",
+        content: `${art?.title ?? "Science guide"}, coaching classes Kharadi, science tuition Kharadi Pune, 10th CBSE science guide, Chandan Nagar science tuition`,
+      },
       { property: "og:title", content: art?.title ?? "The Joshi’s Journal" },
       { property: "og:description", content: art?.excerpt ?? "Science study guidance." },
       { property: "og:type", content: "article" },

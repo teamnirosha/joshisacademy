@@ -1,6 +1,6 @@
 # Roadmap — Joshis Academy Website
 
-Roadmap entries are derived **only** from evidence in the repository: README brief gaps, code observations, git history, and technical debt. Sections labelled *Recommendation* are not existing requirements — they are suggested engineering work.
+Roadmap entries are derived **only** from evidence in the repository: README brief gaps, code observations, git history, and technical debt. Sections labelled _Recommendation_ are not existing requirements — they are suggested engineering work.
 
 ## Completed
 
@@ -42,5 +42,5 @@ All items below are labelled **RECOMMENDATION — Not an existing requirement** 
 ## Evidence Notes for Future Roadmap Writers
 
 - Any new business feature (new courses, ICSE-only pages, pricing pages, results dashboard) must come from the academy, not be inferred here.
-- The README brief (1250 lines of design requirements) is the best source for *design-intent* backlog items still unimplemented: result gallery, individual faculty profiles, per-page FAQ expansion, image pipeline.
+- The README brief (1250 lines of design requirements) is the best source for _design-intent_ backlog items still unimplemented: result gallery, individual faculty profiles, per-page FAQ expansion, image pipeline.
 - `found_images.txt` is empty and tracked — an artifact, possibly intended as a photography inventory; confirm before deleting.

@@ -1,6 +1,6 @@
 # API Contracts — Joshis Academy Website
 
-The application exposes **no custom REST/HTTP API** of its own. The only HTTP endpoint the app *serves* besides pages is `/sitemap.xml`. Two external interfaces are *consumed*: Supabase PostgREST (insert) and an n8n webhook. All are documented below from the actual call sites.
+The application exposes **no custom REST/HTTP API** of its own. The only HTTP endpoint the app _serves_ besides pages is `/sitemap.xml`. Two external interfaces are _consumed_: Supabase PostgREST (insert) and an n8n webhook. All are documented below from the actual call sites.
 
 ---
 
@@ -13,15 +13,16 @@ The application exposes **no custom REST/HTTP API** of its own. The only HTTP en
 - **Authorization:** RLS insert policy `"Anyone can submit an enquiry"` — `WITH CHECK (status = 'new')` for `anon` + `authenticated`. Reads/updates/deletes are **not** granted to anon/authenticated.
 - **Request body (actual payload in `enquiry-dialog.tsx`):**
 
-| Field | Source | Notes |
-|-------|--------|-------|
-| `student_class` | step 1 | `"IX" \| "X"` (DB CHECK) |
-| `board` | step 2 | `"CBSE" \| "ICSE"` (DB CHECK) |
-| `parent_name` | step 3 | trimmed; 2–100 chars (DB CHECK) |
-| `mobile_number` | step 4 | trimmed; regex `^[0-9+ ()-]{10,20}$` (DB); client validates 10–15 |
-| `preferred_contact` | step 6 | `"Call" \| "WhatsApp"` (DB CHECK) |
+| Field               | Source | Notes                                                             |
+| ------------------- | ------ | ----------------------------------------------------------------- |
+| `student_class`     | step 1 | `"IX" \| "X"` (DB CHECK)                                          |
+| `board`             | step 2 | `"CBSE" \| "ICSE"` (DB CHECK)                                     |
+| `parent_name`       | step 3 | trimmed; 2–100 chars (DB CHECK)                                   |
+| `mobile_number`     | step 4 | trimmed; regex `^[0-9+ ()-]{10,20}$` (DB); client validates 10–15 |
+| `preferred_contact` | step 6 | `"Call" \| "WhatsApp"` (DB CHECK)                                 |
 
-  `email`, `submitted_at`, `page_url` are collected in the dialog payload but are **NOT included in the insert** (no such columns).
+`email`, `submitted_at`, `page_url` are collected in the dialog payload but are **NOT included in the insert** (no such columns).
+
 - **Response:** On success, inserted row data; on failure `{ error }`. Caller only `console.warn`s and proceeds to the success state regardless.
 - **Error responses:** Supabase/PostgREST standard (RLS violation, constraint violation, network). Not surfaced to the user by design.
 - **Frontend consumers:** `src/components/enquiry-dialog.tsx`

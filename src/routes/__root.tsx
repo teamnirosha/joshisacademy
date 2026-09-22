@@ -85,7 +85,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Specialist CBSE & ICSE Science coaching for Classes 9 & 10 in Kharadi, Pune. Serving Chandan Nagar, Wagholi, Viman Nagar & Mundhwa. Concept-first teaching & 90%+ board results.",
       },
       { name: "author", content: "Joshi’s Academy" },
-      { name: "keywords", content: "coaching classes in Kharadi, science tuition Kharadi, CBSE 10th science coaching, ICSE science classes Kharadi, tuition classes near Chandan Nagar, science tuition Wagholi, Viman Nagar coaching classes, Mundhwa science tuition" },
+      {
+        name: "keywords",
+        content:
+          "coaching classes in Kharadi, science tuition Kharadi, CBSE 10th science coaching, ICSE science classes Kharadi, tuition classes near Chandan Nagar, science tuition Wagholi, Viman Nagar coaching classes, Mundhwa science tuition",
+      },
       { property: "og:title", content: "Joshi’s Academy - Best Science Coaching in Kharadi, Pune" },
       {
         property: "og:description",

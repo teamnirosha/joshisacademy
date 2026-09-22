@@ -17,7 +17,7 @@ Adopt these going forward (recommendation — current repo practice is direct-to
 1. **`main` remains stable.** Anything pushed to `main` can reach Lovable and, from there, the live site. Test locally (tsc/lint/build) before pushing.
 2. **Use feature branches** for anything non-trivial: `feat/<short-name>`, `fix/<short-name>`. Keep `main` green.
 3. **Meaningful commits** — small, atomic, imperative summaries (e.g., `add n8n lead forwarding to enquiry dialog`). Prefix with `fix:`/`feat:`/`chore:`/`docs:` when it adds clarity.
-4. **Pull latest before starting** work (`git pull --ff-only`); rebase your feature branch onto `main` before merging (do not rewrite *published* history).
+4. **Pull latest before starting** work (`git pull --ff-only`); rebase your feature branch onto `main` before merging (do not rewrite _published_ history).
 5. **Avoid unrelated changes** in the same commit — no drive-by refactors or style edits mixed into feature work (matches AI_RULES change discipline).
 6. **Review PRs** before merging to `main` (code review by a second developer or a careful AI review pass).
 7. **Never commit secrets** — no `.env`, keys, or tokens. `package.json` `*.local`, `.env`, `.dev.vars`, `.wrangler` are gitignored. Keep it that way.

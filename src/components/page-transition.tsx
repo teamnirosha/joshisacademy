@@ -27,9 +27,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const [displayPath, setDisplayPath] = useState(pathname);
   const [phase, setPhase] = useState<Phase>("idle");
   const prevPath = useRef(pathname);
-  const t1 = useRef<ReturnType<typeof setTimeout>>();
-  const t2 = useRef<ReturnType<typeof setTimeout>>();
-  const raf = useRef<number>();
+  const t1 = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const t2 = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const raf = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (pathname === prevPath.current) return;

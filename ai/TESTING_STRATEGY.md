@@ -17,13 +17,13 @@
 
 ## What CAN Be Verified Today (manual commands)
 
-| Command | What it checks |
-|---------|----------------|
-| `npx tsc --noEmit` | Type safety across `src/` (strict mode) |
-| `npm run lint` | ESLint rules + Prettier formatting |
-| `npm run build` | Full production build incl. SSR entry (`server`), CSS, route tree |
-| `npm run dev` | Local dev server for manual/visual checks |
-| `git diff` review | Manual code review |
+| Command            | What it checks                                                    |
+| ------------------ | ----------------------------------------------------------------- |
+| `npx tsc --noEmit` | Type safety across `src/` (strict mode)                           |
+| `npm run lint`     | ESLint rules + Prettier formatting                                |
+| `npm run build`    | Full production build incl. SSR entry (`server`), CSS, route tree |
+| `npm run dev`      | Local dev server for manual/visual checks                         |
+| `git diff` review  | Manual code review                                                |
 
 ## Recommended Strategy
 

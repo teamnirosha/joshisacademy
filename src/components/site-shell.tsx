@@ -1,6 +1,17 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { ArrowRight, Compass, LogOut, MapPin, Menu, MessageSquare, Phone, Sparkles, User, X } from "lucide-react";
+import {
+  ArrowRight,
+  Compass,
+  LogOut,
+  MapPin,
+  Menu,
+  MessageSquare,
+  Phone,
+  Sparkles,
+  User,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EnquiryDialog } from "./enquiry-dialog";
 import { AuthDialog } from "./auth-dialog";
@@ -88,20 +99,43 @@ export function SiteShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("open-enquiry", handleOpenEnquiry);
   }, []);
 
-  // Automatically trigger attractive enquiry popup 3 seconds after website visit
+  const isHome = location.pathname === "/";
+  const isCmsRoute = location.pathname.startsWith("/admin");
+
+  // Automatically trigger attractive enquiry popup ONLY ONCE for first-time new visitors
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setEnquireOpen(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (isCmsRoute) return;
+
+    try {
+      const alreadyShown = localStorage.getItem("joshis_enquiry_popup_shown_v1");
+      if (alreadyShown) {
+        // Already shown to this visitor before, do not auto-open on any page or refresh
+        return;
+      }
+
+      // First time new visitor: show once after 5 seconds, then mark as shown
+      const timer = setTimeout(() => {
+        setEnquireOpen(true);
+        try {
+          localStorage.setItem("joshis_enquiry_popup_shown_v1", "true");
+        } catch (e) {}
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    } catch (e) {
+      // In case localStorage is blocked in private browsing
+    }
+  }, [isCmsRoute]);
 
   // Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  const isHome = location.pathname === "/";
+  // If on CMS Admin routes, render children without public header/footer/popups
+  if (isCmsRoute) {
+    return <>{children}</>;
+  }
 
   // Total offset for page content = announcement bar + header
   const HEADER_HEIGHT = 64; // px - compact target height
@@ -113,21 +147,23 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Fixed Institutional Header + Announcement Bar */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
-          ? "border-b border-border bg-[rgba(250,249,245,0.98)] backdrop-blur-md shadow-xs"
-          : isHome
-            ? "bg-transparent"
-            : "border-b border-border/40 bg-ivory"
-          }`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "border-b border-border bg-[rgba(250,249,245,0.98)] backdrop-blur-md shadow-xs"
+            : isHome
+              ? "bg-transparent"
+              : "border-b border-border/40 bg-ivory"
+        }`}
       >
         {/* Top Opaque Light Announcement Bar — desktop only, hidden on mobile */}
         {showAnnouncement && (
           <div
             ref={announcementRef}
-            className={`w-full transition-all duration-300 overflow-hidden ${scrolled
-              ? "max-h-0 opacity-0 py-0 border-none"
-              : "max-h-12 opacity-100 py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
-              } hidden md:block`}
+            className={`w-full transition-all duration-300 overflow-hidden ${
+              scrolled
+                ? "max-h-0 opacity-0 py-0 border-none"
+                : "max-h-12 opacity-100 py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
+            } hidden md:block`}
             role="region"
             aria-label="Academic Announcement"
           >
@@ -136,7 +172,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 <Sparkles className="size-3 text-amber-300" />
                 {announcement.badge}
               </span>
-              <span className="text-xs font-semibold tracking-tight text-ink">{announcement.text}</span>
+              <span className="text-xs font-semibold tracking-tight text-ink">
+                {announcement.text}
+              </span>
               <button
                 onClick={() => setEnquireOpen(true)}
                 className="ml-1 text-xs font-bold text-violet underline underline-offset-4 hover:text-royal transition-colors cursor-pointer"
@@ -325,7 +363,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="space-y-3 pt-5 border-t border-ivory/15">
             {user ? (
               <div className="flex items-center justify-between bg-white/5 p-3 rounded border border-white/10">
-                <span className="text-xs font-semibold text-lavender truncate max-w-[200px]">{user.email}</span>
+                <span className="text-xs font-semibold text-lavender truncate max-w-[200px]">
+                  {user.email}
+                </span>
                 <button
                   type="button"
                   onClick={() => {
@@ -433,7 +473,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
           onClick={() => setEnquireOpen(true)}
           className="flex items-center justify-center gap-1 bg-violet text-ivory hover:bg-violet/90 transition-colors cursor-pointer px-1"
         >
-          <span className="text-[9.5px] font-bold uppercase tracking-wider truncate">I'M INTERESTED</span>
+          <span className="text-[9.5px] font-bold uppercase tracking-wider truncate">
+            I'M INTERESTED
+          </span>
           <ArrowRight className="size-3 shrink-0" />
         </button>
       </div>

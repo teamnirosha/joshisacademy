@@ -35,8 +35,8 @@ Strict rules for every AI coding agent working in this repository. These complem
 20. **Never expose secrets.**
     - Never commit credentials, API keys, tokens, private keys, passwords, or real secrets.
     - Never modify `.env` secrets or secret configuration.
-    - Never copy secret *values* into `ai/` documentation. Use `[REDACTED — SECRET NOT DOCUMENTED]`.
-    - Document only environment variable *names* and where they are used.
+    - Never copy secret _values_ into `ai/` documentation. Use `[REDACTED — SECRET NOT DOCUMENTED]`.
+    - Document only environment variable _names_ and where they are used.
 21. **Be careful with anything already deployed.** `https://joshisacademy.com` is live. Changes to shared code can reach production via the Lovable-synced branch (`main`). Keep `main` in a working state.
 
 ## Verification
