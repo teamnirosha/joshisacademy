@@ -109,10 +109,10 @@ function ContactPage() {
                   <Phone className="size-4 text-violet group-hover:text-ivory transition-colors" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                     Call Us
                   </p>
-                  <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-violet transition-colors truncate">
+                  <p className="mt-0.5 text-[15px] font-medium tracking-wide text-ink group-hover:text-violet transition-colors truncate">
                     {site.phone}
                   </p>
                 </div>
@@ -129,10 +129,10 @@ function ContactPage() {
                   <MessageSquare className="size-4 text-green-600 group-hover:text-white transition-colors" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                     WhatsApp
                   </p>
-                  <p className="mt-0.5 text-[15px] font-semibold tracking-wide text-ink group-hover:text-green-600 transition-colors truncate">
+                  <p className="mt-0.5 text-[15px] font-medium tracking-wide text-ink group-hover:text-green-600 transition-colors truncate">
                     {site.whatsapp}
                   </p>
                 </div>
@@ -144,7 +144,7 @@ function ContactPage() {
                   <Clock className="size-4 text-royal" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                     Counselling Hours
                   </p>
                   <p className="mt-0.5 text-sm text-ink leading-relaxed break-words">
@@ -163,7 +163,7 @@ function ContactPage() {
                   <Compass className="size-4 text-royal" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                     Locational Accessibility
                   </p>
                   <p className="mt-0.5 text-sm text-muted-foreground leading-relaxed break-words">
@@ -213,7 +213,7 @@ function ContactPage() {
                   href={site.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[11px] font-bold uppercase tracking-wider text-violet hover:underline shrink-0"
+                  className="text-[11px] font-medium uppercase tracking-wider text-violet hover:underline shrink-0"
                 >
                   Open in Maps ↗
                 </a>
@@ -234,7 +234,7 @@ function ContactPage() {
 
               <div className="mt-8 border-t border-border pt-6 sm:pt-8 space-y-4">
                 <div className="border border-border bg-lavender/30 p-4 text-xs text-ink space-y-1 rounded-sm">
-                  <p className="font-bold">✓ Free, no-obligation conversation</p>
+                  <p className="font-medium">✓ Free, no-obligation conversation</p>
                   <p className="text-muted-foreground">
                     Includes syllabus review and previous test gap analysis.
                   </p>

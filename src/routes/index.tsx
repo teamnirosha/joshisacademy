@@ -248,7 +248,7 @@ function HomePage() {
             </div>
             <Link
               to="/about"
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#35208f] hover:underline shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#35208f] hover:underline shrink-0"
             >
               KNOW MORE ABOUT MY APPROACH →
             </Link>
@@ -353,7 +353,7 @@ function HomePage() {
                       onClick={openEnquiry}
                       size="sm"
                       variant="outline"
-                      className="text-xs font-bold cursor-pointer"
+                      className="text-xs font-medium cursor-pointer"
                     >
                       I'm Interested →
                     </Button>
@@ -380,7 +380,7 @@ function HomePage() {
                 </div>
                 <Link
                   to="/results"
-                  className="text-xs font-bold uppercase tracking-wider text-[#35208f] hover:underline shrink-0"
+                  className="text-xs font-medium uppercase tracking-wider text-[#35208f] hover:underline shrink-0"
                 >
                   VIEW ALL RESULTS →
                 </Link>
@@ -390,38 +390,38 @@ function HomePage() {
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Anay Kulkarni</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">
+                  <p className="text-[11px] text-muted-foreground font-medium">
                     CBSE | Class X | 2024-25
                   </p>
                   <p className="text-[10px] text-muted-foreground truncate">
                     The Lexicon International
                   </p>
                   <div className="pt-2">
-                    <span className="font-display text-3xl text-[#35208f] font-bold">96%</span>
+                    <span className="font-display text-3xl text-[#35208f] font-normal">96%</span>
                   </div>
                 </div>
 
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Sia Deshmukh</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">
+                  <p className="text-[11px] text-muted-foreground font-medium">
                     ICSE | Class X | 2024-25
                   </p>
                   <p className="text-[10px] text-muted-foreground truncate">
                     Bishop's School, Pune
                   </p>
                   <div className="pt-2">
-                    <span className="font-display text-3xl text-[#35208f] font-bold">94.2%</span>
+                    <span className="font-display text-3xl text-[#35208f] font-normal">94.2%</span>
                   </div>
                 </div>
 
                 <div className="border border-border bg-[#faf8f5] p-5 rounded-xl text-center space-y-2">
                   <span className="eyebrow text-[#35208f] text-[10px]">Vedant Patil</span>
-                  <p className="text-[11px] text-muted-foreground font-semibold">
+                  <p className="text-[11px] text-muted-foreground font-medium">
                     CBSE | Class X | 2024-25
                   </p>
                   <p className="text-[10px] text-muted-foreground truncate">DPS, Pune</p>
                   <div className="pt-2">
-                    <span className="font-display text-3xl text-[#35208f] font-bold">93.4%</span>
+                    <span className="font-display text-3xl text-[#35208f] font-normal">93.4%</span>
                   </div>
                 </div>
               </div>
@@ -435,7 +435,7 @@ function HomePage() {
                 Science and scores with confidence."
               </blockquote>
               <div className="border-t border-border pt-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-ink">
+                <p className="text-xs font-medium uppercase tracking-wider text-ink">
                   - Parent of Anay Kulkarni
                 </p>
                 <p className="text-xs text-muted-foreground">Kharadi, Pune</p>
@@ -472,7 +472,7 @@ function HomePage() {
                     <span className="eyebrow text-[#35208f] text-[10px]">
                       {c.board} • {c.className}
                     </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
                       Small Batches
                     </span>
                   </div>
@@ -488,7 +488,7 @@ function HomePage() {
                   <Link
                     to="/courses/$slug"
                     params={{ slug: c.slug }}
-                    className="text-xs font-bold uppercase tracking-wider text-[#35208f] hover:underline inline-flex items-center gap-1"
+                    className="text-xs font-medium uppercase tracking-wider text-[#35208f] hover:underline inline-flex items-center gap-1"
                   >
                     EXPLORE COURSE →
                   </Link>
@@ -507,19 +507,19 @@ function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="space-y-1">
-              <span className="font-display text-lg font-bold text-ink">Concept Clarity</span>
+              <span className="text-lg font-semibold text-ink">Concept Clarity</span>
               <p className="text-xs text-muted-foreground">Strong foundation for life</p>
             </div>
             <div className="space-y-1">
-              <span className="font-display text-lg font-bold text-ink">Exam Ready</span>
+              <span className="text-lg font-semibold text-ink">Exam Ready</span>
               <p className="text-xs text-muted-foreground">Focused preparation strategy</p>
             </div>
             <div className="space-y-1">
-              <span className="font-display text-lg font-bold text-ink">Confidence Building</span>
+              <span className="text-lg font-semibold text-ink">Confidence Building</span>
               <p className="text-xs text-muted-foreground">Better understanding, better results</p>
             </div>
             <div className="space-y-1">
-              <span className="font-display text-lg font-bold text-ink">Bright Future</span>
+              <span className="text-lg font-semibold text-ink">Bright Future</span>
               <p className="text-xs text-muted-foreground">Preparing for tomorrow's challenges</p>
             </div>
           </div>
@@ -542,7 +542,7 @@ function HomePage() {
           <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={openEnquiry}
-              className="h-12 px-8 bg-[#35208f] hover:bg-[#2b177d] text-ivory text-xs font-bold uppercase tracking-wider rounded-md shadow-md cursor-pointer"
+              className="h-12 px-8 bg-[#35208f] hover:bg-[#2b177d] text-ivory text-xs font-medium uppercase tracking-wider rounded-md shadow-md cursor-pointer"
             >
               I'M INTERESTED →
             </Button>
@@ -550,7 +550,7 @@ function HomePage() {
               href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="h-12 px-8 border border-ivory/30 bg-transparent text-ivory hover:bg-white/10 text-xs font-bold uppercase tracking-wider rounded-md flex items-center justify-center gap-2 transition-all"
+              className="h-12 px-8 border border-ivory/30 bg-transparent text-ivory hover:bg-white/10 text-xs font-medium uppercase tracking-wider rounded-md flex items-center justify-center gap-2 transition-all"
             >
               <MessageSquare className="size-4 text-emerald-400 shrink-0" />
               WHATSAPP US

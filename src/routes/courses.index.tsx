@@ -90,7 +90,7 @@ function CoursesDirectoryPage() {
               params={{ slug: c.slug }}
               className="group grid gap-6 py-12 transition-colors hover:bg-lavender/30 sm:px-6 md:grid-cols-[80px_1.1fr_1.3fr_180px] md:items-center"
             >
-              <span className="font-sans text-xs font-bold text-violet">0{i + 1}</span>
+              <span className="font-sans text-xs font-semibold text-violet">0{i + 1}</span>
 
               <div>
                 <span className="eyebrow text-royal">{c.board}</span>
@@ -105,7 +105,7 @@ function CoursesDirectoryPage() {
                 <p className="text-sm leading-relaxed text-muted-foreground max-w-lg">
                   {c.description}
                 </p>
-                <div className="mt-3 flex items-center gap-3 text-xs font-bold text-ink/80">
+                <div className="mt-3 flex items-center gap-3 text-xs font-medium text-ink/80">
                   <span className="flex items-center gap-1">
                     <Check className="size-3 text-violet" /> Physics
                   </span>
@@ -118,7 +118,7 @@ function CoursesDirectoryPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-violet group-hover:text-royal transition-colors">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-violet group-hover:text-royal transition-colors">
                 <span>Explore Course</span>
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-2" />
               </div>

@@ -165,7 +165,7 @@ export function LocalSeoAreas() {
                       <span>{area.keyLandmarks}</span>
                     </p>
                   </div>
-                  <div className="shrink-0 rounded-full border border-violet/40 bg-violet/20 px-2.5 py-1 text-[11px] font-bold text-lavender flex items-center gap-1">
+                  <div className="shrink-0 rounded-full border border-violet/40 bg-violet/20 px-2.5 py-1 text-[11px] font-medium text-lavender flex items-center gap-1">
                     <Clock className="size-3" />
                     <span>{area.travelTime}</span>
                   </div>
@@ -184,7 +184,7 @@ export function LocalSeoAreas() {
 
               {/* Schools tag footer */}
               <div className="mt-6 border-t border-ivory/10 pt-4">
-                <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-ivory/50 font-bold mb-2">
+                <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-ivory/50 font-medium mb-2">
                   <School className="size-3 text-lavender" />
                   <span>Key Schools Covered:</span>
                 </div>
@@ -206,7 +206,7 @@ export function LocalSeoAreas() {
         {/* Call to action footer box */}
         <div className="mt-14 rounded-2xl border border-violet/30 bg-gradient-to-r from-violet/30 via-violet/15 to-transparent p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-display text-2xl font-bold text-ivory">
+            <h3 className="font-display text-2xl font-semibold text-ivory">
               Looking for Science Tuition Near You in Kharadi or Nearby?
             </h3>
             <p className="text-sm text-ivory/80 max-w-2xl">
@@ -216,7 +216,7 @@ export function LocalSeoAreas() {
           </div>
           <Button
             onClick={openEnquiry}
-            className="shrink-0 bg-violet hover:bg-violet/90 text-ivory font-bold px-8 py-6 uppercase tracking-wider text-xs shadow-lg shadow-violet/30 cursor-pointer"
+            className="shrink-0 bg-violet hover:bg-violet/90 text-ivory font-semibold px-8 py-6 uppercase tracking-wider text-xs shadow-lg shadow-violet/30 cursor-pointer"
           >
             Enquire For Your Area <Navigation className="ml-2 size-4" />
           </Button>

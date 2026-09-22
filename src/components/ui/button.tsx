@@ -24,9 +24,9 @@ const buttonVariants = cva(
         iconGhost: "border border-border text-ink hover:border-violet hover:text-violet",
         iconLight: "border border-ivory/30 text-ivory hover:border-ivory hover:text-lavender",
         choice:
-          "min-h-20 bg-ivory text-ink hover:bg-lavender/60 border border-border text-sm font-bold tracking-normal uppercase-none",
+          "min-h-20 bg-ivory text-ink hover:bg-lavender/60 border border-border text-sm font-medium tracking-normal uppercase-none",
         choiceActive:
-          "min-h-20 bg-violet text-ivory border border-violet text-sm font-bold tracking-normal uppercase-none",
+          "min-h-20 bg-violet text-ivory border border-violet text-sm font-medium tracking-normal uppercase-none",
         mobileBar:
           "border-r border-border bg-ivory text-ink hover:bg-lavender/60 tracking-wider text-[11px]",
       },

@@ -151,7 +151,7 @@ function AboutPage() {
               },
             ].map((tenet) => (
               <div key={tenet.num} className="border border-border bg-white p-8">
-                <span className="font-sans text-xs font-bold text-violet">{tenet.num}</span>
+                <span className="font-sans text-xs font-semibold text-violet">{tenet.num}</span>
                 <h3 className="font-display text-2xl text-ink mt-3">{tenet.title}</h3>
                 <p className="mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">
                   {tenet.desc}

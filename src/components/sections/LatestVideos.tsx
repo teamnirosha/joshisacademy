@@ -213,13 +213,13 @@ export function LatestVideos() {
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div className="max-w-2xl">
               {/* Tagline */}
-              <div className="yt-hero-tagline inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-400 text-xs font-bold uppercase tracking-[1.5px] mb-4 backdrop-blur-xs">
+              <div className="yt-hero-tagline inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-400 text-xs font-medium uppercase tracking-wider mb-4 backdrop-blur-xs">
                 <Sparkles className="size-3.5" />
                 <span>LEARN • EXPLORE • GROW</span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="yt-hero-heading font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.1]">
+              <h2 className="yt-hero-heading text-2xl sm:text-3xl lg:text-4xl font-semibold text-white tracking-tight leading-snug">
                 Latest from Varsha Tutorials
               </h2>
 
@@ -236,7 +236,7 @@ export function LatestVideos() {
                     const grid = document.getElementById("youtube-content-tabs");
                     grid?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ivory text-ink hover:bg-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ivory text-ink hover:bg-white font-semibold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <Play className="size-3.5 fill-current" />
                   <span>Explore Videos</span>
@@ -246,7 +246,7 @@ export function LatestVideos() {
                   href={channelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <Youtube className="size-4 fill-white" />
                   <span>Visit YouTube Channel ↗</span>
@@ -277,11 +277,11 @@ export function LatestVideos() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <h4 className="font-bold text-sm text-white truncate">{channelName}</h4>
+                    <h4 className="font-semibold text-sm text-white truncate">{channelName}</h4>
                     <CheckCircle2 className="size-4 text-red-500 fill-red-500/20 shrink-0" />
                   </div>
                   <p className="text-xs text-ivory/60 font-mono">{channelHandle}</p>
-                  <span className="inline-block mt-1 text-[11px] font-semibold text-amber-400">
+                  <span className="inline-block mt-1 text-[11px] font-medium text-amber-400">
                     {channel?.subscriber_count
                       ? `${channel.subscriber_count.toLocaleString()}+ Learners`
                       : "24,800+ Learners"}
@@ -312,7 +312,7 @@ export function LatestVideos() {
                 role="tab"
                 aria-selected={activeTab === "VIDEOS"}
                 onClick={() => handleTabChange("VIDEOS")}
-                className={`relative px-5 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
+                className={`relative px-5 py-2.5 rounded-xl font-semibold text-sm transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                   activeTab === "VIDEOS"
                     ? "bg-[#35208f] text-white shadow-sm"
                     : "bg-white text-muted-foreground hover:text-ink border border-border/70"
@@ -329,7 +329,7 @@ export function LatestVideos() {
                 role="tab"
                 aria-selected={activeTab === "SHORTS"}
                 onClick={() => handleTabChange("SHORTS")}
-                className={`relative px-5 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
+                className={`relative px-5 py-2.5 rounded-xl font-semibold text-sm transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                   activeTab === "SHORTS"
                     ? "bg-red-600 text-white shadow-sm"
                     : "bg-white text-muted-foreground hover:text-ink border border-border/70"
@@ -346,7 +346,7 @@ export function LatestVideos() {
                 role="tab"
                 aria-selected={activeTab === "PLAYLISTS"}
                 onClick={() => handleTabChange("PLAYLISTS")}
-                className={`relative px-5 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
+                className={`relative px-5 py-2.5 rounded-xl font-semibold text-sm transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                   activeTab === "PLAYLISTS"
                     ? "bg-amber-600 text-white shadow-sm"
                     : "bg-white text-muted-foreground hover:text-ink border border-border/70"
@@ -365,7 +365,7 @@ export function LatestVideos() {
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#35208f] hover:underline self-end sm:self-auto shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#35208f] hover:underline self-end sm:self-auto shrink-0"
             >
               <span>Visit YouTube Channel</span>
               <ExternalLink className="size-3.5" />
@@ -404,7 +404,7 @@ export function LatestVideos() {
                     </div>
 
                     {activeFeatured.duration && (
-                      <span className="absolute bottom-3 right-3 bg-black/85 text-white font-mono text-xs font-semibold px-2.5 py-1 rounded-md backdrop-blur-xs">
+                      <span className="absolute bottom-3 right-3 bg-black/85 text-white font-mono text-xs font-medium px-2.5 py-1 rounded-md backdrop-blur-xs">
                         {activeFeatured.duration}
                       </span>
                     )}
@@ -414,17 +414,17 @@ export function LatestVideos() {
                   <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-white">
                     <div>
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-800 font-bold text-[11px] uppercase tracking-wider">
+                        <span className="px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-800 font-semibold text-[11px] uppercase tracking-wider">
                           FEATURED LESSON
                         </span>
                         {activeFeatured.view_count && (
-                          <span className="text-xs text-muted-foreground font-medium">
+                          <span className="text-xs text-muted-foreground font-normal">
                             • {activeFeatured.view_count} views
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-ink group-hover:text-[#35208f] transition-colors leading-tight">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-ink group-hover:text-[#35208f] transition-colors leading-snug">
                         {activeFeatured.title}
                       </h3>
 
@@ -438,7 +438,7 @@ export function LatestVideos() {
                     <div className="pt-6 border-t border-border/60 flex items-center justify-between mt-6">
                       <button
                         type="button"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35208f] text-white text-xs font-bold uppercase tracking-wider group-hover:bg-[#2b177d] transition-colors shadow-xs"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#35208f] text-white text-xs font-semibold uppercase tracking-wider group-hover:bg-[#2b177d] transition-colors shadow-xs"
                       >
                         <Play className="size-3.5 fill-white" />
                         <span>Watch Video</span>
@@ -457,7 +457,7 @@ export function LatestVideos() {
               {/* 4-Column Grid of Lessons */}
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-display text-lg sm:text-xl font-bold text-ink">
+                  <h4 className="text-lg sm:text-xl font-semibold text-ink">
                     More Lectures &amp; Lessons
                   </h4>
                   <span className="text-xs text-muted-foreground">
@@ -498,7 +498,7 @@ export function LatestVideos() {
 
                             {/* Duration Badge Bottom-Right */}
                             {vid.duration && (
-                              <span className="absolute bottom-2 right-2 bg-ink/90 text-white font-mono text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-xs">
+                              <span className="absolute bottom-2 right-2 bg-ink/90 text-white font-mono text-[10px] font-medium px-2 py-0.5 rounded backdrop-blur-xs">
                                 {vid.duration}
                               </span>
                             )}
@@ -506,7 +506,7 @@ export function LatestVideos() {
 
                           {/* Card Information */}
                           <div className="p-4">
-                            <h5 className="font-bold text-sm sm:text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors line-clamp-2">
+                            <h5 className="font-semibold text-sm sm:text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors line-clamp-2">
                               {vid.title}
                             </h5>
 
@@ -520,7 +520,7 @@ export function LatestVideos() {
 
                         {/* Card Metadata Footer */}
                         <div className="px-4 pb-4 pt-0 flex items-center justify-between text-[11px] text-muted-foreground border-t border-border/40 pt-3">
-                          <span className="font-semibold text-[#35208f] group-hover:underline">
+                          <span className="font-medium text-[#35208f] group-hover:underline">
                             Watch Video →
                           </span>
                           <span>
@@ -538,7 +538,7 @@ export function LatestVideos() {
                 {hasMoreVideos && (
                   <button
                     onClick={handleLoadMore}
-                    className="w-full sm:w-auto min-w-[200px] px-8 py-3 rounded-xl bg-white hover:bg-ivory text-ink font-bold text-xs uppercase tracking-wider border border-border shadow-xs hover:shadow-md transition-all cursor-pointer"
+                    className="w-full sm:w-auto min-w-[200px] px-8 py-3 rounded-xl bg-white hover:bg-ivory text-ink font-semibold text-xs uppercase tracking-wider border border-border shadow-xs hover:shadow-md transition-all cursor-pointer"
                   >
                     Load More Lessons
                   </button>
@@ -546,7 +546,7 @@ export function LatestVideos() {
 
                 <Link
                   to="/youtube"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#35208f]/10 hover:bg-[#35208f] text-[#35208f] hover:text-white font-bold text-xs uppercase tracking-wider transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#35208f]/10 hover:bg-[#35208f] text-[#35208f] hover:text-white font-semibold text-xs uppercase tracking-wider transition-all"
                 >
                   <span>View All Videos</span>
                   <ArrowRight className="size-4" />
@@ -567,7 +567,7 @@ export function LatestVideos() {
                   href={`${channelUrl}/shorts`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white font-bold text-xs uppercase tracking-wider transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all"
                 >
                   <Smartphone className="size-4" />
                   <span>Browse All Shorts on YouTube ↗</span>
@@ -582,7 +582,7 @@ export function LatestVideos() {
           {activeTab === "PLAYLISTS" && (
             <div className="space-y-6">
               <div className="mb-4">
-                <h3 className="font-display text-2xl sm:text-3xl text-ink font-bold">
+                <h3 className="text-xl sm:text-2xl text-ink font-semibold">
                   Explore Our Playlists
                 </h3>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl">
@@ -613,7 +613,7 @@ export function LatestVideos() {
                         <div className="absolute inset-0 bg-ink/35 group-hover:bg-ink/20 transition-colors" />
 
                         {/* Video Count Overlay Badge */}
-                        <div className="absolute bottom-2.5 right-2.5 bg-ink/90 text-white font-bold text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1.5 backdrop-blur-xs shadow-xs">
+                        <div className="absolute bottom-2.5 right-2.5 bg-ink/90 text-white font-medium text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1.5 backdrop-blur-xs shadow-xs">
                           <ListVideo className="size-3.5 text-amber-400" />
                           <span>▶ {pl.video_count || 12} Videos</span>
                         </div>
@@ -621,7 +621,7 @@ export function LatestVideos() {
 
                       {/* Info */}
                       <div className="p-5">
-                        <h4 className="font-bold text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors line-clamp-2">
+                        <h4 className="font-semibold text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors line-clamp-2">
                           {pl.title}
                         </h4>
                         {pl.description && (
@@ -633,7 +633,7 @@ export function LatestVideos() {
                     </div>
 
                     <div className="px-5 pb-5 pt-0">
-                      <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 group-hover:text-[#35208f] transition-colors">
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 group-hover:text-[#35208f] transition-colors">
                         <span>View Playlist</span>
                         <ArrowRight className="size-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </span>

@@ -59,12 +59,12 @@ export function PlaylistDetailModal({
               <ListVideo className="size-5" />
             </div>
             <div className="min-w-0">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 block">
+              <span className="text-[11px] font-medium uppercase tracking-wider text-amber-400 block">
                 Curated Learning Playlist
               </span>
               <h3
                 id="playlist-modal-title"
-                className="font-bold text-base sm:text-lg text-ivory truncate"
+                className="font-semibold text-base sm:text-lg text-ivory truncate"
               >
                 {playlist.title}
               </h3>
@@ -93,13 +93,13 @@ export function PlaylistDetailModal({
               className="size-full object-cover"
             />
             <div className="absolute inset-0 bg-ink/30" />
-            <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[11px] font-bold">
+            <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[11px] font-medium">
               {playlist.video_count || videos.length} Lessons
             </div>
           </div>
 
           <div className="flex-1 min-w-0">
-            <h4 className="font-display text-lg sm:text-xl font-bold text-ink">{playlist.title}</h4>
+            <h4 className="text-lg sm:text-xl font-semibold text-ink">{playlist.title}</h4>
             {playlist.description && (
               <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 {playlist.description}
@@ -111,7 +111,7 @@ export function PlaylistDetailModal({
                 href={playlistUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 text-white font-bold text-xs hover:bg-red-700 transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 text-white font-medium text-xs hover:bg-red-700 transition-colors shadow-xs"
               >
                 <span>View on YouTube</span>
                 <ExternalLink className="size-3.5" />
@@ -125,7 +125,7 @@ export function PlaylistDetailModal({
 
         {/* Playlist Videos List */}
         <div className="p-4 sm:p-6 overflow-y-auto flex-1 divide-y divide-border/60">
-          <h5 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3 px-2">
+          <h5 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-2">
             Playlist Lessons ({videos.length})
           </h5>
 
@@ -140,7 +140,7 @@ export function PlaylistDetailModal({
                 className="py-3 px-2 sm:px-3 flex items-center gap-3 sm:gap-4 hover:bg-ivory rounded-xl transition-all cursor-pointer group"
               >
                 {/* Lesson Sequence Number */}
-                <span className="font-mono font-bold text-xs sm:text-sm text-muted-foreground group-hover:text-[#35208f] w-6 text-center shrink-0">
+                <span className="font-mono font-medium text-xs sm:text-sm text-muted-foreground group-hover:text-[#35208f] w-6 text-center shrink-0">
                   {formattedIndex}
                 </span>
 
@@ -169,7 +169,7 @@ export function PlaylistDetailModal({
 
                 {/* Video Info */}
                 <div className="flex-1 min-w-0">
-                  <h6 className="font-bold text-xs sm:text-sm text-ink group-hover:text-[#35208f] transition-colors line-clamp-2">
+                  <h6 className="font-medium text-xs sm:text-sm text-ink group-hover:text-[#35208f] transition-colors line-clamp-2">
                     {vid.title}
                   </h6>
                   {vid.description && (
@@ -182,7 +182,7 @@ export function PlaylistDetailModal({
                 {/* Play CTA Button */}
                 <button
                   type="button"
-                  className="hidden xs:inline-flex items-center gap-1 text-xs font-bold text-[#35208f] group-hover:underline shrink-0 px-2.5 py-1 rounded bg-[#35208f]/5 group-hover:bg-[#35208f]/10 transition-colors"
+                  className="hidden xs:inline-flex items-center gap-1 text-xs font-medium text-[#35208f] group-hover:underline shrink-0 px-2.5 py-1 rounded bg-[#35208f]/5 group-hover:bg-[#35208f]/10 transition-colors"
                 >
                   <span>Play</span>
                   <Play className="size-3 fill-current" />

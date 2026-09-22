@@ -77,11 +77,11 @@ export function ShortsCarousel({ shorts, onSelectShort }: ShortsCarouselProps) {
       {/* Navigation Arrows */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-red-600 flex items-center gap-1.5 mb-1">
+          <span className="text-xs font-medium uppercase tracking-wider text-red-600 flex items-center gap-1.5 mb-1">
             <Smartphone className="size-3.5" />
             <span>Varsha Tutorials Shorts</span>
           </span>
-          <h3 className="font-display text-2xl sm:text-3xl text-ink font-bold">Latest Shorts</h3>
+          <h3 className="text-xl sm:text-2xl text-ink font-semibold">Latest Shorts</h3>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
             Quick lessons, tips and key board revision moments from Varsha Tutorials.
           </p>
@@ -153,13 +153,13 @@ export function ShortsCarousel({ shorts, onSelectShort }: ShortsCarouselProps) {
 
             {/* Top Badge: Short */}
             <div className="relative p-3 flex items-center justify-between">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider shadow-xs backdrop-blur-xs">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600/90 text-white text-[10px] font-medium uppercase tracking-wider shadow-xs backdrop-blur-xs">
                 <Smartphone className="size-3" />
                 <span>Short</span>
               </span>
 
               {short.view_count && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-medium backdrop-blur-xs">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-normal backdrop-blur-xs">
                   <Eye className="size-2.5" />
                   {short.view_count}
                 </span>
@@ -175,10 +175,10 @@ export function ShortsCarousel({ shorts, onSelectShort }: ShortsCarouselProps) {
 
             {/* Bottom Content / Title */}
             <div className="absolute bottom-0 inset-x-0 p-3.5 text-white">
-              <h4 className="font-bold text-xs sm:text-sm leading-snug line-clamp-2 text-white/95 group-hover/card:text-white transition-colors">
+              <h4 className="font-medium text-xs sm:text-sm leading-snug line-clamp-2 text-white/95 group-hover/card:text-white transition-colors">
                 {short.title}
               </h4>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-red-400 font-semibold">
+              <div className="mt-2 flex items-center justify-between text-[11px] text-red-400 font-medium">
                 <span className="group-hover/card:underline inline-flex items-center gap-1">
                   ▶ Watch Short
                 </span>

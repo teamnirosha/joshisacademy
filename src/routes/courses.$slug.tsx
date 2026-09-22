@@ -169,28 +169,28 @@ function CourseDetailPage() {
 
             <div className="border-t border-border pt-6 space-y-4 text-xs">
               <div className="flex justify-between py-2 border-b border-border/60">
-                <span className="text-muted-foreground uppercase tracking-wider font-bold">
+                <span className="text-muted-foreground uppercase tracking-wider font-medium">
                   Curriculum Board
                 </span>
-                <span className="font-extrabold text-ink">{c.board}</span>
+                <span className="font-semibold text-ink">{c.board}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-border/60">
-                <span className="text-muted-foreground uppercase tracking-wider font-bold">
+                <span className="text-muted-foreground uppercase tracking-wider font-medium">
                   Grade Level
                 </span>
-                <span className="font-extrabold text-ink">{c.className}</span>
+                <span className="font-semibold text-ink">{c.className}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-border/60">
-                <span className="text-muted-foreground uppercase tracking-wider font-bold">
+                <span className="text-muted-foreground uppercase tracking-wider font-medium">
                   Classroom Location
                 </span>
-                <span className="font-extrabold text-ink">Kharadi, Pune</span>
+                <span className="font-semibold text-ink">Kharadi, Pune</span>
               </div>
               <div className="flex justify-between py-2 border-b border-border/60">
-                <span className="text-muted-foreground uppercase tracking-wider font-bold">
+                <span className="text-muted-foreground uppercase tracking-wider font-medium">
                   Batch Size
                 </span>
-                <span className="font-extrabold text-ink">Strictly Limited</span>
+                <span className="font-semibold text-ink">Strictly Limited</span>
               </div>
             </div>
 
@@ -228,7 +228,7 @@ function CourseDetailPage() {
                       {subj.description}
                     </p>
                     <div className="mt-5 border-t border-border/70 pt-4">
-                      <p className="text-[11px] font-bold uppercase tracking-wider text-ink/75 mb-3">
+                      <p className="text-[11px] font-medium uppercase tracking-wider text-ink/75 mb-3">
                         Core Chapter Modules:
                       </p>
                       <ul className="grid gap-2 sm:grid-cols-2 text-xs text-muted-foreground">
@@ -288,7 +288,7 @@ function CourseDetailPage() {
                     key={item.phase}
                     className="py-5 grid sm:grid-cols-[160px_1fr] gap-4 items-baseline"
                   >
-                    <span className="font-sans text-xs font-bold uppercase tracking-wider text-royal">
+                    <span className="font-sans text-xs font-semibold uppercase tracking-wider text-royal">
                       {item.phase}
                     </span>
                     <span className="text-sm leading-relaxed text-ink font-medium">

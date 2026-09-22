@@ -15,7 +15,7 @@ export function PageHero({
   return (
     <section className="bg-gradient-to-b from-lavender/40 via-ivory to-ivory pb-16 pt-32 text-ink md:pb-24 md:pt-40 border-b border-border/60">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <p className="eyebrow text-violet font-extrabold tracking-[0.2em]">{eyebrow}</p>
+        <p className="eyebrow text-violet font-medium tracking-[0.2em]">{eyebrow}</p>
         <h1 className="mt-5 max-w-4xl font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ink leading-[1.06] tracking-tight">
           {title}
         </h1>
@@ -41,7 +41,7 @@ export function Crumbs({ items }: { items: string[] }) {
           <li
             key={item}
             className={`before:mr-2 before:content-['/'] before:text-ink/40 ${
-              idx === items.length - 1 ? "text-ink font-bold" : "hover:text-violet"
+              idx === items.length - 1 ? "text-ink font-semibold" : "hover:text-violet"
             }`}
           >
             {item}

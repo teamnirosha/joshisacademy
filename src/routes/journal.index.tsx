@@ -79,7 +79,7 @@ function JournalIndexPage() {
       <section className="section-shell py-24 md:py-36">
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center gap-2 border-b border-border pb-8 mb-16">
-          <span className="text-xs uppercase font-bold tracking-wider text-muted-foreground mr-2 flex items-center gap-1.5">
+          <span className="text-xs uppercase font-medium tracking-wider text-muted-foreground mr-2 flex items-center gap-1.5">
             <Tag className="size-3.5 text-violet" /> Categories:
           </span>
           {categories.map((cat) => (
@@ -87,7 +87,7 @@ function JournalIndexPage() {
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer ${
+              className={`rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer ${
                 selectedCategory === cat
                   ? "bg-violet text-ivory shadow-sm"
                   : "bg-white border border-border text-ink hover:bg-lavender/50"
@@ -125,7 +125,7 @@ function JournalIndexPage() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-border/50 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-ink group-hover:text-violet transition-colors">
+              <div className="mt-8 pt-4 border-t border-border/50 flex items-center justify-between text-xs font-medium uppercase tracking-wider text-ink group-hover:text-violet transition-colors">
                 <span>Read Guide</span>
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </div>

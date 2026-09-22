@@ -115,7 +115,7 @@ function YouTubeIndexPage() {
         <div className="mb-6 flex items-center justify-between">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#35208f] hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#35208f] hover:underline"
           >
             <ArrowLeft className="size-3.5" />
             <span>Back to Home</span>
@@ -125,7 +125,7 @@ function YouTubeIndexPage() {
             href={channelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 text-white font-bold text-xs shadow-xs hover:bg-red-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 text-white font-semibold text-xs shadow-xs hover:bg-red-700 transition-colors"
           >
             <Youtube className="size-4 fill-white" />
             <span>Visit YouTube Channel</span>
@@ -158,13 +158,13 @@ function YouTubeIndexPage() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="font-display text-2xl sm:text-3xl font-bold text-white">
+                  <h1 className="text-2xl sm:text-3xl font-semibold text-white">
                     {channelName}
                   </h1>
                   <CheckCircle2 className="size-5 text-red-500 fill-red-500/20" />
                 </div>
                 <p className="text-sm text-ivory/70 font-mono">@varshastutorials</p>
-                <p className="mt-1 text-xs text-amber-400 font-semibold">
+                <p className="mt-1 text-xs text-amber-400 font-medium">
                   Official Secondary Science Coaching Channel • Joshi's Academy
                 </p>
               </div>
@@ -172,19 +172,19 @@ function YouTubeIndexPage() {
 
             <div className="flex items-center gap-6 text-xs text-ivory/80 pt-4 md:pt-0 border-t md:border-t-0 border-white/10">
               <div className="text-center">
-                <span className="block font-display text-xl font-bold text-white">
+                <span className="block text-xl font-semibold text-white">
                   {nonShortVideos.length}
                 </span>
                 <span className="text-[11px] text-ivory/60 uppercase">Lessons</span>
               </div>
               <div className="text-center">
-                <span className="block font-display text-xl font-bold text-white">
+                <span className="block text-xl font-semibold text-white">
                   {shorts.length}
                 </span>
                 <span className="text-[11px] text-ivory/60 uppercase">Shorts</span>
               </div>
               <div className="text-center">
-                <span className="block font-display text-xl font-bold text-white">
+                <span className="block text-xl font-semibold text-white">
                   {playlists.length}
                 </span>
                 <span className="text-[11px] text-ivory/60 uppercase">Playlists</span>
@@ -202,7 +202,7 @@ function YouTubeIndexPage() {
                 setActiveTab("ALL");
                 setPage(1);
               }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === "ALL"
                   ? "bg-[#35208f] text-white shadow-xs"
                   : "bg-muted/40 text-muted-foreground hover:text-ink"
@@ -216,7 +216,7 @@ function YouTubeIndexPage() {
                 setActiveTab("SHORTS");
                 setPage(1);
               }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === "SHORTS"
                   ? "bg-red-600 text-white shadow-xs"
                   : "bg-muted/40 text-muted-foreground hover:text-ink"
@@ -230,7 +230,7 @@ function YouTubeIndexPage() {
                 setActiveTab("PLAYLISTS");
                 setPage(1);
               }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === "PLAYLISTS"
                   ? "bg-amber-600 text-white shadow-xs"
                   : "bg-muted/40 text-muted-foreground hover:text-ink"
@@ -283,7 +283,7 @@ function YouTubeIndexPage() {
                   </div>
 
                   <div className="p-5">
-                    <h4 className="font-bold text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors">
+                    <h4 className="font-semibold text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors">
                       {pl.title}
                     </h4>
                     {pl.description && (
@@ -295,7 +295,7 @@ function YouTubeIndexPage() {
                 </div>
 
                 <div className="px-5 pb-5 pt-0">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 group-hover:text-[#35208f] transition-colors">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 group-hover:text-[#35208f] transition-colors">
                     <span>Explore Course Playlist →</span>
                   </span>
                 </div>
@@ -323,7 +323,7 @@ function YouTubeIndexPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
                 <div className="relative p-3 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600/90 text-white text-[10px] font-bold uppercase">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600/90 text-white text-[10px] font-medium uppercase">
                     <Smartphone className="size-3" />
                     <span>Short</span>
                   </span>
@@ -338,10 +338,10 @@ function YouTubeIndexPage() {
                   <div className="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center mb-2 group-hover:scale-110 group-hover:bg-red-600 transition-all">
                     <Play className="size-4 fill-white ml-0.5" />
                   </div>
-                  <h4 className="font-bold text-xs sm:text-sm leading-snug line-clamp-2 text-white">
+                  <h4 className="font-medium text-xs sm:text-sm leading-snug line-clamp-2 text-white">
                     {short.title}
                   </h4>
-                  <span className="mt-1.5 inline-block text-[11px] font-semibold text-red-400 group-hover:underline">
+                  <span className="mt-1.5 inline-block text-[11px] font-medium text-red-400 group-hover:underline">
                     ▶ Watch Short
                   </span>
                 </div>
@@ -375,14 +375,14 @@ function YouTubeIndexPage() {
                         </div>
                       </div>
                       {vid.duration && (
-                        <span className="absolute bottom-2 right-2 bg-ink/90 text-white font-mono text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-xs">
+                        <span className="absolute bottom-2 right-2 bg-ink/90 text-white font-mono text-[10px] font-medium px-2 py-0.5 rounded backdrop-blur-xs">
                           {vid.duration}
                         </span>
                       )}
                     </div>
 
                     <div className="p-4">
-                      <h4 className="font-bold text-sm sm:text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors line-clamp-2">
+                      <h4 className="font-semibold text-sm sm:text-base text-ink leading-snug group-hover:text-[#35208f] transition-colors line-clamp-2">
                         {vid.title}
                       </h4>
                       {vid.description && (
@@ -394,7 +394,7 @@ function YouTubeIndexPage() {
                   </div>
 
                   <div className="px-4 pb-4 pt-0 flex items-center justify-between text-[11px] text-muted-foreground border-t border-border/40 pt-3">
-                    <span className="font-semibold text-[#35208f] group-hover:underline">
+                    <span className="font-medium text-[#35208f] group-hover:underline">
                       Watch Lecture →
                     </span>
                     {vid.published_at && (
@@ -409,7 +409,7 @@ function YouTubeIndexPage() {
               <div className="pt-10 text-center">
                 <button
                   onClick={() => setPage((p) => p + 1)}
-                  className="px-8 py-3 rounded-xl bg-white hover:bg-ivory text-ink font-bold text-xs uppercase tracking-wider border border-border shadow-xs hover:shadow-md transition-all cursor-pointer"
+                  className="px-8 py-3 rounded-xl bg-white hover:bg-ivory text-ink font-semibold text-xs uppercase tracking-wider border border-border shadow-xs hover:shadow-md transition-all cursor-pointer"
                 >
                   Load More Videos ({filteredVideos.length - paginatedVideos.length} Remaining)
                 </button>

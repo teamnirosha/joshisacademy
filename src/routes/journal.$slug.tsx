@@ -143,7 +143,7 @@ function JournalArticlePage() {
 
             <div className="border-t border-border pt-6 space-y-4">
               <p className="eyebrow text-royal">Audience</p>
-              <p className="text-xs text-ink font-bold">{art.classLevel} Students & Parents</p>
+              <p className="text-xs text-ink font-medium">{art.classLevel} Students & Parents</p>
             </div>
 
             <div className="border-t border-border pt-6">
@@ -157,7 +157,7 @@ function JournalArticlePage() {
           <div className="space-y-12">
             {/* Key Takeaways Callout Box */}
             <div className="border border-border bg-lavender/25 p-8">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-violet mb-3">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-violet mb-3">
                 <CheckCircle className="size-4" />
                 Key Academic Takeaway
               </div>
@@ -170,7 +170,7 @@ function JournalArticlePage() {
             {/* Article Sections */}
             {art.sections.map((sec, idx) => (
               <section key={sec.heading} id={`sec-${idx}`} className="space-y-4 pt-4">
-                <span className="font-sans text-xs font-bold text-violet uppercase tracking-widest">
+                <span className="font-sans text-xs font-semibold text-violet uppercase tracking-widest">
                   Part 0{idx + 1}
                 </span>
                 <h2 className="font-display text-3xl sm:text-4xl text-ink">{sec.heading}</h2>
@@ -192,7 +192,7 @@ function JournalArticlePage() {
               </p>
             </aside>
 
-            {/* Related Courses Callout */}
+            {/* Recommended Programme Callout */}
             <div className="border border-border bg-white p-8 space-y-6">
               <div>
                 <span className="eyebrow text-violet">Recommended Programme</span>
@@ -219,7 +219,7 @@ function JournalArticlePage() {
             <div className="border-t border-border pt-8 flex items-center justify-between">
               <Link
                 to="/journal"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ink hover:text-violet transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-ink hover:text-violet transition-colors"
               >
                 <ArrowLeft className="size-4" /> Back to The Joshi’s Journal
               </Link>

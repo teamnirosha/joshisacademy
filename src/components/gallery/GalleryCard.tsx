@@ -32,7 +32,7 @@ export function GalleryCard({ item, variant, onClick, priority = false }: Galler
 
         {/* Top Badges */}
         <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-          <span className="rounded-full bg-ink/80 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-ivory border border-white/20">
+          <span className="rounded-full bg-ink/80 backdrop-blur-md px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-ivory border border-white/20">
             {item.category || "Classrooms"}
           </span>
         </div>
@@ -45,7 +45,7 @@ export function GalleryCard({ item, variant, onClick, priority = false }: Galler
         {/* Featured Image Text Overlay (As shown in reference screenshot) */}
         {isFeatured ? (
           <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent flex flex-col justify-end p-6 sm:p-10 text-ivory">
-            <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.18em] text-lavender drop-shadow-xs">
+            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-lavender drop-shadow-xs">
               {item.category ? item.category.toUpperCase() : "PEDAGOGY"} • KHARADI CAMPUS • CLASS X
             </span>
             <h2 className="font-display text-2xl sm:text-4xl text-ivory font-semibold mt-1.5 leading-tight">
@@ -63,7 +63,7 @@ export function GalleryCard({ item, variant, onClick, priority = false }: Galler
         ) : (
           /* Standard Hover Overlay */
           <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-ivory">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-lavender">
+            <span className="text-[10px] font-medium uppercase tracking-wider text-lavender">
               Kharadi Campus
             </span>
             <h3 className="font-display text-lg text-ivory font-semibold line-clamp-1 mt-0.5">
@@ -82,7 +82,7 @@ export function GalleryCard({ item, variant, onClick, priority = false }: Galler
       {/* Non-featured bottom bar */}
       {!isFeatured && (
         <div className="p-3.5 bg-white border-t border-border/60">
-          <h3 className="font-bold text-ink text-xs line-clamp-1">{item.title}</h3>
+          <h3 className="font-semibold text-ink text-xs line-clamp-1">{item.title}</h3>
           <span className="text-[10px] text-muted-foreground line-clamp-1 mt-0.5">
             {item.category || "Classrooms"}
           </span>
