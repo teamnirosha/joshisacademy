@@ -97,8 +97,10 @@
     max-width: 100%;
     overflow-x: hidden;
     position: relative;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 
   /* Hide scrollbars globally across all browsers */
@@ -154,7 +156,8 @@
   .section-shell {
     margin-inline: auto;
     max-width: 1500px;
-    padding-inline: 1.25rem; /* 20px - very small mobile */
+    padding-inline: 1.25rem;
+    /* 20px - very small mobile */
   }
 
   .border-hairline {
@@ -196,6 +199,7 @@
   .image-reveal {
     animation: image-mask 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+
   .reveal-1 {
     animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
   }
@@ -218,6 +222,7 @@
     opacity: 0;
     transform: translateY(18px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -229,6 +234,7 @@
     clip-path: inset(0 100% 0 0);
     transform: scale(1.03);
   }
+
   to {
     clip-path: inset(0);
     transform: scale(1);
@@ -237,29 +243,34 @@
 
 @media (min-width: 480px) {
   .section-shell {
-    padding-inline: 1.5rem; /* 24px - mobile/small */
+    padding-inline: 1.5rem;
+    /* 24px - mobile/small */
   }
 }
 
 @media (min-width: 768px) {
   .section-shell {
-    padding-inline: 2rem; /* 32px - tablet */
+    padding-inline: 2rem;
+    /* 32px - tablet */
   }
 }
 
 @media (min-width: 1024px) {
   .section-shell {
-    padding-inline: 2.5rem; /* 40px - small desktop */
+    padding-inline: 2.5rem;
+    /* 40px - small desktop */
   }
 }
 
 @media (min-width: 1280px) {
   .section-shell {
-    padding-inline: 3.5rem; /* 56px - large desktop */
+    padding-inline: 3.5rem;
+    /* 56px - large desktop */
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -276,6 +287,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -285,6 +297,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(-360deg);
   }
@@ -294,6 +307,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -303,6 +317,7 @@
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }

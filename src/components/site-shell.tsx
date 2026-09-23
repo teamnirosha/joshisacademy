@@ -1,24 +1,20 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
+import Lenis from "lenis";
 import {
   ArrowRight,
   Compass,
-  LogOut,
   MapPin,
   Menu,
   MessageSquare,
   Phone,
   Sparkles,
-  User,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EnquiryDialog } from "./enquiry-dialog";
-import { AuthDialog } from "./auth-dialog";
 import { BrandLoader } from "./brand-loader";
 import { site, announcement } from "@/content/site";
-import { supabase } from "@/integrations/supabase/client";
-import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const navItems = [
   { label: "Courses", to: "/courses" },
@@ -34,24 +30,38 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [enquireOpen, setEnquireOpen] = useState(false);
-  const [authOpen, setAuthOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<"signup" | "login">("signup");
-  const [user, setUser] = useState<SupabaseUser | null>(null);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   const announcementRef = useRef<HTMLDivElement>(null);
   const [announcementHeight, setAnnouncementHeight] = useState(0);
   const location = useLocation();
 
+  // Initialize buttery smooth Lenis momentum scrolling
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
     });
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+
+    lenis.on("scroll", (e: { scroll: number }) => {
+      setScrolled(e.scroll > 10);
     });
-    return () => subscription.unsubscribe();
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, []);
 
   useEffect(() => {
@@ -109,7 +119,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
     try {
       const alreadyShown = localStorage.getItem("joshis_enquiry_popup_shown_v1");
       if (alreadyShown) {
-        // Already shown to this visitor before, do not auto-open on any page or refresh
         return;
       }
 
@@ -122,9 +131,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       }, 5000);
 
       return () => clearTimeout(timer);
-    } catch (e) {
-      // In case localStorage is blocked in private browsing
-    }
+    } catch (e) {}
   }, [isCmsRoute]);
 
   // Close menu on route change
@@ -157,143 +164,106 @@ export function SiteShell({ children }: { children: ReactNode }) {
       >
         {/* Top Opaque Light Announcement Bar — desktop only, hidden on mobile */}
         {showAnnouncement && (
-           <div
-             ref={announcementRef}
-             className={`w-full transition-all duration-300 overflow-hidden ${
-               scrolled
-                 ? "max-h-0 opacity-0 py-0 border-none"
-                 : "max-h-12 opacity-100 py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
-             } hidden md:block`}
-             role="region"
-             aria-label="Academic Announcement"
-           >
-             <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3 flex-wrap px-4">
-               <span className="inline-flex items-center gap-1 rounded bg-violet text-ivory px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider shadow-2xs">
-                 <Sparkles className="size-3 text-amber-300" />
-                 {announcement.badge}
-               </span>
-               <span className="text-xs font-medium tracking-tight text-ink">
-                 {announcement.text}
-               </span>
-               <button
-                 onClick={() => setEnquireOpen(true)}
-                 className="ml-1 text-xs font-medium text-violet underline underline-offset-4 hover:text-royal transition-colors cursor-pointer"
-               >
-                 Enquire Now →
-               </button>
-             </div>
-           </div>
-         )}
+          <div
+            ref={announcementRef}
+            className={`w-full transition-all duration-300 overflow-hidden ${
+              scrolled
+                ? "max-h-0 opacity-0 py-0 border-none"
+                : "max-h-12 opacity-100 py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
+            } hidden md:block`}
+            role="region"
+            aria-label="Academic Announcement"
+          >
+            <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3 flex-wrap px-4">
+              <span className="inline-flex items-center gap-1 rounded bg-violet text-ivory px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider shadow-2xs">
+                <Sparkles className="size-3 text-amber-300" />
+                {announcement.badge}
+              </span>
+              <span className="text-xs font-medium tracking-tight text-ink">
+                {announcement.text}
+              </span>
+              <button
+                onClick={() => setEnquireOpen(true)}
+                className="ml-1 text-xs font-medium text-violet underline underline-offset-4 hover:text-royal transition-colors cursor-pointer"
+              >
+                Enquire Now →
+              </button>
+            </div>
+          </div>
+        )}
 
-         <div className="mx-auto flex h-[58px] sm:h-[64px] max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-2 sm:gap-4">
-           {/* Logo + Institutional Title - compact, crisp, clean branding */}
-           <Link
-             to="/"
-             className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer focus:outline-none shrink-0"
-             aria-label={`${site.name} Home`}
-           >
-             <div className="relative size-[36px] sm:size-[42px] shrink-0 rounded-full bg-white shadow-xs flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
-               <img
-                 src="/brand/logo.png"
-                 alt={`${site.name} Academic Seal`}
-                 width={42}
-                 height={42}
-                 className="size-full object-contain rounded-full"
-               />
-             </div>
-             <div className="leading-tight">
-               <span
-                 className={`block text-[11px] sm:text-[13px] font-semibold tracking-[0.05em] uppercase transition-colors ${
-                   scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
-                 }`}
-               >
-                 {site.name}
-               </span>
-               <span
-                 className={`block text-[7px] sm:text-[8px] font-medium tracking-[0.18em] uppercase transition-colors mt-0.5 ${
-                   scrolled || !isHome ? "text-violet" : "text-lavender"
-                 }`}
-               >
-                 {site.tagline}
-               </span>
-             </div>
-           </Link>
+        <div className="mx-auto flex h-[58px] sm:h-[64px] max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-2 sm:gap-4">
+          {/* Logo + Institutional Title - compact, crisp, clean branding */}
+          <Link
+            to="/"
+            className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer focus:outline-none shrink-0"
+            aria-label={`${site.name} Home`}
+          >
+            <div className="relative size-[36px] sm:size-[42px] shrink-0 rounded-full bg-white shadow-xs flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
+              <img
+                src="/brand/logo.png"
+                alt={`${site.name} Academic Seal`}
+                width={42}
+                height={42}
+                className="size-full object-contain rounded-full"
+              />
+            </div>
+            <div className="leading-tight">
+              <span
+                className={`block text-[11px] sm:text-[13px] font-semibold tracking-[0.05em] uppercase transition-colors ${
+                  scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
+                }`}
+              >
+                {site.name}
+              </span>
+              <span
+                className={`block text-[7px] sm:text-[8px] font-medium tracking-[0.18em] uppercase transition-colors mt-0.5 ${
+                  scrolled || !isHome ? "text-violet" : "text-lavender"
+                }`}
+              >
+                {site.tagline}
+              </span>
+            </div>
+          </Link>
 
-           {/* Desktop Navigation Links */}
-           <nav
-             className="hidden items-center gap-3 xl:gap-6 lg:flex shrink-0"
-             aria-label="Primary Navigation"
-           >
-             {navItems.map((item) => (
-               <Link
-                 key={item.to}
-                 to={item.to}
-                 className={`text-[11px] xl:text-[12px] font-medium tracking-[0.08em] uppercase transition-colors ${
-                   scrolled || !isHome
-                     ? "text-ink/70 hover:text-violet"
-                     : "text-ivory/80 hover:text-white"
-                 }`}
-                 activeProps={{
-                   className:
-                     scrolled || !isHome
-                       ? "!text-violet !font-semibold"
-                       : "!text-white !font-semibold underline underline-offset-6",
-                 }}
-               >
-                 {item.label}
-               </Link>
-             ))}
-           </nav>
+          {/* Desktop Navigation Links */}
+          <nav
+            className="hidden items-center gap-3 xl:gap-6 lg:flex shrink-0"
+            aria-label="Primary Navigation"
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`text-[11px] xl:text-[12px] font-medium tracking-[0.08em] uppercase transition-colors ${
+                  scrolled || !isHome
+                    ? "text-ink/70 hover:text-violet"
+                    : "text-ivory/80 hover:text-white"
+                }`}
+                activeProps={{
+                  className:
+                    scrolled || !isHome
+                      ? "!text-violet !font-semibold"
+                      : "!text-white !font-semibold underline underline-offset-6",
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-           {/* Action CTA & Auth */}
-           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-             {user ? (
-               <div className="flex items-center gap-1.5 sm:gap-2">
-                 <span className="hidden xl:inline text-[11px] font-medium max-w-[110px] truncate text-violet bg-violet/10 px-2 py-0.5 rounded-full border border-violet/20">
-                   {user.email}
-                 </span>
-                 <button
-                   type="button"
-                   onClick={() => supabase.auth.signOut()}
-                   className={`inline-flex items-center gap-1.5 h-[36px] sm:h-[38px] px-2.5 sm:px-3 text-[10.5px] font-medium tracking-[0.06em] uppercase transition-colors rounded-sm cursor-pointer border ${
-                     scrolled || !isHome
-                       ? "border-violet/30 text-violet hover:bg-violet/10"
-                       : "border-white/40 text-ivory hover:bg-white/10"
-                   }`}
-                   title="Sign Out"
-                 >
-                   <LogOut className="size-3.5" />
-                   <span className="hidden sm:inline">Logout</span>
-                 </button>
-               </div>
-             ) : (
-               <button
-                 type="button"
-                 onClick={() => {
-                   setAuthMode("login");
-                   setAuthOpen(true);
-                 }}
-                 className={`inline-flex items-center gap-1.5 h-[36px] sm:h-[38px] px-3 sm:px-3.5 text-[10.5px] sm:text-[11px] font-medium tracking-[0.08em] uppercase transition-colors rounded-sm cursor-pointer border ${
-                   scrolled || !isHome
-                     ? "border-violet/40 text-violet hover:bg-violet/10 bg-violet/5"
-                     : "border-white/50 text-ivory hover:bg-white/10 bg-white/5"
-                 }`}
-               >
-                 <User className="size-3.5 text-violet sm:text-current" />
-                 Login
-               </button>
-             )}
-
-             <button
-               onClick={() => setEnquireOpen(true)}
-               className={`hidden sm:inline-flex items-center gap-1.5 h-[36px] sm:h-[38px] px-3.5 sm:px-4 text-[10.5px] sm:text-[11px] font-medium tracking-[0.08em] uppercase transition-colors rounded-sm cursor-pointer ${
-                 scrolled || !isHome
-                   ? "bg-violet text-ivory hover:bg-violet/90"
-                   : "bg-ivory text-ink hover:bg-white shadow-xs"
-               }`}
-             >
-               I'M INTERESTED →
-             </button>
+          {/* Action CTA */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <button
+              onClick={() => setEnquireOpen(true)}
+              className={`inline-flex items-center gap-1.5 h-[38px] sm:h-[42px] px-4 sm:px-6 text-[11px] sm:text-[12px] font-semibold tracking-[0.08em] uppercase transition-all rounded-md cursor-pointer shadow-sm ${
+                scrolled || !isHome
+                  ? "bg-violet text-ivory hover:bg-violet/90 hover:shadow-md"
+                  : "bg-amber-400 text-ink hover:bg-amber-300 hover:shadow-amber-400/20"
+              }`}
+            >
+              I'M INTERESTED →
+            </button>
 
             {/* Mobile Menu Trigger */}
             <button
@@ -361,63 +331,20 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="space-y-3 pt-5 border-t border-ivory/15">
-            {user ? (
-              <div className="flex items-center justify-between bg-white/5 p-3 rounded border border-white/10">
-                <span className="text-xs font-medium text-lavender truncate max-w-[200px]">
-                  {user.email}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    supabase.auth.signOut();
-                    setMenuOpen(false);
-                  }}
-                  className="flex items-center gap-1 text-xs text-rose-400 font-medium uppercase tracking-wider hover:text-rose-300"
-                >
-                  <LogOut className="size-3.5" /> Sign Out
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setAuthMode("signup");
-                    setAuthOpen(true);
-                  }}
-                  className="w-full flex items-center justify-center gap-1.5 bg-violet text-ivory h-10 text-xs font-medium tracking-[0.10em] uppercase hover:bg-violet/90 transition-colors shadow-sm"
-                >
-                  Sign Up
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setAuthMode("login");
-                    setAuthOpen(true);
-                  }}
-                  className="w-full flex items-center justify-center gap-1.5 border border-ivory/30 text-ivory h-10 text-xs font-medium tracking-[0.10em] uppercase hover:bg-white/10 transition-colors"
-                >
-                  <User className="size-3.5" /> Log In
-                </button>
-              </div>
-            )}
-
             <button
               type="button"
               onClick={() => {
                 setMenuOpen(false);
                 setEnquireOpen(true);
               }}
-              className="w-full flex items-center justify-center gap-2 bg-ivory text-ink h-12 text-xs font-medium tracking-[0.12em] uppercase hover:bg-white transition-colors shadow-sm"
+              className="w-full flex items-center justify-center gap-2 bg-amber-400 text-ink h-12 text-xs font-semibold tracking-[0.12em] uppercase hover:bg-amber-300 transition-colors shadow-md rounded-md cursor-pointer"
             >
               I'M INTERESTED <ArrowRight className="size-4" />
             </button>
 
-            <div className="flex items-center justify-between text-xs text-ivory/50 pt-1">
-              <span>Kharadi, Pune</span>
-              <span>CBSE • ICSE Science</span>
+            <div className="flex items-center justify-between text-xs text-ivory/60 pt-2">
+              <span>📍 Kharadi, Pune</span>
+              <span>CBSE • ICSE Classes IX &amp; X</span>
             </div>
           </div>
         </div>
@@ -431,17 +358,13 @@ export function SiteShell({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      {/* Footer */}
+      {/* Footer Component */}
       <Footer onEnquire={() => setEnquireOpen(true)} />
 
-      {/* Mobile Fixed Bottom Action Bar */}
-      <div
-        className="fixed inset-x-0 bottom-0 z-30 grid h-[52px] grid-cols-3 border-t border-border/20 bg-ink text-ivory shadow-[0_-4px_16px_rgba(0,0,0,0.25)] lg:hidden pb-safe"
-        role="navigation"
-        aria-label="Mobile Action Bar"
-      >
+      {/* Persistent Mobile Bottom Action Bar (3 Actions: Call, WhatsApp, I'm Interested) */}
+      <div className="fixed bottom-0 inset-x-0 z-40 grid grid-cols-3 h-14 border-t border-ivory/20 shadow-2xl lg:hidden text-center">
         <a
-          href={site.phone ? `tel:${site.phone}` : "#"}
+          href={site.phone ? `tel:${site.phone.replace(/\s+/g, "")}` : "#"}
           onClick={(e) => {
             if (!site.phone) {
               e.preventDefault();
@@ -482,9 +405,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       {/* Global Enquiry Dialog */}
       <EnquiryDialog open={enquireOpen} onOpenChange={setEnquireOpen} />
-
-      {/* Global Auth (Login / Sign Up) Dialog */}
-      <AuthDialog open={authOpen} onOpenChange={setAuthOpen} defaultMode={authMode} />
     </div>
   );
 }
@@ -497,55 +417,51 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
           {/* ── Column 1: Identity + Contact ──────────────────────── */}
           <div>
             {/* Logo & Brand */}
-            <div className="flex items-center gap-3.5">
-              <div className="relative size-14 shrink-0 rounded-full bg-white p-0.5 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="relative size-12 shrink-0 rounded-full bg-white p-0.5 shadow-xs">
                 <img
                   src="/brand/logo.png"
-                  alt={`${site.name} Academic Seal`}
-                  width={56}
-                  height={56}
+                  alt={`${site.name} Seal`}
+                  width={48}
+                  height={48}
                   className="size-full object-contain rounded-full"
                 />
               </div>
               <div>
-                <p className="text-[13px] sm:text-[13.5px] font-semibold tracking-[0.10em] uppercase text-ivory">
+                <strong className="block text-[13px] font-semibold tracking-[0.08em] uppercase text-ivory">
                   {site.name}
-                </p>
-                <p className="mt-[2px] text-[8px] sm:text-[8.5px] font-medium tracking-[0.24em] uppercase text-lavender">
+                </strong>
+                <span className="block text-[8.5px] font-medium tracking-[0.22em] text-lavender uppercase mt-0.5">
                   {site.tagline}
-                </p>
+                </span>
               </div>
             </div>
 
-            <p className="mt-6 max-w-sm font-display text-xl text-ivory/95 leading-snug">
-              Specialist Science Coaching for CBSE &amp; ICSE Classes IX &amp; X.
-            </p>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-ivory/55">
-              Personalised attention, concept-first teaching, and rigorous testing in Kharadi, Pune,
-              Maharashtra.
+            <p className="mt-4 max-w-sm text-xs leading-relaxed text-ivory/65">
+              {site.description}
             </p>
 
             {/* Contact Details */}
-            <div className="mt-7 space-y-2.5 text-sm">
+            <div className="mt-6 space-y-3 border-t border-ivory/10 pt-5 text-xs">
               <a
-                href={`tel:${site.phone}`}
-                className="flex items-center gap-2.5 text-ivory/75 hover:text-ivory transition-colors group"
+                href={site.phone ? `tel:${site.phone.replace(/\s+/g, "")}` : "#"}
+                className="flex items-center gap-2.5 text-ivory/75 hover:text-lavender transition-colors"
               >
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-ivory/10 group-hover:bg-violet/40 transition-colors">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-ivory/10">
                   <Phone className="size-3.5 text-lavender" />
                 </span>
-                <span className="text-[13px] font-medium tracking-wide">{site.phone}</span>
+                <span>{site.phone}</span>
               </a>
               <a
-                href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
+                href={site.whatsapp ? `https://wa.me/${site.whatsapp.replace(/\D/g, "")}` : "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-ivory/75 hover:text-ivory transition-colors group"
+                className="flex items-center gap-2.5 text-ivory/75 hover:text-emerald-400 transition-colors"
               >
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-ivory/10 group-hover:bg-green-600/40 transition-colors">
-                  <MessageSquare className="size-3.5 text-green-400" />
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/10">
+                  <MessageSquare className="size-3.5 text-emerald-400" />
                 </span>
-                <span className="text-[13px] font-medium tracking-wide">WhatsApp Us</span>
+                <span>WhatsApp Varsha Ma'am</span>
               </a>
               <div className="flex items-start gap-2.5 text-ivory/55">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-ivory/10 mt-0.5">

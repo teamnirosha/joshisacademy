@@ -1,11 +1,22 @@
-import { MapPin, Navigation, Compass, CheckCircle2, Clock, School } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect, useRef } from "react";
+import {
+  MapPin,
+  Navigation,
+  Compass,
+  CheckCircle2,
+  Clock,
+  School,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
+import { gsap } from "gsap";
 
 const openEnquiry = () => window.dispatchEvent(new Event("open-enquiry"));
 
 export interface LocationArea {
   id: string;
   name: string;
+  shortName: string;
   distance: string;
   travelTime: string;
   highlights: string[];
@@ -16,210 +27,318 @@ export interface LocationArea {
 export const locationAreasData: LocationArea[] = [
   {
     id: "kharadi-core",
-    name: "Kharadi (EON IT Park & WTC)",
+    name: "Kharadi (EON & WTC)",
+    shortName: "Kharadi",
     distance: "0 km (Centre)",
     travelTime: "2-5 mins",
-    keyLandmarks: "EON Free Zone, World Trade Center, Gera Commerzone, Forest County, Riverdale",
+    keyLandmarks: "EON Free Zone, WTC, Gera Commerzone, Forest County",
     highlights: [
-      "Walkable & short drive from all major housing societies in Kharadi",
       "Specialised CBSE & ICSE Science Coaching for 9th & 10th grade",
-      "Small batches ensuring personal doubt resolution",
+      "Small batches (max 12) with 1-on-1 personal doubt clearance",
     ],
-    popularSchoolsServed: [
-      "Podar International School",
-      "Dhole Patil National School",
-      "EuroSchool Kharadi",
-    ],
+    popularSchoolsServed: ["Podar International", "EuroSchool", "Dhole Patil"],
   },
   {
     id: "chandan-nagar",
     name: "Chandan Nagar",
+    shortName: "Chandan Nagar",
     distance: "1.2 km",
     travelTime: "3-5 mins",
     keyLandmarks: "Chandan Nagar Bypass, Nagar Road, Vegetable Market",
     highlights: [
-      "Direct access via main Kharadi road",
-      "Preferred science tuition center for Chandan Nagar residents",
-      "Flexible evening batch timings after school hours",
+      "Direct link via main Kharadi road with flexible evening batches",
+      "Structured board practice & concept clarity drills",
     ],
-    popularSchoolsServed: ["Zensar & Chandan Nagar Schools", "Kharadi High School"],
+    popularSchoolsServed: ["Zensar Schools", "Kharadi High School"],
   },
   {
     id: "wagholi",
     name: "Wagholi",
+    shortName: "Wagholi",
     distance: "4.5 km",
     travelTime: "8-10 mins",
     keyLandmarks: "Wagholi Highway, Lexicon Circle, Ivy Estate",
     highlights: [
       "Direct 10-minute commute along Pune-Ahmednagar Highway",
-      "Dedicated CBSE & ICSE science curriculum alignment",
-      "Complete Physics numericals & Chemistry lab observations practice",
+      "Complete Physics numericals & Chemistry observations practice",
     ],
-    popularSchoolsServed: [
-      "Lexicon International School",
-      "JSPM Public School",
-      "Sanskriti School",
-    ],
+    popularSchoolsServed: ["Lexicon International", "JSPM", "Sanskriti"],
   },
   {
     id: "viman-nagar",
-    name: "Viman Nagar (Vimannagar)",
+    name: "Viman Nagar",
+    shortName: "Viman Nagar",
     distance: "3.8 km",
     travelTime: "7-10 mins",
-    keyLandmarks: "Phoenix Marketcity, Symbiosis Campus, Dutta Mandir Chowk",
+    keyLandmarks: "Phoenix Marketcity, Symbiosis Campus, Dutta Mandir",
     highlights: [
-      "Quick access via Nagar Road and Somnath Nagar connection",
-      "High distinction track record (90%+) for ICSE & CBSE board exams",
+      "High distinction track record (90%+) for ICSE & CBSE boards",
       "Handwritten concise revision notes & exemplar solving",
     ],
-    popularSchoolsServed: [
-      "Air Force School",
-      "Symbiosis International School",
-      "Vimannagar Public School",
-    ],
+    popularSchoolsServed: ["Air Force School", "Symbiosis", "Vimannagar Public"],
   },
   {
     id: "mundhwa-keshavnagar",
     name: "Mundhwa & Keshav Nagar",
+    shortName: "Mundhwa",
     distance: "2.5 km",
     travelTime: "5-7 mins",
-    keyLandmarks: "Mula-Mutha Kharadi-Mundhwa Bridge, Godrej Horizon, Florida Riverra",
+    keyLandmarks: "Kharadi-Mundhwa Bridge, Godrej Horizon, Florida Riverra",
     highlights: [
-      "Seamless bridge connectivity directly connecting Mundhwa & Keshav Nagar to Kharadi",
-      "Convenient option for parents seeking top-rated science coaching nearby",
-      "1-on-1 personal doubt solving sessions",
+      "Seamless bridge connection directly into Kharadi centre",
+      "1-on-1 personalized doubt solving & weekly tests",
     ],
     popularSchoolsServed: ["Orbis School", "Lonkar High School"],
   },
   {
     id: "hadapsar-magarpatta",
-    name: "Hadapsar & Magarpatta City",
+    name: "Hadapsar & Magarpatta",
+    shortName: "Hadapsar",
     distance: "5.5 km",
     travelTime: "12-15 mins",
-    keyLandmarks: "Magarpatta South Gate, Amanora Park Town, Noble Hospital Chowk",
+    keyLandmarks: "Magarpatta South Gate, Amanora Park Town",
     highlights: [
       "Connected via Kharadi-Mundhwa bypass road",
-      "Focused 9th & 10th standard Science preparation",
-      "Rigorous board exam preliminary mock test series",
+      "Rigorous board preliminary mock tests & answering techniques",
     ],
-    popularSchoolsServed: ["Vibgyor High School", "Pawar Public School", "Amanora School"],
-  },
-  {
-    id: "vadgaon-sheri",
-    name: "Vadgaon Sheri & Kalyani Nagar",
-    distance: "3.2 km",
-    travelTime: "6-8 mins",
-    keyLandmarks: "Sainikwadi, Bishops School Circle, East Avenue",
-    highlights: [
-      "Proximity to Somnath Nagar & Anand Park link roads",
-      "Proven 90%+ board scoring methodology",
-    ],
-    popularSchoolsServed: ["The Bishop's Co-Ed School", "St. Arnold's Central School"],
+    popularSchoolsServed: ["Vibgyor High", "Pawar Public", "Amanora School"],
   },
 ];
 
 export function LocalSeoAreas() {
+  const [selectedAreaId, setSelectedAreaId] = useState<string>("all");
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const displayedAreas =
+    selectedAreaId === "all"
+      ? locationAreasData
+      : locationAreasData.filter((a) => a.id === selectedAreaId);
+
+  // GSAP Lazy Scroll Animation on viewport enter
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            hasAnimated = true;
+
+            // Animate Header
+            if (headerRef.current) {
+              gsap.fromTo(
+                headerRef.current,
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+              );
+            }
+
+            // Animate Cards
+            if (cardsContainerRef.current) {
+              const cards = cardsContainerRef.current.children;
+              gsap.fromTo(
+                cards,
+                { opacity: 0, y: 35, scale: 0.97 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 0.65,
+                  stagger: 0.07,
+                  ease: "power2.out",
+                  delay: 0.1,
+                  clearProps: "transform,opacity",
+                }
+              );
+            }
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Animate cards on filter change
+  useEffect(() => {
+    if (!cardsContainerRef.current) return;
+    const cards = cardsContainerRef.current.children;
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 15, scale: 0.98 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.35,
+        stagger: 0.04,
+        ease: "power2.out",
+        clearProps: "transform,opacity",
+      }
+    );
+  }, [selectedAreaId]);
+
   return (
     <section
-      className="bg-ink py-20 md:py-32 text-ivory border-t border-border/20 relative overflow-hidden"
+      ref={sectionRef}
+      className="bg-[#faf9f6] py-16 sm:py-20 text-ink border-t border-border/70 relative overflow-hidden"
       id="locations-served"
     >
-      {/* Background Subtle Accent Elements */}
-      <div className="absolute -right-24 -top-24 size-96 rounded-full bg-violet/10 blur-3xl pointer-events-none" />
-      <div className="absolute -left-24 -bottom-24 size-96 rounded-full bg-lavender/10 blur-3xl pointer-events-none" />
+      {/* Subtle Background Glows */}
+      <div className="absolute top-10 right-10 w-80 h-80 bg-[#35208f]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="section-shell relative z-10">
-        {/* Header */}
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-lavender/25 bg-lavender/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-lavender">
-            <MapPin className="size-3.5" />
-            <span>Serving Kharadi & Surrounding Neighborhoods</span>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header Block */}
+        <div ref={headerRef} className="max-w-3xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#35208f]/20 bg-[#35208f]/8 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#35208f]">
+            <MapPin className="size-3.5 text-[#35208f]" />
+            <span>Serving Kharadi &amp; Surrounding Neighborhoods</span>
           </div>
-          <h2 className="mt-5 font-display text-3xl sm:text-4xl md:text-5xl text-ivory tracking-tight leading-tight">
+
+          <h2 className="mt-3.5 font-display text-2xl sm:text-3xl md:text-4xl text-ink tracking-tight leading-[1.15]">
             Top Science Coaching Classes in{" "}
-            <span className="text-lavender">Kharadi & Nearby Areas</span>
+            <span className="text-[#35208f] italic font-normal">Kharadi &amp; Nearby Areas</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-ivory/75 leading-relaxed">
-            Conveniently located in Kharadi, Pune, Joshi’s Academy provides specialist CBSE & ICSE
-            Science tuition (Classes IX & X) for students across Kharadi and nearby residential
-            communities.
+
+          <p className="mt-2.5 text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
+            Conveniently located in Kharadi, Pune. Specialist CBSE &amp; ICSE Science tuition (Classes IX &amp; X)
+            with small batches, structured practice and proven 90%+ board results.
           </p>
         </div>
 
-        {/* Areas Grid */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Interactive Filter Pills */}
+        <div className="mt-6 flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-none">
+          <button
+            onClick={() => setSelectedAreaId("all")}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              selectedAreaId === "all"
+                ? "bg-[#35208f] text-white shadow-xs"
+                : "bg-white text-ink/75 border border-border/80 hover:border-[#35208f]/40 hover:bg-slate-50"
+            }`}
+          >
+            All 6 Locations
+          </button>
           {locationAreasData.map((area) => (
+            <button
+              key={area.id}
+              onClick={() => setSelectedAreaId(area.id)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+                selectedAreaId === area.id
+                  ? "bg-[#35208f] text-white shadow-xs"
+                  : "bg-white text-ink/75 border border-border/80 hover:border-[#35208f]/40 hover:bg-slate-50"
+              }`}
+            >
+              📍 {area.shortName}
+            </button>
+          ))}
+        </div>
+
+        {/* Location Cards Grid - Exactly 6 clean, compact, balanced boxes */}
+        <div
+          ref={cardsContainerRef}
+          className="mt-6 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch"
+        >
+          {displayedAreas.map((area) => (
             <div
               key={area.id}
-              className="group relative flex flex-col justify-between rounded-xl border border-ivory/15 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-violet/60 hover:bg-white/[0.08]"
+              className="group relative flex flex-col justify-between rounded-xl border border-border/80 bg-white p-5 shadow-2xs hover:shadow-lg hover:border-[#35208f]/40 transition-all duration-300 hover:-translate-y-1"
             >
               <div>
-                {/* Area Header */}
-                <div className="flex items-start justify-between gap-3 border-b border-ivory/10 pb-4">
+                {/* Area Header & Commute Time */}
+                <div className="flex items-start justify-between gap-2 border-b border-border/50 pb-3">
                   <div>
-                    <h3 className="font-display text-xl font-semibold text-ivory group-hover:text-lavender transition-colors">
+                    <div className="flex items-center gap-1 mb-0.5">
+                      <span className="size-1.5 rounded-full bg-emerald-500" />
+                      <span className="text-[10.5px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        {area.distance}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-semibold text-ink group-hover:text-[#35208f] transition-colors leading-tight">
                       {area.name}
                     </h3>
-                    <p className="mt-1 text-xs text-ivory/60 flex items-center gap-1.5">
-                      <Compass className="size-3 text-violet" />
-                      <span>{area.keyLandmarks}</span>
-                    </p>
                   </div>
-                  <div className="shrink-0 rounded-full border border-violet/40 bg-violet/20 px-2.5 py-1 text-[11px] font-medium text-lavender flex items-center gap-1">
-                    <Clock className="size-3" />
-                    <span>{area.travelTime}</span>
-                  </div>
+
+                  <span className="shrink-0 rounded-full border border-amber-300/80 bg-amber-50 px-2.5 py-0.5 text-[11px] font-semibold text-amber-900 flex items-center gap-1">
+                    <Clock className="size-3 text-amber-600" />
+                    {area.travelTime}
+                  </span>
                 </div>
 
-                {/* Highlights List */}
-                <ul className="mt-4 space-y-2 text-xs sm:text-sm text-ivory/80">
+                {/* Landmarks Tag */}
+                <p className="mt-2.5 text-[11px] text-muted-foreground flex items-center gap-1.5 line-clamp-1">
+                  <Compass className="size-3 text-[#35208f] shrink-0" />
+                  <span className="truncate">{area.keyLandmarks}</span>
+                </p>
+
+                {/* Highlights List (Compact 2 items) */}
+                <ul className="mt-3 space-y-1.5 text-xs text-ink/85">
                   {area.highlights.map((h, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="size-4 shrink-0 text-lavender mt-0.5" />
-                      <span>{h}</span>
+                      <CheckCircle2 className="size-3.5 shrink-0 text-emerald-600 mt-0.5" />
+                      <span className="leading-tight">{h}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Schools tag footer */}
-              <div className="mt-6 border-t border-ivory/10 pt-4">
-                <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-ivory/50 font-medium mb-2">
-                  <School className="size-3 text-lavender" />
-                  <span>Key Schools Covered:</span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
+              {/* Schools Tag & Action Footer */}
+              <div className="mt-4 border-t border-border/50 pt-3 space-y-2.5">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <School className="size-3 text-[#35208f] shrink-0" />
                   {area.popularSchoolsServed.map((school, sIdx) => (
                     <span
                       key={sIdx}
-                      className="rounded bg-ivory/10 px-2 py-0.5 text-[11px] text-ivory/85"
+                      className="rounded bg-[#35208f]/6 border border-[#35208f]/10 px-2 py-0.5 text-[10.5px] font-medium text-[#35208f]"
                     >
                       {school}
                     </span>
                   ))}
                 </div>
+
+                <button
+                  onClick={openEnquiry}
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-slate-50 hover:bg-[#35208f] text-ink hover:text-white border border-border/70 hover:border-[#35208f] text-[11.5px] font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-2xs group-hover:bg-[#35208f] group-hover:text-white"
+                >
+                  Enquire For {area.shortName} <ArrowRight className="size-3" />
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Call to action footer box */}
-        <div className="mt-14 rounded-2xl border border-violet/30 bg-gradient-to-r from-violet/30 via-violet/15 to-transparent p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-display text-2xl font-semibold text-ivory">
-              Looking for Science Tuition Near You in Kharadi or Nearby?
+        {/* Call To Action Footer Banner */}
+        <div className="mt-10 rounded-xl border border-[#35208f]/30 bg-gradient-to-r from-[#1c1445] via-[#2a1b6d] to-[#120d2e] p-5 sm:p-7 shadow-lg text-white flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center md:text-left">
+            <div className="inline-flex items-center gap-1 text-amber-300 text-[11px] font-semibold uppercase tracking-wider bg-amber-400/15 px-2.5 py-0.5 rounded-full border border-amber-400/25">
+              <Sparkles className="size-3" />
+              <span>Limited Batch Seats Available</span>
+            </div>
+            <h3 className="font-display text-xl sm:text-2xl font-semibold text-white">
+              Looking for Science Tuition Near You?
             </h3>
-            <p className="text-sm text-ivory/80 max-w-2xl">
-              Admissions open for 2025-26 Academic Year for CBSE & ICSE Classes IX & X. Limited
-              seats available per batch to maintain personalised attention.
+            <p className="text-xs text-ivory/80 max-w-xl leading-relaxed">
+              Admissions open for CBSE &amp; ICSE Classes IX &amp; X. Direct concept guidance and
+              individual doubt sessions by Varsha Joshi in Kharadi.
             </p>
           </div>
-          <Button
+
+          <button
             onClick={openEnquiry}
-            className="shrink-0 bg-violet hover:bg-violet/90 text-ivory font-semibold px-8 py-6 uppercase tracking-wider text-xs shadow-lg shadow-violet/30 cursor-pointer"
+            className="shrink-0 inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-ink font-semibold px-6 py-2.5 text-xs uppercase tracking-wider rounded-lg shadow-md shadow-amber-400/20 active:scale-[0.98] transition-all cursor-pointer"
           >
-            Enquire For Your Area <Navigation className="ml-2 size-4" />
-          </Button>
+            Enquire For Your Area <Navigation className="size-3.5" />
+          </button>
         </div>
       </div>
     </section>

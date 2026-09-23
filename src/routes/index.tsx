@@ -113,63 +113,135 @@ function HomePage() {
   return (
     <>
       {/* 01 - ART-DIRECTED RESPONSIVE HERO SECTION */}
-      <section className="relative bg-ink text-ivory overflow-hidden min-h-[620px] sm:min-h-[660px] lg:h-[690px] xl:h-[710px] lg:max-h-[720px] flex items-center">
-        {/* Science Classroom / Educator Background Image */}
-        <div className="absolute inset-0 size-full overflow-hidden">
-          <img
-            src={varshaImage}
-            alt="Varsha Joshi - Principal Science Educator & Mentor at Joshi's Academy"
-            width={1600}
-            height={1000}
-            fetchPriority="high"
-            className="size-full object-cover object-[88%_10%] sm:object-[82%_10%] md:object-[80%_12%] lg:object-[86%_15%] xl:object-[88%_15%] brightness-[1.06] contrast-[1.02] image-reveal"
-          />
-          {/* Mobile Overlay: Art-directed 90deg gradient — 88% dark backdrop on left where text sits, fading to 18% on right where teacher's face is */}
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,16,0.88)_0%,rgba(10,10,16,0.65)_58%,rgba(10,10,16,0.18)_100%)] lg:hidden" />
-          {/* Desktop Overlay: Subtle left-to-right gradient behind text area only */}
-          <div className="absolute inset-0 hidden lg:block bg-[linear-gradient(98deg,rgba(15,15,22,0.78)_0%,rgba(15,15,22,0.58)_45%,rgba(15,15,22,0.18)_70%,transparent_100%)]" />
-        </div>
+      <section className="relative bg-[#0d0d14] text-ivory overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 lg:pb-24">
+        {/* Subtle Ambient Backlight Effects */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#35208f]/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Hero Content - Placed ~112px from top on mobile, max-width 350px on mobile */}
-        <div className="relative z-10 w-full mx-auto max-w-6xl px-4 xs:px-5 sm:px-8 lg:px-12 xl:px-16 pt-[112px] sm:pt-[124px] lg:pt-[96px] pb-12 sm:pb-14">
-          <div className="max-w-[350px] sm:max-w-[480px] lg:max-w-[620px]">
-            {/* Eyebrow */}
-            <div className="reveal-1 flex items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-[11px] sm:text-[13px] lg:text-[14px] font-medium uppercase tracking-[1.5px] text-amber-400">
-                MEET VARSHA JOSHI
-              </span>
-              <div className="h-px w-7 sm:w-10 bg-amber-400/60 flex-shrink-0" />
+        <div className="relative z-10 w-full mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Editorial Hero Typography & CTAs */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-left">
+              {/* Eyebrow Pill */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 w-fit mb-4 sm:mb-5">
+                <span className="inline-block size-2 rounded-full bg-amber-400 animate-pulse" />
+                <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[1.5px] text-amber-300">
+                  MEET VARSHA JOSHI
+                </span>
+              </div>
+
+              {/* Premium Heading */}
+              <h1 className="font-display text-[clamp(2.1rem,6vw,3.5rem)] leading-[1.08] tracking-tight text-white mb-4 sm:mb-5">
+                <span className="block font-normal">An Experienced</span>
+                <span className="block font-normal">Educator.</span>
+                <span className="block text-amber-200/95 italic font-normal mt-0.5">
+                  A Mentor Who Cares.
+                </span>
+              </h1>
+
+              {/* Mobile Image: Shown prominently between title and paragraph on mobile */}
+              <div className="block lg:hidden my-2 mb-5">
+                <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl shadow-black/40 bg-ink">
+                  <img
+                    src={varshaImage}
+                    alt="Varsha Joshi - Principal Science Educator & Mentor at Joshi's Academy"
+                    width={800}
+                    height={600}
+                    fetchPriority="high"
+                    className="w-full h-[260px] xs:h-[300px] sm:h-[360px] object-cover object-[50%_18%] brightness-[1.04] contrast-[1.02]"
+                  />
+                  {/* Floating Glassmorphism Tag */}
+                  <div className="absolute bottom-3 left-3 right-3 bg-[#0d0d14]/85 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2 flex items-center justify-between text-white">
+                    <div className="flex items-center gap-2">
+                      <div className="size-2 rounded-full bg-emerald-400" />
+                      <div>
+                        <p className="text-[13px] font-semibold leading-tight text-white">Varsha Joshi</p>
+                        <p className="text-[11px] text-ivory/75 leading-tight">Science Specialist (CBSE &amp; ICSE)</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-medium uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-md">
+                      15+ Yrs Exp
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Concise Description Paragraph */}
+              <p className="text-[15px] sm:text-[17px] lg:text-[18px] leading-[1.5] text-ivory/85 font-sans max-w-[560px] mb-6 sm:mb-8 font-normal">
+                Concept-focused Science coaching for CBSE, ICSE &amp; State Board Classes IX-X, with
+                small batches, structured practice and individual attention.
+              </p>
+
+              {/* Action CTAs */}
+              <div className="flex items-center flex-wrap gap-3.5 sm:gap-4 mb-6">
+                <button
+                  onClick={openEnquiry}
+                  className="inline-flex items-center justify-center min-h-[48px] px-6 sm:px-8 bg-amber-400 hover:bg-amber-300 text-ink text-[14.5px] sm:text-[15.5px] font-semibold rounded-lg shadow-lg shadow-amber-400/20 active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  I'm Interested →
+                </button>
+                <Link
+                  to="/courses"
+                  className="inline-flex items-center justify-center min-h-[48px] px-5 sm:px-6 bg-white/10 hover:bg-white/15 border border-white/20 text-[14.5px] sm:text-[15.5px] font-medium text-white rounded-lg backdrop-blur-sm transition-all"
+                >
+                  Explore Courses →
+                </Link>
+              </div>
+
+              {/* Mini Highlights */}
+              <div className="flex items-center flex-wrap gap-x-5 gap-y-2 pt-3 text-[12px] sm:text-[13px] text-ivory/70 border-t border-white/10">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="size-4 text-amber-400 flex-shrink-0" />
+                  <span>Small Batches (Max 12)</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="size-4 text-amber-400 flex-shrink-0" />
+                  <span>90%+ Board Success</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="size-4 text-amber-400 flex-shrink-0" />
+                  <span>Kharadi, Pune</span>
+                </div>
+              </div>
             </div>
 
-            {/* Premium Editorial Heading - Lighter, elegant font weight */}
-            <h1 className="reveal-2 font-display text-[clamp(1.95rem,7vw,2.25rem)] sm:text-[38px] md:text-[44px] lg:text-[52px] xl:text-[58px] leading-[1.04] tracking-tight text-white mb-3.5 sm:mb-4 font-normal">
-              <span className="block font-normal">An Experienced</span>
-              <span className="block font-normal">Educator.</span>
-              <span className="block text-ivory/90 font-normal italic mt-0.5 sm:mt-1">
-                A Mentor Who Cares.
-              </span>
-            </h1>
+            {/* Right Column: Desktop Educator Showcase Card */}
+            <div className="hidden lg:block lg:col-span-5 relative">
+              <div className="relative mx-auto max-w-[440px]">
+                {/* Decorative background glow & accent frame */}
+                <div className="absolute -inset-1.5 bg-gradient-to-tr from-amber-400/30 via-violet/40 to-amber-300/20 rounded-3xl blur-md opacity-70" />
 
-            {/* Concise Description Paragraph */}
-            <p className="reveal-3 text-[14.5px] xs:text-[15px] sm:text-[16px] md:text-[17.5px] lg:text-[18.5px] leading-[1.45] text-white/90 font-sans max-w-[350px] sm:max-w-[480px] lg:max-w-[560px] mb-5 sm:mb-7 font-normal">
-              Concept-focused Science coaching for CBSE, ICSE &amp; State Board Classes IX-X, with
-              small batches, structured practice and individual attention.
-            </p>
+                {/* Main Card */}
+                <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-ink">
+                  <img
+                    src={varshaImage}
+                    alt="Varsha Joshi - Principal Science Educator & Mentor at Joshi's Academy"
+                    width={800}
+                    height={1000}
+                    fetchPriority="high"
+                    className="w-full h-[480px] xl:h-[510px] object-cover object-[50%_18%] brightness-[1.04] contrast-[1.02] transition-transform duration-500 hover:scale-[1.02]"
+                  />
 
-            {/* Action CTAs */}
-            <div className="reveal-4 flex items-center flex-wrap gap-y-3.5">
-              <button
-                onClick={openEnquiry}
-                className="inline-flex items-center justify-center min-h-[46px] px-5 sm:px-7 bg-ivory hover:bg-white text-ink text-[14px] sm:text-[15px] font-medium rounded-md shadow-md active:scale-[0.98] transition-all cursor-pointer"
-              >
-                I'm Interested →
-              </button>
-              <Link
-                to="/courses"
-                className="inline-flex items-center gap-1 text-[14px] sm:text-[15px] font-normal text-ivory/90 hover:text-white underline underline-offset-4 hover:decoration-amber-400 transition-colors ml-4 sm:ml-5"
-              >
-                Explore Courses →
-              </Link>
+                  {/* Gradient bottom shading */}
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
+
+                  {/* Floating Glassmorphism Teacher Card */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-[#0d0d14]/85 backdrop-blur-md border border-white/15 rounded-xl p-3.5 shadow-lg text-white">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <p className="text-[15px] font-semibold text-white">Varsha Joshi</p>
+                          <ShieldCheck className="size-4 text-amber-400" />
+                        </div>
+                        <p className="text-[12px] text-ivory/80">Science Specialist • Classes IX &amp; X</p>
+                      </div>
+                      <span className="text-[11px] font-semibold uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-md">
+                        15+ Yrs
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
