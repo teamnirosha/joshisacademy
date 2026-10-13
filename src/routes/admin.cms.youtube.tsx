@@ -67,8 +67,12 @@ function CMSYouTubeDashboardPage() {
   const [formDescription, setFormDescription] = useState("");
   const [formYoutubeUrl, setFormYoutubeUrl] = useState("");
   const [formIsPublished, setFormIsPublished] = useState(true);
+  const [formIsShort, setFormIsShort] = useState(false);
   const [extractedId, setExtractedId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [fetchingMeta, setFetchingMeta] = useState(false);
+  const [fetchedMetaTitle, setFetchedMetaTitle] = useState("");
+  const [fetchedMetaAuthor, setFetchedMetaAuthor] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const loadAllYouTubeData = async () => {
@@ -107,12 +111,61 @@ function CMSYouTubeDashboardPage() {
     loadAllYouTubeData();
   }, []);
 
+  // Prevent background website scrolling when modal is open
   useEffect(() => {
-    if (formYoutubeUrl) {
+    if (isModalOpen || viewingPlaylist) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
+    }
+  }, [isModalOpen, viewingPlaylist]);
+
+  useEffect(() => {
+    if (formYoutubeUrl.trim()) {
       const id = extractYouTubeVideoId(formYoutubeUrl);
       setExtractedId(id);
+      const isShortUrl = formYoutubeUrl.includes("/shorts/");
+      if (isShortUrl) setFormIsShort(true);
+
+      if (id) {
+        setFetchingMeta(true);
+        const timer = setTimeout(async () => {
+          try {
+            const res = await fetch("/api/cms/youtube", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ action: "fetch_metadata", youtubeUrl: formYoutubeUrl.trim() }),
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.title) {
+                setFetchedMetaTitle(data.title);
+                setFetchedMetaAuthor(data.author || "");
+                // Automatically populate title if user hasn't typed a custom one
+                setFormTitle((prev) => (prev && prev !== fetchedMetaTitle ? prev : data.title));
+              }
+              if (data.isShort !== undefined) {
+                setFormIsShort(Boolean(data.isShort));
+              }
+            }
+          } catch (e) {
+            console.warn("Notice auto-fetching YouTube metadata:", e);
+          } finally {
+            setFetchingMeta(false);
+          }
+        }, 250);
+
+        return () => clearTimeout(timer);
+      } else {
+        setFetchingMeta(false);
+      }
     } else {
       setExtractedId(null);
+      setFetchingMeta(false);
+      setFetchedMetaTitle("");
+      setFetchedMetaAuthor("");
     }
   }, [formYoutubeUrl]);
 
@@ -187,6 +240,32 @@ function CMSYouTubeDashboardPage() {
     }
   };
 
+  const handleOpenAddVideo = () => {
+    setEditingVideo(null);
+    setFormTitle("");
+    setFormDescription("");
+    setFormYoutubeUrl("");
+    setFormIsPublished(true);
+    setFormIsShort(false);
+    setExtractedId(null);
+    setFetchedMetaTitle("");
+    setFetchedMetaAuthor("");
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEditVideo = (vid: YouTubeVideoItem) => {
+    setEditingVideo(vid);
+    setFormTitle(vid.title || "");
+    setFormDescription(vid.description || "");
+    setFormYoutubeUrl(vid.youtube_url || (vid.youtube_video_id ? `https://www.youtube.com/watch?v=${vid.youtube_video_id}` : ""));
+    setFormIsPublished(vid.is_published);
+    setFormIsShort(Boolean(vid.is_short));
+    setExtractedId(vid.youtube_video_id);
+    setFetchedMetaTitle(vid.title || "");
+    setFetchedMetaAuthor("");
+    setIsModalOpen(true);
+  };
+
   const handleSaveVideo = async (e: React.FormEvent) => {
     e.preventDefault();
     const vidId = extractYouTubeVideoId(formYoutubeUrl);
@@ -197,6 +276,7 @@ function CMSYouTubeDashboardPage() {
 
     setSaving(true);
     try {
+      const finalTitle = formTitle.trim() || fetchedMetaTitle.trim() || `YouTube Video (${vidId})`;
       if (editingVideo) {
         const res = await fetch("/api/cms/youtube", {
           method: "POST",
@@ -204,31 +284,35 @@ function CMSYouTubeDashboardPage() {
           body: JSON.stringify({
             action: "update_video",
             id: editingVideo.id,
-            title: formTitle,
+            title: finalTitle,
             description: formDescription,
             youtubeUrl: formYoutubeUrl,
             isPublished: formIsPublished,
+            isShort: formIsShort,
+            contentType: formIsShort ? "SHORT" : "VIDEO",
           }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Update failed");
-        setStatusMessage("Video updated!");
+        setStatusMessage("Video updated successfully!");
       } else {
         const res = await fetch("/api/cms/youtube", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "create_video",
-            title: formTitle,
+            title: finalTitle,
             description: formDescription,
             youtubeUrl: formYoutubeUrl,
             isPublished: formIsPublished,
+            isShort: formIsShort,
+            contentType: formIsShort ? "SHORT" : "VIDEO",
             displayOrder: videos.length + 1,
           }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Creation failed");
-        setStatusMessage("Video added!");
+        setStatusMessage(formIsShort ? "YouTube Short added successfully!" : "YouTube Video added successfully!");
       }
       setIsModalOpen(false);
       await loadAllYouTubeData();
@@ -371,14 +455,7 @@ function CMSYouTubeDashboardPage() {
             <RefreshCw className={`size-4 ${loading ? "animate-spin" : ""}`} />
           </button>
           <button
-            onClick={() => {
-              setEditingVideo(null);
-              setFormTitle("");
-              setFormDescription("");
-              setFormYoutubeUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-              setFormIsPublished(true);
-              setIsModalOpen(true);
-            }}
+            onClick={handleOpenAddVideo}
             className="flex items-center gap-1.5 rounded-xl bg-red-600 text-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-red-700 shadow-xs transition-all cursor-pointer"
           >
             <Plus className="size-4" /> Add Video Link
@@ -607,7 +684,7 @@ function CMSYouTubeDashboardPage() {
                     <h3 className="font-bold text-ink text-xs line-clamp-2 leading-snug">
                       {short.title}
                     </h3>
-                    <div className="flex items-center justify-between text-[10px]">
+                    <div className="flex items-center justify-between text-[10px] pt-1 border-t border-border/40">
                       <button
                         onClick={() => handleTogglePublishVideo(short)}
                         className={`px-2 py-0.5 rounded font-semibold cursor-pointer ${
@@ -618,12 +695,22 @@ function CMSYouTubeDashboardPage() {
                       >
                         {short.is_published ? "Live" : "Hidden"}
                       </button>
-                      <button
-                        onClick={() => handleDeleteVideo(short.id)}
-                        className="text-red-600 hover:underline"
-                      >
-                        Delete
-                      </button>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleOpenEditVideo(short)}
+                          className="p-1 rounded text-muted-foreground hover:text-blue-600 hover:bg-blue-50 cursor-pointer"
+                          title="Edit Short"
+                        >
+                          <Edit2 className="size-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteVideo(short.id)}
+                          className="p-1 rounded text-red-600 hover:text-red-700 hover:bg-red-50 cursor-pointer"
+                          title="Delete Short"
+                        >
+                          <Trash2 className="size-3.5" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -737,6 +824,13 @@ function CMSYouTubeDashboardPage() {
                         <ExternalLink className="size-4" />
                       </a>
                       <button
+                        onClick={() => handleOpenEditVideo(vid)}
+                        className="p-1.5 rounded-lg text-muted-foreground hover:text-blue-600 hover:bg-blue-50 cursor-pointer transition-colors"
+                        title="Edit video"
+                      >
+                        <Edit2 className="size-4" />
+                      </button>
+                      <button
                         onClick={() => handleDeleteVideo(vid.id)}
                         className="p-1.5 rounded-lg text-muted-foreground hover:text-red-600 hover:bg-red-50 cursor-pointer transition-colors"
                         title="Delete video"
@@ -821,95 +915,179 @@ function CMSYouTubeDashboardPage() {
         </div>
       )}
 
-      {/* ── 7. MANUAL ADD VIDEO MODAL ─────────────────────────────────────── */}
+      {/* ── 7. MANUAL ADD / EDIT VIDEO MODAL ─────────────────────────────── */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/60 backdrop-blur-xs animate-in fade-in">
-          <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl space-y-6 border border-border">
-            <div className="flex items-center justify-between border-b border-border/60 pb-4">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsModalOpen(false);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs animate-in fade-in overscroll-contain"
+        >
+          <div className="w-full max-w-lg rounded-3xl bg-white shadow-2xl border border-border flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-150">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-border/60 px-6 py-4 shrink-0 bg-white">
               <div className="flex items-center gap-2">
                 <div className="size-8 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
                   <Video className="size-4" />
                 </div>
                 <h2 className="font-bold text-ink text-base">
-                  {editingVideo ? "Edit YouTube Video" : "Add Custom Video Link"}
+                  {editingVideo ? "Edit YouTube Video" : "Add YouTube Video / Short"}
                 </h2>
               </div>
               <button
+                type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-ink"
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-ink cursor-pointer transition-colors"
               >
                 <X className="size-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveVideo} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
-                  YouTube Video Link *
-                </label>
-                <input
-                  type="url"
-                  required
-                  placeholder="https://www.youtube.com/watch?v=..."
-                  value={formYoutubeUrl}
-                  onChange={(e) => setFormYoutubeUrl(e.target.value)}
-                  className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-red-500/30"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
-                  Video Title *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. CBSE 10th Science Masterclass"
-                  value={formTitle}
-                  onChange={(e) => setFormTitle(e.target.value)}
-                  className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-red-500/30"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
-                  Description
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Brief summary..."
-                  value={formDescription}
-                  onChange={(e) => setFormDescription(e.target.value)}
-                  className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-red-500/30"
-                />
-              </div>
-
-              <div className="flex items-center justify-between pt-2">
-                <label className="flex items-center gap-2 text-xs font-bold text-ink cursor-pointer">
+            {/* Modal Form with scrollable body & pinned footer */}
+            <form onSubmit={handleSaveVideo} className="flex flex-col min-h-0 flex-1 overflow-hidden">
+              <div className="overflow-y-auto overscroll-contain px-6 py-5 space-y-4 flex-1">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                      YouTube Video or Short URL *
+                    </label>
+                    {fetchingMeta && (
+                      <span className="flex items-center gap-1 text-[11px] font-medium text-red-600 animate-pulse">
+                        <RefreshCw className="size-3 animate-spin" /> Fetching details...
+                      </span>
+                    )}
+                    {!fetchingMeta && fetchedMetaTitle && (
+                      <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600">
+                        <Check className="size-3" /> Auto-fetched from YouTube
+                      </span>
+                    )}
+                  </div>
                   <input
-                    type="checkbox"
-                    checked={formIsPublished}
-                    onChange={(e) => setFormIsPublished(e.target.checked)}
-                    className="size-4 rounded accent-red-600"
+                    type="url"
+                    required
+                    placeholder="https://www.youtube.com/watch?v=... or https://youtube.com/shorts/..."
+                    value={formYoutubeUrl}
+                    onChange={(e) => setFormYoutubeUrl(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-red-500/30"
                   />
-                  <span>Publish immediately to website homepage</span>
-                </label>
+                  <p className="text-[11px] text-muted-foreground mt-1">
+                    Paste any YouTube URL or Shorts link. Title and thumbnail are fetched automatically.
+                  </p>
+                </div>
+
+                {/* Preview card if video ID is extracted */}
+                {extractedId && (
+                  <div className="flex items-center gap-3 p-3 bg-lavender/30 rounded-2xl border border-border/80">
+                    <img
+                      src={getYouTubeThumbnail(extractedId, "default")}
+                      alt="Preview"
+                      className="w-16 h-12 rounded-lg object-cover bg-black shrink-0"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold text-ink truncate">
+                        {formTitle || fetchedMetaTitle || "Fetching video title..."}
+                      </p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span
+                          className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${
+                            formIsShort
+                              ? "bg-amber-100 text-amber-800"
+                              : "bg-red-100 text-red-700"
+                          }`}
+                        >
+                          {formIsShort ? "YouTube Short" : "Standard Video"}
+                        </span>
+                        {fetchedMetaAuthor && (
+                          <span className="text-[11px] text-muted-foreground truncate">
+                            by {fetchedMetaAuthor}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                      Video Title
+                    </label>
+                    <span className="text-[10px] text-muted-foreground font-normal">
+                      (Optional — fetched automatically)
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder={
+                      fetchedMetaTitle
+                        ? fetchedMetaTitle
+                        : "Will be fetched automatically from YouTube"
+                    }
+                    value={formTitle}
+                    onChange={(e) => setFormTitle(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    placeholder="Optional brief summary or notes..."
+                    value={formDescription}
+                    onChange={(e) => setFormDescription(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                  />
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <label className="flex items-center gap-2 text-xs font-bold text-ink cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formIsShort}
+                      onChange={(e) => setFormIsShort(e.target.checked)}
+                      className="size-4 rounded accent-red-600"
+                    />
+                    <span>Mark as YouTube Short (Vertical 9:16 Video)</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 text-xs font-bold text-ink cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formIsPublished}
+                      onChange={(e) => setFormIsPublished(e.target.checked)}
+                      className="size-4 rounded accent-red-600"
+                    />
+                    <span>Publish immediately to website homepage</span>
+                  </label>
+                </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-border/60">
+              {/* Pinned Modal Footer */}
+              <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border/60 bg-white shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-ink cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-ink cursor-pointer transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving || !extractedId}
-                  className="flex items-center gap-1.5 rounded-xl bg-red-600 text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-red-700 disabled:opacity-50 cursor-pointer shadow-xs"
+                  className="flex items-center gap-1.5 rounded-xl bg-red-600 text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-red-700 disabled:opacity-50 cursor-pointer shadow-xs transition-colors"
                 >
-                  {saving ? "Saving..." : editingVideo ? "Update Video" : "Save Video"}
+                  {saving ? (
+                    <>
+                      <RefreshCw className="size-3.5 animate-spin" /> Saving...
+                    </>
+                  ) : editingVideo ? (
+                    "Update Video"
+                  ) : (
+                    "Save Video"
+                  )}
                 </button>
               </div>
             </form>

@@ -1,6 +1,6 @@
 // Standalone CMS Administrator Authentication Service for Joshi's Academy (MySQL Enabled)
 
-import { queryMySQL, isMySQLConfigured } from "@/lib/mysql.server";
+import { supabaseServer } from "@/lib/supabase.server";
 
 export type CMSAdminUser = {
   id: string;
@@ -51,36 +51,39 @@ export const CMSAuthService = {
     const validEmail = (email || "").trim().toLowerCase();
     const validPass = pass || "";
 
-    // 1. Try MySQL Database authentication if MySQL is configured
-    if (isMySQLConfigured()) {
-      try {
-        const rows = await queryMySQL<any[]>(
-          `SELECT * FROM cms_admin_users WHERE email = ? AND is_active = 1 LIMIT 1`,
-          [validEmail],
-        );
+    // 1. Try Supabase Database authentication
+    try {
+      const { data: userRow, error } = await supabaseServer
+        .from("cms_admin_users")
+        .select("*")
+        .eq("email", validEmail)
+        .eq("is_active", true)
+        .maybeSingle();
 
-        if (Array.isArray(rows) && rows.length > 0) {
-          const userRow = rows[0];
-          // Check password hash or match
-          if (
-            userRow.password_hash === validPass ||
-            this.verifyCredentials(validEmail, validPass)
-          ) {
-            // Update last_login_at in MySQL
-            await queryMySQL(`UPDATE cms_admin_users SET last_login_at = NOW() WHERE id = ?`, [
-              userRow.id,
-            ]);
-            return {
-              id: userRow.id,
-              email: userRow.email,
-              name: userRow.name || "CMS Administrator",
-              role: "CMS_ADMIN",
-            };
-          }
+      if (!error && userRow) {
+        // Check password hash or match
+        if (
+          userRow.password_hash === validPass ||
+          this.verifyCredentials(validEmail, validPass)
+        ) {
+          // Update last_login_at in Supabase
+          try {
+            await supabaseServer
+              .from("cms_admin_users")
+              .update({ last_login_at: new Date().toISOString() })
+              .eq("id", userRow.id);
+          } catch (e) {}
+
+          return {
+            id: userRow.id,
+            email: userRow.email,
+            name: userRow.name || "CMS Administrator",
+            role: "CMS_ADMIN",
+          };
         }
-      } catch (err) {
-        console.warn("MySQL Auth notice:", err);
       }
+    } catch (err) {
+      console.warn("Supabase Auth notice:", err);
     }
 
     // 2. Fallback local credentials verification

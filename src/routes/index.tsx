@@ -12,9 +12,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import varshaImage from "@/assets/varsha-joshi.jpg";
-import heroImage from "@/assets/classroom-hero.jpg";
-import approachImage from "@/assets/academy-approach.jpg";
-import classroomImage from "@/assets/classroom-wide.jpg";
+import pillar01Image from "@/assets/pillar 01.jfif";
+import pillar02Image from "@/assets/pillar 02.jpg";
+import pillar03Image from "@/assets/pillar 03.jfif";
+import pillar04Image from "@/assets/pillar 04.jfif";
+import pillar05Image from "@/assets/pillar 05.jfif";
 import { LocalSeoAreas } from "@/components/sections/LocalSeoAreas";
 import { LatestVideos } from "@/components/sections/LatestVideos";
 import { GoogleReviewsSection } from "@/components/sections/GoogleReviewsSection";
@@ -151,16 +153,16 @@ function HomePage() {
                     className="w-full h-[260px] xs:h-[300px] sm:h-[360px] object-cover object-[50%_18%] brightness-[1.04] contrast-[1.02]"
                   />
                   {/* Floating Glassmorphism Tag */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-[#0d0d14]/85 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2 flex items-center justify-between text-white">
-                    <div className="flex items-center gap-2">
-                      <div className="size-2 rounded-full bg-emerald-400" />
-                      <div>
-                        <p className="text-[13px] font-semibold leading-tight text-white">Varsha Joshi</p>
-                        <p className="text-[11px] text-ivory/75 leading-tight">Science Specialist (CBSE &amp; ICSE)</p>
+                  <div className="absolute bottom-3 left-3 right-3 bg-[#0d0d14]/85 backdrop-blur-md border border-white/15 rounded-xl px-3 py-2 flex items-center justify-between gap-2 text-white">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="size-2 rounded-full bg-emerald-400 shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-[12px] sm:text-[13px] font-semibold leading-tight text-white truncate">Varsha Joshi</p>
+                        <p className="text-[10px] sm:text-[11px] text-ivory/75 leading-tight truncate">Science Specialist (CBSE &amp; ICSE)</p>
                       </div>
                     </div>
-                    <span className="text-[10px] font-medium uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-md">
-                      15+ Yrs Exp
+                    <span className="text-[9px] sm:text-[10px] font-medium uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-md shrink-0">
+                      15+ Yrs
                     </span>
                   </div>
                 </div>
@@ -332,7 +334,7 @@ function HomePage() {
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
                 <img
-                  src={approachImage}
+                  src={pillar01Image}
                   alt="Concept-focused science teaching"
                   className="size-full object-cover"
                 />
@@ -351,7 +353,7 @@ function HomePage() {
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
                 <img
-                  src={classroomImage}
+                  src={pillar02Image}
                   alt="Individual student attention in small batches"
                   className="size-full object-cover"
                 />
@@ -370,7 +372,7 @@ function HomePage() {
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
                 <img
-                  src={heroImage}
+                  src={pillar03Image}
                   alt="Regular doubt solving session"
                   className="size-full object-cover"
                 />
@@ -388,7 +390,7 @@ function HomePage() {
             <div className="border border-border/70 bg-white p-6 rounded-xl shadow-xs hover:shadow-md transition-shadow space-y-4">
               <div className="overflow-hidden rounded-lg aspect-[16/10] bg-muted">
                 <img
-                  src={approachImage}
+                  src={pillar04Image}
                   alt="Structured practice and test series"
                   className="size-full object-cover"
                 />
@@ -408,7 +410,7 @@ function HomePage() {
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <div className="w-full sm:w-1/2 overflow-hidden rounded-lg aspect-[16/10] bg-muted">
                   <img
-                    src={classroomImage}
+                    src={pillar05Image}
                     alt="Mentorship and student motivation"
                     className="size-full object-cover"
                   />

@@ -18,8 +18,8 @@ export const Route = createFileRoute("/admin/cms/login")({
 function CMSLoginPage() {
   const navigate = useNavigate();
   const search = useSearch({ from: "/admin/cms/login" });
-  const [email, setEmail] = useState("admin@joshisacademy.com");
-  const [password, setPassword] = useState("Admin@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -162,12 +162,6 @@ function CMSLoginPage() {
               )}
             </Button>
           </form>
-
-          <div className="pt-3 border-t border-white/10 text-center">
-            <span className="text-[10px] text-ivory/40 font-mono">
-              Default Admin: admin@joshisacademy.com / Admin@123
-            </span>
-          </div>
         </div>
 
         {/* Public site link */}

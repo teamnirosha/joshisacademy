@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { YouTubeChannelService } from "@/services/youtube.server";
-import { YouTubeService } from "@/services/cms.server";
+import { YouTubeService, extractYouTubeVideoId, getYouTubeThumbnail } from "@/services/cms.server";
 
 export const Route = createFileRoute("/api/cms/youtube")({
   server: {
@@ -59,6 +59,45 @@ export const Route = createFileRoute("/api/cms/youtube")({
             });
           }
 
+          if (action === "fetch_metadata") {
+            const url = (body.youtubeUrl || "").trim();
+            if (!url) {
+              return new Response(JSON.stringify({ error: "YouTube URL is required" }), { status: 400 });
+            }
+            const videoId = extractYouTubeVideoId(url);
+            if (!videoId) {
+              return new Response(JSON.stringify({ error: "Invalid YouTube URL format" }), { status: 400 });
+            }
+
+            let title = "";
+            let author = "";
+            const isShort = url.includes("/shorts/");
+            const thumbnailUrl = getYouTubeThumbnail(videoId, "maxres");
+
+            try {
+              const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+              const res = await fetch(oembedUrl);
+              if (res.ok) {
+                const data = await res.json();
+                title = data.title || "";
+                author = data.author_name || "";
+              }
+            } catch (e) {}
+
+            return new Response(
+              JSON.stringify({
+                success: true,
+                videoId,
+                title,
+                author,
+                thumbnailUrl,
+                isShort,
+                contentType: isShort ? "SHORT" : "VIDEO",
+              }),
+              { headers: { "Content-Type": "application/json" } }
+            );
+          }
+
           if (action === "create_video") {
             const newVid = await YouTubeService.createVideo({
               title: body.title,
@@ -66,6 +105,8 @@ export const Route = createFileRoute("/api/cms/youtube")({
               youtubeUrl: body.youtubeUrl,
               isPublished: body.isPublished ?? true,
               displayOrder: body.displayOrder,
+              isShort: body.isShort,
+              contentType: body.contentType,
             });
             return new Response(JSON.stringify({ success: true, video: newVid }), {
               headers: { "Content-Type": "application/json" },
@@ -79,6 +120,8 @@ export const Route = createFileRoute("/api/cms/youtube")({
               youtubeUrl: body.youtubeUrl,
               isPublished: body.isPublished,
               displayOrder: body.displayOrder,
+              isShort: body.isShort,
+              contentType: body.contentType,
             });
             return new Response(JSON.stringify({ success: true, video: updated }), {
               headers: { "Content-Type": "application/json" },

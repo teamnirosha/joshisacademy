@@ -9,10 +9,21 @@ export function GoogleReviewsSection() {
   useEffect(() => {
     async function loadReviews() {
       try {
-        const payload = await GooglePlacesService.getPublicReviews("default");
-        setData(payload);
+        const res = await fetch("/api/public/google-reviews");
+        if (res.ok) {
+          const payload = await res.json();
+          setData(payload);
+        } else {
+          const payload = await GooglePlacesService.getPublicReviews("default");
+          setData(payload);
+        }
       } catch (err) {
-        console.warn("Notice loading Google reviews:", err);
+        try {
+          const payload = await GooglePlacesService.getPublicReviews("default");
+          setData(payload);
+        } catch (e) {
+          console.warn("Notice loading Google reviews:", e);
+        }
       } finally {
         setLoading(false);
       }

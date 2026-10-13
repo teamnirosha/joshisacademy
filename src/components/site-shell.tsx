@@ -64,14 +64,60 @@ export function SiteShell({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const [liveSettings, setLiveSettings] = useState<{
+    site_name?: string;
+    tagline?: string;
+    address_display?: string;
+    phone?: string;
+    whatsapp?: string;
+    email?: string;
+    announcement?: {
+      enabled: boolean;
+      badge: string;
+      text: string;
+      expiry: string;
+    };
+  } | null>(null);
+
+  // Fetch live published settings with fallback
   useEffect(() => {
-    if (announcement.enabled) {
+    fetch("/api/public/settings")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.settings) {
+          setLiveSettings(data.settings);
+          if (data.settings.announcement?.enabled) {
+            const isExpired =
+              data.settings.announcement.expiry &&
+              new Date(data.settings.announcement.expiry) < new Date();
+            if (!isExpired) {
+              setShowAnnouncement(true);
+            } else {
+              setShowAnnouncement(false);
+            }
+          } else {
+            setShowAnnouncement(false);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const currentSiteName = liveSettings?.site_name || site.name;
+  const currentTagline = liveSettings?.tagline || site.tagline;
+  const currentPhone = liveSettings?.phone || site.phone;
+  const currentWhatsapp = liveSettings?.whatsapp || site.whatsapp;
+  const currentAnnouncementBadge = liveSettings?.announcement?.badge || announcement.badge;
+  const currentAnnouncementText = liveSettings?.announcement?.text || announcement.text;
+
+  useEffect(() => {
+    if (announcement.enabled && !liveSettings) {
       const isExpired = announcement.expiry && new Date(announcement.expiry) < new Date();
       if (!isExpired) {
         setShowAnnouncement(true);
       }
     }
-  }, []);
+  }, [liveSettings]);
 
   // Measure the announcement bar height so we can offset the fixed header correctly
   useEffect(() => {
@@ -162,29 +208,29 @@ export function SiteShell({ children }: { children: ReactNode }) {
               : "border-b border-border/40 bg-ivory"
         }`}
       >
-        {/* Top Opaque Light Announcement Bar — desktop only, hidden on mobile */}
+        {/* Top Announcement Bar */}
         {showAnnouncement && (
           <div
             ref={announcementRef}
             className={`w-full transition-all duration-300 overflow-hidden ${
               scrolled
                 ? "max-h-0 opacity-0 py-0 border-none"
-                : "max-h-12 opacity-100 py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
-            } hidden md:block`}
+                : "max-h-24 sm:max-h-12 opacity-100 py-1.5 sm:py-2 border-b border-violet/15 bg-white text-ink shadow-2xs"
+            }`}
             role="region"
             aria-label="Academic Announcement"
           >
-            <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3 flex-wrap px-4">
-              <span className="inline-flex items-center gap-1 rounded bg-violet text-ivory px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider shadow-2xs">
-                <Sparkles className="size-3 text-amber-300" />
-                {announcement.badge}
+            <div className="mx-auto flex max-w-6xl items-center justify-center gap-1.5 sm:gap-3 flex-wrap px-3 text-center">
+              <span className="inline-flex items-center gap-1 rounded bg-violet text-ivory px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider shadow-2xs shrink-0">
+                <Sparkles className="size-2.5 sm:size-3 text-amber-300" />
+                {currentAnnouncementBadge}
               </span>
-              <span className="text-xs font-medium tracking-tight text-ink">
-                {announcement.text}
+              <span className="text-[11px] sm:text-xs font-medium tracking-tight text-ink">
+                {currentAnnouncementText}
               </span>
               <button
                 onClick={() => setEnquireOpen(true)}
-                className="ml-1 text-xs font-medium text-violet underline underline-offset-4 hover:text-royal transition-colors cursor-pointer"
+                className="text-[11px] sm:text-xs font-medium text-violet underline underline-offset-4 hover:text-royal transition-colors cursor-pointer shrink-0"
               >
                 Enquire Now →
               </button>
@@ -196,32 +242,32 @@ export function SiteShell({ children }: { children: ReactNode }) {
           {/* Logo + Institutional Title - compact, crisp, clean branding */}
           <Link
             to="/"
-            className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer focus:outline-none shrink-0"
-            aria-label={`${site.name} Home`}
+            className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer focus:outline-none shrink-0 min-w-0"
+            aria-label={`${currentSiteName} Home`}
           >
-            <div className="relative size-[36px] sm:size-[42px] shrink-0 rounded-full bg-white shadow-xs flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative size-[34px] sm:size-[42px] shrink-0 rounded-full bg-white shadow-xs flex items-center justify-center p-0.5 border border-border/70 transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/brand/logo.png"
-                alt={`${site.name} Academic Seal`}
+                alt={`${currentSiteName} Academic Seal`}
                 width={42}
                 height={42}
                 className="size-full object-contain rounded-full"
               />
             </div>
-            <div className="leading-tight">
+            <div className="leading-tight min-w-0">
               <span
-                className={`block text-[11px] sm:text-[13px] font-semibold tracking-[0.05em] uppercase transition-colors ${
+                className={`block text-[11px] sm:text-[13px] font-semibold tracking-[0.05em] uppercase transition-colors truncate ${
                   scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
                 }`}
               >
-                {site.name}
+                {currentSiteName}
               </span>
               <span
-                className={`block text-[7px] sm:text-[8px] font-medium tracking-[0.18em] uppercase transition-colors mt-0.5 ${
+                className={`block text-[7px] sm:text-[8px] font-medium tracking-[0.18em] uppercase transition-colors mt-0.5 truncate ${
                   scrolled || !isHome ? "text-violet" : "text-lavender"
                 }`}
               >
-                {site.tagline}
+                {currentTagline}
               </span>
             </div>
           </Link>
@@ -253,22 +299,22 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </nav>
 
           {/* Action CTA */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <button
               onClick={() => setEnquireOpen(true)}
-              className={`inline-flex items-center gap-1.5 h-[38px] sm:h-[42px] px-4 sm:px-6 text-[11px] sm:text-[12px] font-semibold tracking-[0.08em] uppercase transition-all rounded-md cursor-pointer shadow-sm ${
+              className={`inline-flex items-center justify-center gap-1.5 h-[36px] sm:h-[42px] px-2.5 sm:px-6 text-[10px] sm:text-[12px] font-semibold tracking-[0.06em] sm:tracking-[0.08em] uppercase transition-all rounded-md cursor-pointer shadow-sm ${
                 scrolled || !isHome
                   ? "bg-violet text-ivory hover:bg-violet/90 hover:shadow-md"
                   : "bg-amber-400 text-ink hover:bg-amber-300 hover:shadow-amber-400/20"
               }`}
             >
-              I'M INTERESTED →
+              <span className="hidden xs:inline">I'M </span>INTERESTED →
             </button>
 
             {/* Mobile Menu Trigger */}
             <button
               type="button"
-              className={`lg:hidden flex items-center justify-center size-9 transition-colors ${
+              className={`lg:hidden flex items-center justify-center size-9 transition-colors cursor-pointer rounded-lg hover:bg-white/10 ${
                 scrolled || !isHome ? "text-ink hover:text-violet" : "text-ivory hover:text-white"
               }`}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -359,14 +405,21 @@ export function SiteShell({ children }: { children: ReactNode }) {
       </main>
 
       {/* Footer Component */}
-      <Footer onEnquire={() => setEnquireOpen(true)} />
+      <Footer
+        onEnquire={() => setEnquireOpen(true)}
+        siteName={currentSiteName}
+        tagline={currentTagline}
+        phone={currentPhone}
+        whatsapp={currentWhatsapp}
+        addressDisplay={liveSettings?.address_display || site.addressDisplay}
+      />
 
       {/* Persistent Mobile Bottom Action Bar (3 Actions: Call, WhatsApp, I'm Interested) */}
-      <div className="fixed bottom-0 inset-x-0 z-40 grid grid-cols-3 h-14 border-t border-ivory/20 shadow-2xl lg:hidden text-center">
+      <div className="fixed bottom-0 inset-x-0 z-40 grid grid-cols-3 h-14 border-t border-ivory/20 shadow-2xl lg:hidden text-center bg-ink">
         <a
-          href={site.phone ? `tel:${site.phone.replace(/\s+/g, "")}` : "#"}
+          href={currentPhone ? `tel:${currentPhone.replace(/\s+/g, "")}` : "#"}
           onClick={(e) => {
-            if (!site.phone) {
+            if (!currentPhone) {
               e.preventDefault();
               setEnquireOpen(true);
             }
@@ -378,9 +431,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </a>
 
         <a
-          href={site.whatsapp ? `https://wa.me/${site.whatsapp.replace(/\D/g, "")}` : "#"}
+          href={currentWhatsapp ? `https://wa.me/${currentWhatsapp.replace(/\D/g, "")}` : "#"}
           onClick={(e) => {
-            if (!site.whatsapp) {
+            if (!currentWhatsapp) {
               e.preventDefault();
               setEnquireOpen(true);
             }
@@ -409,7 +462,21 @@ export function SiteShell({ children }: { children: ReactNode }) {
   );
 }
 
-function Footer({ onEnquire }: { onEnquire: () => void }) {
+function Footer({
+  onEnquire,
+  siteName,
+  tagline,
+  phone,
+  whatsapp,
+  addressDisplay,
+}: {
+  onEnquire: () => void;
+  siteName: string;
+  tagline: string;
+  phone: string;
+  whatsapp: string;
+  addressDisplay: string;
+}) {
   return (
     <footer className="bg-ink pb-28 pt-16 text-ivory lg:pb-12 border-t border-border/15">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -421,7 +488,7 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
               <div className="relative size-12 shrink-0 rounded-full bg-white p-0.5 shadow-xs">
                 <img
                   src="/brand/logo.png"
-                  alt={`${site.name} Seal`}
+                  alt={`${siteName} Seal`}
                   width={48}
                   height={48}
                   className="size-full object-contain rounded-full"
@@ -429,10 +496,10 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
               </div>
               <div>
                 <strong className="block text-[13px] font-semibold tracking-[0.08em] uppercase text-ivory">
-                  {site.name}
+                  {siteName}
                 </strong>
                 <span className="block text-[8.5px] font-medium tracking-[0.22em] text-lavender uppercase mt-0.5">
-                  {site.tagline}
+                  {tagline}
                 </span>
               </div>
             </div>
@@ -444,16 +511,16 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
             {/* Contact Details */}
             <div className="mt-6 space-y-3 border-t border-ivory/10 pt-5 text-xs">
               <a
-                href={site.phone ? `tel:${site.phone.replace(/\s+/g, "")}` : "#"}
+                href={phone ? `tel:${phone.replace(/\s+/g, "")}` : "#"}
                 className="flex items-center gap-2.5 text-ivory/75 hover:text-lavender transition-colors"
               >
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-ivory/10">
                   <Phone className="size-3.5 text-lavender" />
                 </span>
-                <span>{site.phone}</span>
+                <span>{phone}</span>
               </a>
               <a
-                href={site.whatsapp ? `https://wa.me/${site.whatsapp.replace(/\D/g, "")}` : "#"}
+                href={whatsapp ? `https://wa.me/${whatsapp.replace(/\D/g, "")}` : "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 text-ivory/75 hover:text-emerald-400 transition-colors"
@@ -468,9 +535,7 @@ function Footer({ onEnquire }: { onEnquire: () => void }) {
                   <MapPin className="size-3.5 text-lavender" />
                 </span>
                 <span className="text-[12px] leading-relaxed">
-                  Kharadi, Pune,
-                  <br />
-                  Maharashtra, India
+                  {addressDisplay || "Kharadi, Pune, Maharashtra, India"}
                 </span>
               </div>
             </div>

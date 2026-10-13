@@ -19,6 +19,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { site } from "@/content/site";
+import { EnquiriesService } from "@/services/enquiries.service";
 
 type FormData = {
   studentClass: "IX" | "X" | "";
@@ -138,18 +139,16 @@ export function EnquiryDialog({
         body: JSON.stringify(payload),
       }).catch((err) => console.warn("n8n webhook notice:", err));
 
-      // 2. Persist to Supabase
-      const { error } = await supabase.from("enquiries").insert({
+      // 2. Persist to Enquiries Service (Supabase + Local Backup)
+      await EnquiriesService.create({
         student_class: form.studentClass,
         board: form.board,
         parent_name: form.parentName.trim(),
         mobile_number: form.mobile.trim(),
+        email: form.email.trim() || undefined,
         preferred_contact: form.preferred,
+        source: "Website Enquiry Popup",
       });
-
-      if (error) {
-        console.warn("Supabase enquiry notice:", error.message);
-      }
       try {
         localStorage.setItem("joshis_enquiry_popup_shown_v1", "true");
       } catch (e) {}

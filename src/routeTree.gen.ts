@@ -29,15 +29,18 @@ import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as YoutubeIndexRouteImport } from './routes/youtube.index'
 import { Route as AdminCmsIndexRouteImport } from './routes/admin.cms.index'
+import { Route as AdminCmsEnquiriesRouteImport } from './routes/admin.cms.enquiries'
 import { Route as AdminCmsGalleryRouteImport } from './routes/admin.cms.gallery'
 import { Route as AdminCmsGoogleReviewsRouteImport } from './routes/admin.cms.google-reviews'
 import { Route as AdminCmsLoginRouteImport } from './routes/admin.cms.login'
 import { Route as AdminCmsSettingsRouteImport } from './routes/admin.cms.settings'
 import { Route as AdminCmsYoutubeRouteImport } from './routes/admin.cms.youtube'
 import { Route as ApiCmsGalleryRouteImport } from './routes/api.cms.gallery'
+import { Route as ApiCmsSettingsRouteImport } from './routes/api.cms.settings'
 import { Route as ApiCmsYoutubeRouteImport } from './routes/api.cms.youtube'
 import { Route as ApiPublicGalleryRouteImport } from './routes/api.public.gallery'
 import { Route as ApiPublicGoogleReviewsRouteImport } from './routes/api.public.google-reviews'
+import { Route as ApiPublicSettingsRouteImport } from './routes/api.public.settings'
 import { Route as ApiPublicYoutubeRouteImport } from './routes/api.public.youtube'
 import { Route as YoutubePlaylistPlaylistIdRouteImport } from './routes/youtube.playlist.$playlistId'
 import { Route as ApiCmsAuthLoginRouteImport } from './routes/api.cms.auth.login'
@@ -144,6 +147,11 @@ const AdminCmsIndexRoute = AdminCmsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminCmsRoute,
 } as any)
+const AdminCmsEnquiriesRoute = AdminCmsEnquiriesRouteImport.update({
+  id: '/enquiries',
+  path: '/enquiries',
+  getParentRoute: () => AdminCmsRoute,
+} as any)
 const AdminCmsGalleryRoute = AdminCmsGalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -174,6 +182,11 @@ const ApiCmsGalleryRoute = ApiCmsGalleryRouteImport.update({
   path: '/api/cms/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCmsSettingsRoute = ApiCmsSettingsRouteImport.update({
+  id: '/api/cms/settings',
+  path: '/api/cms/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiCmsYoutubeRoute = ApiCmsYoutubeRouteImport.update({
   id: '/api/cms/youtube',
   path: '/api/cms/youtube',
@@ -187,6 +200,11 @@ const ApiPublicGalleryRoute = ApiPublicGalleryRouteImport.update({
 const ApiPublicGoogleReviewsRoute = ApiPublicGoogleReviewsRouteImport.update({
   id: '/api/public/google-reviews',
   path: '/api/public/google-reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSettingsRoute = ApiPublicSettingsRouteImport.update({
+  id: '/api/public/settings',
+  path: '/api/public/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicYoutubeRoute = ApiPublicYoutubeRouteImport.update({
@@ -236,15 +254,18 @@ export interface FileRoutesByFullPath {
   '/courses/': typeof CoursesIndexRoute
   '/journal/': typeof JournalIndexRoute
   '/youtube/': typeof YoutubeIndexRoute
+  '/admin/cms/enquiries': typeof AdminCmsEnquiriesRoute
   '/admin/cms/gallery': typeof AdminCmsGalleryRoute
   '/admin/cms/google-reviews': typeof AdminCmsGoogleReviewsRoute
   '/admin/cms/login': typeof AdminCmsLoginRoute
   '/admin/cms/settings': typeof AdminCmsSettingsRoute
   '/admin/cms/youtube': typeof AdminCmsYoutubeRoute
   '/api/cms/gallery': typeof ApiCmsGalleryRoute
+  '/api/cms/settings': typeof ApiCmsSettingsRoute
   '/api/cms/youtube': typeof ApiCmsYoutubeRoute
   '/api/public/gallery': typeof ApiPublicGalleryRoute
   '/api/public/google-reviews': typeof ApiPublicGoogleReviewsRoute
+  '/api/public/settings': typeof ApiPublicSettingsRoute
   '/api/public/youtube': typeof ApiPublicYoutubeRoute
   '/youtube/playlist/$playlistId': typeof YoutubePlaylistPlaylistIdRoute
   '/admin/cms/': typeof AdminCmsIndexRoute
@@ -268,15 +289,18 @@ export interface FileRoutesByTo {
   '/courses': typeof CoursesIndexRoute
   '/journal': typeof JournalIndexRoute
   '/youtube': typeof YoutubeIndexRoute
+  '/admin/cms/enquiries': typeof AdminCmsEnquiriesRoute
   '/admin/cms/gallery': typeof AdminCmsGalleryRoute
   '/admin/cms/google-reviews': typeof AdminCmsGoogleReviewsRoute
   '/admin/cms/login': typeof AdminCmsLoginRoute
   '/admin/cms/settings': typeof AdminCmsSettingsRoute
   '/admin/cms/youtube': typeof AdminCmsYoutubeRoute
   '/api/cms/gallery': typeof ApiCmsGalleryRoute
+  '/api/cms/settings': typeof ApiCmsSettingsRoute
   '/api/cms/youtube': typeof ApiCmsYoutubeRoute
   '/api/public/gallery': typeof ApiPublicGalleryRoute
   '/api/public/google-reviews': typeof ApiPublicGoogleReviewsRoute
+  '/api/public/settings': typeof ApiPublicSettingsRoute
   '/api/public/youtube': typeof ApiPublicYoutubeRoute
   '/youtube/playlist/$playlistId': typeof YoutubePlaylistPlaylistIdRoute
   '/admin/cms': typeof AdminCmsIndexRoute
@@ -305,15 +329,18 @@ export interface FileRoutesById {
   '/courses/': typeof CoursesIndexRoute
   '/journal/': typeof JournalIndexRoute
   '/youtube/': typeof YoutubeIndexRoute
+  '/admin/cms/enquiries': typeof AdminCmsEnquiriesRoute
   '/admin/cms/gallery': typeof AdminCmsGalleryRoute
   '/admin/cms/google-reviews': typeof AdminCmsGoogleReviewsRoute
   '/admin/cms/login': typeof AdminCmsLoginRoute
   '/admin/cms/settings': typeof AdminCmsSettingsRoute
   '/admin/cms/youtube': typeof AdminCmsYoutubeRoute
   '/api/cms/gallery': typeof ApiCmsGalleryRoute
+  '/api/cms/settings': typeof ApiCmsSettingsRoute
   '/api/cms/youtube': typeof ApiCmsYoutubeRoute
   '/api/public/gallery': typeof ApiPublicGalleryRoute
   '/api/public/google-reviews': typeof ApiPublicGoogleReviewsRoute
+  '/api/public/settings': typeof ApiPublicSettingsRoute
   '/api/public/youtube': typeof ApiPublicYoutubeRoute
   '/youtube/playlist/$playlistId': typeof YoutubePlaylistPlaylistIdRoute
   '/admin/cms/': typeof AdminCmsIndexRoute
@@ -343,15 +370,18 @@ export interface FileRouteTypes {
     | '/courses/'
     | '/journal/'
     | '/youtube/'
+    | '/admin/cms/enquiries'
     | '/admin/cms/gallery'
     | '/admin/cms/google-reviews'
     | '/admin/cms/login'
     | '/admin/cms/settings'
     | '/admin/cms/youtube'
     | '/api/cms/gallery'
+    | '/api/cms/settings'
     | '/api/cms/youtube'
     | '/api/public/gallery'
     | '/api/public/google-reviews'
+    | '/api/public/settings'
     | '/api/public/youtube'
     | '/youtube/playlist/$playlistId'
     | '/admin/cms/'
@@ -375,15 +405,18 @@ export interface FileRouteTypes {
     | '/courses'
     | '/journal'
     | '/youtube'
+    | '/admin/cms/enquiries'
     | '/admin/cms/gallery'
     | '/admin/cms/google-reviews'
     | '/admin/cms/login'
     | '/admin/cms/settings'
     | '/admin/cms/youtube'
     | '/api/cms/gallery'
+    | '/api/cms/settings'
     | '/api/cms/youtube'
     | '/api/public/gallery'
     | '/api/public/google-reviews'
+    | '/api/public/settings'
     | '/api/public/youtube'
     | '/youtube/playlist/$playlistId'
     | '/admin/cms'
@@ -411,15 +444,18 @@ export interface FileRouteTypes {
     | '/courses/'
     | '/journal/'
     | '/youtube/'
+    | '/admin/cms/enquiries'
     | '/admin/cms/gallery'
     | '/admin/cms/google-reviews'
     | '/admin/cms/login'
     | '/admin/cms/settings'
     | '/admin/cms/youtube'
     | '/api/cms/gallery'
+    | '/api/cms/settings'
     | '/api/cms/youtube'
     | '/api/public/gallery'
     | '/api/public/google-reviews'
+    | '/api/public/settings'
     | '/api/public/youtube'
     | '/youtube/playlist/$playlistId'
     | '/admin/cms/'
@@ -444,9 +480,11 @@ export interface RootRouteChildren {
   YoutubeRoute: typeof YoutubeRouteWithChildren
   AdminCmsRoute: typeof AdminCmsRouteWithChildren
   ApiCmsGalleryRoute: typeof ApiCmsGalleryRoute
+  ApiCmsSettingsRoute: typeof ApiCmsSettingsRoute
   ApiCmsYoutubeRoute: typeof ApiCmsYoutubeRoute
   ApiPublicGalleryRoute: typeof ApiPublicGalleryRoute
   ApiPublicGoogleReviewsRoute: typeof ApiPublicGoogleReviewsRoute
+  ApiPublicSettingsRoute: typeof ApiPublicSettingsRoute
   ApiPublicYoutubeRoute: typeof ApiPublicYoutubeRoute
   ApiCmsAuthLoginRoute: typeof ApiCmsAuthLoginRoute
   ApiCmsAuthLogoutRoute: typeof ApiCmsAuthLogoutRoute
@@ -595,6 +633,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCmsIndexRouteImport
       parentRoute: typeof AdminCmsRoute
     }
+    '/admin/cms/enquiries': {
+      id: '/admin/cms/enquiries'
+      path: '/enquiries'
+      fullPath: '/admin/cms/enquiries'
+      preLoaderRoute: typeof AdminCmsEnquiriesRouteImport
+      parentRoute: typeof AdminCmsRoute
+    }
     '/admin/cms/gallery': {
       id: '/admin/cms/gallery'
       path: '/gallery'
@@ -637,6 +682,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCmsGalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/cms/settings': {
+      id: '/api/cms/settings'
+      path: '/api/cms/settings'
+      fullPath: '/api/cms/settings'
+      preLoaderRoute: typeof ApiCmsSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/cms/youtube': {
       id: '/api/cms/youtube'
       path: '/api/cms/youtube'
@@ -656,6 +708,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/google-reviews'
       fullPath: '/api/public/google-reviews'
       preLoaderRoute: typeof ApiPublicGoogleReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/settings': {
+      id: '/api/public/settings'
+      path: '/api/public/settings'
+      fullPath: '/api/public/settings'
+      preLoaderRoute: typeof ApiPublicSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/youtube': {
@@ -736,6 +795,7 @@ const YoutubeRouteWithChildren =
   YoutubeRoute._addFileChildren(YoutubeRouteChildren)
 
 interface AdminCmsRouteChildren {
+  AdminCmsEnquiriesRoute: typeof AdminCmsEnquiriesRoute
   AdminCmsGalleryRoute: typeof AdminCmsGalleryRoute
   AdminCmsGoogleReviewsRoute: typeof AdminCmsGoogleReviewsRoute
   AdminCmsLoginRoute: typeof AdminCmsLoginRoute
@@ -745,6 +805,7 @@ interface AdminCmsRouteChildren {
 }
 
 const AdminCmsRouteChildren: AdminCmsRouteChildren = {
+  AdminCmsEnquiriesRoute: AdminCmsEnquiriesRoute,
   AdminCmsGalleryRoute: AdminCmsGalleryRoute,
   AdminCmsGoogleReviewsRoute: AdminCmsGoogleReviewsRoute,
   AdminCmsLoginRoute: AdminCmsLoginRoute,
@@ -773,9 +834,11 @@ const rootRouteChildren: RootRouteChildren = {
   YoutubeRoute: YoutubeRouteWithChildren,
   AdminCmsRoute: AdminCmsRouteWithChildren,
   ApiCmsGalleryRoute: ApiCmsGalleryRoute,
+  ApiCmsSettingsRoute: ApiCmsSettingsRoute,
   ApiCmsYoutubeRoute: ApiCmsYoutubeRoute,
   ApiPublicGalleryRoute: ApiPublicGalleryRoute,
   ApiPublicGoogleReviewsRoute: ApiPublicGoogleReviewsRoute,
+  ApiPublicSettingsRoute: ApiPublicSettingsRoute,
   ApiPublicYoutubeRoute: ApiPublicYoutubeRoute,
   ApiCmsAuthLoginRoute: ApiCmsAuthLoginRoute,
   ApiCmsAuthLogoutRoute: ApiCmsAuthLogoutRoute,

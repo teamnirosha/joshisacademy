@@ -3,7 +3,7 @@
 // Handles Server-Side Channel Sync, Video & Shorts Classification, and Playlists
 // ============================================================================
 
-import { queryMySQL, isMySQLConfigured } from "@/lib/mysql.server";
+import { supabaseServer } from "@/lib/supabase.server";
 import { YouTubeService, getYouTubeThumbnail, type YouTubeVideoItem } from "./cms.server";
 
 export type YouTubeChannelConfig = {
@@ -69,68 +69,8 @@ const DEFAULT_CHANNEL_CONFIG: YouTubeChannelConfig = {
 
 let memoryChannelConfig: YouTubeChannelConfig | null = DEFAULT_CHANNEL_CONFIG;
 
-const memoryPlaylists: YouTubePlaylistItem[] = [
-  {
-    id: "pl-1",
-    academy_id: "default",
-    playlist_id: "PL_PHYSICS_10TH_CBSE",
-    channel_id: "UC_VarshasTutorials_Official",
-    title: "CBSE Class 10 Physics — Complete Course",
-    description:
-      "Master Light reflection, refraction, electricity circuits, and magnetic effects with step-by-step board solutions.",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?q=80&w=600&auto=format&fit=crop",
-    video_count: 18,
-    published_at: new Date(Date.now() - 86400000 * 30).toISOString(),
-    is_published: true,
-    display_order: 1,
-  },
-  {
-    id: "pl-2",
-    academy_id: "default",
-    playlist_id: "PL_CHEMISTRY_ICSE_10TH",
-    channel_id: "UC_VarshasTutorials_Official",
-    title: "ICSE Class 10 Chemistry & Reaction Mechanisms",
-    description:
-      "Periodic table, chemical bonding, metallurgy, acid-base salts and organic chemistry fundamentals.",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=600&auto=format&fit=crop",
-    video_count: 14,
-    published_at: new Date(Date.now() - 86400000 * 20).toISOString(),
-    is_published: true,
-    display_order: 2,
-  },
-  {
-    id: "pl-3",
-    academy_id: "default",
-    playlist_id: "PL_NUMERICALS_BOARD_SPECIAL",
-    channel_id: "UC_VarshasTutorials_Official",
-    title: "Physics & Chemistry Numericals Masterclass",
-    description:
-      "Speed tricks and formula applications to score full 100% in board exam numerical sections.",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=600&auto=format&fit=crop",
-    video_count: 12,
-    published_at: new Date(Date.now() - 86400000 * 15).toISOString(),
-    is_published: true,
-    display_order: 3,
-  },
-  {
-    id: "pl-4",
-    academy_id: "default",
-    playlist_id: "PL_BOARD_PREP_TIPS",
-    channel_id: "UC_VarshasTutorials_Official",
-    title: "Board Exam Revision Strategies & Top Mistakes",
-    description:
-      "Time management techniques, ray diagram guidelines, and common examiner trap alerts.",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=600&auto=format&fit=crop",
-    video_count: 9,
-    published_at: new Date(Date.now() - 86400000 * 10).toISOString(),
-    is_published: true,
-    display_order: 4,
-  },
-];
+// Runtime cache for playlists loaded from Supabase
+let memoryPlaylists: YouTubePlaylistItem[] = [];
 
 // ─── HELPER PARSERS ─────────────────────────────────────────────────────────
 
@@ -191,33 +131,32 @@ function extractXmlAttr(xml: string, tag: string, attr: string): string {
 
 export const YouTubeChannelService = {
   async getChannelConfig(academyId: string = "default"): Promise<YouTubeChannelConfig | null> {
-    if (isMySQLConfigured()) {
-      try {
-        const rows = await queryMySQL<any[]>(
-          `SELECT * FROM youtube_channel_config WHERE academy_id = ? LIMIT 1`,
-          [academyId],
-        );
-        if (Array.isArray(rows) && rows.length > 0) {
-          const r = rows[0];
-          return {
-            id: r.id,
-            academy_id: r.academy_id,
-            channel_id: r.channel_id,
-            channel_handle: r.channel_handle,
-            channel_url: r.channel_url,
-            channel_name: r.channel_name,
-            channel_thumbnail: r.channel_thumbnail,
-            subscriber_count: Number(r.subscriber_count) || 0,
-            video_count: Number(r.video_count) || 0,
-            playlist_count: Number(r.playlist_count) || 0,
-            is_enabled: Boolean(r.is_enabled),
-            auto_sync: Boolean(r.auto_sync),
-            sync_interval_hours: Number(r.sync_interval_hours) || 6,
-            last_synced_at: r.last_synced_at,
-          };
-        }
-      } catch (err) {}
-    }
+    try {
+      const { data: r, error } = await supabaseServer
+        .from("youtube_channel_config")
+        .select("*")
+        .eq("academy_id", academyId)
+        .maybeSingle();
+
+      if (!error && r) {
+        return {
+          id: r.id,
+          academy_id: r.academy_id,
+          channel_id: r.channel_id,
+          channel_handle: r.channel_handle,
+          channel_url: r.channel_url,
+          channel_name: r.channel_name,
+          channel_thumbnail: r.channel_thumbnail,
+          subscriber_count: Number(r.subscriber_count) || 0,
+          video_count: Number(r.video_count) || 0,
+          playlist_count: Number(r.playlist_count) || 0,
+          is_enabled: Boolean(r.is_enabled),
+          auto_sync: Boolean(r.auto_sync),
+          sync_interval_hours: Number(r.sync_interval_hours) || 6,
+          last_synced_at: r.last_synced_at,
+        };
+      }
+    } catch (err) {}
     return memoryChannelConfig;
   },
 
@@ -339,47 +278,37 @@ export const YouTubeChannelService = {
       updated_at: new Date().toISOString(),
     };
 
-    if (isMySQLConfigured()) {
-      try {
-        const sql = `
-          INSERT INTO youtube_channel_config 
-          (id, academy_id, channel_id, channel_handle, channel_url, channel_name, channel_thumbnail, subscriber_count, video_count, playlist_count, is_enabled, auto_sync, sync_interval_hours, last_synced_at)
-          VALUES ('default-channel', ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 6, NOW())
-          ON DUPLICATE KEY UPDATE
-            channel_id = VALUES(channel_id),
-            channel_handle = VALUES(channel_handle),
-            channel_url = VALUES(channel_url),
-            channel_name = VALUES(channel_name),
-            channel_thumbnail = VALUES(channel_thumbnail),
-            subscriber_count = VALUES(subscriber_count),
-            video_count = VALUES(video_count),
-            playlist_count = VALUES(playlist_count),
-            last_synced_at = NOW()
-        `;
-        await queryMySQL(sql, [
-          academyId,
-          configPayload.channel_id,
-          configPayload.channel_handle,
-          configPayload.channel_url,
-          configPayload.channel_name,
-          configPayload.channel_thumbnail,
-          configPayload.subscriber_count,
-          configPayload.video_count,
-          configPayload.playlist_count,
-        ]);
-      } catch (err) {}
-    }
+    try {
+      await supabaseServer.from("youtube_channel_config").upsert({
+        id: "default-channel",
+        academy_id: academyId,
+        channel_id: configPayload.channel_id,
+        channel_handle: configPayload.channel_handle,
+        channel_url: configPayload.channel_url,
+        channel_name: configPayload.channel_name,
+        channel_thumbnail: configPayload.channel_thumbnail,
+        subscriber_count: configPayload.subscriber_count,
+        video_count: configPayload.video_count,
+        playlist_count: configPayload.playlist_count,
+        is_enabled: true,
+        auto_sync: true,
+        sync_interval_hours: 6,
+        last_synced_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      });
+    } catch (err) {}
 
     memoryChannelConfig = configPayload;
     return configPayload;
   },
 
   async disconnectChannel(academyId: string = "default"): Promise<boolean> {
-    if (isMySQLConfigured()) {
-      try {
-        await queryMySQL(`DELETE FROM youtube_channel_config WHERE academy_id = ?`, [academyId]);
-      } catch (err) {}
-    }
+    try {
+      await supabaseServer
+        .from("youtube_channel_config")
+        .delete()
+        .eq("academy_id", academyId);
+    } catch (err) {}
     memoryChannelConfig = null;
     return true;
   },
@@ -476,36 +405,25 @@ export const YouTubeChannelService = {
                 if (isShort) syncedShorts++;
                 else syncedVideos++;
 
-                if (isMySQLConfigured()) {
-                  const sql = `
-                    INSERT INTO youtube_videos 
-                    (id, academy_id, youtube_video_id, channel_id, title, description, youtube_url, thumbnail_url, published_at, duration, content_type, is_short, is_published, display_order)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
-                    ON DUPLICATE KEY UPDATE
-                      title = VALUES(title),
-                      description = VALUES(description),
-                      thumbnail_url = VALUES(thumbnail_url),
-                      duration = VALUES(duration),
-                      content_type = VALUES(content_type),
-                      is_short = VALUES(is_short),
-                      updated_at = NOW()
-                  `;
-                  await queryMySQL(sql, [
-                    `vid-${vidId}`,
-                    academyId,
-                    vidId,
-                    config.channel_id,
+                try {
+                  await supabaseServer.from("youtube_videos").upsert({
+                    id: `vid-${vidId}`,
+                    academy_id: academyId,
+                    youtube_video_id: vidId,
+                    channel_id: config.channel_id,
                     title,
-                    desc,
-                    `https://www.youtube.com/watch?v=${vidId}`,
-                    thumbUrl,
-                    new Date(publishedAt).toISOString().slice(0, 19).replace("T", " "),
-                    rawDuration,
-                    contentType,
-                    isShort ? 1 : 0,
-                    fetchedCount + 1,
-                  ]);
-                }
+                    description: desc,
+                    youtube_url: `https://www.youtube.com/watch?v=${vidId}`,
+                    thumbnail_url: thumbUrl,
+                    published_at: new Date(publishedAt).toISOString(),
+                    duration: rawDuration,
+                    content_type: contentType,
+                    is_short: isShort,
+                    is_published: true,
+                    display_order: fetchedCount + 1,
+                    updated_at: new Date().toISOString(),
+                  });
+                } catch (e) {}
                 fetchedCount++;
               }
             }
@@ -552,34 +470,24 @@ export const YouTubeChannelService = {
               if (isShort) syncedShorts++;
               else syncedVideos++;
 
-              if (isMySQLConfigured()) {
-                const sql = `
-                  INSERT INTO youtube_videos 
-                  (id, academy_id, youtube_video_id, channel_id, title, description, youtube_url, thumbnail_url, published_at, content_type, is_short, is_published, display_order)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
-                  ON DUPLICATE KEY UPDATE
-                    title = VALUES(title),
-                    description = VALUES(description),
-                    thumbnail_url = VALUES(thumbnail_url),
-                    content_type = VALUES(content_type),
-                    is_short = VALUES(is_short),
-                    updated_at = NOW()
-                `;
-                await queryMySQL(sql, [
-                  `vid-${vidId}`,
-                  academyId,
-                  vidId,
-                  config.channel_id,
+              try {
+                await supabaseServer.from("youtube_videos").upsert({
+                  id: `vid-${vidId}`,
+                  academy_id: academyId,
+                  youtube_video_id: vidId,
+                  channel_id: config.channel_id,
                   title,
-                  desc,
-                  `https://www.youtube.com/watch?v=${vidId}`,
-                  thumbUrl,
-                  new Date(publishedAt).toISOString().slice(0, 19).replace("T", " "),
-                  contentType,
-                  isShort ? 1 : 0,
-                  order,
-                ]);
-              }
+                  description: desc,
+                  youtube_url: `https://www.youtube.com/watch?v=${vidId}`,
+                  thumbnail_url: thumbUrl,
+                  published_at: new Date(publishedAt).toISOString(),
+                  content_type: contentType,
+                  is_short: isShort,
+                  is_published: true,
+                  display_order: order,
+                  updated_at: new Date().toISOString(),
+                });
+              } catch (e) {}
               order++;
             }
           }
@@ -591,14 +499,16 @@ export const YouTubeChannelService = {
 
     // Update last_synced_at & counts
     const totalCount = syncedVideos + syncedShorts || config.video_count || 42;
-    if (isMySQLConfigured()) {
-      try {
-        await queryMySQL(
-          `UPDATE youtube_channel_config SET last_synced_at = NOW(), video_count = ? WHERE academy_id = ?`,
-          [totalCount, academyId],
-        );
-      } catch (err) {}
-    }
+    try {
+      await supabaseServer
+        .from("youtube_channel_config")
+        .update({
+          last_synced_at: new Date().toISOString(),
+          video_count: totalCount,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("academy_id", academyId);
+    } catch (err) {}
 
     if (memoryChannelConfig) {
       memoryChannelConfig.last_synced_at = new Date().toISOString();
@@ -615,20 +525,22 @@ export const YouTubeChannelService = {
   },
 
   async getPlaylists(academyId: string = "default"): Promise<YouTubePlaylistItem[]> {
-    if (isMySQLConfigured()) {
-      try {
-        const rows = await queryMySQL<any[]>(
-          `SELECT * FROM youtube_playlists WHERE academy_id = ? ORDER BY display_order ASC`,
-          [academyId],
-        );
-        if (Array.isArray(rows) && rows.length > 0) {
-          return rows.map((r) => ({
-            ...r,
-            is_published: Boolean(r.is_published),
-          }));
-        }
-      } catch (err) {}
-    }
+    try {
+      const { data, error } = await supabaseServer
+        .from("youtube_playlists")
+        .select("*")
+        .eq("academy_id", academyId)
+        .order("display_order", { ascending: true });
+
+      if (!error && Array.isArray(data)) {
+        const mapped = data.map((r: any) => ({
+          ...r,
+          is_published: Boolean(r.is_published),
+        }));
+        memoryPlaylists = mapped;
+        return mapped;
+      }
+    } catch (err) {}
     return memoryPlaylists;
   },
 
@@ -636,21 +548,21 @@ export const YouTubeChannelService = {
     playlistIdentifier: string,
     academyId: string = "default",
   ): Promise<YouTubePlaylistItem | null> {
-    if (isMySQLConfigured()) {
-      try {
-        const rows = await queryMySQL<any[]>(
-          `SELECT * FROM youtube_playlists WHERE academy_id = ? AND (id = ? OR playlist_id = ?) LIMIT 1`,
-          [academyId, playlistIdentifier, playlistIdentifier],
-        );
-        if (Array.isArray(rows) && rows.length > 0) {
-          const r = rows[0];
-          return {
-            ...r,
-            is_published: Boolean(r.is_published),
-          };
-        }
-      } catch (err) {}
-    }
+    try {
+      const { data, error } = await supabaseServer
+        .from("youtube_playlists")
+        .select("*")
+        .eq("academy_id", academyId)
+        .or(`id.eq.${playlistIdentifier},playlist_id.eq.${playlistIdentifier}`)
+        .maybeSingle();
+
+      if (!error && data) {
+        return {
+          ...data,
+          is_published: Boolean(data.is_published),
+        };
+      }
+    } catch (err) {}
     const found = memoryPlaylists.find(
       (p) => p.id === playlistIdentifier || p.playlist_id === playlistIdentifier,
     );
@@ -661,14 +573,12 @@ export const YouTubeChannelService = {
     const p = memoryPlaylists.find((item) => item.id === id);
     if (p) p.is_published = isPublished;
 
-    if (isMySQLConfigured()) {
-      try {
-        await queryMySQL(`UPDATE youtube_playlists SET is_published = ? WHERE id = ?`, [
-          isPublished ? 1 : 0,
-          id,
-        ]);
-      } catch (err) {}
-    }
+    try {
+      await supabaseServer
+        .from("youtube_playlists")
+        .update({ is_published: isPublished, updated_at: new Date().toISOString() })
+        .eq("id", id);
+    } catch (err) {}
     return true;
   },
 };

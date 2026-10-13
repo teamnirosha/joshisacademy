@@ -3,7 +3,19 @@
 // Handles Gallery, YouTube Videos, and Google Reviews API logic
 // ============================================================================
 
-import { queryMySQL, isMySQLConfigured } from "@/lib/mysql.server";
+import { supabaseServer } from "@/lib/supabase.server";
+import waImg01 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.20 PM.jpeg";
+import waImg02 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.23 PM.jpeg";
+import waImg03 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.24 PM.jpeg";
+import waImg04 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.24 PM (1).jpeg";
+import waImg05 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.25 PM.jpeg";
+import waImg06 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.25 PM (1).jpeg";
+import waImg07 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.25 PM (2).jpeg";
+import waImg08 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.25 PM (3).jpeg";
+import waImg09 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.25 PM (4).jpeg";
+import waImg10 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.26 PM.jpeg";
+import waImg11 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.26 PM (1).jpeg";
+import waImg12 from "@/assets/WhatsApp Image 2026-10-12 at 3.40.26 PM (2).jpeg";
 
 export type GalleryItem = {
   id: string;
@@ -97,10 +109,8 @@ const memoryGallery: GalleryItem[] = [
     title: "Small-Batch Science Lecture in Session",
     description:
       "A teacher breaking down Newton's laws of motion with real-time student participation.",
-    image_url:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=600&auto=format&fit=crop",
+    image_url: waImg01,
+    thumbnail_url: waImg01,
     category: "Classrooms",
     is_published: true,
     display_order: 1,
@@ -115,11 +125,9 @@ const memoryGallery: GalleryItem[] = [
     title: "Step-Wise Numerical Problem Solving Workshop",
     description:
       "Deconstructing Physics numericals and Chemistry valency problems on the board with student participation.",
-    image_url:
-      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1200&auto=format&fit=crop",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=600&auto=format&fit=crop",
-    category: "Campus & Infrastructure",
+    image_url: waImg02,
+    thumbnail_url: waImg02,
+    category: "Classrooms",
     is_published: true,
     display_order: 2,
     created_at: new Date(Date.now() - 86400000 * 4).toISOString(),
@@ -133,11 +141,9 @@ const memoryGallery: GalleryItem[] = [
     title: "State-of-the-Art Science Laboratory",
     description:
       "Hands-on Physics and Chemistry practical experiment demonstrations for ICSE & CBSE Class 10.",
-    image_url:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1200&auto=format&fit=crop",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=600&auto=format&fit=crop",
-    category: "Science Labs",
+    image_url: waImg03,
+    thumbnail_url: waImg03,
+    category: "Activity",
     is_published: true,
     display_order: 3,
     created_at: new Date(Date.now() - 86400000 * 3).toISOString(),
@@ -151,11 +157,9 @@ const memoryGallery: GalleryItem[] = [
     title: "Weekly Test Series & Board Examination Practice Session",
     description:
       "Students completing timed test series reflecting exact CBSE & ICSE marking parameters.",
-    image_url:
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1200&auto=format&fit=crop",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=600&auto=format&fit=crop",
-    category: "Campus & Infrastructure",
+    image_url: waImg04,
+    thumbnail_url: waImg04,
+    category: "Activity",
     is_published: true,
     display_order: 4,
     created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
@@ -169,11 +173,9 @@ const memoryGallery: GalleryItem[] = [
     title: "Annual Academic Felicitation & Merit Awards",
     description:
       "Celebrating top scorers from ICSE & CBSE Class 10 board examinations at Joshi's Academy Kharadi.",
-    image_url:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200&auto=format&fit=crop",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop",
-    category: "Cultural Events",
+    image_url: waImg05,
+    thumbnail_url: waImg05,
+    category: "Events",
     is_published: true,
     display_order: 5,
     created_at: new Date(Date.now() - 86400000 * 1).toISOString(),
@@ -187,15 +189,109 @@ const memoryGallery: GalleryItem[] = [
     title: "Wall of Fame • 95%+ Board Champions",
     description:
       "Honoring past batch toppers across Physics, Chemistry, Biology, and Mathematics with distinction.",
-    image_url:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop",
-    thumbnail_url:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=600&auto=format&fit=crop",
+    image_url: waImg06,
+    thumbnail_url: waImg06,
     category: "Wall of Fame",
     is_published: true,
     display_order: 6,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
+    created_by: null,
+    updated_by: null,
+  },
+  {
+    id: "gal-default-7",
+    academy_id: "default",
+    title: "Focused Interactive Classroom Engagement",
+    description:
+      "Students actively discussing and participating in conceptual Science learning sessions.",
+    image_url: waImg07,
+    thumbnail_url: waImg07,
+    category: "Classrooms",
+    is_published: true,
+    display_order: 7,
+    created_at: new Date(Date.now() - 86400000 * 6).toISOString(),
+    updated_at: new Date(Date.now() - 86400000 * 6).toISOString(),
+    created_by: null,
+    updated_by: null,
+  },
+  {
+    id: "gal-default-8",
+    academy_id: "default",
+    title: "Practical Science Concept Demonstration",
+    description:
+      "In-depth understanding of experiments and real-world science applications.",
+    image_url: waImg08,
+    thumbnail_url: waImg08,
+    category: "Activity",
+    is_published: true,
+    display_order: 8,
+    created_at: new Date(Date.now() - 86400000 * 7).toISOString(),
+    updated_at: new Date(Date.now() - 86400000 * 7).toISOString(),
+    created_by: null,
+    updated_by: null,
+  },
+  {
+    id: "gal-default-9",
+    academy_id: "default",
+    title: "Modern Study Environment & Library",
+    description:
+      "Disciplined and comfortable academic space conducive to concentrated study.",
+    image_url: waImg09,
+    thumbnail_url: waImg09,
+    category: "Activity",
+    is_published: true,
+    display_order: 9,
+    created_at: new Date(Date.now() - 86400000 * 8).toISOString(),
+    updated_at: new Date(Date.now() - 86400000 * 8).toISOString(),
+    created_by: null,
+    updated_by: null,
+  },
+  {
+    id: "gal-default-10",
+    academy_id: "default",
+    title: "Student Celebration & Milestone Recognition",
+    description:
+      "Recognizing effort, consistency, and remarkable academic progression.",
+    image_url: waImg10,
+    thumbnail_url: waImg10,
+    category: "Events",
+    is_published: true,
+    display_order: 10,
+    created_at: new Date(Date.now() - 86400000 * 9).toISOString(),
+    updated_at: new Date(Date.now() - 86400000 * 9).toISOString(),
+    created_by: null,
+    updated_by: null,
+  },
+  {
+    id: "gal-default-11",
+    academy_id: "default",
+    title: "Small Group Doubt Resolution",
+    description:
+      "Personal mentoring where individual learning queries are addressed in detail.",
+    image_url: waImg11,
+    thumbnail_url: waImg11,
+    category: "Classrooms",
+    is_published: true,
+    display_order: 11,
+    created_at: new Date(Date.now() - 86400000 * 10).toISOString(),
+    updated_at: new Date(Date.now() - 86400000 * 10).toISOString(),
+    created_by: null,
+    updated_by: null,
+  },
+  {
+    id: "gal-default-12",
+    academy_id: "default",
+    title: "Academic Excellence & Board Results Display",
+    description:
+      "Proven history of high scores across CBSE and ICSE board exams.",
+    image_url: waImg12,
+    thumbnail_url: waImg12,
+    category: "Wall of Fame",
+    is_published: true,
+    display_order: 12,
+    created_at: new Date(Date.now() - 86400000 * 11).toISOString(),
+    updated_at: new Date(Date.now() - 86400000 * 11).toISOString(),
     created_by: null,
     updated_by: null,
   },
@@ -515,54 +611,34 @@ export function getYouTubeThumbnail(videoId: string, quality: "maxres" | "hq" = 
   return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 }
 
-async function ensureGalleryTable() {
-  if (!isMySQLConfigured()) return;
-  try {
-    await queryMySQL(`
-      CREATE TABLE IF NOT EXISTS \`gallery\` (
-        \`id\` VARCHAR(64) NOT NULL,
-        \`academy_id\` VARCHAR(64) NOT NULL DEFAULT 'default',
-        \`title\` VARCHAR(255) NOT NULL,
-        \`description\` TEXT DEFAULT NULL,
-        \`image_url\` LONGTEXT NOT NULL,
-        \`thumbnail_url\` LONGTEXT DEFAULT NULL,
-        \`category\` VARCHAR(100) NOT NULL DEFAULT 'General',
-        \`is_published\` TINYINT(1) NOT NULL DEFAULT 1,
-        \`display_order\` INT NOT NULL DEFAULT 0,
-        \`created_at\` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        \`updated_at\` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        PRIMARY KEY (\`id\`),
-        KEY \`idx_gallery_academy\` (\`academy_id\`),
-        KEY \`idx_gallery_published\` (\`is_published\`),
-        KEY \`idx_gallery_order\` (\`display_order\`)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-    `);
-  } catch (e) {}
-}
-
-// ─── GALLERY SERVICE (MYSQL + MEMORY BACKEND) ───────────────────────────────
+// ─── GALLERY SERVICE (SUPABASE + MEMORY BACKEND) ─────────────────────────────
 
 export const GalleryService = {
   async getItems(
     academyId: string = "default",
     includeUnpublished: boolean = false,
   ): Promise<GalleryItem[]> {
-    if (isMySQLConfigured()) {
-      try {
-        await ensureGalleryTable();
-        const sql = includeUnpublished
-          ? `SELECT * FROM gallery WHERE academy_id = ? ORDER BY display_order ASC, created_at DESC`
-          : `SELECT * FROM gallery WHERE academy_id = ? AND is_published = 1 ORDER BY display_order ASC, created_at DESC`;
-        const rows = await queryMySQL<any[]>(sql, [academyId]);
-        if (Array.isArray(rows) && rows.length > 0) {
-          return rows.map((r) => ({
-            ...r,
-            is_published: Boolean(r.is_published),
-          }));
-        }
-      } catch (err) {
-        console.warn("MySQL gallery query error, using local fallback:", err);
+    try {
+      let query = supabaseServer
+        .from("gallery")
+        .select("*")
+        .eq("academy_id", academyId)
+        .order("display_order", { ascending: true })
+        .order("created_at", { ascending: false });
+
+      if (!includeUnpublished) {
+        query = query.eq("is_published", true);
       }
+
+      const { data, error } = await query;
+      if (!error && Array.isArray(data) && data.length > 0) {
+        return data.map((r: any) => ({
+          ...r,
+          is_published: Boolean(r.is_published),
+        }));
+      }
+    } catch (err) {
+      console.warn("Supabase gallery query notice, using local fallback:", err);
     }
 
     return includeUnpublished
@@ -587,7 +663,7 @@ export const GalleryService = {
       description: payload.description?.trim() || "",
       image_url: payload.imageUrl.trim(),
       thumbnail_url: payload.thumbnailUrl?.trim() || payload.imageUrl.trim(),
-      category: payload.category?.trim() || "Campus & Infrastructure",
+      category: payload.category?.trim() || "Classrooms",
       is_published: payload.isPublished ?? true,
       display_order: payload.displayOrder ?? memoryGallery.length + 1,
       created_at: new Date().toISOString(),
@@ -596,27 +672,20 @@ export const GalleryService = {
       updated_by: null,
     };
 
-    if (isMySQLConfigured()) {
-      try {
-        await ensureGalleryTable();
-        const sql = `
-          INSERT INTO gallery (id, academy_id, title, description, image_url, thumbnail_url, category, is_published, display_order)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-        await queryMySQL(sql, [
-          newItem.id,
-          newItem.academy_id,
-          newItem.title,
-          newItem.description,
-          newItem.image_url,
-          newItem.thumbnail_url,
-          newItem.category,
-          newItem.is_published ? 1 : 0,
-          newItem.display_order,
-        ]);
-      } catch (err) {
-        console.warn("MySQL insert error:", err);
-      }
+    try {
+      await supabaseServer.from("gallery").insert({
+        id: newItem.id,
+        academy_id: newItem.academy_id,
+        title: newItem.title,
+        description: newItem.description,
+        image_url: newItem.image_url,
+        thumbnail_url: newItem.thumbnail_url,
+        category: newItem.category,
+        is_published: newItem.is_published,
+        display_order: newItem.display_order,
+      });
+    } catch (err) {
+      console.warn("Supabase gallery insert notice:", err);
     }
 
     memoryGallery.push(newItem);
@@ -648,43 +717,20 @@ export const GalleryService = {
       memoryGallery[idx]!.updated_at = new Date().toISOString();
     }
 
-    if (isMySQLConfigured()) {
-      try {
-        await ensureGalleryTable();
-        const fields: string[] = [];
-        const params: any[] = [];
-        if (payload.title !== undefined) {
-          fields.push("title = ?");
-          params.push(payload.title.trim());
-        }
-        if (payload.description !== undefined) {
-          fields.push("description = ?");
-          params.push(payload.description.trim());
-        }
-        if (payload.imageUrl !== undefined) {
-          fields.push("image_url = ?");
-          params.push(payload.imageUrl.trim());
-        }
-        if (payload.category !== undefined) {
-          fields.push("category = ?");
-          params.push(payload.category.trim());
-        }
-        if (payload.isPublished !== undefined) {
-          fields.push("is_published = ?");
-          params.push(payload.isPublished ? 1 : 0);
-        }
-        if (payload.displayOrder !== undefined) {
-          fields.push("display_order = ?");
-          params.push(payload.displayOrder);
-        }
+    try {
+      const updates: any = {};
+      if (payload.title !== undefined) updates.title = payload.title.trim();
+      if (payload.description !== undefined) updates.description = payload.description.trim();
+      if (payload.imageUrl !== undefined) updates.image_url = payload.imageUrl.trim();
+      if (payload.thumbnailUrl !== undefined) updates.thumbnail_url = payload.thumbnailUrl.trim();
+      if (payload.category !== undefined) updates.category = payload.category.trim();
+      if (payload.isPublished !== undefined) updates.is_published = payload.isPublished;
+      if (payload.displayOrder !== undefined) updates.display_order = payload.displayOrder;
+      updates.updated_at = new Date().toISOString();
 
-        if (fields.length > 0) {
-          fields.push("updated_at = NOW()");
-          params.push(id);
-          const sql = `UPDATE gallery SET ${fields.join(", ")} WHERE id = ?`;
-          await queryMySQL(sql, params);
-        }
-      } catch (err) {}
+      await supabaseServer.from("gallery").update(updates).eq("id", id);
+    } catch (err) {
+      console.warn("Supabase gallery update notice:", err);
     }
 
     return memoryGallery.find((i) => i.id === id) || null;
@@ -694,11 +740,10 @@ export const GalleryService = {
     const idx = memoryGallery.findIndex((i) => i.id === id);
     if (idx !== -1) memoryGallery.splice(idx, 1);
 
-    if (isMySQLConfigured()) {
-      try {
-        await ensureGalleryTable();
-        await queryMySQL(`DELETE FROM gallery WHERE id = ?`, [id]);
-      } catch (err) {}
+    try {
+      await supabaseServer.from("gallery").delete().eq("id", id);
+    } catch (err) {
+      console.warn("Supabase gallery delete notice:", err);
     }
     return true;
   },
@@ -709,17 +754,16 @@ export const GalleryService = {
       if (found) found.display_order = item.displayOrder;
     });
 
-    if (isMySQLConfigured()) {
-      try {
-        await ensureGalleryTable();
-        for (const item of items) {
-          await queryMySQL(`UPDATE gallery SET display_order = ? WHERE id = ? AND academy_id = ?`, [
-            item.displayOrder,
-            item.id,
-            academyId,
-          ]);
-        }
-      } catch (err) {}
+    try {
+      for (const item of items) {
+        await supabaseServer
+          .from("gallery")
+          .update({ display_order: item.displayOrder, updated_at: new Date().toISOString() })
+          .eq("id", item.id)
+          .eq("academy_id", academyId);
+      }
+    } catch (err) {
+      console.warn("Supabase gallery reorder notice:", err);
     }
     return true;
   },
@@ -743,26 +787,36 @@ export const GalleryService = {
 
 // ─── YOUTUBE SERVICE (MYSQL + MEMORY BACKEND) ───────────────────────────────
 
+// ─── YOUTUBE SERVICE (SUPABASE + MEMORY BACKEND) ─────────────────────────────
+
 export const YouTubeService = {
   async getVideos(
     academyId: string = "default",
     includeUnpublished: boolean = false,
   ): Promise<YouTubeVideoItem[]> {
-    if (isMySQLConfigured()) {
-      try {
-        const sql = includeUnpublished
-          ? `SELECT * FROM youtube_videos WHERE academy_id = ? ORDER BY display_order ASC, created_at DESC`
-          : `SELECT * FROM youtube_videos WHERE academy_id = ? AND is_published = 1 ORDER BY display_order ASC, created_at DESC`;
-        const rows = await queryMySQL<any[]>(sql, [academyId]);
-        if (Array.isArray(rows) && rows.length > 0) {
-          return rows.map((r) => ({
-            ...r,
-            is_published: Boolean(r.is_published),
-            is_featured: Boolean(r.is_featured),
-            is_short: Boolean(r.is_short),
-          }));
-        }
-      } catch (err) {}
+    try {
+      let query = supabaseServer
+        .from("youtube_videos")
+        .select("*")
+        .eq("academy_id", academyId)
+        .order("display_order", { ascending: true })
+        .order("created_at", { ascending: false });
+
+      if (!includeUnpublished) {
+        query = query.eq("is_published", true);
+      }
+
+      const { data, error } = await query;
+      if (!error && Array.isArray(data) && data.length > 0) {
+        return data.map((r: any) => ({
+          ...r,
+          is_published: Boolean(r.is_published),
+          is_featured: Boolean(r.is_featured),
+          is_short: Boolean(r.is_short),
+        }));
+      }
+    } catch (err) {
+      console.warn("Supabase youtube query notice:", err);
     }
 
     return includeUnpublished
@@ -772,11 +826,13 @@ export const YouTubeService = {
 
   async createVideo(payload: {
     academyId?: string;
-    title: string;
+    title?: string;
     description?: string;
     youtubeUrl: string;
     isPublished?: boolean;
     displayOrder?: number;
+    isShort?: boolean;
+    contentType?: "VIDEO" | "SHORT" | string;
   }): Promise<YouTubeVideoItem> {
     const videoId = extractYouTubeVideoId(payload.youtubeUrl);
     if (!videoId) {
@@ -784,40 +840,77 @@ export const YouTubeService = {
     }
     const thumbnailUrl = getYouTubeThumbnail(videoId, "maxres");
 
+    let isShort = payload.isShort ?? false;
+    if (payload.youtubeUrl.includes("/shorts/")) {
+      isShort = true;
+    }
+    const contentType = payload.contentType || (isShort ? "SHORT" : "VIDEO");
+
+    let title = (payload.title || "").trim();
+    let description = (payload.description || "").trim();
+
+    // Auto-fetch real YouTube title directly if empty
+    if (!title) {
+      try {
+        const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(payload.youtubeUrl.trim())}&format=json`;
+        const res = await fetch(oembedUrl);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.title) {
+            title = String(data.title).trim();
+          }
+        }
+      } catch (err) {
+        console.warn("YouTube oEmbed fetch error:", err);
+      }
+    }
+
+    if (!title) {
+      title = `YouTube ${isShort ? "Short" : "Video"} (${videoId})`;
+    }
+
     const newVid: YouTubeVideoItem = {
-      id: "vid-" + Date.now(),
+      id: "vid-" + videoId + "-" + Date.now().toString(36),
       academy_id: payload.academyId || "default",
-      title: payload.title.trim(),
-      description: payload.description?.trim() || "",
+      title,
+      description,
       youtube_url: payload.youtubeUrl.trim(),
       youtube_video_id: videoId,
       thumbnail_url: thumbnailUrl,
       is_published: payload.isPublished ?? true,
       display_order: payload.displayOrder ?? memoryVideos.length + 1,
+      is_short: isShort,
+      content_type: contentType,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       created_by: null,
       updated_by: null,
     };
 
-    if (isMySQLConfigured()) {
-      try {
-        const sql = `
-          INSERT INTO youtube_videos (id, academy_id, title, description, youtube_url, youtube_video_id, thumbnail_url, is_published, display_order)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-        await queryMySQL(sql, [
-          newVid.id,
-          newVid.academy_id,
-          newVid.title,
-          newVid.description,
-          newVid.youtube_url,
-          newVid.youtube_video_id,
-          newVid.thumbnail_url,
-          newVid.is_published ? 1 : 0,
-          newVid.display_order,
-        ]);
-      } catch (err) {}
+    try {
+      const { error } = await supabaseServer.from("youtube_videos").insert({
+        id: newVid.id,
+        academy_id: newVid.academy_id,
+        title: newVid.title,
+        description: newVid.description,
+        youtube_url: newVid.youtube_url,
+        youtube_video_id: newVid.youtube_video_id,
+        thumbnail_url: newVid.thumbnail_url,
+        is_published: newVid.is_published,
+        display_order: newVid.display_order,
+        is_short: newVid.is_short,
+        content_type: newVid.content_type,
+        created_at: newVid.created_at,
+        updated_at: newVid.updated_at,
+      });
+
+      if (error) {
+        console.error("Supabase insert youtube_videos error:", error);
+        throw new Error("Database insert failed: " + error.message);
+      }
+    } catch (err: any) {
+      console.warn("Supabase youtube insert notice:", err?.message || err);
+      throw err;
     }
 
     memoryVideos.push(newVid);
@@ -832,6 +925,8 @@ export const YouTubeService = {
       youtubeUrl: string;
       isPublished: boolean;
       displayOrder: number;
+      isShort: boolean;
+      contentType: string;
     }>,
   ) {
     const idx = memoryVideos.findIndex((v) => v.id === id);
@@ -842,6 +937,10 @@ export const YouTubeService = {
       if (payload.isPublished !== undefined) memoryVideos[idx]!.is_published = payload.isPublished;
       if (payload.displayOrder !== undefined)
         memoryVideos[idx]!.display_order = payload.displayOrder;
+      if (payload.isShort !== undefined) {
+        memoryVideos[idx]!.is_short = payload.isShort;
+        memoryVideos[idx]!.content_type = payload.contentType || (payload.isShort ? "SHORT" : "VIDEO");
+      }
       if (payload.youtubeUrl !== undefined) {
         const videoId = extractYouTubeVideoId(payload.youtubeUrl);
         if (videoId) {
@@ -852,38 +951,48 @@ export const YouTubeService = {
       }
     }
 
-    if (isMySQLConfigured()) {
-      try {
-        const fields: string[] = [];
-        const params: any[] = [];
-        if (payload.title !== undefined) {
-          fields.push("title = ?");
-          params.push(payload.title.trim());
+    try {
+      const updates: any = {};
+      if (payload.title !== undefined) updates.title = payload.title.trim();
+      if (payload.description !== undefined) updates.description = payload.description.trim();
+      if (payload.isPublished !== undefined) updates.is_published = payload.isPublished;
+      if (payload.displayOrder !== undefined) updates.display_order = payload.displayOrder;
+      if (payload.isShort !== undefined) {
+        updates.is_short = payload.isShort;
+        updates.content_type = payload.contentType || (payload.isShort ? "SHORT" : "VIDEO");
+      }
+      if (payload.youtubeUrl !== undefined) {
+        const videoId = extractYouTubeVideoId(payload.youtubeUrl);
+        if (videoId) {
+          updates.youtube_url = payload.youtubeUrl.trim();
+          updates.youtube_video_id = videoId;
+          updates.thumbnail_url = getYouTubeThumbnail(videoId, "maxres");
         }
-        if (payload.description !== undefined) {
-          fields.push("description = ?");
-          params.push(payload.description.trim());
+      }
+      updates.updated_at = new Date().toISOString();
+      const { data: updatedDb, error: updateErr } = await supabaseServer
+        .from("youtube_videos")
+        .update(updates)
+        .eq("id", id)
+        .select()
+        .single();
+
+      if (!updateErr && updatedDb) {
+        const mapped: YouTubeVideoItem = {
+          ...updatedDb,
+          is_published: Boolean(updatedDb.is_published),
+          is_featured: Boolean(updatedDb.is_featured),
+          is_short: Boolean(updatedDb.is_short),
+        };
+        if (idx !== -1) {
+          memoryVideos[idx] = mapped;
+        } else {
+          memoryVideos.push(mapped);
         }
-        if (payload.isPublished !== undefined) {
-          fields.push("is_published = ?");
-          params.push(payload.isPublished ? 1 : 0);
-        }
-        if (payload.displayOrder !== undefined) {
-          fields.push("display_order = ?");
-          params.push(payload.displayOrder);
-        }
-        if (payload.youtubeUrl !== undefined) {
-          const videoId = extractYouTubeVideoId(payload.youtubeUrl);
-          if (videoId) {
-            fields.push("youtube_url = ?", "youtube_video_id = ?", "thumbnail_url = ?");
-            params.push(payload.youtubeUrl.trim(), videoId, getYouTubeThumbnail(videoId, "maxres"));
-          }
-        }
-        if (fields.length > 0) {
-          params.push(id);
-          await queryMySQL(`UPDATE youtube_videos SET ${fields.join(", ")} WHERE id = ?`, params);
-        }
-      } catch (err) {}
+        return mapped;
+      }
+    } catch (err) {
+      console.warn("Supabase youtube update notice:", err);
     }
 
     return memoryVideos.find((v) => v.id === id) || null;
@@ -893,10 +1002,10 @@ export const YouTubeService = {
     const idx = memoryVideos.findIndex((v) => v.id === id);
     if (idx !== -1) memoryVideos.splice(idx, 1);
 
-    if (isMySQLConfigured()) {
-      try {
-        await queryMySQL(`DELETE FROM youtube_videos WHERE id = ?`, [id]);
-      } catch (err) {}
+    try {
+      await supabaseServer.from("youtube_videos").delete().eq("id", id);
+    } catch (err) {
+      console.warn("Supabase youtube delete notice:", err);
     }
     return true;
   },
@@ -910,15 +1019,16 @@ export const YouTubeService = {
       if (found) found.display_order = item.displayOrder;
     });
 
-    if (isMySQLConfigured()) {
-      try {
-        for (const item of items) {
-          await queryMySQL(
-            `UPDATE youtube_videos SET display_order = ? WHERE id = ? AND academy_id = ?`,
-            [item.displayOrder, item.id, academyId],
-          );
-        }
-      } catch (err) {}
+    try {
+      for (const item of items) {
+        await supabaseServer
+          .from("youtube_videos")
+          .update({ display_order: item.displayOrder, updated_at: new Date().toISOString() })
+          .eq("id", item.id)
+          .eq("academy_id", academyId);
+      }
+    } catch (err) {
+      console.warn("Supabase youtube reorder notice:", err);
     }
     return true;
   },
@@ -926,63 +1036,39 @@ export const YouTubeService = {
 
 // ─── GOOGLE PLACES & REVIEWS SERVICE ─────────────────────────────────────────
 
-const FALLBACK_REVIEWS: PublicGoogleReviewsPayload = {
+const EMPTY_REVIEWS: PublicGoogleReviewsPayload = {
   enabled: true,
   placeName: "Joshi's Academy",
   rating: 4.9,
-  totalReviews: 245,
+  totalReviews: 0,
   googleMapsUri: "https://maps.google.com/?q=Joshi's+Academy+Kharadi+Pune",
   lastFetchedAt: new Date().toISOString(),
-  reviews: [
-    {
-      authorName: "Rohan Deshmukh",
-      rating: 5,
-      text: "Varsha Ma'am teaches Science with extraordinary clarity. Concepts in Physics numericals and Chemistry equations became crystal clear. Secured 96% in 10th CBSE!",
-      relativeTime: "2 weeks ago",
-      authorPhotoUrl: null,
-      googleMapsUri: "https://maps.google.com/?q=Joshi's+Academy+Kharadi+Pune",
-    },
-    {
-      authorName: "Ananya Kulkarni",
-      rating: 5,
-      text: "Small batch size gives individual focus. Doubts are solved in every single lecture. Highly recommended for ICSE & CBSE students in Kharadi.",
-      relativeTime: "1 month ago",
-      authorPhotoUrl: null,
-      googleMapsUri: "https://maps.google.com/?q=Joshi's+Academy+Kharadi+Pune",
-    },
-    {
-      authorName: "Prakash Sharma (Parent)",
-      rating: 5,
-      text: "Best decision for my daughter's Class 10 board prep. Regular test series and individual feedback built immense exam confidence.",
-      relativeTime: "2 months ago",
-      authorPhotoUrl: null,
-      googleMapsUri: "https://maps.google.com/?q=Joshi's+Academy+Kharadi+Pune",
-    },
-  ],
+  reviews: [],
 };
 
 export const GooglePlacesService = {
   async getConfig(academyId: string = "default"): Promise<GoogleReviewConfig> {
-    if (isMySQLConfigured()) {
-      try {
-        const rows = await queryMySQL<any[]>(
-          `SELECT * FROM google_review_config WHERE academy_id = ? LIMIT 1`,
-          [academyId],
-        );
-        if (Array.isArray(rows) && rows.length > 0) {
-          const r = rows[0];
-          return {
-            id: r.id,
-            academy_id: r.academy_id,
-            google_place_id: r.google_place_id || process.env["GOOGLE_PLACE_ID"] || "",
-            is_enabled: Boolean(r.is_enabled),
-            auto_refresh: Boolean(r.auto_refresh),
-            max_reviews: r.max_reviews || 10,
-            min_rating: r.min_rating || 4,
-            last_fetched_at: r.last_fetched_at,
-          };
-        }
-      } catch (err) {}
+    try {
+      const { data, error } = await supabaseServer
+        .from("google_review_config")
+        .select("*")
+        .eq("academy_id", academyId)
+        .maybeSingle();
+
+      if (!error && data) {
+        return {
+          id: data.id,
+          academy_id: data.academy_id,
+          google_place_id: data.google_place_id || process.env["GOOGLE_PLACE_ID"] || "",
+          is_enabled: Boolean(data.is_enabled),
+          auto_refresh: Boolean(data.auto_refresh),
+          max_reviews: data.max_reviews || 10,
+          min_rating: data.min_rating || 4,
+          last_fetched_at: data.last_fetched_at,
+        };
+      }
+    } catch (err) {
+      console.warn("Supabase google_review_config notice:", err);
     }
 
     return {
@@ -1009,27 +1095,19 @@ export const GooglePlacesService = {
       min_rating: number;
     }>,
   ) {
-    if (isMySQLConfigured()) {
-      try {
-        const sql = `
-          INSERT INTO google_review_config (id, academy_id, google_place_id, is_enabled, auto_refresh, max_reviews, min_rating)
-          VALUES ('default-config', ?, ?, ?, ?, ?, ?)
-          ON DUPLICATE KEY UPDATE
-            google_place_id = VALUES(google_place_id),
-            is_enabled = VALUES(is_enabled),
-            auto_refresh = VALUES(auto_refresh),
-            max_reviews = VALUES(max_reviews),
-            min_rating = VALUES(min_rating)
-        `;
-        await queryMySQL(sql, [
-          academyId,
-          payload.google_place_id || "",
-          payload.is_enabled ? 1 : 0,
-          payload.auto_refresh ? 1 : 0,
-          payload.max_reviews ?? 10,
-          payload.min_rating ?? 4,
-        ]);
-      } catch (err) {}
+    try {
+      await supabaseServer.from("google_review_config").upsert({
+        id: "default-config",
+        academy_id: academyId,
+        google_place_id: payload.google_place_id || "",
+        is_enabled: payload.is_enabled ?? true,
+        auto_refresh: payload.auto_refresh ?? true,
+        max_reviews: payload.max_reviews ?? 10,
+        min_rating: payload.min_rating ?? 4,
+        updated_at: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.warn("Supabase google_review_config save notice:", err);
     }
 
     return this.getConfig(academyId);
@@ -1081,30 +1159,18 @@ export const GooglePlacesService = {
         lastFetchedAt: new Date().toISOString(),
       };
 
-      if (isMySQLConfigured()) {
-        try {
-          const sql = `
-            INSERT INTO google_review_cache (id, academy_id, place_id, place_name, overall_rating, total_reviews, review_data, last_fetched_at)
-            VALUES ('default-cache', ?, ?, ?, ?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE
-              place_id = VALUES(place_id),
-              place_name = VALUES(place_name),
-              overall_rating = VALUES(overall_rating),
-              total_reviews = VALUES(total_reviews),
-              review_data = VALUES(review_data),
-              last_fetched_at = VALUES(last_fetched_at)
-          `;
-          await queryMySQL(sql, [
-            academyId,
-            placeId,
-            payload.placeName,
-            payload.rating,
-            payload.totalReviews,
-            JSON.stringify(payload.reviews),
-            payload.lastFetchedAt,
-          ]);
-        } catch (err) {}
-      }
+      try {
+        await supabaseServer.from("google_review_cache").upsert({
+          id: "default-cache",
+          academy_id: academyId,
+          place_id: placeId,
+          place_name: payload.placeName,
+          overall_rating: payload.rating,
+          total_reviews: payload.totalReviews,
+          review_data: payload.reviews,
+          last_fetched_at: payload.lastFetchedAt,
+        });
+      } catch (err) {}
 
       return payload;
     } catch (err) {
@@ -1113,37 +1179,65 @@ export const GooglePlacesService = {
   },
 
   async getCachedOrFallback(academyId: string = "default"): Promise<PublicGoogleReviewsPayload> {
-    if (isMySQLConfigured()) {
-      try {
-        const rows = await queryMySQL<any[]>(
-          `SELECT * FROM google_review_cache WHERE academy_id = ? LIMIT 1`,
-          [academyId],
-        );
-        if (Array.isArray(rows) && rows.length > 0) {
-          const cache = rows[0];
-          let parsedReviews: NormalizedReview[] = [];
-          if (typeof cache.review_data === "string") {
-            parsedReviews = JSON.parse(cache.review_data);
-          } else if (Array.isArray(cache.review_data)) {
-            parsedReviews = cache.review_data;
-          }
+    try {
+      const { data: cache, error } = await supabaseServer
+        .from("google_review_cache")
+        .select("*")
+        .eq("academy_id", academyId)
+        .maybeSingle();
 
-          if (parsedReviews.length > 0) {
-            return {
-              enabled: true,
-              placeName: cache.place_name || "Joshi's Academy",
-              rating: Number(cache.overall_rating) || 4.9,
-              totalReviews: cache.total_reviews || parsedReviews.length,
-              googleMapsUri: `https://maps.google.com/?q=${encodeURIComponent(cache.place_name || "Joshi's Academy Kharadi")}`,
-              reviews: parsedReviews,
-              lastFetchedAt: cache.last_fetched_at,
-            };
-          }
+      if (!error && cache) {
+        let parsedReviews: NormalizedReview[] = [];
+        if (typeof cache.review_data === "string") {
+          parsedReviews = JSON.parse(cache.review_data);
+        } else if (Array.isArray(cache.review_data)) {
+          parsedReviews = cache.review_data;
         }
-      } catch (err) {}
-    }
 
-    return FALLBACK_REVIEWS;
+        if (parsedReviews.length > 0) {
+          return {
+            enabled: true,
+            placeName: cache.place_name || "Joshi's Academy",
+            rating: Number(cache.overall_rating) || 4.9,
+            totalReviews: cache.total_reviews || parsedReviews.length,
+            googleMapsUri: `https://maps.google.com/?q=${encodeURIComponent(cache.place_name || "Joshi's Academy Kharadi")}`,
+            reviews: parsedReviews,
+            lastFetchedAt: cache.last_fetched_at,
+          };
+        }
+      }
+    } catch (err) {}
+
+    return EMPTY_REVIEWS;
+  },
+
+  async saveReviewsCache(
+    academyId: string = "default",
+    payload: {
+      placeName?: string;
+      rating?: number;
+      totalReviews?: number;
+      googleMapsUri?: string;
+      reviews: NormalizedReview[];
+    },
+  ): Promise<PublicGoogleReviewsPayload> {
+    try {
+      const dataToSave = {
+        id: "default-cache",
+        academy_id: academyId,
+        place_id: "default-place",
+        place_name: payload.placeName || "Joshi's Academy",
+        overall_rating: payload.rating || 4.9,
+        total_reviews: payload.totalReviews || payload.reviews.length,
+        review_data: payload.reviews,
+        last_fetched_at: new Date().toISOString(),
+      };
+      await supabaseServer.from("google_review_cache").upsert(dataToSave, { onConflict: "id" });
+      return this.getCachedOrFallback(academyId);
+    } catch (err) {
+      console.warn("Supabase save review cache notice:", err);
+      throw err;
+    }
   },
 
   async getPublicReviews(academyId: string = "default"): Promise<PublicGoogleReviewsPayload> {

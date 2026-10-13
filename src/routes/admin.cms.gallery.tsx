@@ -27,11 +27,9 @@ export const Route = createFileRoute("/admin/cms/gallery")({
 
 const CATEGORIES = [
   "All",
-  "Campus & Infrastructure",
   "Classrooms",
-  "Science Labs",
-  "Cultural Events",
-  "Sports & Activities",
+  "Events",
+  "Activity",
   "Wall of Fame",
 ];
 
@@ -55,7 +53,7 @@ function CMSGalleryPage() {
   const [formTitle, setFormTitle] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formImageUrl, setFormImageUrl] = useState("");
-  const [formCategory, setFormCategory] = useState("Campus & Infrastructure");
+  const [formCategory, setFormCategory] = useState("Classrooms");
   const [formIsPublished, setFormIsPublished] = useState(true);
   const [saving, setSaving] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -101,6 +99,17 @@ function CMSGalleryPage() {
     loadGallery();
   }, []);
 
+  // Prevent background website scrolling when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
+    }
+  }, [isModalOpen]);
+
   const handleOpenAddModal = () => {
     setEditingItem(null);
     setFormTitle("");
@@ -108,7 +117,7 @@ function CMSGalleryPage() {
     setFormImageUrl("");
     setSelectedFile(null);
     setUploadSource("file");
-    setFormCategory("Campus & Infrastructure");
+    setFormCategory("Classrooms");
     setFormIsPublished(true);
     setIsModalOpen(true);
   };
@@ -120,7 +129,7 @@ function CMSGalleryPage() {
     setFormImageUrl(item.image_url);
     setSelectedFile(null);
     setUploadSource(item.image_url.startsWith("data:") ? "file" : "url");
-    setFormCategory(item.category || "Campus & Infrastructure");
+    setFormCategory(item.category || "Classrooms");
     setFormIsPublished(item.is_published);
     setIsModalOpen(true);
   };
@@ -533,9 +542,15 @@ function CMSGalleryPage() {
 
       {/* Add / Edit Modal with Local File Upload */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/60 backdrop-blur-xs animate-in fade-in">
-          <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl space-y-5 border border-border overflow-y-auto max-h-[90vh]">
-            <div className="flex items-center justify-between border-b border-border/60 pb-3">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsModalOpen(false);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs animate-in fade-in overscroll-contain"
+        >
+          <div className="w-full max-w-lg rounded-3xl bg-white shadow-2xl border border-border flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-150">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-border/60 px-6 py-4 shrink-0 bg-white">
               <div className="flex items-center gap-2">
                 <div className="size-8 rounded-xl bg-violet/10 text-violet flex items-center justify-center">
                   <ImageIcon className="size-4" />
@@ -545,202 +560,207 @@ function CMSGalleryPage() {
                 </h2>
               </div>
               <button
+                type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-ink cursor-pointer"
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-ink cursor-pointer transition-colors"
               >
                 <X className="size-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveItem} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
-                  Title *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Science Exhibition 2026"
-                  value={formTitle}
-                  onChange={(e) => setFormTitle(e.target.value)}
-                  className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2.5 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
-                />
-              </div>
-
-              {/* Upload Source Selector (File Upload vs External URL) */}
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-ink">
-                    Photo Source *
+            {/* Modal Form with scrollable body & pinned footer */}
+            <form onSubmit={handleSaveItem} className="flex flex-col min-h-0 flex-1 overflow-hidden">
+              <div className="overflow-y-auto overscroll-contain px-6 py-5 space-y-4 flex-1">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
+                    Title *
                   </label>
-                  <div className="flex items-center gap-1 rounded-xl bg-ivory p-1 border border-border/80">
-                    <button
-                      type="button"
-                      onClick={() => setUploadSource("file")}
-                      className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-all ${
-                        uploadSource === "file"
-                          ? "bg-violet text-ivory shadow-2xs font-bold"
-                          : "text-muted-foreground hover:text-ink"
-                      }`}
-                    >
-                      <Upload className="size-3" /> Upload File
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setUploadSource("url")}
-                      className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-all ${
-                        uploadSource === "url"
-                          ? "bg-violet text-ivory shadow-2xs font-bold"
-                          : "text-muted-foreground hover:text-ink"
-                      }`}
-                    >
-                      <LinkIcon className="size-3" /> Image URL
-                    </button>
-                  </div>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Science Exhibition 2026"
+                    value={formTitle}
+                    onChange={(e) => setFormTitle(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2.5 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
+                  />
                 </div>
 
-                {uploadSource === "file" ? (
-                  <div>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/png, image/jpeg, image/webp, image/gif"
-                      onChange={handleFileInputChange}
-                      className="hidden"
-                    />
-
-                    <div
-                      onDragOver={(e) => {
-                        e.preventDefault();
-                        setDragOver(true);
-                      }}
-                      onDragLeave={() => setDragOver(false)}
-                      onDrop={handleDrop}
-                      onClick={() => fileInputRef.current?.click()}
-                      className={`relative border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2 ${
-                        dragOver
-                          ? "border-violet bg-violet/10"
-                          : formImageUrl
-                            ? "border-emerald-400 bg-emerald-50/40"
-                            : "border-border/80 bg-ivory hover:bg-lavender/30 hover:border-violet/40"
-                      }`}
-                    >
-                      {uploadingFile ? (
-                        <div className="py-4 flex flex-col items-center gap-2">
-                          <div className="size-6 rounded-full border-2 border-violet border-t-transparent animate-spin" />
-                          <span className="text-xs font-semibold text-violet">
-                            Processing image file...
-                          </span>
-                        </div>
-                      ) : formImageUrl ? (
-                        <div className="w-full space-y-2">
-                          <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-black max-h-48 mx-auto">
-                            <img
-                              src={formImageUrl}
-                              alt="Preview"
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute top-2 right-2 bg-emerald-600 text-white rounded-full p-1 shadow-md">
-                              <Check className="size-3.5" />
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-between text-xs text-muted-foreground pt-1 px-1">
-                            <span className="font-semibold text-emerald-700 flex items-center gap-1">
-                              <CheckCircle className="size-3.5 text-emerald-600" />
-                              {selectedFile ? selectedFile.name : "Image Uploaded Successfully"}
-                            </span>
-                            <span className="text-violet font-bold underline hover:text-violet-dark">
-                              Change Photo
-                            </span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="py-3 flex flex-col items-center gap-1.5">
-                          <div className="size-10 rounded-2xl bg-violet/10 text-violet flex items-center justify-center">
-                            <FileUp className="size-5" />
-                          </div>
-                          <div>
-                            <span className="text-xs font-bold text-ink block">
-                              Click to choose photo or drag & drop here
-                            </span>
-                            <span className="text-[10px] text-muted-foreground block mt-0.5">
-                              Supports PNG, JPG, WEBP (Max 10MB)
-                            </span>
-                          </div>
-                        </div>
-                      )}
+                {/* Upload Source Selector (File Upload vs External URL) */}
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                      Photo Source *
+                    </label>
+                    <div className="flex items-center gap-1 rounded-xl bg-ivory p-1 border border-border/80">
+                      <button
+                        type="button"
+                        onClick={() => setUploadSource("file")}
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-all ${
+                          uploadSource === "file"
+                            ? "bg-violet text-ivory shadow-2xs font-bold"
+                            : "text-muted-foreground hover:text-ink"
+                        }`}
+                      >
+                        <Upload className="size-3" /> Upload File
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setUploadSource("url")}
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold cursor-pointer transition-all ${
+                          uploadSource === "url"
+                            ? "bg-violet text-ivory shadow-2xs font-bold"
+                            : "text-muted-foreground hover:text-ink"
+                        }`}
+                      >
+                        <LinkIcon className="size-3" /> Image URL
+                      </button>
                     </div>
                   </div>
-                ) : (
-                  <div>
-                    <input
-                      type="url"
-                      placeholder="https://images.unsplash.com/photo-..."
-                      value={formImageUrl}
-                      onChange={(e) => setFormImageUrl(e.target.value)}
-                      className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2.5 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
-                    />
-                    <p className="text-[10px] text-muted-foreground mt-1">
-                      Provide a direct HTTPS URL for the high-res photo.
-                    </p>
-                  </div>
-                )}
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
-                  Category
-                </label>
-                <select
-                  value={formCategory}
-                  onChange={(e) => setFormCategory(e.target.value)}
-                  className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2.5 text-xs font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
-                >
-                  {CATEGORIES.filter((c) => c !== "All").map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  {uploadSource === "file" ? (
+                    <div>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/png, image/jpeg, image/webp, image/gif"
+                        onChange={handleFileInputChange}
+                        className="hidden"
+                      />
 
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
-                  Description
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder="Brief caption for this photo..."
-                  value={formDescription}
-                  onChange={(e) => setFormDescription(e.target.value)}
-                  className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
-                />
-              </div>
+                      <div
+                        onDragOver={(e) => {
+                          e.preventDefault();
+                          setDragOver(true);
+                        }}
+                        onDragLeave={() => setDragOver(false)}
+                        onDrop={handleDrop}
+                        onClick={() => fileInputRef.current?.click()}
+                        className={`relative border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2 ${
+                          dragOver
+                            ? "border-violet bg-violet/10"
+                            : formImageUrl
+                              ? "border-emerald-400 bg-emerald-50/40"
+                              : "border-border/80 bg-ivory hover:bg-lavender/30 hover:border-violet/40"
+                        }`}
+                      >
+                        {uploadingFile ? (
+                          <div className="py-4 flex flex-col items-center gap-2">
+                            <div className="size-6 rounded-full border-2 border-violet border-t-transparent animate-spin" />
+                            <span className="text-xs font-semibold text-violet">
+                              Processing image file...
+                            </span>
+                          </div>
+                        ) : formImageUrl ? (
+                          <div className="w-full space-y-2">
+                            <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-black max-h-48 mx-auto">
+                              <img
+                                src={formImageUrl}
+                                alt="Preview"
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute top-2 right-2 bg-emerald-600 text-white rounded-full p-1 shadow-md">
+                                <Check className="size-3.5" />
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between text-xs text-muted-foreground pt-1 px-1">
+                              <span className="font-semibold text-emerald-700 flex items-center gap-1 truncate max-w-[280px]">
+                                <CheckCircle className="size-3.5 text-emerald-600 shrink-0" />
+                                <span className="truncate">{selectedFile ? selectedFile.name : "Image Uploaded Successfully"}</span>
+                              </span>
+                              <span className="text-violet font-bold underline hover:text-violet-dark shrink-0">
+                                Change Photo
+                              </span>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="py-3 flex flex-col items-center gap-1.5">
+                            <div className="size-10 rounded-2xl bg-violet/10 text-violet flex items-center justify-center">
+                              <FileUp className="size-5" />
+                            </div>
+                            <div>
+                              <span className="text-xs font-bold text-ink block">
+                                Click to choose photo or drag & drop here
+                              </span>
+                              <span className="text-[10px] text-muted-foreground block mt-0.5">
+                                Supports PNG, JPG, WEBP (Max 10MB)
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <input
+                        type="url"
+                        placeholder="https://images.unsplash.com/photo-..."
+                        value={formImageUrl}
+                        onChange={(e) => setFormImageUrl(e.target.value)}
+                        className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2.5 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
+                      />
+                      <p className="text-[10px] text-muted-foreground mt-1">
+                        Provide a direct HTTPS URL for the high-res photo.
+                      </p>
+                    </div>
+                  )}
+                </div>
 
-              <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 text-xs font-bold text-ink cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formIsPublished}
-                    onChange={(e) => setFormIsPublished(e.target.checked)}
-                    className="size-4 rounded accent-violet"
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
+                    Category
+                  </label>
+                  <select
+                    value={formCategory}
+                    onChange={(e) => setFormCategory(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2.5 text-xs font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
+                  >
+                    {CATEGORIES.filter((c) => c !== "All").map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    placeholder="Brief caption for this photo..."
+                    value={formDescription}
+                    onChange={(e) => setFormDescription(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-ivory px-3.5 py-2 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-violet/30"
                   />
-                  <span>Publish immediately to website gallery</span>
-                </label>
+                </div>
+
+                <div className="flex items-center justify-between pt-1">
+                  <label className="flex items-center gap-2 text-xs font-bold text-ink cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formIsPublished}
+                      onChange={(e) => setFormIsPublished(e.target.checked)}
+                      className="size-4 rounded accent-violet"
+                    />
+                    <span>Publish immediately to website gallery</span>
+                  </label>
+                </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-border/60">
+              {/* Pinned Modal Footer */}
+              <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border/60 bg-white shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-ink cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-ink cursor-pointer transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving || uploadingFile || !formImageUrl}
-                  className="flex items-center gap-1.5 rounded-xl bg-violet text-ivory px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-violet-dark disabled:opacity-50 cursor-pointer shadow-xs"
+                  className="flex items-center gap-1.5 rounded-xl bg-violet text-ivory px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-violet-dark disabled:opacity-50 cursor-pointer shadow-xs transition-colors"
                 >
                   {saving ? "Saving..." : editingItem ? "Update Image" : "Save Image"}
                 </button>

@@ -53,7 +53,7 @@ function GalleryPage() {
   useEffect(() => {
     // Initial cache load for zero layout shift
     try {
-      const cached = localStorage.getItem("joshis_public_gallery_cache_v2");
+      const cached = localStorage.getItem("joshis_public_gallery_cache_v4");
       if (cached) {
         setItems(JSON.parse(cached));
         setLoading(false);
@@ -68,7 +68,7 @@ function GalleryPage() {
           if (Array.isArray(data.items) && data.items.length > 0) {
             setItems(data.items);
             try {
-              localStorage.setItem("joshis_public_gallery_cache_v2", JSON.stringify(data.items));
+              localStorage.setItem("joshis_public_gallery_cache_v4", JSON.stringify(data.items));
             } catch (e) {}
             return;
           }

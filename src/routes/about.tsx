@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, Sparkles, Check } from "lucide-react";
 import { PageHero, seoMeta } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
-import approachImg from "@/assets/academy-approach.jpg";
-import classroomImg from "@/assets/classroom-wide.jpg";
+import approachImg from "@/assets/pillar 01.jfif";
+import classroomImg from "@/assets/pillar 02.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

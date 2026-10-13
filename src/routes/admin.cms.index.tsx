@@ -10,6 +10,9 @@ import {
   Clock,
   CheckCircle2,
   RefreshCw,
+  Inbox,
+  Phone,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +21,7 @@ import {
   GooglePlacesService,
   type PublicGoogleReviewsPayload,
 } from "@/services/cms.server";
+import { EnquiriesService, type EnquiryRecord } from "@/services/enquiries.service";
 
 export const Route = createFileRoute("/admin/cms/")({
   component: CMSDashboardPage,
@@ -27,19 +31,22 @@ function CMSDashboardPage() {
   const [galleryCount, setGalleryCount] = useState(0);
   const [videoCount, setVideoCount] = useState(0);
   const [reviewsData, setReviewsData] = useState<PublicGoogleReviewsPayload | null>(null);
+  const [enquiries, setEnquiries] = useState<EnquiryRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadStats() {
       try {
-        const [gItems, vItems, rData] = await Promise.all([
+        const [gItems, vItems, rData, enqRes] = await Promise.all([
           GalleryService.getItems("default", true),
           YouTubeService.getVideos("default", true),
           GooglePlacesService.getCachedOrFallback("default"),
+          EnquiriesService.getAll(),
         ]);
         setGalleryCount(gItems.length);
         setVideoCount(vItems.length);
         setReviewsData(rData);
+        setEnquiries(enqRes.data);
       } catch (err) {
         console.warn("CMS Dashboard load notice:", err);
       } finally {
@@ -48,6 +55,8 @@ function CMSDashboardPage() {
     }
     loadStats();
   }, []);
+
+  const newLeadsCount = enquiries.filter((e) => e.status === "NEW").length;
 
   return (
     <div className="space-y-8">
@@ -70,8 +79,36 @@ function CMSDashboardPage() {
         </div>
       </div>
 
-      {/* 4 Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {/* 5 Stat Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {/* Card 0: Enquiries & Leads */}
+        <div className="rounded-2xl border border-amber-300 bg-amber-50/40 p-5 shadow-2xs space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-900">
+              Admission Leads
+            </span>
+            <div className="size-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+              <Inbox className="size-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline justify-between">
+            <span className="font-display text-3xl font-bold text-amber-950">
+              {loading ? "…" : enquiries.length}
+            </span>
+            <span className="text-[10px] text-amber-800 font-bold bg-amber-100 px-2 py-0.5 rounded-full">
+              {newLeadsCount} New
+            </span>
+          </div>
+          <div className="pt-2 border-t border-amber-200/80">
+            <Link
+              to="/admin/cms/enquiries"
+              className="text-xs font-bold text-amber-900 hover:underline inline-flex items-center gap-1"
+            >
+              View All Leads →
+            </Link>
+          </div>
+        </div>
+
         {/* Card 1: Gallery */}
         <div className="rounded-2xl border border-border/80 bg-white p-5 shadow-2xs space-y-3">
           <div className="flex items-center justify-between">
@@ -185,6 +222,113 @@ function CMSDashboardPage() {
         </div>
       </div>
 
+      {/* ── Latest Admission Enquiries Widget ────────────────────────────────── */}
+      <div className="rounded-2xl border border-border/80 bg-white p-6 shadow-2xs space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-border/60">
+          <div className="flex items-center gap-2">
+            <Inbox className="size-4 text-violet" />
+            <h3 className="font-bold text-ink text-base">Latest Admission Enquiries</h3>
+            <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
+              {newLeadsCount} Action Needed
+            </span>
+          </div>
+          <Link
+            to="/admin/cms/enquiries"
+            className="text-xs font-bold text-violet hover:underline inline-flex items-center gap-1"
+          >
+            Open Enquiries CRM →
+          </Link>
+        </div>
+
+        {enquiries.length === 0 ? (
+          <div className="py-8 text-center text-muted-foreground text-xs">
+            No inquiries received yet.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-ivory/60 text-muted-foreground text-[10px] font-extrabold uppercase tracking-wider">
+                <tr>
+                  <th className="py-2.5 px-3">Parent Name</th>
+                  <th className="py-2.5 px-3">Class & Board</th>
+                  <th className="py-2.5 px-3">Mobile</th>
+                  <th className="py-2.5 px-3">Date</th>
+                  <th className="py-2.5 px-3">Status</th>
+                  <th className="py-2.5 px-3 text-right">Quick Contact</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/50">
+                {enquiries.slice(0, 4).map((enq) => {
+                  const cleanPhone = enq.mobile_number.replace(/\D/g, "");
+                  const msg = encodeURIComponent(
+                    `Hello ${enq.parent_name}, greetings from Joshi's Academy Kharadi regarding Class ${enq.student_class} (${enq.board}) admission enquiry.`
+                  );
+                  return (
+                    <tr key={enq.id} className="hover:bg-lavender/10">
+                      <td className="py-3 px-3">
+                        <span className="font-bold text-ink">{enq.parent_name}</span>
+                        {enq.notes && (
+                          <p className="text-[10px] text-muted-foreground line-clamp-1">{enq.notes}</p>
+                        )}
+                      </td>
+                      <td className="py-3 px-3">
+                        <span className="font-bold text-violet bg-violet/10 px-2 py-0.5 rounded text-[10px]">
+                          Class {enq.student_class} • {enq.board}
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 font-mono text-[11px] font-bold text-ink">
+                        +91 {enq.mobile_number}
+                      </td>
+                      <td className="py-3 px-3 text-muted-foreground text-[10px]">
+                        {new Date(enq.created_at).toLocaleDateString("en-IN", {
+                          day: "numeric",
+                          month: "short",
+                        })}
+                      </td>
+                      <td className="py-3 px-3">
+                        <span
+                          className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                            enq.status === "NEW"
+                              ? "bg-amber-100 text-amber-900 border border-amber-200"
+                              : enq.status === "CONTACTED"
+                              ? "bg-blue-50 text-blue-900 border border-blue-200"
+                              : enq.status === "ENROLLED"
+                              ? "bg-emerald-100 text-emerald-900 border border-emerald-200"
+                              : "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {enq.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <a
+                            href={`https://wa.me/91${cleanPhone}?text=${msg}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex size-7 items-center justify-center rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition-colors"
+                            title="Chat on WhatsApp"
+                          >
+                            <MessageSquare className="size-3" />
+                          </a>
+                          <a
+                            href={`tel:${cleanPhone}`}
+                            className="inline-flex size-7 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                            title="Call Now"
+                          >
+                            <Phone className="size-3" />
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
       {/* Recent Activity Log & Quick Shortcuts */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Recent CMS Activity */}
@@ -253,6 +397,17 @@ function CMSDashboardPage() {
           </h3>
 
           <div className="space-y-2.5">
+            <Link
+              to="/admin/cms/enquiries"
+              className="flex items-center justify-between p-3 rounded-xl border border-amber-300 bg-amber-50/60 hover:bg-amber-100/60 transition-all text-xs font-bold text-amber-950 shadow-2xs"
+            >
+              <div className="flex items-center gap-2">
+                <Inbox className="size-4 text-amber-700" />
+                <span>Review Admission Leads ({newLeadsCount} New)</span>
+              </div>
+              <ArrowRight className="size-4 text-amber-700" />
+            </Link>
+
             <Link
               to="/admin/cms/gallery"
               className="flex items-center justify-between p-3 rounded-xl border border-border/70 hover:border-violet/40 hover:bg-lavender/30 transition-all text-xs font-bold text-ink"
