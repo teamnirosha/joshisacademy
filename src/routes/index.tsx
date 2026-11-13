@@ -114,8 +114,82 @@ const openEnquiry = () => window.dispatchEvent(new Event("open-enquiry"));
 function HomePage() {
   return (
     <>
-      {/* 01 - ART-DIRECTED RESPONSIVE HERO SECTION */}
-      <section className="relative bg-[#0d0d14] text-ivory overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 lg:pb-24">
+      {/* 01 - PROMOTIONAL HERO BANNER SECTION: CLASS X CBSE TEST SERIES 2026–27 */}
+      <section
+        className="relative bg-background pt-1.5 sm:pt-2.5 pb-8 sm:pb-12 border-b border-border/40"
+        aria-label="Class X CBSE Test Series 2026–27 Promotion"
+      >
+        <h1 className="sr-only">
+          Class X CBSE Test Series 2026–27 — Joshi’s Academy for Excellence, Kharadi, Pune
+        </h1>
+
+        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+          {/* Responsive Banner Card - Clickable to WhatsApp */}
+          <div className="overflow-hidden rounded-xl sm:rounded-2xl border border-border/80 shadow-md sm:shadow-lg bg-white transition-all hover:shadow-xl">
+            <a
+              href="https://wa.me/917030554317?text=Hello%2C%20I%20would%20like%20details%20about%20the%20Class%20X%20CBSE%20Test%20Series."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-violet focus-visible:ring-offset-2"
+              aria-label="Enquire about Class X CBSE Test Series 2026–27 on WhatsApp"
+            >
+              <picture className="block w-full">
+                {/* Desktop & Tablet Landscape view (>= 768px): 1600x700 wide banner */}
+                <source
+                  media="(min-width: 768px)"
+                  srcSet="/banners/class-x-cbse-test-series-desktop-1600x700.png"
+                  width={1600}
+                  height={700}
+                />
+                {/* Mobile Portrait view (< 768px): 1122x1402 portrait banner */}
+                <source
+                  media="(max-width: 767px)"
+                  srcSet="/banners/class-x-cbse-test-series-mobile-1122x1402.png"
+                  width={1122}
+                  height={1402}
+                />
+                <img
+                  src="/banners/class-x-cbse-test-series-desktop-1600x700.png"
+                  alt="Class X CBSE Test Series 2026–27 — Science, Mathematics & Social Science (SST) — Joshi's Academy for Excellence, Kharadi, Pune. Commences 18 November 2026."
+                  width={1600}
+                  height={700}
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-auto block select-none"
+                />
+              </picture>
+            </a>
+          </div>
+
+          {/* Promotional Description & Enquire Now CTA */}
+          <div className="mt-6 sm:mt-8 max-w-3xl mx-auto text-center px-2">
+            <p className="text-[15px] sm:text-[17px] md:text-[18px] text-ink/85 leading-relaxed font-sans font-normal">
+              Prepare for your Class X CBSE Board Examinations with focused practice and
+              structured preparation in Science, Mathematics and Social Science (SST). Join
+              Joshi&apos;s Academy for Excellence, Kharadi, Pune. Classes commence on 18
+              November 2026.
+            </p>
+
+            <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href="https://wa.me/917030554317?text=Hello%2C%20I%20would%20like%20details%20about%20the%20Class%20X%20CBSE%20Test%20Series."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 min-h-[48px] sm:min-h-[50px] px-8 sm:px-10 bg-amber-400 hover:bg-amber-300 text-ink text-[15px] sm:text-[16px] font-bold rounded-lg shadow-md hover:shadow-lg shadow-amber-400/20 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet focus-visible:ring-offset-2"
+                aria-label="Enquire Now on WhatsApp for Class X CBSE Test Series"
+              >
+                <MessageSquare className="size-5 text-ink shrink-0 fill-ink/10" />
+                <span>Enquire Now</span>
+                <ArrowRight className="size-4 text-ink shrink-0" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 02 - EDUCATOR SPOTLIGHT: MEET VARSHA JOSHI */}
+      <section className="relative bg-[#0d0d14] text-ivory overflow-hidden py-14 sm:py-20 lg:py-24">
         {/* Subtle Ambient Backlight Effects */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#35208f]/20 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -133,13 +207,13 @@ function HomePage() {
               </div>
 
               {/* Premium Heading */}
-              <h1 className="font-display text-[clamp(2.1rem,6vw,3.5rem)] leading-[1.08] tracking-tight text-white mb-4 sm:mb-5">
+              <h2 className="font-display text-[clamp(2.1rem,6vw,3.5rem)] leading-[1.08] tracking-tight text-white mb-4 sm:mb-5">
                 <span className="block font-normal">An Experienced</span>
                 <span className="block font-normal">Educator.</span>
                 <span className="block text-amber-200/95 italic font-normal mt-0.5">
                   A Mentor Who Cares.
                 </span>
-              </h1>
+              </h2>
 
               {/* Mobile Image: Shown prominently between title and paragraph on mobile */}
               <div className="block lg:hidden my-2 mb-5">
@@ -149,7 +223,8 @@ function HomePage() {
                     alt="Varsha Joshi - Principal Science Educator & Mentor at Joshi's Academy"
                     width={800}
                     height={600}
-                    fetchPriority="high"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-[260px] xs:h-[300px] sm:h-[360px] object-cover object-[50%_18%] brightness-[1.04] contrast-[1.02]"
                   />
                   {/* Floating Glassmorphism Tag */}
@@ -220,7 +295,8 @@ function HomePage() {
                     alt="Varsha Joshi - Principal Science Educator & Mentor at Joshi's Academy"
                     width={800}
                     height={1000}
-                    fetchPriority="high"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-[480px] xl:h-[510px] object-cover object-[50%_18%] brightness-[1.04] contrast-[1.02] transition-transform duration-500 hover:scale-[1.02]"
                   />
 
@@ -249,7 +325,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 02 - COMPACT TRUST STATISTICS STRIP */}
+      {/* 03 - COMPACT TRUST STATISTICS STRIP */}
       <div className="mx-auto max-w-6xl px-3.5 sm:px-6 lg:px-8 relative z-20 -mt-5 sm:-mt-8 mb-14">
         <div className="bg-white rounded-[18px] shadow-md border border-border/70 py-5 px-4 sm:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center divide-x-0 md:divide-x divide-border/60">

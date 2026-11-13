@@ -31,8 +31,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [enquireOpen, setEnquireOpen] = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
-  const announcementRef = useRef<HTMLDivElement>(null);
-  const [announcementHeight, setAnnouncementHeight] = useState(0);
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(64);
   const location = useLocation();
 
   // Initialize buttery smooth Lenis momentum scrolling
@@ -119,16 +119,12 @@ export function SiteShell({ children }: { children: ReactNode }) {
     }
   }, [liveSettings]);
 
-  // Measure the announcement bar height so we can offset the fixed header correctly
+  // Measure total fixed header height so we can offset page content with zero excess gap
   useEffect(() => {
-    if (!showAnnouncement) {
-      setAnnouncementHeight(0);
-      return;
-    }
-    const el = announcementRef.current;
+    const el = headerRef.current;
     if (!el) return;
     const updateHeight = () => {
-      setAnnouncementHeight(el.offsetHeight);
+      setHeaderHeight(el.offsetHeight);
     };
     updateHeight();
     const ro = new ResizeObserver(updateHeight);
@@ -138,7 +134,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       ro.disconnect();
       window.removeEventListener("resize", updateHeight);
     };
-  }, [showAnnouncement]);
+  }, [showAnnouncement, scrolled]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -190,28 +186,22 @@ export function SiteShell({ children }: { children: ReactNode }) {
     return <>{children}</>;
   }
 
-  // Total offset for page content = announcement bar + header
-  const HEADER_HEIGHT = 64; // px - compact target height
-  const contentOffset = announcementHeight + HEADER_HEIGHT;
-
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground flex flex-col antialiased">
       <BrandLoader />
 
       {/* Fixed Institutional Header + Announcement Bar */}
       <header
+        ref={headerRef}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled
             ? "border-b border-border bg-[rgba(250,249,245,0.98)] backdrop-blur-md shadow-xs"
-            : isHome
-              ? "bg-transparent"
-              : "border-b border-border/40 bg-ivory"
+            : "border-b border-border/40 bg-ivory"
         }`}
       >
         {/* Top Announcement Bar */}
         {showAnnouncement && (
           <div
-            ref={announcementRef}
             className={`w-full transition-all duration-300 overflow-hidden ${
               scrolled
                 ? "max-h-0 opacity-0 py-0 border-none"
@@ -255,18 +245,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
               />
             </div>
             <div className="leading-tight min-w-0">
-              <span
-                className={`block text-[11px] sm:text-[13px] font-semibold tracking-[0.05em] uppercase transition-colors truncate ${
-                  scrolled || !isHome ? "text-ink" : "text-ivory drop-shadow-xs"
-                }`}
-              >
+              <span className="block text-[11px] sm:text-[13px] font-semibold tracking-[0.05em] uppercase transition-colors truncate text-ink">
                 {currentSiteName}
               </span>
-              <span
-                className={`block text-[7px] sm:text-[8px] font-medium tracking-[0.18em] uppercase transition-colors mt-0.5 truncate ${
-                  scrolled || !isHome ? "text-violet" : "text-lavender"
-                }`}
-              >
+              <span className="block text-[7px] sm:text-[8px] font-medium tracking-[0.18em] uppercase transition-colors mt-0.5 truncate text-violet">
                 {currentTagline}
               </span>
             </div>
@@ -281,16 +263,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <Link
                 key={item.to}
                 to={item.to}
-                className={`text-[11px] xl:text-[12px] font-medium tracking-[0.08em] uppercase transition-colors ${
-                  scrolled || !isHome
-                    ? "text-ink/70 hover:text-violet"
-                    : "text-ivory/80 hover:text-white"
-                }`}
+                className="text-[11px] xl:text-[12px] font-medium tracking-[0.08em] uppercase transition-colors text-ink/70 hover:text-violet"
                 activeProps={{
-                  className:
-                    scrolled || !isHome
-                      ? "!text-violet !font-semibold"
-                      : "!text-white !font-semibold underline underline-offset-6",
+                  className: "!text-violet !font-semibold",
                 }}
               >
                 {item.label}
@@ -302,11 +277,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <button
               onClick={() => setEnquireOpen(true)}
-              className={`inline-flex items-center justify-center gap-1.5 h-[36px] sm:h-[42px] px-2.5 sm:px-6 text-[10px] sm:text-[12px] font-semibold tracking-[0.06em] sm:tracking-[0.08em] uppercase transition-all rounded-md cursor-pointer shadow-sm ${
-                scrolled || !isHome
-                  ? "bg-violet text-ivory hover:bg-violet/90 hover:shadow-md"
-                  : "bg-amber-400 text-ink hover:bg-amber-300 hover:shadow-amber-400/20"
-              }`}
+              className="inline-flex items-center justify-center gap-1.5 h-[36px] sm:h-[42px] px-2.5 sm:px-6 text-[10px] sm:text-[12px] font-semibold tracking-[0.06em] sm:tracking-[0.08em] uppercase transition-all rounded-md cursor-pointer shadow-sm bg-violet text-ivory hover:bg-violet/90 hover:shadow-md"
             >
               <span className="hidden xs:inline">I'M </span>INTERESTED →
             </button>
@@ -314,9 +285,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             {/* Mobile Menu Trigger */}
             <button
               type="button"
-              className={`lg:hidden flex items-center justify-center size-9 transition-colors cursor-pointer rounded-lg hover:bg-white/10 ${
-                scrolled || !isHome ? "text-ink hover:text-violet" : "text-ivory hover:text-white"
-              }`}
+              className="lg:hidden flex items-center justify-center size-9 transition-colors cursor-pointer rounded-lg hover:bg-black/5 text-ink hover:text-violet"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -399,7 +368,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       {/* Main Content Area - offset by header + announcement height */}
       <main
         className="flex-1 w-full max-w-full overflow-x-hidden pb-16 lg:pb-0"
-        style={{ paddingTop: isHome ? 0 : `${contentOffset}px` }}
+        style={{ paddingTop: `${headerHeight}px` }}
       >
         {children}
       </main>
